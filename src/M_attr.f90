@@ -738,7 +738,7 @@ if(present(valin))then
       call insert(mono_values,mono_val,iabs(place))
    else
       call replace(values,val,place)
-      call replace(values,mono_val,place)
+      call replace(mono_values,mono_val,place)
    endif
 else
    call locate(keywords,key,place)
