@@ -1,0 +1,915 @@
+!>
+!!##NAME
+!!    M_attr(3f) - [M_attr] control text attributes on terminals
+!!    (LICENSE:MIT)
+!!
+!!##SYNOPSIS
+!!
+!!      use M_attr, only : attr, attr_mode, attr_update
+!!
+!!##MAJOR FEATURES
+!!   o Add text attributes with an HTML-like syntax using attr(3f).
+!!   o suppress the escape sequence output with attr_mode(3f).
+!!   o customize what strings are produced using attr_update(3f).
+!!
+!!##DESCRIPTION
+!!    M_attr(3f) is a Fortran module that writes common ANSI escape
+!!    sequences which control terminal attributes like text color. It is
+!!    designed to allow the sequences to be suppressed and for the user
+!!    program to completely customize it -- the user can add, delete and
+!!    replace the sequences associated with a keyword without changing
+!!    the code.
+!!
+!!    Attributes are specified by writing lines with HTML-like structure.
+!!
+!!    The advantage of the approach of replacing in-band escape sequences
+!!    with formatting directives contained on each line is that it is easy
+!!    to turn off when running batch, but more importantly your program can
+!!    be run in "raw" mode and write a clean text file with the directives in
+!!    it that can then be read back in by a simple filter program that strips
+!!    it back to plain text( see app/plain.f90), or displays it to a screen
+!!    in color(see app/light.f90) or perhaps converts it to another format.
+!!
+!!    By making each line self-contained by default this can still be done
+!!    with any arbitrarily selected group of lines from the file.
+!!
+!!    So in addition to printing colored lines to your screen this module
+!!    makes it trivial to read specially-formatted data from a file like a
+!!    message catalog (perhaps with various versions in different languages)
+!!    and colorize it or display it as plain text using the included attr(3f)
+!!    procedure, for example.
+!!
+!!##LIMITATIONS
+!!   o colors are not nestable.
+!!   o keywords are case-sensitive,
+!!   o ANSI escape sequences are not universally supported by
+!!     all terminal emulators; and normally should be suppressed
+!!     when not going to a tty device. Therefore, you should use
+!!     M_system::system_istty(3f) or the common Fortran extension
+!!     ISATTY() to set the default to "plain" instead of "color"
+!!     when the output file is not a conforming terminal. On basic
+!!     MSWindows console windows, it is best to use Windows 10+ and/or
+!!     the Linux mode; you may have to enable ANSI escape sequence
+!!     mode on MSWindows. It does work as-is with CygWin and MinGW and
+!!     Putty windows and mintty(1) as tested.
+!!
+!!##EXAMPLE
+!!
+!!    Sample program
+!!
+!!     program demo_M_attr
+!!     use M_attr, only : attr, attr_mode
+!!     implicit none
+!!     character(len=256) :: line
+!!     real :: value
+!!        write(*,'(a)')&
+!!        &attr('<r><W>ERROR:</W> red text on a white background</y>')
+!!
+!!        value=3.4567
+!!        write(line,fmt=&
+!!        &'("<w><G>GREAT</G></w>:&
+!!        &The new value <Y><b>",f8.4,"</b></Y> is in range")')value
+!!        write(*,'(a)')attr(trim(line))
+!!
+!!        ! write same string as plain text
+!!        call attr_mode(manner='plain')
+!!        write(*,'(a)')attr(trim(line))
+!!
+!!     end program demo_M_attr
+!!
+!!##AUTHOR
+!!    John S. Urban, 2020
+!!
+!!##LICENSE
+!!    MIT
+!!
+!!##SEE ALSO
+!!    attr(3f), attr_mode(3f), attr_update(3f)
+!!
+!!    Related information:
+!!
+!!     terminfo(3c), termlib(3c), tput(1), reset(1), clear(1),
+!!     console_codes(4), ECMA-48,
+!!     https://en.wikipedia.org/wiki/ANSI_escape_code
+module M_attr
+use, intrinsic :: iso_fortran_env, only : stderr=>ERROR_UNIT,stdin=>INPUT_UNIT,stdout=>OUTPUT_UNIT
+use, intrinsic :: iso_c_binding, only: c_int
+implicit none
+private
+public attr
+public attr_mode
+public attr_update
+interface attr;    module procedure attr_scalar, attr_matrix;  end interface
+
+! direct use of constant strings
+
+character(len=:),allocatable,save :: keywords(:)
+character(len=:),allocatable,save :: values(:)
+character(len=:),allocatable,save :: mono_values(:)
+
+character(len=:),allocatable,save :: mode
+
+! mnemonics
+character(len=*),parameter  :: NL=new_line('a')                     ! New line character.
+character(len=*),parameter  :: ESCAPE=achar(27)                     ! "\" character.
+! codes
+character(len=*),parameter  :: CODE_START=ESCAPE//'['               ! Start ANSI code, "\[".
+character(len=*),parameter  :: CODE_END='m'                         ! End ANSI code, "m".
+character(len=*),parameter  :: CODE_RESET=CODE_START//'0'//CODE_END ! Clear all styles, "\[0m".
+
+character(len=*),parameter  :: CLEAR_DISPLAY=CODE_START//'2J'
+character(len=*),parameter  :: HOME_DISPLAY=CODE_START//'H'
+character(len=*),parameter  :: BELL=achar(7)
+
+character(len=*),parameter  :: AT_BOLD='1', AT_ITALIC='3', AT_UNDERLINE='4', AT_INVERSE='7'
+character(len=*),parameter  :: BLACK='0', RED='1', GREEN='2', YELLOW='3', BLUE='4', MAGENTA='5', CYAN='6', WHITE='7', DEFAULT='9'
+!prefixes
+character(len=*),parameter  :: FG='3'
+character(len=*),parameter  :: BG='4'
+character(len=*),parameter  :: FG_INTENSE='9'
+character(len=*),parameter  :: BG_INTENSE='10'
+character(len=*),parameter  :: ON=''
+character(len=*),parameter  :: OFF='2'
+
+
+! foreground colors
+character(len=*),parameter,public :: fg_red      =  CODE_START//FG//RED//CODE_END
+character(len=*),parameter,public :: fg_cyan     =  CODE_START//FG//CYAN//CODE_END
+character(len=*),parameter,public :: fg_magenta  =  CODE_START//FG//MAGENTA//CODE_END
+character(len=*),parameter,public :: fg_blue     =  CODE_START//FG//BLUE//CODE_END
+character(len=*),parameter,public :: fg_green    =  CODE_START//FG//GREEN//CODE_END
+character(len=*),parameter,public :: fg_yellow   =  CODE_START//FG//YELLOW//CODE_END
+character(len=*),parameter,public :: fg_white    =  CODE_START//FG//WHITE//CODE_END
+character(len=*),parameter,public :: fg_ebony    =  CODE_START//FG//BLACK//CODE_END
+character(len=*),parameter,public :: fg_black    =  CODE_START//FG//BLACK//CODE_END
+character(len=*),parameter,public :: fg_default  =  CODE_START//FG//DEFAULT//CODE_END
+! background colors
+character(len=*),parameter,public :: bg_red      =  CODE_START//BG//RED//CODE_END
+character(len=*),parameter,public :: bg_cyan     =  CODE_START//BG//CYAN//CODE_END
+character(len=*),parameter,public :: bg_magenta  =  CODE_START//BG//MAGENTA//CODE_END
+character(len=*),parameter,public :: bg_blue     =  CODE_START//BG//BLUE//CODE_END
+character(len=*),parameter,public :: bg_green    =  CODE_START//BG//GREEN//CODE_END
+character(len=*),parameter,public :: bg_yellow   =  CODE_START//BG//YELLOW//CODE_END
+character(len=*),parameter,public :: bg_white    =  CODE_START//BG//WHITE//CODE_END
+character(len=*),parameter,public :: bg_ebony    =  CODE_START//BG//BLACK//CODE_END
+character(len=*),parameter,public :: bg_black    =  CODE_START//BG//BLACK//CODE_END
+character(len=*),parameter,public :: bg_default  =  CODE_START//BG//DEFAULT//CODE_END
+! attributes
+character(len=*),parameter,public :: bold        =  CODE_START//ON//AT_BOLD//CODE_END
+character(len=*),parameter,public :: italic      =  CODE_START//ON//AT_ITALIC//CODE_END
+character(len=*),parameter,public :: inverse     =  CODE_START//ON//AT_INVERSE//CODE_END
+character(len=*),parameter,public :: underline   =  CODE_START//ON//AT_UNDERLINE//CODE_END
+character(len=*),parameter,public :: unbold      =  CODE_START//OFF//AT_BOLD//CODE_END
+character(len=*),parameter,public :: unitalic    =  CODE_START//OFF//AT_ITALIC//CODE_END
+character(len=*),parameter,public :: uninverse   =  CODE_START//OFF//AT_INVERSE//CODE_END
+character(len=*),parameter,public :: ununderline =  CODE_START//OFF//AT_UNDERLINE//CODE_END
+
+character(len=*),parameter,public :: reset       =  CODE_RESET
+character(len=*),parameter,public :: clear       =  HOME_DISPLAY//CLEAR_DISPLAY
+
+private locate   ! find PLACE in sorted character array where value can be found or should be placed
+private insert   ! insert entry into a sorted allocatable array at specified position
+private replace  ! replace entry by index from a sorted allocatable array if it is present
+private remove   ! delete entry by index from a sorted allocatable array if it is present
+
+contains
+
+!>
+!!##NAME
+!!    attr(3f) - [M_attr] substitute escape sequences for HTML-like syntax
+!!               in strings
+!!    (LICENSE:MIT)
+!!
+!!##SYNOPSIS
+!!
+!!      function attr(string,clear_at_end) result (expanded)
+!!
+!!        ! scalar
+!!        character(len=*),intent(in) :: string
+!!        logical,intent(in),optional :: clear_at_end
+!!        character(len=:),allocatable :: expanded
+!!        ! or array
+!!        character(len=*),intent(in) :: string(:)
+!!        logical,intent(in),optional :: clear_at_end
+!!        character(len=:),allocatable :: expanded(:)
+!!
+!!##DESCRIPTION
+!!    Use HTML-like syntax to add attributes to terminal output such as color
+!!    on devices that recognize ANSI escape sequences.
+!!
+!!##OPTIONS
+!!    string        input string  of form
+!!
+!!                    "<attribute_name>string</attribute_name> ...".
+!!
+!!                   where the current attributes are color names,
+!!                   bold, italic, underline, ...
+!!
+!!    clear_at_end   By default, a sequence to clear all text attributes
+!!                   is sent at the end of the returned text if an escape
+!!                   character appears in the output string. This can be
+!!                   turned off by setting this value to false. Each line
+!!                   being self-contained has advantages when output is
+!!                   filtered with commands such as grep(1).
+!!##KEYWORDS
+!!    primary default keywords
+!!
+!!      colors:
+!!        r,         red,       R,  RED
+!!        g,         green,     G,  GREEN
+!!        b,         blue,      B,  BLUE
+!!        m,         magenta,   M,  MAGENTA
+!!        c,         cyan,      C,  CYAN
+!!        y,         yellow,    Y,  YELLOW
+!!        e,         ebony,     E,  EBONY
+!!        w,         white,     W,  WHITE
+!!      attributes:
+!!        it,        italic
+!!        bo,        bold
+!!        un,        underline
+!!       other:
+!!        clear
+!!        escape
+!!        default
+!!        reset
+!!        gt
+!!        lt
+!!      dual-value (one for color, one for mono):
+!!        write(*,*)'<ERROR>an error message'
+!!        write(*,*)'<WARNING>a warning message'
+!!        write(*,*)'<INFO>an informational message'
+!!
+!!    By default, if the color mnemonics (ie. the keywords) are uppercase
+!!    they change the background color. If lowercase, the foreground color.
+!!    When preceded by a "/" character the attribute is returned to the default.
+!!
+!!    The "default" keyword is typically used explicitly when
+!!    clear_at_end=.false, and sets all text attributes to their initial defaults.
+!!
+!!##LIMITATIONS
+!!    o colors are not nestable, keywords are case-sensitive,
+!!    o not all terminals obey the sequences. On Windows, it is best if
+!!      you use Windows 10+ and/or the Linux mode; although it has worked
+!!      with all CygWin and MinGW and Putty windows and mintty.
+!!    o you should use "<gt>" and "<lt>" instead of ">" and "<" in a string
+!!      processed by attr(3f) instead of in any plain text output so that
+!!      the raw mode will create correct input for the attr(3f) function
+!!      if read back in.
+!!
+!!##EXAMPLE
+!!
+!!    Sample program
+!!
+!!     program demo_esc
+!!     use M_attr, only : attr, attr_mode, attr_update
+!!        call printstuff('defaults')
+!!
+!!        call attr_mode(manner='plain')
+!!        call printstuff('plain:')
+!!
+!!        call printstuff('raw:')
+!!
+!!        call attr_mode(manner='color')
+!!        call printstuff('')
+!!
+!!        write(*,'(a)') attr('TEST ADDING A CUSTOM SEQUENCE:')
+!!        call attr_update('blink',char(27)//'[5m')
+!!        call attr_update('/blink',char(27)//'[38m')
+!!        write(*,'(a)') attr('<blink>Items for Friday</blink>')
+!!
+!!     contains
+!!     subroutine printstuff(label)
+!!     character(len=*),intent(in) :: label
+!!       call attr_mode(manner=label)
+!!       write(*,'(a)') attr('TEST MANNER='//label)
+!!       write(*,'(a)') attr('<r>RED</r>,<g>GREEN</g>,<b>BLUE</b>')
+!!       write(*,'(a)') attr('<c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</y>')
+!!       write(*,'(a)') attr('<w>WHITE</w> and <e>EBONY</e>')
+!!
+!!       write(*,'(a)') attr('Adding <bo>bold</bo>')
+!!       write(*,'(a)') attr('<bo><r>RED</r>,<g>GREEN</g>,<b>BLUE</b></bo>')
+!!       write(*,'(a)') attr('<bo><c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</y></bo>')
+!!       write(*,'(a)') attr('<bo><w>WHITE</w> and <e>EBONY</e></bo>')
+!!
+!!       write(*,'(a)') attr('Adding <ul>underline</ul>')
+!!       write(*,'(a)') attr(&
+!!        &'<bo><ul><r>RED</r>,<g>GREEN</g>,<b>BLUE</b></ul></bo>')
+!!       write(*,'(a)') attr(&
+!!        &'<bo><ul><c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</y></ul></bo>')
+!!       write(*,'(a)') attr('<bo><ul><w>WHITE</w> and <e>EBONY</e></ul></bo>')
+!!
+!!       write(*,'(a)') attr('Adding <ul>italic</ul>')
+!!       write(*,'(a)') attr(&
+!!        &'<bo><ul><it><r>RED</r>,<g>GREEN</g>,<b>BLUE</b></it></ul></bo>')
+!!       write(*,'(a)') attr(&
+!!        &'<bo><ul><it><c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</it></y></ul></bo>')
+!!       write(*,'(a)') attr('<bo><ul><it><w>WHITE</w> and <e>EBONY</e></ul></bo>')
+!!
+!!       write(*,'(a)') attr('Adding <in>inverse</in>')
+!!       write(*,'(a)') attr(&
+!!        &'<in><bo><ul><it><r>RED</r>,<g>GREEN</g>,&
+!!        &<b>BLUE</b></it></ul></bo></in>')
+!!       write(*,'(a)') attr(&
+!!        &'<in><bo><ul><it><c>CYAN</c>,<m>MAGENTA</g>,&
+!!        &<y>YELLOW</it></y></ul></bo></in>')
+!!       write(*,'(a)') attr(&
+!!        &'<in><bo><ul><it><w>WHITE</w> and <e>EBONY</e></ul></bo></in>')
+!!     end subroutine printstuff
+!!
+!!     end program demo_esc
+!!
+!!##AUTHOR
+!!    John S. Urban, 2020
+!!
+!!##LICENSE
+!!    MIT
+!!
+!!##SEE ALSO
+!!    attr_mode(3f), attr_update(3f)
+function attr_scalar(string,clear_at_end) result (expanded)
+character(len=*),intent(in)  :: string
+logical,intent(in),optional  :: clear_at_end
+logical                      :: clear_at_end_local
+character(len=:),allocatable :: padded
+character(len=:),allocatable :: expanded
+character(len=:),allocatable :: name
+integer                      :: i
+integer                      :: ii
+integer                      :: maxlen
+integer                      :: place
+if(present(clear_at_end))then
+   clear_at_end_local=clear_at_end
+else
+   clear_at_end_local=.false.
+endif
+if(.not.allocated(mode))then  ! set substitution mode
+   mode='color' ! 'color'|'raw'|'plain'
+   call vt102()
+endif
+
+if(mode=='raw')then
+   expanded=string
+   return
+endif
+
+maxlen=len(string)
+padded=string//' '
+i=1
+expanded=''
+do
+   select case(padded(i:i))
+   case('>')  ! should not get here unless unmatched
+      i=i+1
+      expanded=expanded//'>'
+   case('<')  ! assuming not nested for now
+      ii=index(padded(i+1:),'>')
+      if(ii.eq.0)then
+         expanded=expanded//'<'
+         i=i+1
+      else
+         name=padded(i+1:i+ii-1)
+         name=trim(adjustl(name))
+         call locate(keywords,name,place)
+
+         if(mode.eq.'plain')then
+            expanded=expanded//get(name)
+         elseif(place.le.0)then     ! unknown name; print what you found
+            expanded=expanded//padded(i:i+ii)
+         else
+            expanded=expanded//get(name)
+         endif
+         i=ii+i+1
+      endif
+   case default
+      expanded=expanded//padded(i:i)
+      i=i+1
+   end select
+   if(i >= maxlen+1)exit
+enddo
+if( (index(expanded,escape).ne.0).and.(.not.clear_at_end_local))then
+   if((mode.ne.'raw').and.(mode.ne.'plain'))then
+      expanded=expanded//CODE_RESET                                   ! Clear all styles
+   endif
+endif
+end function attr_scalar
+
+function attr_matrix(string,clear_at_end) result (expanded)
+character(len=*),intent(in)  :: string(:)
+logical,intent(in),optional  :: clear_at_end
+character(len=:),allocatable :: expanded(:)
+character(len=:),allocatable :: hold
+integer                      :: i
+allocate(character(len=0) :: expanded(0))
+do i=1,size(string)
+   hold=attr_scalar(string(i))
+   expanded=[character(len=max(len(expanded),len(hold))):: expanded,hold]
+enddo
+end function attr_matrix
+
+subroutine vt102()
+! create a dictionary with character keywords, values, and value lengths
+! using the routines for maintaining a list
+
+   call wipe_dictionary()
+   ! insert and replace entries
+
+   call attr_update('bold',bold)
+   call attr_update('/bold',unbold)
+   call attr_update('bo',bold)
+   call attr_update('/bo',unbold)
+   call attr_update('livid',bold)
+   call attr_update('/livid',unbold)
+   call attr_update('li',bold)
+   call attr_update('/li',unbold)
+
+   call attr_update('italic',italic)
+   call attr_update('/italic',unitalic)
+   call attr_update('it',italic)
+   call attr_update('/it',unitalic)
+
+   call attr_update('inverse',inverse)
+   call attr_update('/inverse',uninverse)
+   call attr_update('in',inverse)
+   call attr_update('/in',uninverse)
+
+   call attr_update('underline',underline)
+   call attr_update('/underline',ununderline)
+   call attr_update('un',underline)
+   call attr_update('/un',ununderline)
+   call attr_update('ul',underline)
+   call attr_update('/ul',ununderline)
+
+   call attr_update('attr',ESCAPE)
+   call attr_update('escape',ESCAPE)
+
+   call attr_update('clear',clear)
+   call attr_update('reset',reset)
+   call attr_update('bell',BELL)
+   call attr_update('gt','>')
+   call attr_update('lt','<')
+
+   ! foreground colors
+   call attr_update('r',fg_red)
+       call attr_update('/r',fg_default)
+       call attr_update('red',fg_red)
+       call attr_update('/red',fg_default)
+   call attr_update('c',fg_cyan)
+       call attr_update('/c',fg_default)
+       call attr_update('cyan',fg_cyan)
+       call attr_update('/cyan',fg_default)
+   call attr_update('m',fg_magenta)
+       call attr_update('/m',fg_default)
+       call attr_update('magenta',fg_magenta)
+       call attr_update('/magenta',fg_default)
+   call attr_update('b',fg_blue)
+       call attr_update('/b',fg_default)
+       call attr_update('blue',fg_blue)
+       call attr_update('/blue',fg_default)
+   call attr_update('g',fg_green)
+       call attr_update('/g',fg_default)
+       call attr_update('green',fg_green)
+       call attr_update('/green',fg_default)
+   call attr_update('y',fg_yellow)
+       call attr_update('/y',fg_default)
+       call attr_update('yellow',fg_yellow)
+       call attr_update('/yellow',fg_default)
+   call attr_update('w',fg_white)
+       call attr_update('/w',fg_default)
+       call attr_update('white',fg_white)
+       call attr_update('/white',fg_default)
+   call attr_update('e',fg_ebony)
+       call attr_update('/e',fg_default)
+       call attr_update('ebony',fg_ebony)
+       call attr_update('/ebony',fg_default)
+   call attr_update('x',fg_ebony)
+       call attr_update('/x',fg_default)
+       call attr_update('black',fg_ebony)
+       call attr_update('/black',fg_default)
+
+   ! background colors
+   call attr_update('R',bg_red)
+       call attr_update('/R',bg_default)
+       call attr_update('RED',bg_red)
+       call attr_update('/RED',bg_default)
+   call attr_update('C',bg_cyan)
+       call attr_update('/C',bg_default)
+       call attr_update('CYAN',bg_cyan)
+       call attr_update('/CYAN',bg_default)
+   call attr_update('M',bg_magenta)
+       call attr_update('/M',bg_default)
+       call attr_update('MAGENTA',bg_magenta)
+       call attr_update('/MAGENTA',bg_default)
+   call attr_update('B',bg_blue)
+       call attr_update('/B',bg_default)
+       call attr_update('BLUE',bg_blue)
+       call attr_update('/BLUE',bg_default)
+   call attr_update('G',bg_green)
+       call attr_update('/G',bg_default)
+       call attr_update('GREEN',bg_green)
+       call attr_update('/GREEN',bg_default)
+   call attr_update('Y',bg_yellow)
+       call attr_update('/Y',bg_default)
+       call attr_update('YELLOW',bg_yellow)
+       call attr_update('/YELLOW',bg_default)
+   call attr_update('W',bg_white)
+       call attr_update('/W',bg_default)
+       call attr_update('WHITE',bg_white)
+       call attr_update('/WHITE',bg_default)
+   call attr_update('E',bg_ebony)
+       call attr_update('/E',bg_default)
+       call attr_update('EBONY',bg_ebony)
+       call attr_update('/EBONY',bg_default)
+   call attr_update('X',bg_ebony)
+       call attr_update('/X',bg_default)
+       call attr_update('BLACK',bg_ebony)
+       call attr_update('/BLACK',bg_default)
+
+   call attr_update('ERROR',fg_red//bold//bg_ebony//'error:'//bg_default//fg_default,'ERROR:')
+   call attr_update('WARNING',fg_magenta//bold//bg_ebony//'warning:'//bg_default//fg_default,'WARNING:')
+   call attr_update('INFO',fg_yellow//bold//bg_ebony//'info:'//bg_default//fg_default,'INFO:')
+
+end subroutine vt102
+!>
+!! !>
+!!##NAME
+!!    attr_mode(3f) - [M_attr] select processing mode for output from attr(3f)
+!!    (LICENSE:MIT)
+!!
+!!##SYNOPSIS
+!!
+!!
+!!     subroutine attr_mode(manner)
+!!
+!!        character(len=*),intent(in) :: manner
+!!
+!!##DESCRIPTION
+!!    Turn off the generation of strings associated with the HTML keywords
+!!    in the string generated by the attr(3f) function, or display the
+!!    text in raw mode as it was passed to attr(3f) or return to ANSI
+!!    escape control sequence generation.
+!!
+!!##OPTIONS
+!!    MANNER  The current manners or modes supported via the attr_mode(3f)
+!!             procedure are
+!!
+!!         plain          suppress the output associated with keywords
+!!         color(default) commonly supported escape sequences
+!!         raw            echo the input to attr(3f) as its output
+!!         reload         restore original keyword meanings deleted or
+!!                        replaced by calls to attr_update(3f).
+!!
+!!##EXAMPLE
+!!
+!!
+!!    Sample program
+!!
+!!     program demo_attr_mode
+!!     use M_attr, only : attr, attr_mode
+!!     implicit none
+!!     character(len=1024) :: line
+!!     real :: value
+!!
+!!       value=3.4567
+!!       if( (value>0.0) .and. (value<100.0))then
+!!         write(line,fmt='("&
+!!        &<w><G>GREAT</G></w>: The value <Y><b>",f8.4,"</b></Y> is in range &
+!!        &")')value
+!!       else
+!!         write(line,fmt='("&
+!!        &<R><e>ERROR</e></R>:The new value <Y><b>",g0,"</b></Y> is out of range&
+!!        & ")')value
+!!       endif
+!!
+!!       write(*,'(a)')attr(trim(line))
+!!
+!!       call attr_mode(manner='plain') ! write as plain text
+!!       write(*,'(a)')attr(trim(line))
+!!       call attr_mode(manner='raw')   ! write as-is
+!!       write(*,'(a)')attr(trim(line))
+!!       call attr_mode(manner='ansi')  ! return to default mode
+!!       write(*,'(a)')attr(trim(line))
+!!
+!!     end program demo_attr_mode
+!!
+!!##AUTHOR
+!!    John S. Urban, 2020
+!!
+!!##LICENSE
+!!    MIT
+subroutine attr_mode(manner)
+character(len=*),intent(in) :: manner
+integer                     :: i
+   if(.not.allocated(mode))then  ! set substitution mode
+      mode='color'
+      call vt102()
+   endif
+   select case(manner)
+   case('vt102','ANSI','ansi','color','COLOR')
+      mode='color'
+   case('reload','default','defaults','')
+      call vt102()
+      mode='color'
+   case('raw')
+      mode='raw'
+   case('dump')  ! dump dictionary for debugging
+      if(allocated(keywords))then
+         if(size(keywords).gt.0)then
+            write(stderr,'(*(a,t30,a))')'KEYWORD','VALUE'
+            write(stderr,'(*(a,t30,2("[",a,"]"),/))')(trim(keywords(i)),values(i),mono_values(i),i=1,size(keywords))
+         endif
+      endif
+   case('dummy','plain','text')
+      mode='plain'
+   case default
+      write(*,*)'unknown manner. Try color|raw|plain'
+      mode='color'
+   end select
+end subroutine attr_mode
+
+subroutine wipe_dictionary()
+   if(allocated(keywords))deallocate(keywords)
+   allocate(character(len=0) :: keywords(0))
+   if(allocated(values))deallocate(values)
+   allocate(character(len=0) :: values(0))
+   if(allocated(mono_values))deallocate(mono_values)
+   allocate(character(len=0) :: mono_values(0))
+end subroutine wipe_dictionary
+
+!>
+!! !>
+!!##NAME
+!!    attr_update(3f) - [M_attr] update internal dictionary given keyword and value
+!!    (LICENSE:MIT)
+!!
+!!##SYNOPSIS
+!!
+!!
+!!    subroutine attr_update(key,val)
+!!
+!!     character(len=*),intent(in)           :: key
+!!     character(len=*),intent(in),optional  :: val
+!!     character(len=*),intent(in),optional  :: mono_val
+!!
+!!##DESCRIPTION
+!!    Update internal dictionary in M_attr(3fm) module.
+!!
+!!##OPTIONS
+!!    key       name of keyword to add, replace, or delete from dictionary
+!!    val       if present add or replace value associated with keyword. If
+!!              not present remove keyword entry from dictionary.
+!!    mono_val  if present add or replace second value associated with
+!!              keyword used for plain text mode.
+!!              Must only be specified if VAL is also specified.
+!!
+!!##KEYWORDS
+!!    The following keywords are defined by default
+!!
+!!    colors:
+!!
+!!      r,red     c,cyan     w,white
+!!      g,green   m,magenta  e,ebony
+!!      b,blue    y,yellow
+!!
+!!    If the color keywords are capitalized they control the text background
+!!    instead of the text color.
+!!
+!!    attributes:
+!!
+!!      ul,underline
+!!      it,italics (often produces inverse colors on many devices
+!!
+!!##EXAMPLE
+!!
+!!
+!!    Sample program
+!!
+!!     program demo_update
+!!     use M_attr, only : attr, attr_update
+!!        write(*,'(a)') attr('<clear>TEST CUSTOMIZED:')
+!!        ! add custom keywords
+!!        call attr_update('blink',char(27)//'[5m')
+!!        call attr_update('/blink',char(27)//'[38m')
+!!
+!!        write(*,'(a)') attr('<blink>Items for Friday</blink>')
+!!
+!!        write(*,'(a)',advance='no') attr('<r>RED</r>,')
+!!        write(*,'(a)',advance='no') attr('<b>BLUE</b>,')
+!!        write(*,'(a)',advance='yes') attr('<g>GREEN</g>')
+!!
+!!        ! delete
+!!        call attr_update('r')
+!!        call attr_update('/r')
+!!        ! replace
+!!        call attr_update('b','<<<<')
+!!        call attr_update('/b','>>>>')
+!!        write(*,'(a)',advance='no') attr('<r>RED</r>,')
+!!        write(*,'(a)',advance='no') attr('<b>BLUE</b>,')
+!!        write(*,'(a)',advance='yes') attr('<g>GREEN</g>')
+!!
+!!     end program demo_update
+!!
+!!##AUTHOR
+!!    John S. Urban, 2020
+!!
+!!##LICENSE
+!!    MIT
+subroutine attr_update(key,valin,mono_valin)
+character(len=*),intent(in)           :: key
+character(len=*),intent(in),optional  :: valin
+character(len=*),intent(in),optional  :: mono_valin
+integer                               :: place
+character(len=:),allocatable          :: val
+character(len=:),allocatable          :: mono_val
+
+if(present(mono_valin))then
+   mono_val=mono_valin
+else
+   mono_val=''
+endif
+
+if(present(valin))then
+   val=valin
+   ! find where string is or should be
+   call locate(keywords,key,place)
+   ! if string was not found insert it
+   if(place.lt.1)then
+      call insert(keywords,key,iabs(place))
+      call insert(values,val,iabs(place))
+      call insert(mono_values,mono_val,iabs(place))
+   else
+      call replace(values,val,place)
+      call replace(values,mono_val,place)
+   endif
+else
+   call locate(keywords,key,place)
+   if(place.gt.0)then
+      call remove(keywords,place)
+      call remove(values,place)
+      call remove(mono_values,place)
+   endif
+endif
+end subroutine attr_update
+
+function get(key) result(valout)
+character(len=*),intent(in)   :: key
+character(len=:),allocatable  :: valout
+integer                       :: place
+   ! find where string is or should be
+   call locate(keywords,key,place)
+   if(place.lt.1)then
+      valout=''
+   else
+      if(mode.eq.'plain')then
+         valout=trim(mono_values(place))
+      else
+         valout=trim(values(place))
+      endif
+   endif
+end function get
+
+subroutine locate(list,value,place,ier,errmsg)
+character(len=*),intent(in)             :: value
+integer,intent(out)                     :: place
+character(len=:),allocatable            :: list(:)
+integer,intent(out),optional            :: ier
+character(len=*),intent(out),optional   :: errmsg
+integer                                 :: i
+character(len=:),allocatable            :: message
+integer                                 :: arraysize
+integer                                 :: maxtry
+integer                                 :: imin, imax
+integer                                 :: error
+   if(.not.allocated(list))then
+      list=[character(len=max(len_trim(value),2)) :: ]
+   endif
+   arraysize=size(list)
+
+   error=0
+   if(arraysize.eq.0)then
+      maxtry=0
+      place=-1
+   else
+      maxtry=int(log(float(arraysize))/log(2.0)+1.0)
+      place=(arraysize+1)/2
+   endif
+   imin=1
+   imax=arraysize
+   message=''
+
+   LOOP: block
+   do i=1,maxtry
+
+      if(value.eq.list(PLACE))then
+         exit LOOP
+      else if(value.gt.list(place))then
+         imax=place-1
+      else
+         imin=place+1
+      endif
+
+      if(imin.gt.imax)then
+         place=-imin
+         if(iabs(place).gt.arraysize)then ! ran off end of list. Where new value should go or an unsorted input array'
+            exit LOOP
+         endif
+         exit LOOP
+      endif
+
+      place=(imax+imin)/2
+
+      if(place.gt.arraysize.or.place.le.0)then
+         message='*locate* error: search is out of bounds of list. Probably an unsorted input array'
+         error=-1
+         exit LOOP
+      endif
+
+   enddo
+   message='*locate* exceeded allowed tries. Probably an unsorted input array'
+   endblock LOOP
+   if(present(ier))then
+      ier=error
+   else if(error.ne.0)then
+      write(stderr,*)message//' VALUE=',trim(value)//' PLACE=',place
+      stop 1
+   endif
+   if(present(errmsg))then
+      errmsg=message
+   endif
+end subroutine locate
+
+subroutine remove(list,place)
+character(len=:),allocatable :: list(:)
+integer,intent(in)           :: place
+integer                      :: ii, end
+   if(.not.allocated(list))then
+      list=[character(len=2) :: ]
+   endif
+   ii=len(list)
+   end=size(list)
+   if(place.le.0.or.place.gt.end)then                       ! index out of bounds of array
+   elseif(place.eq.end)then                                 ! remove from array
+      list=[character(len=ii) :: list(:place-1) ]
+   else
+      list=[character(len=ii) :: list(:place-1), list(place+1:) ]
+   endif
+end subroutine remove
+
+subroutine replace(list,value,place)
+character(len=*),intent(in)  :: value
+character(len=:),allocatable :: list(:)
+character(len=:),allocatable :: kludge(:)
+integer,intent(in)           :: place
+integer                      :: ii
+integer                      :: tlen
+integer                      :: end
+   if(.not.allocated(list))then
+      list=[character(len=max(len_trim(value),2)) :: ]
+   endif
+   tlen=len_trim(value)
+   end=size(list)
+   if(place.lt.0.or.place.gt.end)then
+           write(stderr,*)'*replace* error: index out of range. end=',end,' index=',place
+   elseif(len_trim(value).le.len(list))then
+      list(place)=value
+   else  ! increase length of variable
+      ii=max(tlen,len(list))
+      kludge=[character(len=ii) :: list ]
+      list=kludge
+      list(place)=value
+   endif
+end subroutine replace
+
+subroutine insert(list,value,place)
+
+character(len=*),intent(in)  :: value
+character(len=:),allocatable :: list(:)
+character(len=:),allocatable :: kludge(:)
+integer,intent(in)           :: place
+integer                      :: ii
+integer                      :: end
+
+   if(.not.allocated(list))then
+      list=[character(len=max(len_trim(value),2)) :: ]
+   endif
+
+   ii=max(len_trim(value),len(list),2)
+   end=size(list)
+
+   if(end.eq.0)then                                          ! empty array
+      list=[character(len=ii) :: value ]
+   elseif(place.eq.1)then                                    ! put in front of array
+      kludge=[character(len=ii) :: value, list]
+      list=kludge
+   elseif(place.gt.end)then                                  ! put at end of array
+      kludge=[character(len=ii) :: list, value ]
+      list=kludge
+   elseif(place.ge.2.and.place.le.end)then                 ! put in middle of array
+      kludge=[character(len=ii) :: list(:place-1), value,list(place:) ]
+      list=kludge
+   else                                                      ! index out of range
+      write(stderr,*)'*insert* error: index out of range. end=',end,' index=',place,' value=',value
+   endif
+
+end subroutine insert
+
+end module M_attr
