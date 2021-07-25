@@ -10,16 +10,20 @@ categories = ["ANSI escape sequences"]
 keywords = ["fortran", "terminal control sequences", "escape sequences", "in-line terminal control" ]
 homepage = "https://github.com/urbanjost/M_attr.git"
 
-# demo programs
-test = [
-   { name="demo5_custom", source-dir="test", main="custom.f90" },
-   { name="demo1_default", source-dir="test", main="default.f90" },
-   { name="demo6_dump", source-dir="test", main="dump.f90" },
-   { name="demo7_functional", source-dir="test", main="functional.f90" },
-   { name="demo9_mixed", source-dir="test", main="mixed.f90" },
+[build]
+external-modules = ["ifport", "dfport"]
 
-]
-executable = [
-   { name="plain", source-dir="app", main="plain.f90" },
-   { name="light", source-dir="app", main="light.f90" },
-]
+[[executable]]
+name="attr"
+source-dir="app"
+main="main.F90"
+
+[[executable]]
+name="plain"
+source-dir="app"
+main="plain.f90"
+
+[[executable]]
+name="light"
+source-dir="app"
+main="light.f90"

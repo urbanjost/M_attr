@@ -2,14 +2,16 @@
            use M_attr, only : attr, attr_mode
            implicit none
            character(len=256) :: line
+           character(len=*),parameter :: f='( &
+           &"   <bo><w><G> GREAT: </G></w>&
+           &The new value <Y><b>",f8.4,1x,"</b></Y> is in range"&
+           &)'
            real :: value
               write(*,'(a)')&
-              &attr('<r><W>ERROR:</W> red text on a white background</y>')
+              &attr('   <r><W><bo> ERROR: </W>red text on a white background</y>')
 
               value=3.4567
-              write(line,fmt=&
-              &'("<w><G>GREAT</G></w>:&
-              &The new value <Y><b>",f8.4,"</b></Y> is in range")')value
+              write(line,fmt=f) value
               write(*,'(a)')attr(trim(line))
 
               ! write same string as plain text

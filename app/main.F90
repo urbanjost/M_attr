@@ -12,7 +12,7 @@ character(len=:),allocatable    :: line
 character(len=256)              :: message
 integer                         :: ios
 character(len=1)                :: paws
-   if(isatty(stdout))then ! ISATTY() is an extension, but found in Intel, GNU, PGI, ... compiler
+   if(system_isatty(stdout))then ! ISATTY() is an extension, but found in Intel, GNU, PGI, ... compiler
       call attr_mode('color')
    else
       call attr_mode('plain') 
@@ -21,7 +21,8 @@ character(len=1)                :: paws
    INFINITE: do
       ! clear screen, set attributes and print messages
       line="<clear><B><w><bo>Enter the quadratic equation coefficients a, b and c"
-      write(*,'(*(a))',advance='no') attr('<B><w><bo>'//repeat('_',len(line))//'<'), char(13),attr('<B><y>ENTER>')
+      write(*,'(*(a))',advance='no') &
+      & attr('<B><w><bo>'//repeat('_',len(line))), char(13),attr('<B><y>ENTER<gt>')
       read(*,*,iostat=ios,iomsg=message)a,b,c
       !write(*,'(a)',advance='no')attr('reset')
       if(ios.ne.0)then
@@ -55,4 +56,45 @@ character(len=1)                :: paws
       read(*,advance='yes',iostat=ios,fmt='(a)',iomsg=message)paws
       if(paws.ne.'')exit INFINITE
    enddo INFINITE
+contains
+!>  call compiler-specific ISATTY() function or return .FALSE.
+#undef ISATTY
+
+#ifdef __INTEL_COMPILER
+    function system_isatty(lun)
+    use IFPORT
+    integer,intent(in) :: lun
+    logical :: system_isatty
+       system_isatty=isatty(lun)
+    end function system_isatty
+#define ISATTY
+#endif
+
+#ifdef __NVCOMPILER_MAJOR__X
+    ! __NVCOMPILER_MAJOR__ __NVCOMPILER_MINOR__ __NVCOMPILER_PATCHLEVEL__
+    function system_isatty(lun)
+    use DFPORT
+    integer,intent(in) :: lun
+    logical :: system_isatty
+       system_isatty=isatty(lun)
+    end function system_isatty
+#define ISATTY
+#endif
+
+#ifdef __GFORTRAN__
+    function system_isatty(lun)
+    integer,intent(in) :: lun
+    logical :: system_isatty
+       system_isatty=isatty(lun)
+    end function system_isatty
+#define ISATTY
+#endif
+#ifndef ISATTY
+    function system_isatty(lun)
+    integer,intent(in) :: lun
+    logical :: system_isatty
+       system_isatty=.false.
+    end function system_isatty
+#define ISATTY
+#endif
 END PROGRAM roots

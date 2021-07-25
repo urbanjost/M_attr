@@ -61,14 +61,16 @@
 !!     use M_attr, only : attr, attr_mode
 !!     implicit none
 !!     character(len=256) :: line
+!!     character(len=*),parameter :: f='( &
+!!     &"   <bo><w><G> GREAT: </G></w>&
+!!     &The new value <Y><b>",f8.4,1x,"</b></Y> is in range"&
+!!     &)'
 !!     real :: value
 !!        write(*,'(a)')&
-!!        &attr('<r><W>ERROR:</W> red text on a white background</y>')
+!!        &attr('   <r><W><bo> ERROR: </W>red text on a white background</y>')
 !!
 !!        value=3.4567
-!!        write(line,fmt=&
-!!        &'("<w><G>GREAT</G></w>:&
-!!        &The new value <Y><b>",f8.4,"</b></Y> is in range")')value
+!!        write(line,fmt=f) value
 !!        write(*,'(a)')attr(trim(line))
 !!
 !!        ! write same string as plain text
@@ -185,13 +187,14 @@ contains
 !!      function attr(string,clear_at_end) result (expanded)
 !!
 !!        ! scalar
-!!        character(len=*),intent(in) :: string
-!!        logical,intent(in),optional :: clear_at_end
+!!        character(len=*),intent(in)  :: string
+!!        logical,intent(in),optional  :: clear_at_end
 !!        character(len=:),allocatable :: expanded
 !!        ! or array
-!!        character(len=*),intent(in) :: string(:)
-!!        logical,intent(in),optional :: clear_at_end
+!!        character(len=*),intent(in)  :: string(:)
+!!        logical,intent(in),optional  :: clear_at_end
 !!        character(len=:),allocatable :: expanded(:)
+!!        integer,intent(in),optional  :: chars
 !!
 !!##DESCRIPTION
 !!    Use HTML-like syntax to add attributes to terminal output such as color
@@ -211,6 +214,10 @@ contains
 !!                   turned off by setting this value to false. Each line
 !!                   being self-contained has advantages when output is
 !!                   filtered with commands such as grep(1).
+!!    chars          For arrays, a reset will be placed after the Nth
+!!                   displayable column count in order to make it easier
+!!                   to generate even right borders for non-default
+!!                   background colors.
 !!##KEYWORDS
 !!    primary default keywords
 !!
@@ -267,7 +274,7 @@ contains
 !!        call attr_mode(manner='plain')
 !!        call printstuff('plain:')
 !!
-!!        call printstuff('raw:')
+!!        call printstuff('raw')
 !!
 !!        call attr_mode(manner='color')
 !!        call printstuff('')
@@ -279,12 +286,16 @@ contains
 !!
 !!     contains
 !!     subroutine printstuff(label)
-!!     character(len=*),intent(in) :: label
+!!     character(len=*),intent(in)  :: label
+!!     character(len=:),allocatable :: array(:)
 !!       call attr_mode(manner=label)
-!!       write(*,'(a)') attr('TEST MANNER='//label)
-!!       write(*,'(a)') attr('<r>RED</r>,<g>GREEN</g>,<b>BLUE</b>')
-!!       write(*,'(a)') attr('<c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</y>')
-!!       write(*,'(a)') attr('<w>WHITE</w> and <e>EBONY</e>')
+!!
+!!       array=[character(len=60) ::    &
+!!        'TEST MANNER='//label,                      &
+!!        '<r>RED</r>,<g>GREEN</g>,<b>BLUE</b>',      &
+!!        '<c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</y>', &
+!!        '<w>WHITE</w> and <e>EBONY</e>']
+!!       write(*,'(a)') attr(array)
 !!
 !!       write(*,'(a)') attr('Adding <bo>bold</bo>')
 !!       write(*,'(a)') attr('<bo><r>RED</r>,<g>GREEN</g>,<b>BLUE</b></bo>')
@@ -393,16 +404,40 @@ if( (index(expanded,escape).ne.0).and.(.not.clear_at_end_local))then
 endif
 end function attr_scalar
 
-function attr_matrix(string,clear_at_end) result (expanded)
+function attr_matrix(string,clear_at_end,chars) result (expanded)
 character(len=*),intent(in)  :: string(:)
 logical,intent(in),optional  :: clear_at_end
+integer,intent(in),optional  :: chars
 character(len=:),allocatable :: expanded(:)
 character(len=:),allocatable :: hold
 integer                      :: i
+integer                      :: right
+integer                      :: len_local
+integer                      :: len_local2
 allocate(character(len=0) :: expanded(0))
+
+if(present(chars))then
+   right=chars
+else
+   right=len(string)
+endif
+if(.not.allocated(mode))then  ! set substitution mode
+   mode='color' ! 'color'|'raw'|'plain'
+   call vt102()
+endif
+
 do i=1,size(string)
-   hold=attr_scalar(string(i))
-   expanded=[character(len=max(len(expanded),len(hold))):: expanded,hold]
+   if(mode.eq.'color')then
+      len_local2=len_trim(attr_scalar(string(i)))
+      mode='plain'
+      len_local=len_trim(attr_scalar(string(i)))
+      hold=trim(string(i))//repeat(' ',max(0,right-len_local))
+      mode='color'
+   else
+      hold=string(i)
+   endif
+   hold=attr_scalar(hold)
+   expanded=[character(len=max(len(expanded),len(hold))) :: expanded,hold]
 enddo
 end function attr_matrix
 
@@ -537,7 +572,6 @@ end subroutine vt102
 !!
 !!##SYNOPSIS
 !!
-!!
 !!     subroutine attr_mode(manner)
 !!
 !!        character(len=*),intent(in) :: manner
@@ -560,34 +594,35 @@ end subroutine vt102
 !!
 !!##EXAMPLE
 !!
-!!
 !!    Sample program
 !!
 !!     program demo_attr_mode
 !!     use M_attr, only : attr, attr_mode
 !!     implicit none
-!!     character(len=1024) :: line
-!!     real :: value
+!!     character(len=:),allocatable :: lines(:)
+!!     character(len=:),allocatable :: outlines(:)
+!!     integer :: i
+!!        lines=[character(len=110):: &
+!!        '<B><y>',&
+!!        '<B><y>  Suffice it to say that <W><e>black</e></W><B><y>&
+!!        & and <E><w>white</w></E><B><y> are also colors',&
+!!        '<B><y>  for their simultaneous contrast is as striking as that ',&
+!!        '<B><y>  of <R><g>green</g></R><B><y> and <G><r>red</r></G><B><y>,&
+!!        & for instance. --- <bo>Vincent van Gogh',&
+!!        '<B><y>',&
+!!        ' ']
 !!
-!!       value=3.4567
-!!       if( (value>0.0) .and. (value<100.0))then
-!!         write(line,fmt='("&
-!!        &<w><G>GREAT</G></w>: The value <Y><b>",f8.4,"</b></Y> is in range &
-!!        &")')value
-!!       else
-!!         write(line,fmt='("&
-!!        &<R><e>ERROR</e></R>:The new value <Y><b>",g0,"</b></Y> is out of range&
-!!        & ")')value
-!!       endif
+!!        outlines=attr(lines,chars=57)
+!!        write(*,'(a)')(trim(outlines(i)),i=1,size(outlines))
 !!
-!!       write(*,'(a)')attr(trim(line))
+!!        call attr_mode(manner='plain') ! write as plain text
+!!        write(*,'(a)')attr(lines)
+!!        call attr_mode(manner='raw')   ! write as-is
+!!        write(*,'(a)')attr(lines)
 !!
-!!       call attr_mode(manner='plain') ! write as plain text
-!!       write(*,'(a)')attr(trim(line))
-!!       call attr_mode(manner='raw')   ! write as-is
-!!       write(*,'(a)')attr(trim(line))
-!!       call attr_mode(manner='ansi')  ! return to default mode
-!!       write(*,'(a)')attr(trim(line))
+!!        call attr_mode(manner='ansi')  ! return to default mode
+!!        outlines=attr(lines,chars=80)
+!!        write(*,'(a)')(trim(outlines(i)),i=1,size(outlines))
 !!
 !!     end program demo_attr_mode
 !!
