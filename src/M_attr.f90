@@ -62,9 +62,9 @@
 !!     implicit none
 !!     character(len=256) :: line
 !!     character(len=*),parameter :: f='( &
-!!     &"   <bo><w><G> GREAT: </G></w>&
-!!     &The new value <Y><b>",f8.4,1x,"</b></Y> is in range"&
-!!     &)'
+!!      &"   <bo><w><G> GREAT: </G></w>&
+!!      &The new value <Y><b>",f8.4,1x,"</b></Y> is in range"&
+!!      &)'
 !!     real :: value
 !!        write(*,'(a)')&
 !!        &attr('   <r><W><bo> ERROR: </W>red text on a white background</y>')
@@ -101,7 +101,11 @@ private
 public attr
 public attr_mode
 public attr_update
-interface attr;    module procedure attr_scalar, attr_matrix;  end interface
+interface attr
+   module procedure attr_scalar
+   module procedure attr_matrix
+   module procedure attr_scalar_width
+end interface
 
 ! direct use of constant strings
 
@@ -184,15 +188,15 @@ contains
 !!
 !!##SYNOPSIS
 !!
-!!      function attr(string,clear_at_end) result (expanded)
+!!      function attr(string,reset) result (expanded)
 !!
 !!        ! scalar
 !!        character(len=*),intent(in)  :: string
-!!        logical,intent(in),optional  :: clear_at_end
+!!        logical,intent(in),optional  :: reset
 !!        character(len=:),allocatable :: expanded
 !!        ! or array
 !!        character(len=*),intent(in)  :: string(:)
-!!        logical,intent(in),optional  :: clear_at_end
+!!        logical,intent(in),optional  :: reset
 !!        character(len=:),allocatable :: expanded(:)
 !!        integer,intent(in),optional  :: chars
 !!
@@ -208,16 +212,20 @@ contains
 !!                   where the current attributes are color names,
 !!                   bold, italic, underline, ...
 !!
-!!    clear_at_end   By default, a sequence to clear all text attributes
-!!                   is sent at the end of the returned text if an escape
+!!    reset          By default, a sequence to clear all text attributes
+!!                   is sent at the end of each returned line if an escape
 !!                   character appears in the output string. This can be
-!!                   turned off by setting this value to false. Each line
-!!                   being self-contained has advantages when output is
-!!                   filtered with commands such as grep(1).
+!!                   turned off by setting RESET to .false. .
+!!
+!!                   Note if turning off the reset attributes may be
+!!                   continued accross lines, but if each line is not
+!!                   self-contained attributes may not display properly
+!!                   when filtered with commands such as grep(1).
+!!
 !!    chars          For arrays, a reset will be placed after the Nth
 !!                   displayable column count in order to make it easier
-!!                   to generate even right borders for non-default
-!!                   background colors.
+!!                   to generate consistent right borders for non-default
+!!                   background colors for a text block.
 !!##KEYWORDS
 !!    primary default keywords
 !!
@@ -242,16 +250,16 @@ contains
 !!        gt
 !!        lt
 !!      dual-value (one for color, one for mono):
-!!        write(*,*)'<ERROR>an error message'
-!!        write(*,*)'<WARNING>a warning message'
-!!        write(*,*)'<INFO>an informational message'
+!!        write(*,*)attr('<ERROR>an error message')
+!!        write(*,*)attr('<WARNING>a warning message')
+!!        write(*,*)attr('<INFO>an informational message')
 !!
 !!    By default, if the color mnemonics (ie. the keywords) are uppercase
 !!    they change the background color. If lowercase, the foreground color.
 !!    When preceded by a "/" character the attribute is returned to the default.
 !!
 !!    The "default" keyword is typically used explicitly when
-!!    clear_at_end=.false, and sets all text attributes to their initial defaults.
+!!    reset=.false, and sets all text attributes to their initial defaults.
 !!
 !!##LIMITATIONS
 !!    o colors are not nestable, keywords are case-sensitive,
@@ -337,10 +345,10 @@ contains
 !!
 !!##SEE ALSO
 !!    attr_mode(3f), attr_update(3f)
-function attr_scalar(string,clear_at_end) result (expanded)
+function attr_scalar(string,reset) result (expanded)
 character(len=*),intent(in)  :: string
-logical,intent(in),optional  :: clear_at_end
-logical                      :: clear_at_end_local
+logical,intent(in),optional  :: reset
+logical                      :: clear_at_end
 character(len=:),allocatable :: padded
 character(len=:),allocatable :: expanded
 character(len=:),allocatable :: name
@@ -348,10 +356,10 @@ integer                      :: i
 integer                      :: ii
 integer                      :: maxlen
 integer                      :: place
-if(present(clear_at_end))then
-   clear_at_end_local=clear_at_end
+if(present(reset))then
+   clear_at_end=reset
 else
-   clear_at_end_local=.false.
+   clear_at_end=.true.
 endif
 if(.not.allocated(mode))then  ! set substitution mode
    mode='color' ! 'color'|'raw'|'plain'
@@ -397,16 +405,15 @@ do
    end select
    if(i >= maxlen+1)exit
 enddo
-if( (index(expanded,escape).ne.0).and.(.not.clear_at_end_local))then
+if( (index(expanded,escape).ne.0).and.(clear_at_end))then
    if((mode.ne.'raw').and.(mode.ne.'plain'))then
       expanded=expanded//CODE_RESET                                   ! Clear all styles
    endif
 endif
 end function attr_scalar
-
-function attr_matrix(string,clear_at_end,chars) result (expanded)
+function attr_matrix(string,reset,chars) result (expanded)
 character(len=*),intent(in)  :: string(:)
-logical,intent(in),optional  :: clear_at_end
+logical,intent(in),optional  :: reset
 integer,intent(in),optional  :: chars
 character(len=:),allocatable :: expanded(:)
 character(len=:),allocatable :: hold
@@ -436,10 +443,20 @@ do i=1,size(string)
    else
       hold=string(i)
    endif
-   hold=attr_scalar(hold)
+   hold=attr_scalar(hold,reset=reset)
    expanded=[character(len=max(len(expanded),len(hold))) :: expanded,hold]
 enddo
 end function attr_matrix
+
+function attr_scalar_width(string,reset,chars) result (expanded)
+character(len=*),intent(in)  :: string
+logical,intent(in),optional  :: reset
+integer,intent(in)           :: chars
+character(len=:),allocatable :: expanded_arr(:)
+character(len=:),allocatable :: expanded
+   expanded_arr=attr_matrix([string],reset,chars)
+   expanded=expanded_arr(1)
+end function attr_scalar_width
 
 subroutine vt102()
 ! create a dictionary with character keywords, values, and value lengths

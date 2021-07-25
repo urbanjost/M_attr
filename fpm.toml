@@ -14,9 +14,9 @@ homepage = "https://github.com/urbanjost/M_attr.git"
 external-modules = ["ifport", "dfport"]
 
 [[executable]]
-name="attr"
+name="redirect"
 source-dir="app"
-main="main.F90"
+main="redirect.F90"
 
 [[executable]]
 name="plain"

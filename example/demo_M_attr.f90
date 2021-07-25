@@ -3,9 +3,9 @@
            implicit none
            character(len=256) :: line
            character(len=*),parameter :: f='( &
-           &"   <bo><w><G> GREAT: </G></w>&
-           &The new value <Y><b>",f8.4,1x,"</b></Y> is in range"&
-           &)'
+            &"   <bo><w><G> GREAT: </G></w>&
+            &The new value <Y><b>",f8.4,1x,"</b></Y> is in range"&
+            &)'
            real :: value
               write(*,'(a)')&
               &attr('   <r><W><bo> ERROR: </W>red text on a white background</y>')

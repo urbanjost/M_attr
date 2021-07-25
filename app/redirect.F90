@@ -12,51 +12,83 @@ character(len=:),allocatable    :: line
 character(len=256)              :: message
 integer                         :: ios
 character(len=1)                :: paws
+character(len=1024)             :: buffer
+character(len=*),parameter      :: numbers='("<B><w><bo>   ",*("(",g0.8,",",g0.8,")":,1x))'
    if(system_isatty(stdout))then ! ISATTY() is an extension, but found in Intel, GNU, PGI, ... compiler
       call attr_mode('color')
    else
-      call attr_mode('plain') 
+      call attr_mode('plain')
    endif
 
    INFINITE: do
       ! clear screen, set attributes and print messages
-      line="<clear><B><w><bo>Enter the quadratic equation coefficients a, b and c"
+      call text("<reset><clear>")
+      call text("Enter the quadratic equation coefficients <m>a</m><b>, <m>b</m><g> and <m>c</m> ")
       write(*,'(*(a))',advance='no') &
-      & attr('<B><w><bo>'//repeat('_',len(line))), char(13),attr('<B><y>ENTER<gt>')
+      & attr('<B><w><bo>'//repeat('_',80)), char(13),attr('<B><y><bo>ENTER<gt><ul><g>',reset=.false.)
       read(*,*,iostat=ios,iomsg=message)a,b,c
-      !write(*,'(a)',advance='no')attr('reset')
+      write(*,'(a)',advance='no')attr('<reset>')
       if(ios.ne.0)then
          write(*,'(*(g0))')ios,' ',trim(message)
       else
          ! Given the equation "A*x**2 + B*x + C = 0"
          ! Use the quadratic formula to determine the root values of the equation.
          ! prompt for new value
-      
-         WRITE(*,'(*(g0))') 'for ',a,'*x**2 + ',b,'*x + ',c,' = 0'
+
+         call text()
+         call text('Given the equation')
+         call text()
+         write(buffer,'(*(g0.8))') '<B><w><bo>   ',a,'<m>*x**2</m><w> + ',b,'<m>*x</m><w> + ',c,' = 0'
+         write(*,'(*(g0))') attr(buffer,chars=80)
+         call text()
+
          discriminant = b**2 - 4*a*c
-      
+
          IF ( discriminant>0 ) THEN
-            write(*,*) 'the roots (ie. "x intercepts") are real so the parabola crosses the x-axis at two points:'
+            call text('the <m>roots</m><g> (ie. "x intercepts") are <m>real<m><g> so the parabola ')
+            call text('crosses the x-axis at <m>two points</m><g>:')
+            call text()
             x1 = ( -b + sqrt(discriminant)) / (2 * a)
             x2 = ( -b - sqrt(discriminant)) / (2 * a)
-            PRINT *, "Real roots:", x1, x2
+            write(buffer,numbers)x1,0.0d0, x2,0.0d0
+            WRITE(*,'(*(g0))') attr(buffer,chars=80)
          ELSEIF ( discriminant==0 ) THEN
-            PRINT *,'the roots (ie. "x intercepts") are repeated (real and equal) so the parabola just touches the x-axis at:'
+
+            call text('the <m>roots</m><g> (ie. "x intercepts") are repeated <m>(real and equal)</m><g>')
+            call text('so the parabola just touches the x-axis at:')
+            call text()
             x = (-b) / (2 * a)
-            PRINT *, "Two identical Real roots", x
+            write(buffer,numbers)x1, x2
+            WRITE(*,'(*(g0))') attr(buffer,chars=80)
+            call text()
          ELSE
-            PRINT *, 'the roots(ie. "x intercepts")  are complex:'
+            call text('the <m>roots</m><g>(ie. "x intercepts")  are <m>complex</m><g>:')
             x_real     = (-b)/(2 * a)
             x_complex  = sqrt (abs(discriminant)) / (2 * a)
-            PRINT *, x_real, "+i",x_complex , x_real, "-i",x_complex
+            call text()
+            WRITE(buffer,'(a,*("(",g0.8,", +i",g0.8,")",:,1x))') '<B><w><bo>   ', x_real,x_complex,x_real,x_complex
+            WRITE(*,'(*(g0))') attr(buffer,chars=80)
+            call text()
          ENDIF
-            PRINT *, "discriminant =", discriminant
+         call text('with')
+         call text()
+         write(buffer,'(g0,*(g0.8,1x))')"<B><w><bo>   <m>discriminate</m><w> = ", discriminant
+         WRITE(*,'(*(g0))') attr(buffer,chars=80)
+         call text()
       endif
-      write(*,'(*(g0))')'press <return> to continue, <q> to quit'
+      write(*,'(*(g0))',advance='no')attr('<B><e>press <g>return</g><e> to continue, "<g>q</g><e>" to quit:',chars=79)
       read(*,advance='yes',iostat=ios,fmt='(a)',iomsg=message)paws
       if(paws.ne.'')exit INFINITE
    enddo INFINITE
 contains
+subroutine text(string)
+character(len=*),intent(in),optional :: string
+   if(present(string))then
+      WRITE(*,'(*(g0))') attr('<B><g><bo>'//string,chars=80)
+   else
+      WRITE(*,'(*(g0))') attr('<B><g><bo>',chars=80)
+   endif
+end subroutine text
 !>  call compiler-specific ISATTY() function or return .FALSE.
 #undef ISATTY
 
