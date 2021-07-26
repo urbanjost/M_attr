@@ -1,24 +1,32 @@
-           program demo_update
-           use M_attr, only : attr, attr_update
-              write(*,'(a)') attr('<clear>TEST CUSTOMIZED:')
-              ! add custom keywords
-              call attr_update('blink',char(27)//'[5m')
-              call attr_update('/blink',char(27)//'[38m')
+            program demo_update
+            use M_attr, only : attr, attr_update
+               write(*,'(a)') attr('<clear>TEST CUSTOMIZED:')
 
-              write(*,'(a)') attr('<blink>Items for Friday</blink>')
+               ! add custom keywords
+               call attr_update('blink',char(27)//'[5m')
+               call attr_update('/blink',char(27)//'[38m')
 
-              write(*,'(a)',advance='no') attr('<r>RED</r>,')
-              write(*,'(a)',advance='no') attr('<b>BLUE</b>,')
-              write(*,'(a)',advance='yes') attr('<g>GREEN</g>')
+               write(*,*)
+               write(*,'(a)') attr('<blink>Items for Friday</blink>')
 
-              ! delete
-              call attr_update('r')
-              call attr_update('/r')
-              ! replace
-              call attr_update('b','<<<<')
-              call attr_update('/b','>>>>')
-              write(*,'(a)',advance='no') attr('<r>RED</r>,')
-              write(*,'(a)',advance='no') attr('<b>BLUE</b>,')
-              write(*,'(a)',advance='yes') attr('<g>GREEN</g>')
+               call attr_update('ouch',attr( &
+               ' <R><bo><w>BIG mistake!</R></w> '))
+               write(*,*)
+               write(*,'(a)') attr('<ouch> Did not see that coming.')
 
-           end program demo_update
+               write(*,*)
+               write(*,'(a)') attr( &
+               'ORIGINALLY: <r>Apple</r>, <b>Sky</b>, <g>Grass</g>')
+
+               ! delete
+               call attr_update('r')
+               call attr_update('/r')
+
+               ! replace (or create)
+               call attr_update('b','<<<<')
+               call attr_update('/b','>>>>')
+               write(*,*)
+               write(*,'(a)') attr( &
+               'CUSTOMIZED: <r>Apple</r>, <b>Sky</b>, <g>Grass</g>')
+
+            end program demo_update

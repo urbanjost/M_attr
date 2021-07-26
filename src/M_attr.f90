@@ -58,7 +58,7 @@
 !!    Sample program
 !!
 !!     program demo_M_attr
-!!     use M_attr, only : attr, attr_mode
+!!     use M_attr, only : attr, attr_mode, attr_update
 !!     implicit none
 !!     character(len=256) :: line
 !!     character(len=*),parameter :: f='( &
@@ -66,6 +66,7 @@
 !!      &The new value <Y><b>",f8.4,1x,"</b></Y> is in range"&
 !!      &)'
 !!     real :: value
+!!
 !!        write(*,'(a)')&
 !!        &attr('   <r><W><bo> ERROR: </W>red text on a white background</y>')
 !!
@@ -74,8 +75,23 @@
 !!        write(*,'(a)')attr(trim(line))
 !!
 !!        ! write same string as plain text
+!!        write(*,*)
 !!        call attr_mode(manner='plain')
 !!        write(*,'(a)')attr(trim(line))
+!!
+!!        call attr_mode(manner='color')
+!!        ! use pre-defined or user defined strings
+!!        write(*,*)
+!!        write(*,'(a)')attr('<ERROR> Woe is nigh.')
+!!        write(*,'(a)')attr('<WARNING> The night is young.')
+!!        write(*,'(a)')attr('<INFO> It is Monday')
+!!
+!!        ! create a custom mneumonic
+!!        call attr_update('MYERROR',attr(&
+!!        ' <R><e> E<w>-<e>R<w>-<e>R<w>-<e>O<w>-<e>R: </e></R></bo>'&
+!!        ))
+!!        write(*,*)
+!!        write(*,'(a)')attr('<MYERROR> my custom message style')
 !!
 !!     end program demo_M_attr
 !!
@@ -98,9 +114,23 @@ use, intrinsic :: iso_fortran_env, only : stderr=>ERROR_UNIT,stdin=>INPUT_UNIT,s
 use, intrinsic :: iso_c_binding, only: c_int
 implicit none
 private
-public attr
-public attr_mode
-public attr_update
+public  :: attr
+public  :: attr_mode
+public  :: attr_update
+
+private :: attr_matrix
+private :: attr_scalar
+private :: attr_scalar_width
+private :: get
+
+private :: locate   ! find PLACE in sorted character array where value can be found or should be placed
+private :: insert   ! insert entry into a sorted allocatable array at specified position
+private :: replace  ! replace entry by index from a sorted allocatable array if it is present
+private :: remove   ! delete entry by index from a sorted allocatable array if it is present
+private :: wipe_dictionary
+
+private :: vt102
+
 interface attr
    module procedure attr_scalar
    module procedure attr_matrix
@@ -173,10 +203,6 @@ character(len=*),parameter,public :: ununderline =  CODE_START//OFF//AT_UNDERLIN
 character(len=*),parameter,public :: reset       =  CODE_RESET
 character(len=*),parameter,public :: clear       =  HOME_DISPLAY//CLEAR_DISPLAY
 
-private locate   ! find PLACE in sorted character array where value can be found or should be placed
-private insert   ! insert entry into a sorted allocatable array at specified position
-private replace  ! replace entry by index from a sorted allocatable array if it is present
-private remove   ! delete entry by index from a sorted allocatable array if it is present
 
 contains
 
@@ -411,16 +437,28 @@ if( (index(expanded,escape).ne.0).and.(clear_at_end))then
    endif
 endif
 end function attr_scalar
+
 function attr_matrix(string,reset,chars) result (expanded)
 character(len=*),intent(in)  :: string(:)
 logical,intent(in),optional  :: reset
 integer,intent(in),optional  :: chars
 character(len=:),allocatable :: expanded(:)
+!gfortran does not return allocatable array from a function properly, but works with subroutine
+call kludge_bug(string,reset,chars,expanded)
+end function attr_matrix
+
+subroutine kludge_bug(string,reset,chars,expanded)
+character(len=*),intent(in)  :: string(:)
+logical,intent(in),optional  :: reset
+integer,intent(in),optional  :: chars
+character(len=:),allocatable :: expanded(:)
+integer                      :: width
 character(len=:),allocatable :: hold
 integer                      :: i
 integer                      :: right
 integer                      :: len_local
 integer                      :: len_local2
+
 allocate(character(len=0) :: expanded(0))
 
 if(present(chars))then
@@ -444,9 +482,10 @@ do i=1,size(string)
       hold=string(i)
    endif
    hold=attr_scalar(hold,reset=reset)
-   expanded=[character(len=max(len(expanded),len(hold))) :: expanded,hold]
+   width=max(len(hold),len(expanded))
+   expanded=[character(len=width) :: expanded,hold]
 enddo
-end function attr_matrix
+end subroutine kludge_bug
 
 function attr_scalar_width(string,reset,chars) result (expanded)
 character(len=*),intent(in)  :: string
@@ -735,30 +774,39 @@ end subroutine wipe_dictionary
 !!
 !!    Sample program
 !!
-!!     program demo_update
-!!     use M_attr, only : attr, attr_update
-!!        write(*,'(a)') attr('<clear>TEST CUSTOMIZED:')
-!!        ! add custom keywords
-!!        call attr_update('blink',char(27)//'[5m')
-!!        call attr_update('/blink',char(27)//'[38m')
+!!      program demo_update
+!!      use M_attr, only : attr, attr_update
+!!         write(*,'(a)') attr('<clear>TEST CUSTOMIZED:')
 !!
-!!        write(*,'(a)') attr('<blink>Items for Friday</blink>')
+!!         ! add custom keywords
+!!         call attr_update('blink',char(27)//'[5m')
+!!         call attr_update('/blink',char(27)//'[38m')
 !!
-!!        write(*,'(a)',advance='no') attr('<r>RED</r>,')
-!!        write(*,'(a)',advance='no') attr('<b>BLUE</b>,')
-!!        write(*,'(a)',advance='yes') attr('<g>GREEN</g>')
+!!         write(*,*)
+!!         write(*,'(a)') attr('<blink>Items for Friday</blink>')
 !!
-!!        ! delete
-!!        call attr_update('r')
-!!        call attr_update('/r')
-!!        ! replace
-!!        call attr_update('b','<<<<')
-!!        call attr_update('/b','>>>>')
-!!        write(*,'(a)',advance='no') attr('<r>RED</r>,')
-!!        write(*,'(a)',advance='no') attr('<b>BLUE</b>,')
-!!        write(*,'(a)',advance='yes') attr('<g>GREEN</g>')
+!!         call attr_update('ouch',attr( &
+!!         ' <R><bo><w>BIG mistake!</R></w> '))
+!!         write(*,*)
+!!         write(*,'(a)') attr('<ouch> Did not see that coming.')
 !!
-!!     end program demo_update
+!!         write(*,*)
+!!         write(*,'(a)') attr( &
+!!         'ORIGINALLY: <r>Apple</r>, <b>Sky</b>, <g>Grass</g>')
+!!
+!!         ! delete
+!!         call attr_update('r')
+!!         call attr_update('/r')
+!!
+!!         ! replace (or create)
+!!         call attr_update('b','<<<<')
+!!         call attr_update('/b','>>>>')
+!!         write(*,*)
+!!         write(*,'(a)') attr( &
+!!         'CUSTOMIZED: <r>Apple</r>, <b>Sky</b>, <g>Grass</g>')
+!!
+!!      end program demo_update
+!!
 !!
 !!##AUTHOR
 !!    John S. Urban, 2020

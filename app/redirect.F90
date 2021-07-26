@@ -8,7 +8,6 @@ real(kind=dp)                   :: a, b, c, discriminant
 real(kind=dp)                   :: x1, x2, x ! Real roots of the equation
 real(kind=dp)                   :: x_real    ! Real part of complex root of the equation
 REAL(kind=dp)                   :: x_complex ! Imaginary part of complex root of the equation
-character(len=:),allocatable    :: line
 character(len=256)              :: message
 integer                         :: ios
 character(len=1)                :: paws
@@ -23,22 +22,25 @@ character(len=*),parameter      :: numbers='("<B><w><bo>   ",*("(",g0.8,",",g0.8
    INFINITE: do
       ! clear screen, set attributes and print messages
       call text("<reset><clear>")
-      call text("Enter the quadratic equation coefficients <m>a</m><b>, <m>b</m><g> and <m>c</m> ")
+      call text("For the quadratic equation <m>A</m><g>*x**2 +<m>B</m><g>*x + <m>C</m> ")
       write(*,'(*(a))',advance='no') &
-      & attr('<B><w><bo>'//repeat('_',78)//'  '), char(13),attr('<B><y><bo>ENTER<gt><ul><g>',reset=.false.)
+      & attr('<B><w><bo>'//repeat('_',78)//'  '), &
+      & char(13),&
+      & attr('<B><g><bo>enter coefficients <m>A,B,C</m><g>:<y><gt><ul>',&
+      & reset=.false.)
       read(*,*,iostat=ios,iomsg=message)a,b,c
       write(*,'(a)',advance='no')attr('<reset>')
       if(ios.ne.0)then
          write(*,'(*(g0))')ios,' ',trim(message)
       else
-         ! Given the equation "A*x**2 + B*x + C = 0"
+         ! Given the equation "A*X**2 + B*X + C = 0"
          ! Use the quadratic formula to determine the root values of the equation.
          ! prompt for new value
 
          call text()
          call text('Given the equation')
          call text()
-         write(buffer,'(*(g0.8))') '<B><w><bo>   ',a,'<m>*x**2</m><w> + ',b,'<m>*x</m><w> + ',c,' = 0'
+         write(buffer,'(*(g0.8))') '<B><w><bo>   ',a,'<m>*X**2</m><w> + ',b,'<m>*X</m><w> + ',c,' = 0'
          call text(buffer)
          call text()
 
@@ -57,7 +59,7 @@ character(len=*),parameter      :: numbers='("<B><w><bo>   ",*("(",g0.8,",",g0.8
             write(buffer,numbers)x2,0.0d0
             call text(buffer)
             call text()
-         ELSEIF ( discriminant==0 ) THEN
+         elseif ( discriminant==0 ) then
 
             call text('the <m>roots</m><g> (ie. "x intercepts") are repeated <m>(real and equal)</m><g>')
             call text('so the parabola just touches the x-axis at:')
@@ -70,7 +72,7 @@ character(len=*),parameter      :: numbers='("<B><w><bo>   ",*("(",g0.8,",",g0.8
             write(buffer,numbers)x,0.0d0
             call text(buffer)
             call text()
-         ELSE
+         else
             call text('the <m>roots</m><g>(ie. "x intercepts")  are <m>complex</m><g>:')
             x_real     = (-b)/(2 * a)
             x_complex  = sqrt (abs(discriminant)) / (2 * a)
@@ -80,7 +82,7 @@ character(len=*),parameter      :: numbers='("<B><w><bo>   ",*("(",g0.8,",",g0.8
             WRITE(buffer,'(a,*("(",g0.8,", -i",g0.8,")",:,1x))') '<B><w><bo>   ', x_real,x_complex
             call text(buffer)
             call text()
-         ENDIF
+         endif
          call text('with')
          call text()
          write(buffer,'(g0,*(g0.8,1x))')"<B><w><bo>   <m>discriminate</m><w> = ", discriminant

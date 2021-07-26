@@ -9,8 +9,8 @@ program mode
    character(len=*),intent(in) :: mymode
       call attr_mode(mymode)
       write(*,'(a)')mymode
-      write(*,'(a)')attr('<ERROR>Woa is nigh.')
+      write(*,'(a)')attr('<ERROR>Woe is nigh.')
       write(*,'(a)')attr('<WARNING>The night is young.')
-      write(*,'(a)')attr('<INFO>It is monday')
+      write(*,'(a)')attr('<INFO>It is Monday')
    end subroutine printme
 end program mode
