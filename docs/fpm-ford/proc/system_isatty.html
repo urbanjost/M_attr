@@ -10,9 +10,7 @@
     <meta name="author" content="John S. Urban" >
     <link rel="icon" href="../favicon.png">
 
-    <title>
-All Programs &ndash; M_attr
-</title>
+    <title>system_isatty &ndash; M_attr</title>
 
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/pygments.css" rel="stylesheet">
@@ -108,42 +106,230 @@ All Programs &ndash; M_attr
 
     <div class="container">
     
-      <div class="row">
-        <div class="col-lg-12" id='text'>
-			 <h1>Programs</h1>
-			 <table class="table table-striped nostretch">
-			 <thead><tr><th>Program</th><th>Source File</th><th>Description</th></tr></thead>
-			 <tbody>
-			 
-			   <tr><td><a href='../program/demo_attr.html'>demo_attr</a></td><td><a href='../sourcefile/light.f90.html'>light.f90</a></td><td></td></tr>
-			 
-			   <tr><td><a href='../program/demo_attr~2.html'>demo_attr</a></td><td><a href='../sourcefile/plain.f90.html'>plain.f90</a></td><td></td></tr>
-			 
-			   <tr><td><a href='../program/demo_attr_mode.html'>demo_attr_mode</a></td><td><a href='../sourcefile/demo_attr_mode.f90.html'>demo_attr_mode.f90</a></td><td></td></tr>
-			 
-			   <tr><td><a href='../program/demo_dump.html'>demo_dump</a></td><td><a href='../sourcefile/dump.f90.html'>dump.f90</a></td><td></td></tr>
-			 
-			   <tr><td><a href='../program/demo_esc.html'>demo_esc</a></td><td><a href='../sourcefile/demo_attr.f90.html'>demo_attr.f90</a></td><td></td></tr>
-			 
-			   <tr><td><a href='../program/demo_m_attr.html'>demo_M_attr</a></td><td><a href='../sourcefile/demo_m_attr.f90.html'>demo_M_attr.f90</a></td><td></td></tr>
-			 
-			   <tr><td><a href='../program/demo_m_attr~2.html'>demo_M_attr</a></td><td><a href='../sourcefile/custom.f90.html'>custom.f90</a></td><td></td></tr>
-			 
-			   <tr><td><a href='../program/demo_m_attr~3.html'>demo_M_attr</a></td><td><a href='../sourcefile/default.f90.html'>default.f90</a></td><td></td></tr>
-			 
-			   <tr><td><a href='../program/demo_m_attrape.html'>demo_M_attrape</a></td><td><a href='../sourcefile/mixed.f90.html'>mixed.f90</a></td><td></td></tr>
-			 
-			   <tr><td><a href='../program/demo_update.html'>demo_update</a></td><td><a href='../sourcefile/demo_attr_update.f90.html'>demo_attr_update.f90</a></td><td></td></tr>
-			 
-			   <tr><td><a href='../program/mode.html'>mode</a></td><td><a href='../sourcefile/message.f90.html'>message.f90</a></td><td></td></tr>
-			 
-			   <tr><td><a href='../program/mode~2.html'>mode</a></td><td><a href='../sourcefile/functional.f90.html'>functional.f90</a></td><td></td></tr>
-			 
-			   <tr><td><a href='../program/roots.html'>roots</a></td><td><a href='../sourcefile/redirect.f90.html'>redirect.F90</a></td><td></td></tr>
-			 
-			 </tbody></table>
-        </div>
-      </div>
+  
+  <div class="row">
+    <h1>system_isatty
+      <small>Function</small>
+    
+    </h1>
+    
+<div class="row">
+  <div class="col-lg-12">
+<div class="well well-sm">
+  <ul class="list-inline" style="margin-bottom:0px;display:inline">
+     
+     
+     
+     
+    
+    
+     <li><i class="fa fa-list-ol"></i>
+       <a data-toggle="tooltip"
+    data-placement="bottom" data-html="true"
+    title=" 3.6% of total for procedures.">5 statements</a>
+     </li> 
+     
+     
+     
+    <li><i class="fa fa-code"></i><a href="../src/redirect.F90"> Source File</a></li>
+     
+     
+  </ul>
+  <ol class="breadcrumb in-well text-right">
+  
+    
+     <li><a href='../sourcefile/redirect.f90.html'>redirect.F90</a></li>
+    
+     <li><a href='../program/roots.html'>roots</a></li>
+    
+  
+     <li class="active">system_isatty</li>
+  </ol>
+</div>
+</div>
+</div>
+<script>
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>
+
+  </div>
+  
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
+    
+<div id="sidebar">
+  
+<h3>Contents</h3>
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
+  <div class="list-group">
+    <a class="list-group-item" href="../proc/system_isatty.html#src">system_isatty</a>
+  </div>
+</div>
+
+
+
+</div>
+
+    </div>
+    
+    <div class="col-md-9" id='text'>
+    <h2>
+function system_isatty(lun)
+    
+    
+   
+</h2>
+    
+  
+
+
+    
+    <p>call compiler-specific ISATTY() function or return .FALSE.</p>
+    
+
+    <h3>Arguments</h3>
+    
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-lun"></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lun</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+    
+    
+    
+    
+    
+    
+    
+   <h3>Return Value <small><span class="anchor" id="variable-system_isatty"></span>logical
+  </small></h3>
+    
+    
+    
+    
+     
+    <br>
+
+    <section class="visible-xs visible-sm hidden-md">
+      
+<h3>Contents</h3>
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
+  <div class="list-group">
+    <a class="list-group-item" href="../proc/system_isatty.html#src">system_isatty</a>
+  </div>
+</div>
+
+
+
+    </section>
+    <br class="visible-xs visible-sm hidden-md">
+
+    
+
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+    <section>
+    <h2><span class="anchor" id="src"></span>Source Code</h2>
+    <div class="highlight"><pre><span></span>    <span class="k">function </span><span class="n">system_isatty</span><span class="p">(</span><span class="n">lun</span><span class="p">)</span>
+    <span class="k">use </span><span class="n">IFPORT</span>
+    <span class="kt">integer</span><span class="p">,</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">lun</span>
+    <span class="kt">logical</span> <span class="kd">::</span> <span class="n">system_isatty</span>
+       <span class="n">system_isatty</span><span class="o">=</span><span class="nb">isatty</span><span class="p">(</span><span class="n">lun</span><span class="p">)</span>
+    <span class="k">end function </span><span class="n">system_isatty</span>
+</pre></div>
+
+    </section>
+    <br>
+    
+    
+    </div>
+  </div>
+
 
     <hr>    
     </div> <!-- /container -->

@@ -10,7 +10,7 @@
     <meta name="author" content="John S. Urban" >
     <link rel="icon" href="../favicon.png">
 
-    <title>demo_attr_mode.f90 &ndash; M_attr</title>
+    <title>demo_attr_update.f90 &ndash; M_attr</title>
 
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/pygments.css" rel="stylesheet">
@@ -108,7 +108,7 @@
     
   
   <div class="row">
-    <h1>demo_attr_mode.f90
+    <h1>demo_attr_update.f90
     <small>Source File</small>
     
     </h1>
@@ -126,12 +126,12 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title=" 2.0% of total for source files.">17 statements</a>
+    title=" 2.2% of total for source files.">19 statements</a>
      </li> 
      
      
      
-    <li><i class="fa fa-code"></i><a href="../src/demo_attr_mode.f90"> Source File</a></li>
+    <li><i class="fa fa-code"></i><a href="../src/demo_attr_update.f90"> Source File</a></li>
      
      
   </ul>
@@ -139,7 +139,7 @@
   
     
   
-     <li class="active">demo_attr_mode.f90</li>
+     <li class="active">demo_attr_update.f90</li>
   </ol>
 </div>
 </div>
@@ -169,7 +169,7 @@
   <div id="progs-0" class="panel-collapse collapse">
     <div class="list-group">
       
-      <a class="list-group-item" href="../program/demo_attr_mode.html">demo_attr_mode</a>
+      <a class="list-group-item" href="../program/demo_update.html">demo_update</a>
       
     </div>
   </div>
@@ -194,7 +194,7 @@
 <div class="panel panel-primary">
   <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
   <div class="list-group">
-    <a class="list-group-item" href="../sourcefile/demo_attr_mode.f90.html#src">demo_attr_mode.f90</a>
+    <a class="list-group-item" href="../sourcefile/demo_attr_update.f90.html#src">demo_attr_update.f90</a>
   </div>
 </div>
 
@@ -225,7 +225,7 @@
   <div id="progs-1" class="panel-collapse collapse">
     <div class="list-group">
       
-      <a class="list-group-item" href="../program/demo_attr_mode.html">demo_attr_mode</a>
+      <a class="list-group-item" href="../program/demo_update.html">demo_update</a>
       
     </div>
   </div>
@@ -250,7 +250,7 @@
 <div class="panel panel-primary">
   <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
   <div class="list-group">
-    <a class="list-group-item" href="../sourcefile/demo_attr_mode.f90.html#src">demo_attr_mode.f90</a>
+    <a class="list-group-item" href="../sourcefile/demo_attr_update.f90.html#src">demo_attr_update.f90</a>
   </div>
 </div>
 
@@ -261,35 +261,38 @@
 
     <section>
       <h2><span class="anchor" id="src"></span>Source Code</h2>
-    <div class="hl"><pre><span></span><a name="ln-1"></a>           <span class="k">program </span><span class="n">demo_attr_mode</span>
-<a name="ln-2"></a>           <span class="k">use </span><span class="n">M_attr</span><span class="p">,</span> <span class="k">only</span> <span class="p">:</span> <span class="n">attr</span><span class="p">,</span> <span class="n">attr_mode</span>
-<a name="ln-3"></a>           <span class="k">implicit none</span>
-<a name="ln-4"></a><span class="k">           </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="p">:),</span><span class="k">allocatable</span> <span class="kd">::</span> <span class="n">lines</span><span class="p">(:)</span>
-<a name="ln-5"></a>           <span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="p">:),</span><span class="k">allocatable</span> <span class="kd">::</span> <span class="n">outlines</span><span class="p">(:)</span>
-<a name="ln-6"></a>           <span class="kt">integer</span> <span class="kd">::</span> <span class="n">i</span>
-<a name="ln-7"></a>              <span class="n">lines</span><span class="o">=</span><span class="p">[</span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">110</span><span class="p">)</span><span class="kd">::</span> <span class="p">&amp;</span>
-<a name="ln-8"></a>              <span class="s1">&#39;&lt;B&gt;&lt;y&gt;&#39;</span><span class="p">,&amp;</span>
-<a name="ln-9"></a>              <span class="s1">&#39;&lt;B&gt;&lt;y&gt;  Suffice it to say that &lt;W&gt;&lt;e&gt;black&lt;/e&gt;&lt;/W&gt;&lt;B&gt;&lt;y&gt;&amp;</span>
-<a name="ln-10"></a><span class="s1">              &amp; and &lt;E&gt;&lt;w&gt;white&lt;/w&gt;&lt;/E&gt;&lt;B&gt;&lt;y&gt; are also colors&#39;</span><span class="p">,&amp;</span>
-<a name="ln-11"></a>              <span class="s1">&#39;&lt;B&gt;&lt;y&gt;  for their simultaneous contrast is as striking as that &#39;</span><span class="p">,&amp;</span>
-<a name="ln-12"></a>              <span class="s1">&#39;&lt;B&gt;&lt;y&gt;  of &lt;R&gt;&lt;g&gt;green&lt;/g&gt;&lt;/R&gt;&lt;B&gt;&lt;y&gt; and &lt;G&gt;&lt;r&gt;red&lt;/r&gt;&lt;/G&gt;&lt;B&gt;&lt;y&gt;,&amp;</span>
-<a name="ln-13"></a><span class="s1">              &amp; for instance. --- &lt;bo&gt;Vincent van Gogh&#39;</span><span class="p">,&amp;</span>
-<a name="ln-14"></a>              <span class="s1">&#39;&lt;B&gt;&lt;y&gt;&#39;</span><span class="p">,&amp;</span>
-<a name="ln-15"></a>              <span class="s1">&#39; &#39;</span><span class="p">]</span>
+    <div class="hl"><pre><span></span><a name="ln-1"></a>            <span class="k">program </span><span class="n">demo_update</span>
+<a name="ln-2"></a>            <span class="k">use </span><span class="n">M_attr</span><span class="p">,</span> <span class="k">only</span> <span class="p">:</span> <span class="n">attr</span><span class="p">,</span> <span class="n">attr_update</span>
+<a name="ln-3"></a>               <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;clear&gt;TEST CUSTOMIZED:&#39;</span><span class="p">)</span>
+<a name="ln-4"></a>
+<a name="ln-5"></a>               <span class="c">! add custom keywords</span>
+<a name="ln-6"></a>               <span class="k">call </span><span class="n">attr_update</span><span class="p">(</span><span class="s1">&#39;blink&#39;</span><span class="p">,</span><span class="nb">char</span><span class="p">(</span><span class="mi">27</span><span class="p">)</span><span class="o">//</span><span class="s1">&#39;[5m&#39;</span><span class="p">)</span>
+<a name="ln-7"></a>               <span class="k">call </span><span class="n">attr_update</span><span class="p">(</span><span class="s1">&#39;/blink&#39;</span><span class="p">,</span><span class="nb">char</span><span class="p">(</span><span class="mi">27</span><span class="p">)</span><span class="o">//</span><span class="s1">&#39;[38m&#39;</span><span class="p">)</span>
+<a name="ln-8"></a>
+<a name="ln-9"></a>               <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span>
+<a name="ln-10"></a>               <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;blink&gt;Items for Friday&lt;/blink&gt;&#39;</span><span class="p">)</span>
+<a name="ln-11"></a>
+<a name="ln-12"></a>               <span class="k">call </span><span class="n">attr_update</span><span class="p">(</span><span class="s1">&#39;ouch&#39;</span><span class="p">,</span><span class="n">attr</span><span class="p">(</span> <span class="p">&amp;</span>
+<a name="ln-13"></a>               <span class="s1">&#39; &lt;R&gt;&lt;bo&gt;&lt;w&gt;BIG mistake!&lt;/R&gt;&lt;/w&gt; &#39;</span><span class="p">))</span>
+<a name="ln-14"></a>               <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span>
+<a name="ln-15"></a>               <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;ouch&gt; Did not see that coming.&#39;</span><span class="p">)</span>
 <a name="ln-16"></a>
-<a name="ln-17"></a>              <span class="n">outlines</span><span class="o">=</span><span class="n">attr</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span><span class="n">chars</span><span class="o">=</span><span class="mi">57</span><span class="p">)</span>
-<a name="ln-18"></a>              <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)(</span><span class="nb">trim</span><span class="p">(</span><span class="n">outlines</span><span class="p">(</span><span class="n">i</span><span class="p">)),</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">size</span><span class="p">(</span><span class="n">outlines</span><span class="p">))</span>
-<a name="ln-19"></a>
-<a name="ln-20"></a>              <span class="k">call </span><span class="n">attr_mode</span><span class="p">(</span><span class="n">manner</span><span class="o">=</span><span class="s1">&#39;plain&#39;</span><span class="p">)</span> <span class="c">! write as plain text</span>
-<a name="ln-21"></a>              <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="n">attr</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
-<a name="ln-22"></a>              <span class="k">call </span><span class="n">attr_mode</span><span class="p">(</span><span class="n">manner</span><span class="o">=</span><span class="s1">&#39;raw&#39;</span><span class="p">)</span>   <span class="c">! write as-is</span>
-<a name="ln-23"></a>              <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="n">attr</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+<a name="ln-17"></a>               <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span>
+<a name="ln-18"></a>               <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span> <span class="p">&amp;</span>
+<a name="ln-19"></a>               <span class="s1">&#39;ORIGINALLY: &lt;r&gt;Apple&lt;/r&gt;, &lt;b&gt;Sky&lt;/b&gt;, &lt;g&gt;Grass&lt;/g&gt;&#39;</span><span class="p">)</span>
+<a name="ln-20"></a>
+<a name="ln-21"></a>               <span class="c">! delete</span>
+<a name="ln-22"></a>               <span class="k">call </span><span class="n">attr_update</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<a name="ln-23"></a>               <span class="k">call </span><span class="n">attr_update</span><span class="p">(</span><span class="s1">&#39;/r&#39;</span><span class="p">)</span>
 <a name="ln-24"></a>
-<a name="ln-25"></a>              <span class="k">call </span><span class="n">attr_mode</span><span class="p">(</span><span class="n">manner</span><span class="o">=</span><span class="s1">&#39;ansi&#39;</span><span class="p">)</span>  <span class="c">! return to default mode</span>
-<a name="ln-26"></a>              <span class="n">outlines</span><span class="o">=</span><span class="n">attr</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span><span class="n">chars</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
-<a name="ln-27"></a>              <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)(</span><span class="nb">trim</span><span class="p">(</span><span class="n">outlines</span><span class="p">(</span><span class="n">i</span><span class="p">)),</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">size</span><span class="p">(</span><span class="n">outlines</span><span class="p">))</span>
-<a name="ln-28"></a>
-<a name="ln-29"></a>           <span class="k">end program </span><span class="n">demo_attr_mode</span>
+<a name="ln-25"></a>               <span class="c">! replace (or create)</span>
+<a name="ln-26"></a>               <span class="k">call </span><span class="n">attr_update</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;&lt;&lt;&lt;&lt;&#39;</span><span class="p">)</span>
+<a name="ln-27"></a>               <span class="k">call </span><span class="n">attr_update</span><span class="p">(</span><span class="s1">&#39;/b&#39;</span><span class="p">,</span><span class="s1">&#39;&gt;&gt;&gt;&gt;&#39;</span><span class="p">)</span>
+<a name="ln-28"></a>               <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span>
+<a name="ln-29"></a>               <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span> <span class="p">&amp;</span>
+<a name="ln-30"></a>               <span class="s1">&#39;CUSTOMIZED: &lt;r&gt;Apple&lt;/r&gt;, &lt;b&gt;Sky&lt;/b&gt;, &lt;g&gt;Grass&lt;/g&gt;&#39;</span><span class="p">)</span>
+<a name="ln-31"></a>
+<a name="ln-32"></a>            <span class="k">end program </span><span class="n">demo_update</span>
 </pre></div>
 
     </section>

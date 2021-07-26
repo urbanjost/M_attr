@@ -126,7 +126,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title=" 7.2% of total for programs.">19 statements</a>
+    title=" 5.1% of total for programs.">17 statements</a>
      </li> 
      
      
@@ -169,9 +169,11 @@
   <div id="vars-0" class="panel-collapse collapse">
     <div class="list-group">
       
-      <a class="list-group-item" href="../program/demo_attr_mode.html#variable-line~5">line</a>
+      <a class="list-group-item" href="../program/demo_attr_mode.html#variable-i~2">i</a>
       
-      <a class="list-group-item" href="../program/demo_attr_mode.html#variable-value~2">value</a>
+      <a class="list-group-item" href="../program/demo_attr_mode.html#variable-lines">lines</a>
+      
+      <a class="list-group-item" href="../program/demo_attr_mode.html#variable-outlines">outlines</a>
       
     </div>
   </div>
@@ -248,9 +250,11 @@
   <div id="vars-1" class="panel-collapse collapse">
     <div class="list-group">
       
-      <a class="list-group-item" href="../program/demo_attr_mode.html#variable-line~5">line</a>
+      <a class="list-group-item" href="../program/demo_attr_mode.html#variable-i~2">i</a>
       
-      <a class="list-group-item" href="../program/demo_attr_mode.html#variable-value~2">value</a>
+      <a class="list-group-item" href="../program/demo_attr_mode.html#variable-lines">lines</a>
+      
+      <a class="list-group-item" href="../program/demo_attr_mode.html#variable-outlines">outlines</a>
       
     </div>
   </div>
@@ -308,11 +312,11 @@
   
 <tr>
   
-  <td><span class="anchor" id="variable-line~5"></span>character(len=1024)</td>
+  <td><span class="anchor" id="variable-i~2"></span>integer</td>
   
   
   <td></td><td>::</td>
-  <td><strong>line</strong></td><td></td><td></td><td></td>
+  <td><strong>i</strong></td><td></td><td></td><td></td>
   
 </tr>
 
@@ -322,11 +326,25 @@
   
 <tr>
   
-  <td><span class="anchor" id="variable-value~2"></span>real</td>
+  <td><span class="anchor" id="variable-lines"></span>character(len=:),</td>
   
   
-  <td></td><td>::</td>
-  <td><strong>value</strong></td><td></td><td></td><td></td>
+  <td>allocatable</td><td>::</td>
+  <td><strong>lines</strong>(:)</td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-outlines"></span>character(len=:),</td>
+  
+  
+  <td>allocatable</td><td>::</td>
+  <td><strong>outlines</strong>(:)</td><td></td><td></td><td></td>
   
 </tr>
 
@@ -356,30 +374,32 @@
     <div class="highlight"><pre><span></span>           <span class="k">program </span><span class="n">demo_attr_mode</span>
            <span class="k">use </span><span class="n">M_attr</span><span class="p">,</span> <span class="k">only</span> <span class="p">:</span> <span class="n">attr</span><span class="p">,</span> <span class="n">attr_mode</span>
            <span class="k">implicit none</span>
-<span class="k">           </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span> <span class="kd">::</span> <span class="n">line</span>
-           <span class="kt">real</span> <span class="kd">::</span> <span class="k">value</span>
+<span class="k">           </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="p">:),</span><span class="k">allocatable</span> <span class="kd">::</span> <span class="n">lines</span><span class="p">(:)</span>
+           <span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="p">:),</span><span class="k">allocatable</span> <span class="kd">::</span> <span class="n">outlines</span><span class="p">(:)</span>
+           <span class="kt">integer</span> <span class="kd">::</span> <span class="n">i</span>
+              <span class="n">lines</span><span class="o">=</span><span class="p">[</span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">110</span><span class="p">)</span><span class="kd">::</span> <span class="p">&amp;</span>
+              <span class="s1">&#39;&lt;B&gt;&lt;y&gt;&#39;</span><span class="p">,&amp;</span>
+              <span class="s1">&#39;&lt;B&gt;&lt;y&gt;  Suffice it to say that &lt;W&gt;&lt;e&gt;black&lt;/e&gt;&lt;/W&gt;&lt;B&gt;&lt;y&gt;&amp;</span>
+<span class="s1">              &amp; and &lt;E&gt;&lt;w&gt;white&lt;/w&gt;&lt;/E&gt;&lt;B&gt;&lt;y&gt; are also colors&#39;</span><span class="p">,&amp;</span>
+              <span class="s1">&#39;&lt;B&gt;&lt;y&gt;  for their simultaneous contrast is as striking as that &#39;</span><span class="p">,&amp;</span>
+              <span class="s1">&#39;&lt;B&gt;&lt;y&gt;  of &lt;R&gt;&lt;g&gt;green&lt;/g&gt;&lt;/R&gt;&lt;B&gt;&lt;y&gt; and &lt;G&gt;&lt;r&gt;red&lt;/r&gt;&lt;/G&gt;&lt;B&gt;&lt;y&gt;,&amp;</span>
+<span class="s1">              &amp; for instance. --- &lt;bo&gt;Vincent van Gogh&#39;</span><span class="p">,&amp;</span>
+              <span class="s1">&#39;&lt;B&gt;&lt;y&gt;&#39;</span><span class="p">,&amp;</span>
+              <span class="s1">&#39; &#39;</span><span class="p">]</span>
 
-<span class="k">             value</span><span class="o">=</span><span class="mf">3.4567</span>
-             <span class="k">if</span><span class="p">(</span> <span class="p">(</span><span class="k">value</span><span class="o">&gt;</span><span class="mf">0.0</span><span class="p">)</span> <span class="p">.</span><span class="nb">and</span><span class="p">.</span> <span class="p">(</span><span class="k">value</span><span class="o">&lt;</span><span class="mi">10</span><span class="mf">0.0</span><span class="p">))</span><span class="k">then</span>
-<span class="k">               write</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(&quot;&amp;</span>
-<span class="s1">              &amp;&lt;w&gt;&lt;G&gt;GREAT&lt;/G&gt;&lt;/w&gt;: The value &lt;Y&gt;&lt;b&gt;&quot;,f8.4,&quot;&lt;/b&gt;&lt;/Y&gt; is in range &amp;</span>
-<span class="s1">              &amp;&quot;)&#39;</span><span class="p">)</span><span class="k">value</span>
-<span class="k">             else</span>
-<span class="k">               write</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(&quot;&amp;</span>
-<span class="s1">              &amp;&lt;R&gt;&lt;e&gt;ERROR&lt;/e&gt;&lt;/R&gt;:The new value &lt;Y&gt;&lt;b&gt;&quot;,g0,&quot;&lt;/b&gt;&lt;/Y&gt; is out of range&amp;</span>
-<span class="s1">              &amp; &quot;)&#39;</span><span class="p">)</span><span class="k">value</span>
-<span class="k">             endif</span>
+              <span class="n">outlines</span><span class="o">=</span><span class="n">attr</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span><span class="n">chars</span><span class="o">=</span><span class="mi">57</span><span class="p">)</span>
+              <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)(</span><span class="nb">trim</span><span class="p">(</span><span class="n">outlines</span><span class="p">(</span><span class="n">i</span><span class="p">)),</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">size</span><span class="p">(</span><span class="n">outlines</span><span class="p">))</span>
 
-<span class="k">             write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="n">attr</span><span class="p">(</span><span class="nb">trim</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
+              <span class="k">call </span><span class="n">attr_mode</span><span class="p">(</span><span class="n">manner</span><span class="o">=</span><span class="s1">&#39;plain&#39;</span><span class="p">)</span> <span class="c">! write as plain text</span>
+              <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="n">attr</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+              <span class="k">call </span><span class="n">attr_mode</span><span class="p">(</span><span class="n">manner</span><span class="o">=</span><span class="s1">&#39;raw&#39;</span><span class="p">)</span>   <span class="c">! write as-is</span>
+              <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="n">attr</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
 
-             <span class="k">call </span><span class="n">attr_mode</span><span class="p">(</span><span class="n">manner</span><span class="o">=</span><span class="s1">&#39;plain&#39;</span><span class="p">)</span> <span class="c">! write as plain text</span>
-             <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="n">attr</span><span class="p">(</span><span class="nb">trim</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
-             <span class="k">call </span><span class="n">attr_mode</span><span class="p">(</span><span class="n">manner</span><span class="o">=</span><span class="s1">&#39;raw&#39;</span><span class="p">)</span>   <span class="c">! write as-is</span>
-             <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="n">attr</span><span class="p">(</span><span class="nb">trim</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
-             <span class="k">call </span><span class="n">attr_mode</span><span class="p">(</span><span class="n">manner</span><span class="o">=</span><span class="s1">&#39;ansi&#39;</span><span class="p">)</span>  <span class="c">! return to default mode</span>
-             <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="n">attr</span><span class="p">(</span><span class="nb">trim</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
+              <span class="k">call </span><span class="n">attr_mode</span><span class="p">(</span><span class="n">manner</span><span class="o">=</span><span class="s1">&#39;ansi&#39;</span><span class="p">)</span>  <span class="c">! return to default mode</span>
+              <span class="n">outlines</span><span class="o">=</span><span class="n">attr</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span><span class="n">chars</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+              <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)(</span><span class="nb">trim</span><span class="p">(</span><span class="n">outlines</span><span class="p">(</span><span class="n">i</span><span class="p">)),</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">size</span><span class="p">(</span><span class="n">outlines</span><span class="p">))</span>
 
-              <span class="k">end program </span><span class="n">demo_attr_mode</span>
+           <span class="k">end program </span><span class="n">demo_attr_mode</span>
 </pre></div>
 
     </section>
@@ -400,7 +420,7 @@
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/cmacmackin/ford">FORD</a>
-             on 2021-07-24 13:50  
+             on 2021-07-26 09:23  
           </p>
         </div>
         <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> M_attr was developed by John S. Urban</p></div>

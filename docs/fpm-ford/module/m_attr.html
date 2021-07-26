@@ -126,7 +126,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title="100.0% of total for modules and submodules.">462 statements</a>
+    title="100.0% of total for modules and submodules.">511 statements</a>
      </li> 
      
      
@@ -293,15 +293,38 @@
 <div class="codehilite"><pre><span></span><code>  use M_attr, only : attr, attr_mode, attr_update
 </code></pre></div>
 
-<h2 id="description">DESCRIPTION</h2>
-<div class="codehilite"><pre><span></span><code><span class="nv">M_attr</span><span class="ss">(</span><span class="mi">3</span><span class="nv">f</span><span class="ss">)</span> <span class="nv">is</span> <span class="nv">a</span> <span class="nv">Fortran</span> <span class="nv">module</span> <span class="k">for</span> <span class="nv">adding</span> <span class="nv">attributes</span> <span class="nv">to</span> <span class="nv">terminal</span>
-<span class="nv">output</span> <span class="nv">such</span> <span class="nv">as</span> <span class="nv">color</span> <span class="nv">on</span> <span class="nv">devices</span> <span class="nv">that</span> <span class="nv">recognize</span> <span class="nv">ANSI</span> <span class="nv">escape</span> <span class="nv">sequences</span>.
-</code></pre></div>
-
 <h2 id="major-features">MAJOR FEATURES</h2>
 <p>o Add text attributes with an HTML-like syntax using attr(3f).
    o suppress the escape sequence output with attr_mode(3f).
    o customize what strings are produced using attr_update(3f).</p>
+<h2 id="description">DESCRIPTION</h2>
+<div class="codehilite"><pre><span></span><code><span class="n">M_attr</span><span class="p">(</span><span class="mi">3</span><span class="n">f</span><span class="p">)</span> <span class="k">is</span> <span class="n">a</span> <span class="n">Fortran</span> <span class="n">module</span> <span class="n">that</span> <span class="n">writes</span> <span class="n">common</span> <span class="n">ANSI</span> <span class="n">escape</span>
+<span class="n">sequences</span> <span class="n">which</span> <span class="n">control</span> <span class="n">terminal</span> <span class="n">attributes</span> <span class="n">like</span> <span class="n">text</span> <span class="n">color</span><span class="o">.</span> <span class="n">It</span> <span class="k">is</span>
+<span class="n">designed</span> <span class="n">to</span> <span class="n">allow</span> <span class="n">the</span> <span class="n">sequences</span> <span class="n">to</span> <span class="n">be</span> <span class="n">suppressed</span> <span class="ow">and</span> <span class="k">for</span> <span class="n">the</span> <span class="n">user</span>
+<span class="n">program</span> <span class="n">to</span> <span class="n">completely</span> <span class="n">customize</span> <span class="n">it</span> <span class="o">--</span> <span class="n">the</span> <span class="n">user</span> <span class="n">can</span> <span class="n">add</span><span class="p">,</span> <span class="n">delete</span> <span class="ow">and</span>
+<span class="n">replace</span> <span class="n">the</span> <span class="n">sequences</span> <span class="n">associated</span> <span class="n">with</span> <span class="n">a</span> <span class="n">keyword</span> <span class="n">without</span> <span class="n">changing</span>
+<span class="n">the</span> <span class="n">code</span><span class="o">.</span>
+
+<span class="n">Attributes</span> <span class="n">are</span> <span class="n">specified</span> <span class="n">by</span> <span class="n">writing</span> <span class="n">lines</span> <span class="n">with</span> <span class="n">HTML</span><span class="o">-</span><span class="n">like</span> <span class="n">structure</span><span class="o">.</span>
+
+<span class="n">The</span> <span class="n">advantage</span> <span class="n">of</span> <span class="n">the</span> <span class="n">approach</span> <span class="n">of</span> <span class="n">replacing</span> <span class="ow">in</span><span class="o">-</span><span class="n">band</span> <span class="n">escape</span> <span class="n">sequences</span>
+<span class="n">with</span> <span class="n">formatting</span> <span class="n">directives</span> <span class="n">contained</span> <span class="n">on</span> <span class="n">each</span> <span class="n">line</span> <span class="k">is</span> <span class="n">that</span> <span class="n">it</span> <span class="k">is</span> <span class="n">easy</span>
+<span class="n">to</span> <span class="n">turn</span> <span class="n">off</span> <span class="n">when</span> <span class="n">running</span> <span class="n">batch</span><span class="p">,</span> <span class="n">but</span> <span class="n">more</span> <span class="n">importantly</span> <span class="n">your</span> <span class="n">program</span> <span class="n">can</span>
+<span class="n">be</span> <span class="n">run</span> <span class="ow">in</span> <span class="s2">&quot;raw&quot;</span> <span class="n">mode</span> <span class="ow">and</span> <span class="n">write</span> <span class="n">a</span> <span class="n">clean</span> <span class="n">text</span> <span class="n">file</span> <span class="n">with</span> <span class="n">the</span> <span class="n">directives</span> <span class="ow">in</span>
+<span class="n">it</span> <span class="n">that</span> <span class="n">can</span> <span class="n">then</span> <span class="n">be</span> <span class="n">read</span> <span class="n">back</span> <span class="ow">in</span> <span class="n">by</span> <span class="n">a</span> <span class="n">simple</span> <span class="n">filter</span> <span class="n">program</span> <span class="n">that</span> <span class="n">strips</span>
+<span class="n">it</span> <span class="n">back</span> <span class="n">to</span> <span class="n">plain</span> <span class="n">text</span><span class="p">(</span> <span class="n">see</span> <span class="n">app</span><span class="o">/</span><span class="n">plain</span><span class="o">.</span><span class="n">f90</span><span class="p">),</span> <span class="ow">or</span> <span class="n">displays</span> <span class="n">it</span> <span class="n">to</span> <span class="n">a</span> <span class="n">screen</span>
+<span class="ow">in</span> <span class="n">color</span><span class="p">(</span><span class="n">see</span> <span class="n">app</span><span class="o">/</span><span class="n">light</span><span class="o">.</span><span class="n">f90</span><span class="p">)</span> <span class="ow">or</span> <span class="n">perhaps</span> <span class="n">converts</span> <span class="n">it</span> <span class="n">to</span> <span class="n">another</span> <span class="n">format</span><span class="o">.</span>
+
+<span class="n">By</span> <span class="n">making</span> <span class="n">each</span> <span class="n">line</span> <span class="bp">self</span><span class="o">-</span><span class="n">contained</span> <span class="n">by</span> <span class="n">default</span> <span class="n">this</span> <span class="n">can</span> <span class="n">still</span> <span class="n">be</span> <span class="n">done</span>
+<span class="n">with</span> <span class="n">any</span> <span class="n">arbitrarily</span> <span class="n">selected</span> <span class="n">group</span> <span class="n">of</span> <span class="n">lines</span> <span class="n">from</span> <span class="n">the</span> <span class="n">file</span><span class="o">.</span>
+
+<span class="n">So</span> <span class="ow">in</span> <span class="n">addition</span> <span class="n">to</span> <span class="n">printing</span> <span class="n">colored</span> <span class="n">lines</span> <span class="n">to</span> <span class="n">your</span> <span class="n">screen</span> <span class="n">this</span> <span class="n">module</span>
+<span class="n">makes</span> <span class="n">it</span> <span class="n">trivial</span> <span class="n">to</span> <span class="n">read</span> <span class="n">specially</span><span class="o">-</span><span class="n">formatted</span> <span class="n">data</span> <span class="n">from</span> <span class="n">a</span> <span class="n">file</span> <span class="n">like</span> <span class="n">a</span>
+<span class="n">message</span> <span class="n">catalog</span> <span class="p">(</span><span class="n">perhaps</span> <span class="n">with</span> <span class="n">various</span> <span class="n">versions</span> <span class="ow">in</span> <span class="n">different</span> <span class="n">languages</span><span class="p">)</span>
+<span class="ow">and</span> <span class="n">colorize</span> <span class="n">it</span> <span class="ow">or</span> <span class="n">display</span> <span class="n">it</span> <span class="k">as</span> <span class="n">plain</span> <span class="n">text</span> <span class="n">using</span> <span class="n">the</span> <span class="n">included</span> <span class="n">attr</span><span class="p">(</span><span class="mi">3</span><span class="n">f</span><span class="p">)</span>
+<span class="n">procedure</span><span class="p">,</span> <span class="k">for</span> <span class="n">example</span><span class="o">.</span>
+</code></pre></div>
+
 <h2 id="limitations">LIMITATIONS</h2>
 <p>o colors are not nestable.
    o keywords are case-sensitive,
@@ -319,22 +342,40 @@
 <div class="codehilite"><pre><span></span><code>Sample program
 
  program demo_M_attr
- use M_attr, only : attr, attr_mode
+ use M_attr, only : attr, attr_mode, attr_update
  implicit none
  character(len=256) :: line
+ character(len=*),parameter :: f=&#39;( <span class="err">&amp;</span>
+  <span class="err">&amp;</span>&quot;   <span class="nt">&lt;bo&gt;&lt;w&gt;&lt;G&gt;</span> GREAT: <span class="nt">&lt;/G&gt;&lt;/w&gt;</span><span class="err">&amp;</span>
+  <span class="err">&amp;</span>The new value <span class="nt">&lt;Y&gt;&lt;b&gt;</span>&quot;,f8.4,1x,&quot;<span class="nt">&lt;/b&gt;&lt;/Y&gt;</span> is in range&quot;<span class="err">&amp;</span>
+  <span class="err">&amp;</span>)&#39;
  real :: value
+
     write(*,&#39;(a)&#39;)<span class="err">&amp;</span>
-    <span class="err">&amp;</span>attr(&#39;<span class="nt">&lt;r&gt;&lt;W&gt;</span>ERROR:<span class="nt">&lt;/W&gt;</span> red text on a white background<span class="nt">&lt;/y&gt;</span>&#39;)
+    <span class="err">&amp;</span>attr(&#39;   <span class="nt">&lt;r&gt;&lt;W&gt;&lt;bo&gt;</span> ERROR: <span class="nt">&lt;/W&gt;</span>red text on a white background<span class="nt">&lt;/y&gt;</span>&#39;)
 
     value=3.4567
-    write(line,fmt=<span class="err">&amp;</span>
-    <span class="err">&amp;</span>&#39;(&quot;<span class="nt">&lt;w&gt;&lt;G&gt;</span>GREAT<span class="nt">&lt;/G&gt;&lt;/w&gt;</span>:<span class="err">&amp;</span>
-    <span class="err">&amp;</span>The new value <span class="nt">&lt;Y&gt;&lt;b&gt;</span>&quot;,f8.4,&quot;<span class="nt">&lt;/b&gt;&lt;/Y&gt;</span> is in range&quot;)&#39;)value
+    write(line,fmt=f) value
     write(*,&#39;(a)&#39;)attr(trim(line))
 
     ! write same string as plain text
+    write(*,*)
     call attr_mode(manner=&#39;plain&#39;)
     write(*,&#39;(a)&#39;)attr(trim(line))
+
+    call attr_mode(manner=&#39;color&#39;)
+    ! use pre-defined or user defined strings
+    write(*,*)
+    write(*,&#39;(a)&#39;)attr(&#39;<span class="nt">&lt;ERROR&gt;</span> Woe is nigh.&#39;)
+    write(*,&#39;(a)&#39;)attr(&#39;<span class="nt">&lt;WARNING&gt;</span> The night is young.&#39;)
+    write(*,&#39;(a)&#39;)attr(&#39;<span class="nt">&lt;INFO&gt;</span> It is Monday&#39;)
+
+    ! create a custom mneumonic
+    call attr_update(&#39;MYERROR&#39;,attr(<span class="err">&amp;</span>
+    &#39; <span class="nt">&lt;R&gt;&lt;e&gt;</span> E<span class="nt">&lt;w&gt;</span>-<span class="nt">&lt;e&gt;</span>R<span class="nt">&lt;w&gt;</span>-<span class="nt">&lt;e&gt;</span>R<span class="nt">&lt;w&gt;</span>-<span class="nt">&lt;e&gt;</span>O<span class="nt">&lt;w&gt;</span>-<span class="nt">&lt;e&gt;</span>R: <span class="nt">&lt;/e&gt;&lt;/R&gt;&lt;/bo&gt;</span>&#39;<span class="err">&amp;</span>
+    ))
+    write(*,*)
+    write(*,&#39;(a)&#39;)attr(&#39;<span class="nt">&lt;MYERROR&gt;</span> my custom message style&#39;)
 
  end program demo_M_attr
 </code></pre></div>
@@ -973,7 +1014,7 @@ Related information:
     
     
     <h3>
-private function attr_scalar(string, clear_at_end) result(expanded)
+private function attr_scalar(string, reset) result(expanded)
     
     
    
@@ -1023,7 +1064,7 @@ private function attr_scalar(string, clear_at_end) result(expanded)
   <td>optional</td>
   
   <td></td><td>::</td>
-  <td><strong>clear_at_end</strong></td><td></td>
+  <td><strong>reset</strong></td><td></td>
   
 </tr>
 
@@ -1049,7 +1090,7 @@ private function attr_scalar(string, clear_at_end) result(expanded)
     
     
     <h3>
-private function attr_matrix(string, clear_at_end) result(expanded)
+private function attr_matrix(string, reset, chars) result(expanded)
     
     
    
@@ -1095,7 +1136,22 @@ private function attr_matrix(string, clear_at_end) result(expanded)
   <td>optional</td>
   
   <td></td><td>::</td>
-  <td><strong>clear_at_end</strong></td><td></td>
+  <td><strong>reset</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>chars</strong></td><td></td>
   
 </tr>
 
@@ -1112,6 +1168,93 @@ private function attr_matrix(string, clear_at_end) result(expanded)
   
      <h4>Return Value <small>character(len=:),
   allocatable, (:)</small></h4>
+  
+    
+
+    </li>
+  
+    <li class="list-group-item">
+    
+    
+    <h3>
+private function attr_scalar_width(string, reset, chars) result(expanded)
+    
+    
+   
+</h3>
+    
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>character(len=*),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>string</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>logical,</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>reset</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>chars</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>character(len=:),
+  allocatable</small></h4>
   
     
 
@@ -1304,7 +1447,7 @@ public subroutine <a href='../proc/attr_update.html'>attr_update</a>(key, valin,
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/cmacmackin/ford">FORD</a>
-             on 2021-07-24 13:50  
+             on 2021-07-26 09:23  
           </p>
         </div>
         <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> M_attr was developed by John S. Urban</p></div>

@@ -10,7 +10,7 @@
     <meta name="author" content="John S. Urban" >
     <link rel="icon" href="../favicon.png">
 
-    <title>demo_update.f90 &ndash; M_attr</title>
+    <title>message.f90 &ndash; M_attr</title>
 
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/pygments.css" rel="stylesheet">
@@ -108,7 +108,7 @@
     
   
   <div class="row">
-    <h1>demo_update.f90
+    <h1>message.f90
     <small>Source File</small>
     
     </h1>
@@ -126,12 +126,12 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title=" 2.3% of total for source files.">17 statements</a>
+    title=" 1.9% of total for source files.">16 statements</a>
      </li> 
      
      
      
-    <li><i class="fa fa-code"></i><a href="../src/demo_update.f90"> Source File</a></li>
+    <li><i class="fa fa-code"></i><a href="../src/message.f90"> Source File</a></li>
      
      
   </ul>
@@ -139,7 +139,7 @@
   
     
   
-     <li class="active">demo_update.f90</li>
+     <li class="active">message.f90</li>
   </ol>
 </div>
 </div>
@@ -169,7 +169,7 @@
   <div id="progs-0" class="panel-collapse collapse">
     <div class="list-group">
       
-      <a class="list-group-item" href="../program/demo_update.html">demo_update</a>
+      <a class="list-group-item" href="../program/mode.html">mode</a>
       
     </div>
   </div>
@@ -194,7 +194,7 @@
 <div class="panel panel-primary">
   <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
   <div class="list-group">
-    <a class="list-group-item" href="../sourcefile/demo_update.f90.html#src">demo_update.f90</a>
+    <a class="list-group-item" href="../sourcefile/message.f90.html#src">message.f90</a>
   </div>
 </div>
 
@@ -225,7 +225,7 @@
   <div id="progs-1" class="panel-collapse collapse">
     <div class="list-group">
       
-      <a class="list-group-item" href="../program/demo_update.html">demo_update</a>
+      <a class="list-group-item" href="../program/mode.html">mode</a>
       
     </div>
   </div>
@@ -250,7 +250,7 @@
 <div class="panel panel-primary">
   <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
   <div class="list-group">
-    <a class="list-group-item" href="../sourcefile/demo_update.f90.html#src">demo_update.f90</a>
+    <a class="list-group-item" href="../sourcefile/message.f90.html#src">message.f90</a>
   </div>
 </div>
 
@@ -261,30 +261,22 @@
 
     <section>
       <h2><span class="anchor" id="src"></span>Source Code</h2>
-    <div class="hl"><pre><span></span><a name="ln-1"></a>           <span class="k">program </span><span class="n">demo_update</span>
-<a name="ln-2"></a>           <span class="k">use </span><span class="n">M_attr</span><span class="p">,</span> <span class="k">only</span> <span class="p">:</span> <span class="n">attr</span><span class="p">,</span> <span class="n">attr_update</span>
-<a name="ln-3"></a>              <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;clear&gt;TEST CUSTOMIZED:&#39;</span><span class="p">)</span>
-<a name="ln-4"></a>              <span class="c">! add custom keywords</span>
-<a name="ln-5"></a>              <span class="k">call </span><span class="n">attr_update</span><span class="p">(</span><span class="s1">&#39;blink&#39;</span><span class="p">,</span><span class="nb">char</span><span class="p">(</span><span class="mi">27</span><span class="p">)</span><span class="o">//</span><span class="s1">&#39;[5m&#39;</span><span class="p">)</span>
-<a name="ln-6"></a>              <span class="k">call </span><span class="n">attr_update</span><span class="p">(</span><span class="s1">&#39;/blink&#39;</span><span class="p">,</span><span class="nb">char</span><span class="p">(</span><span class="mi">27</span><span class="p">)</span><span class="o">//</span><span class="s1">&#39;[38m&#39;</span><span class="p">)</span>
-<a name="ln-7"></a>
-<a name="ln-8"></a>              <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;blink&gt;Items for Friday&lt;/blink&gt;&#39;</span><span class="p">)</span>
-<a name="ln-9"></a>
-<a name="ln-10"></a>              <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">,</span><span class="n">advance</span><span class="o">=</span><span class="s1">&#39;no&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;r&gt;RED&lt;/r&gt;,&#39;</span><span class="p">)</span>
-<a name="ln-11"></a>              <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">,</span><span class="n">advance</span><span class="o">=</span><span class="s1">&#39;no&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;b&gt;BLUE&lt;/b&gt;,&#39;</span><span class="p">)</span>
-<a name="ln-12"></a>              <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">,</span><span class="n">advance</span><span class="o">=</span><span class="s1">&#39;yes&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;g&gt;GREEN&lt;/g&gt;&#39;</span><span class="p">)</span>
-<a name="ln-13"></a>
-<a name="ln-14"></a>              <span class="c">! delete</span>
-<a name="ln-15"></a>              <span class="k">call </span><span class="n">attr_update</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
-<a name="ln-16"></a>              <span class="k">call </span><span class="n">attr_update</span><span class="p">(</span><span class="s1">&#39;/r&#39;</span><span class="p">)</span>
-<a name="ln-17"></a>              <span class="c">! replace</span>
-<a name="ln-18"></a>              <span class="k">call </span><span class="n">attr_update</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;&lt;&lt;&lt;&lt;&#39;</span><span class="p">)</span>
-<a name="ln-19"></a>              <span class="k">call </span><span class="n">attr_update</span><span class="p">(</span><span class="s1">&#39;/b&#39;</span><span class="p">,</span><span class="s1">&#39;&gt;&gt;&gt;&gt;&#39;</span><span class="p">)</span>
-<a name="ln-20"></a>              <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">,</span><span class="n">advance</span><span class="o">=</span><span class="s1">&#39;no&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;r&gt;RED&lt;/r&gt;,&#39;</span><span class="p">)</span>
-<a name="ln-21"></a>              <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">,</span><span class="n">advance</span><span class="o">=</span><span class="s1">&#39;no&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;b&gt;BLUE&lt;/b&gt;,&#39;</span><span class="p">)</span>
-<a name="ln-22"></a>              <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">,</span><span class="n">advance</span><span class="o">=</span><span class="s1">&#39;yes&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;g&gt;GREEN&lt;/g&gt;&#39;</span><span class="p">)</span>
-<a name="ln-23"></a>
-<a name="ln-24"></a>           <span class="k">end program </span><span class="n">demo_update</span>
+    <div class="hl"><pre><span></span><a name="ln-1"></a><span class="k">program </span><span class="n">mode</span>
+<a name="ln-2"></a>   <span class="k">use </span><span class="n">M_attr</span><span class="p">,</span> <span class="k">only</span> <span class="p">:</span> <span class="n">attr</span><span class="p">,</span> <span class="n">attr_mode</span>
+<a name="ln-3"></a>   <span class="k">implicit none</span>
+<a name="ln-4"></a><span class="k">        call </span><span class="n">printme</span><span class="p">(</span><span class="s1">&#39;color&#39;</span><span class="p">)</span>
+<a name="ln-5"></a>        <span class="k">call </span><span class="n">printme</span><span class="p">(</span><span class="s1">&#39;plain&#39;</span><span class="p">)</span>
+<a name="ln-6"></a>        <span class="k">call </span><span class="n">printme</span><span class="p">(</span><span class="s1">&#39;raw&#39;</span><span class="p">)</span>
+<a name="ln-7"></a>   <span class="k">contains</span>
+<a name="ln-8"></a><span class="k">   subroutine </span><span class="n">printme</span><span class="p">(</span><span class="n">mymode</span><span class="p">)</span>
+<a name="ln-9"></a>   <span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=*</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">mymode</span>
+<a name="ln-10"></a>      <span class="k">call </span><span class="n">attr_mode</span><span class="p">(</span><span class="n">mymode</span><span class="p">)</span>
+<a name="ln-11"></a>      <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="n">mymode</span>
+<a name="ln-12"></a>      <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;ERROR&gt;Woe is nigh.&#39;</span><span class="p">)</span>
+<a name="ln-13"></a>      <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;WARNING&gt;The night is young.&#39;</span><span class="p">)</span>
+<a name="ln-14"></a>      <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;INFO&gt;It is Monday&#39;</span><span class="p">)</span>
+<a name="ln-15"></a>   <span class="k">end subroutine </span><span class="n">printme</span>
+<a name="ln-16"></a><span class="k">end program </span><span class="n">mode</span>
 </pre></div>
 
     </section>
@@ -303,7 +295,7 @@
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/cmacmackin/ford">FORD</a>
-             on 2021-07-24 13:50  
+             on 2021-07-26 09:23  
           </p>
         </div>
         <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> M_attr was developed by John S. Urban</p></div>

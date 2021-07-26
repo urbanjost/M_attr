@@ -126,7 +126,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title=" 4.5% of total for programs.">12 statements</a>
+    title=" 6.5% of total for programs.">22 statements</a>
      </li> 
      
      
@@ -169,7 +169,9 @@
   <div id="vars-0" class="panel-collapse collapse">
     <div class="list-group">
       
-      <a class="list-group-item" href="../program/demo_m_attr.html#variable-line~4">line</a>
+      <a class="list-group-item" href="../program/demo_m_attr.html#variable-f">f</a>
+      
+      <a class="list-group-item" href="../program/demo_m_attr.html#variable-line~3">line</a>
       
       <a class="list-group-item" href="../program/demo_m_attr.html#variable-value">value</a>
       
@@ -248,7 +250,9 @@
   <div id="vars-1" class="panel-collapse collapse">
     <div class="list-group">
       
-      <a class="list-group-item" href="../program/demo_m_attr.html#variable-line~4">line</a>
+      <a class="list-group-item" href="../program/demo_m_attr.html#variable-f">f</a>
+      
+      <a class="list-group-item" href="../program/demo_m_attr.html#variable-line~3">line</a>
       
       <a class="list-group-item" href="../program/demo_m_attr.html#variable-value">value</a>
       
@@ -308,7 +312,21 @@
   
 <tr>
   
-  <td><span class="anchor" id="variable-line~4"></span>character(len=256)</td>
+  <td><span class="anchor" id="variable-f"></span>character(len=*),</td>
+  
+  
+  <td>parameter</td><td>::</td>
+  <td><strong>f</strong></td><td> =</td><td>'( "&nbsp;&nbsp;&nbsp;<bo><w><G> GREAT: </G></w>The new value <Y><b>",f8.4,1x,"</b></Y> is in range")'</td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-line~3"></span>character(len=256)</td>
   
   
   <td></td><td>::</td>
@@ -354,24 +372,42 @@
     <section>
     <h2 id="src">Source Code</h2>
     <div class="highlight"><pre><span></span>           <span class="k">program </span><span class="n">demo_M_attr</span>
-           <span class="k">use </span><span class="n">M_attr</span><span class="p">,</span> <span class="k">only</span> <span class="p">:</span> <span class="n">attr</span><span class="p">,</span> <span class="n">attr_mode</span>
+           <span class="k">use </span><span class="n">M_attr</span><span class="p">,</span> <span class="k">only</span> <span class="p">:</span> <span class="n">attr</span><span class="p">,</span> <span class="n">attr_mode</span><span class="p">,</span> <span class="n">attr_update</span>
            <span class="k">implicit none</span>
 <span class="k">           </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span> <span class="kd">::</span> <span class="n">line</span>
+           <span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=*</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">f</span><span class="o">=</span><span class="s1">&#39;( &amp;</span>
+<span class="s1">            &amp;&quot;   &lt;bo&gt;&lt;w&gt;&lt;G&gt; GREAT: &lt;/G&gt;&lt;/w&gt;&amp;</span>
+<span class="s1">            &amp;The new value &lt;Y&gt;&lt;b&gt;&quot;,f8.4,1x,&quot;&lt;/b&gt;&lt;/Y&gt; is in range&quot;&amp;</span>
+<span class="s1">            &amp;)&#39;</span>
            <span class="kt">real</span> <span class="kd">::</span> <span class="k">value</span>
+
 <span class="k">              write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)&amp;</span>
-              <span class="p">&amp;</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;r&gt;&lt;W&gt;ERROR:&lt;/W&gt; red text on a white background&lt;/y&gt;&#39;</span><span class="p">)</span>
+              <span class="p">&amp;</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;   &lt;r&gt;&lt;W&gt;&lt;bo&gt; ERROR: &lt;/W&gt;red text on a white background&lt;/y&gt;&#39;</span><span class="p">)</span>
 
               <span class="k">value</span><span class="o">=</span><span class="mf">3.4567</span>
-              <span class="k">write</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="p">&amp;</span>
-              <span class="p">&amp;</span><span class="s1">&#39;(&quot;&lt;w&gt;&lt;G&gt;GREAT&lt;/G&gt;&lt;/w&gt;:&amp;</span>
-<span class="s1">              &amp;The new value &lt;Y&gt;&lt;b&gt;&quot;,f8.4,&quot;&lt;/b&gt;&lt;/Y&gt; is in range&quot;)&#39;</span><span class="p">)</span><span class="k">value</span>
+              <span class="k">write</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="n">f</span><span class="p">)</span> <span class="k">value</span>
 <span class="k">              write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="n">attr</span><span class="p">(</span><span class="nb">trim</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
 
               <span class="c">! write same string as plain text</span>
+              <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span>
               <span class="k">call </span><span class="n">attr_mode</span><span class="p">(</span><span class="n">manner</span><span class="o">=</span><span class="s1">&#39;plain&#39;</span><span class="p">)</span>
               <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="n">attr</span><span class="p">(</span><span class="nb">trim</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
 
-           <span class="k">end program </span><span class="n">demo_M_attr</span>
+              <span class="k">call </span><span class="n">attr_mode</span><span class="p">(</span><span class="n">manner</span><span class="o">=</span><span class="s1">&#39;color&#39;</span><span class="p">)</span>
+              <span class="c">! use pre-defined or user defined strings</span>
+              <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span>
+              <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;ERROR&gt; Woe is nigh.&#39;</span><span class="p">)</span>
+              <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;WARNING&gt; The night is young.&#39;</span><span class="p">)</span>
+              <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;INFO&gt; It is Monday&#39;</span><span class="p">)</span>
+
+              <span class="c">! create a custom mneumonic</span>
+              <span class="k">call </span><span class="n">attr_update</span><span class="p">(</span><span class="s1">&#39;MYERROR&#39;</span><span class="p">,</span><span class="n">attr</span><span class="p">(&amp;</span>
+              <span class="s1">&#39; &lt;R&gt;&lt;e&gt; E&lt;w&gt;-&lt;e&gt;R&lt;w&gt;-&lt;e&gt;R&lt;w&gt;-&lt;e&gt;O&lt;w&gt;-&lt;e&gt;R: &lt;/e&gt;&lt;/R&gt;&lt;/bo&gt;&#39;</span><span class="p">&amp;</span>
+              <span class="p">))</span>
+              <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span>
+              <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;MYERROR&gt; my custom message style&#39;</span><span class="p">)</span>
+
+              <span class="k">end program </span><span class="n">demo_M_attr</span>
 </pre></div>
 
     </section>
@@ -392,7 +428,7 @@
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/cmacmackin/ford">FORD</a>
-             on 2021-07-24 13:50  
+             on 2021-07-26 09:23  
           </p>
         </div>
         <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> M_attr was developed by John S. Urban</p></div>

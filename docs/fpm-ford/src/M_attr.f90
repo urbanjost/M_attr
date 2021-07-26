@@ -7,14 +7,37 @@
 !!
 !!      use M_attr, only : attr, attr_mode, attr_update
 !!
-!!##DESCRIPTION
-!!    M_attr(3f) is a Fortran module for adding attributes to terminal
-!!    output such as color on devices that recognize ANSI escape sequences.
-!!
 !!##MAJOR FEATURES
 !!   o Add text attributes with an HTML-like syntax using attr(3f).
 !!   o suppress the escape sequence output with attr_mode(3f).
 !!   o customize what strings are produced using attr_update(3f).
+!!
+!!##DESCRIPTION
+!!    M_attr(3f) is a Fortran module that writes common ANSI escape
+!!    sequences which control terminal attributes like text color. It is
+!!    designed to allow the sequences to be suppressed and for the user
+!!    program to completely customize it -- the user can add, delete and
+!!    replace the sequences associated with a keyword without changing
+!!    the code.
+!!
+!!    Attributes are specified by writing lines with HTML-like structure.
+!!
+!!    The advantage of the approach of replacing in-band escape sequences
+!!    with formatting directives contained on each line is that it is easy
+!!    to turn off when running batch, but more importantly your program can
+!!    be run in "raw" mode and write a clean text file with the directives in
+!!    it that can then be read back in by a simple filter program that strips
+!!    it back to plain text( see app/plain.f90), or displays it to a screen
+!!    in color(see app/light.f90) or perhaps converts it to another format.
+!!
+!!    By making each line self-contained by default this can still be done
+!!    with any arbitrarily selected group of lines from the file.
+!!
+!!    So in addition to printing colored lines to your screen this module
+!!    makes it trivial to read specially-formatted data from a file like a
+!!    message catalog (perhaps with various versions in different languages)
+!!    and colorize it or display it as plain text using the included attr(3f)
+!!    procedure, for example.
 !!
 !!##LIMITATIONS
 !!   o colors are not nestable.
@@ -35,22 +58,40 @@
 !!    Sample program
 !!
 !!     program demo_M_attr
-!!     use M_attr, only : attr, attr_mode
+!!     use M_attr, only : attr, attr_mode, attr_update
 !!     implicit none
 !!     character(len=256) :: line
+!!     character(len=*),parameter :: f='( &
+!!      &"   <bo><w><G> GREAT: </G></w>&
+!!      &The new value <Y><b>",f8.4,1x,"</b></Y> is in range"&
+!!      &)'
 !!     real :: value
+!!
 !!        write(*,'(a)')&
-!!        &attr('<r><W>ERROR:</W> red text on a white background</y>')
+!!        &attr('   <r><W><bo> ERROR: </W>red text on a white background</y>')
 !!
 !!        value=3.4567
-!!        write(line,fmt=&
-!!        &'("<w><G>GREAT</G></w>:&
-!!        &The new value <Y><b>",f8.4,"</b></Y> is in range")')value
+!!        write(line,fmt=f) value
 !!        write(*,'(a)')attr(trim(line))
 !!
 !!        ! write same string as plain text
+!!        write(*,*)
 !!        call attr_mode(manner='plain')
 !!        write(*,'(a)')attr(trim(line))
+!!
+!!        call attr_mode(manner='color')
+!!        ! use pre-defined or user defined strings
+!!        write(*,*)
+!!        write(*,'(a)')attr('<ERROR> Woe is nigh.')
+!!        write(*,'(a)')attr('<WARNING> The night is young.')
+!!        write(*,'(a)')attr('<INFO> It is Monday')
+!!
+!!        ! create a custom mneumonic
+!!        call attr_update('MYERROR',attr(&
+!!        ' <R><e> E<w>-<e>R<w>-<e>R<w>-<e>O<w>-<e>R: </e></R></bo>'&
+!!        ))
+!!        write(*,*)
+!!        write(*,'(a)')attr('<MYERROR> my custom message style')
 !!
 !!     end program demo_M_attr
 !!
@@ -73,10 +114,28 @@ use, intrinsic :: iso_fortran_env, only : stderr=>ERROR_UNIT,stdin=>INPUT_UNIT,s
 use, intrinsic :: iso_c_binding, only: c_int
 implicit none
 private
-public attr
-public attr_mode
-public attr_update
-interface attr;    module procedure attr_scalar, attr_matrix;  end interface
+public  :: attr
+public  :: attr_mode
+public  :: attr_update
+
+private :: attr_matrix
+private :: attr_scalar
+private :: attr_scalar_width
+private :: get
+
+private :: locate   ! find PLACE in sorted character array where value can be found or should be placed
+private :: insert   ! insert entry into a sorted allocatable array at specified position
+private :: replace  ! replace entry by index from a sorted allocatable array if it is present
+private :: remove   ! delete entry by index from a sorted allocatable array if it is present
+private :: wipe_dictionary
+
+private :: vt102
+
+interface attr
+   module procedure attr_scalar
+   module procedure attr_matrix
+   module procedure attr_scalar_width
+end interface
 
 ! direct use of constant strings
 
@@ -144,10 +203,6 @@ character(len=*),parameter,public :: ununderline =  CODE_START//OFF//AT_UNDERLIN
 character(len=*),parameter,public :: reset       =  CODE_RESET
 character(len=*),parameter,public :: clear       =  HOME_DISPLAY//CLEAR_DISPLAY
 
-private locate   ! find PLACE in sorted character array where value can be found or should be placed
-private insert   ! insert entry into a sorted allocatable array at specified position
-private replace  ! replace entry by index from a sorted allocatable array if it is present
-private remove   ! delete entry by index from a sorted allocatable array if it is present
 
 contains
 
@@ -159,15 +214,17 @@ contains
 !!
 !!##SYNOPSIS
 !!
-!!      function attr(string,clear_at_end) result (expanded)
-!!      ! scalar
-!!        character(len=*),intent(in) :: string
-!!        logical,intent(in),optional :: clear_at_end
+!!      function attr(string,reset) result (expanded)
+!!
+!!        ! scalar
+!!        character(len=*),intent(in)  :: string
+!!        logical,intent(in),optional  :: reset
 !!        character(len=:),allocatable :: expanded
-!!      ! or array
-!!        character(len=*),intent(in) :: string(:)
-!!        logical,intent(in),optional :: clear_at_end
+!!        ! or array
+!!        character(len=*),intent(in)  :: string(:)
+!!        logical,intent(in),optional  :: reset
 !!        character(len=:),allocatable :: expanded(:)
+!!        integer,intent(in),optional  :: chars
 !!
 !!##DESCRIPTION
 !!    Use HTML-like syntax to add attributes to terminal output such as color
@@ -181,12 +238,20 @@ contains
 !!                   where the current attributes are color names,
 !!                   bold, italic, underline, ...
 !!
-!!    clear_at_end   By default, a sequence to clear all text attributes
-!!                   is sent at the end of the returned text if an escape
+!!    reset          By default, a sequence to clear all text attributes
+!!                   is sent at the end of each returned line if an escape
 !!                   character appears in the output string. This can be
-!!                   turned off by setting this value to false. Each line
-!!                   being self-contained has advantages when output is
-!!                   filtered with commands such as grep(1).
+!!                   turned off by setting RESET to .false. .
+!!
+!!                   Note if turning off the reset attributes may be
+!!                   continued accross lines, but if each line is not
+!!                   self-contained attributes may not display properly
+!!                   when filtered with commands such as grep(1).
+!!
+!!    chars          For arrays, a reset will be placed after the Nth
+!!                   displayable column count in order to make it easier
+!!                   to generate consistent right borders for non-default
+!!                   background colors for a text block.
 !!##KEYWORDS
 !!    primary default keywords
 !!
@@ -211,16 +276,16 @@ contains
 !!        gt
 !!        lt
 !!      dual-value (one for color, one for mono):
-!!        ERROR
-!!        WARNING
-!!        INFO
+!!        write(*,*)attr('<ERROR>an error message')
+!!        write(*,*)attr('<WARNING>a warning message')
+!!        write(*,*)attr('<INFO>an informational message')
 !!
 !!    By default, if the color mnemonics (ie. the keywords) are uppercase
 !!    they change the background color. If lowercase, the foreground color.
 !!    When preceded by a "/" character the attribute is returned to the default.
 !!
 !!    The "default" keyword is typically used explicitly when
-!!    clear_at_end=.false, and sets all text attributes to their initial defaults.
+!!    reset=.false, and sets all text attributes to their initial defaults.
 !!
 !!##LIMITATIONS
 !!    o colors are not nestable, keywords are case-sensitive,
@@ -243,7 +308,7 @@ contains
 !!        call attr_mode(manner='plain')
 !!        call printstuff('plain:')
 !!
-!!        call printstuff('raw:')
+!!        call printstuff('raw')
 !!
 !!        call attr_mode(manner='color')
 !!        call printstuff('')
@@ -255,12 +320,16 @@ contains
 !!
 !!     contains
 !!     subroutine printstuff(label)
-!!     character(len=*),intent(in) :: label
+!!     character(len=*),intent(in)  :: label
+!!     character(len=:),allocatable :: array(:)
 !!       call attr_mode(manner=label)
-!!       write(*,'(a)') attr('TEST MANNER='//label)
-!!       write(*,'(a)') attr('<r>RED</r>,<g>GREEN</g>,<b>BLUE</b>')
-!!       write(*,'(a)') attr('<c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</y>')
-!!       write(*,'(a)') attr('<w>WHITE</w> and <e>EBONY</e>')
+!!
+!!       array=[character(len=60) ::    &
+!!        'TEST MANNER='//label,                      &
+!!        '<r>RED</r>,<g>GREEN</g>,<b>BLUE</b>',      &
+!!        '<c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</y>', &
+!!        '<w>WHITE</w> and <e>EBONY</e>']
+!!       write(*,'(a)') attr(array)
 !!
 !!       write(*,'(a)') attr('Adding <bo>bold</bo>')
 !!       write(*,'(a)') attr('<bo><r>RED</r>,<g>GREEN</g>,<b>BLUE</b></bo>')
@@ -302,10 +371,10 @@ contains
 !!
 !!##SEE ALSO
 !!    attr_mode(3f), attr_update(3f)
-function attr_scalar(string,clear_at_end) result (expanded)
+function attr_scalar(string,reset) result (expanded)
 character(len=*),intent(in)  :: string
-logical,intent(in),optional  :: clear_at_end
-logical                      :: clear_at_end_local
+logical,intent(in),optional  :: reset
+logical                      :: clear_at_end
 character(len=:),allocatable :: padded
 character(len=:),allocatable :: expanded
 character(len=:),allocatable :: name
@@ -313,10 +382,10 @@ integer                      :: i
 integer                      :: ii
 integer                      :: maxlen
 integer                      :: place
-if(present(clear_at_end))then
-   clear_at_end_local=clear_at_end
+if(present(reset))then
+   clear_at_end=reset
 else
-   clear_at_end_local=.false.
+   clear_at_end=.true.
 endif
 if(.not.allocated(mode))then  ! set substitution mode
    mode='color' ! 'color'|'raw'|'plain'
@@ -362,25 +431,72 @@ do
    end select
    if(i >= maxlen+1)exit
 enddo
-if( (index(expanded,escape).ne.0).and.(.not.clear_at_end_local))then
+if( (index(expanded,escape).ne.0).and.(clear_at_end))then
    if((mode.ne.'raw').and.(mode.ne.'plain'))then
       expanded=expanded//CODE_RESET                                   ! Clear all styles
    endif
 endif
+expanded=trim(expanded)
 end function attr_scalar
 
-function attr_matrix(string,clear_at_end) result (expanded)
+function attr_matrix(string,reset,chars) result (expanded)
 character(len=*),intent(in)  :: string(:)
-logical,intent(in),optional  :: clear_at_end
+logical,intent(in),optional  :: reset
+integer,intent(in),optional  :: chars
 character(len=:),allocatable :: expanded(:)
+!gfortran does not return allocatable array from a function properly, but works with subroutine
+call kludge_bug(string,reset,chars,expanded)
+end function attr_matrix
+
+subroutine kludge_bug(string,reset,chars,expanded)
+character(len=*),intent(in)  :: string(:)
+logical,intent(in),optional  :: reset
+integer,intent(in),optional  :: chars
+character(len=:),allocatable :: expanded(:)
+integer                      :: width
 character(len=:),allocatable :: hold
 integer                      :: i
+integer                      :: right
+integer                      :: len_local
+integer                      :: len_local2
+
 allocate(character(len=0) :: expanded(0))
+
+if(present(chars))then
+   right=chars
+else
+   right=len(string)
+endif
+if(.not.allocated(mode))then  ! set substitution mode
+   mode='color' ! 'color'|'raw'|'plain'
+   call vt102()
+endif
+
 do i=1,size(string)
-   hold=attr_scalar(string(i))
-   expanded=[character(len=max(len(expanded),len(hold))):: expanded,hold]
+   if(mode.eq.'color')then
+      len_local2=len_trim(attr_scalar(string(i)))
+      mode='plain'
+      len_local=len_trim(attr_scalar(string(i)))
+      hold=trim(string(i))//repeat(' ',max(0,right-len_local))
+      mode='color'
+   else
+      hold=string(i)
+   endif
+   hold=attr_scalar(hold,reset=reset)
+   width=max(len(hold),len(expanded))
+   expanded=[character(len=width) :: expanded,hold]
 enddo
-end function attr_matrix
+end subroutine kludge_bug
+
+function attr_scalar_width(string,reset,chars) result (expanded)
+character(len=*),intent(in)  :: string
+logical,intent(in),optional  :: reset
+integer,intent(in)           :: chars
+character(len=:),allocatable :: expanded_arr(:)
+character(len=:),allocatable :: expanded
+   expanded_arr=attr_matrix([string],reset,chars)
+   expanded=expanded_arr(1)
+end function attr_scalar_width
 
 subroutine vt102()
 ! create a dictionary with character keywords, values, and value lengths
@@ -513,7 +629,6 @@ end subroutine vt102
 !!
 !!##SYNOPSIS
 !!
-!!
 !!     subroutine attr_mode(manner)
 !!
 !!        character(len=*),intent(in) :: manner
@@ -536,34 +651,35 @@ end subroutine vt102
 !!
 !!##EXAMPLE
 !!
-!!
 !!    Sample program
 !!
 !!     program demo_attr_mode
 !!     use M_attr, only : attr, attr_mode
 !!     implicit none
-!!     character(len=1024) :: line
-!!     real :: value
+!!     character(len=:),allocatable :: lines(:)
+!!     character(len=:),allocatable :: outlines(:)
+!!     integer :: i
+!!        lines=[character(len=110):: &
+!!        '<B><y>',&
+!!        '<B><y>  Suffice it to say that <W><e>black</e></W><B><y>&
+!!        & and <E><w>white</w></E><B><y> are also colors',&
+!!        '<B><y>  for their simultaneous contrast is as striking as that ',&
+!!        '<B><y>  of <R><g>green</g></R><B><y> and <G><r>red</r></G><B><y>,&
+!!        & for instance. --- <bo>Vincent van Gogh',&
+!!        '<B><y>',&
+!!        ' ']
 !!
-!!       value=3.4567
-!!       if( (value>0.0) .and. (value<100.0))then
-!!         write(line,fmt='("&
-!!        &<w><G>GREAT</G></w>: The value <Y><b>",f8.4,"</b></Y> is in range &
-!!        &")')value
-!!       else
-!!         write(line,fmt='("&
-!!        &<R><e>ERROR</e></R>:The new value <Y><b>",g0,"</b></Y> is out of range&
-!!        & ")')value
-!!       endif
+!!        outlines=attr(lines,chars=57)
+!!        write(*,'(a)')(trim(outlines(i)),i=1,size(outlines))
 !!
-!!       write(*,'(a)')attr(trim(line))
+!!        call attr_mode(manner='plain') ! write as plain text
+!!        write(*,'(a)')attr(lines)
+!!        call attr_mode(manner='raw')   ! write as-is
+!!        write(*,'(a)')attr(lines)
 !!
-!!       call attr_mode(manner='plain') ! write as plain text
-!!       write(*,'(a)')attr(trim(line))
-!!       call attr_mode(manner='raw')   ! write as-is
-!!       write(*,'(a)')attr(trim(line))
-!!       call attr_mode(manner='ansi')  ! return to default mode
-!!       write(*,'(a)')attr(trim(line))
+!!        call attr_mode(manner='ansi')  ! return to default mode
+!!        outlines=attr(lines,chars=80)
+!!        write(*,'(a)')(trim(outlines(i)),i=1,size(outlines))
 !!
 !!     end program demo_attr_mode
 !!
@@ -659,30 +775,39 @@ end subroutine wipe_dictionary
 !!
 !!    Sample program
 !!
-!!     program demo_update
-!!     use M_attr, only : attr, attr_update
-!!        write(*,'(a)') attr('<clear>TEST CUSTOMIZED:')
-!!        ! add custom keywords
-!!        call attr_update('blink',char(27)//'[5m')
-!!        call attr_update('/blink',char(27)//'[38m')
+!!      program demo_update
+!!      use M_attr, only : attr, attr_update
+!!         write(*,'(a)') attr('<clear>TEST CUSTOMIZED:')
 !!
-!!        write(*,'(a)') attr('<blink>Items for Friday</blink>')
+!!         ! add custom keywords
+!!         call attr_update('blink',char(27)//'[5m')
+!!         call attr_update('/blink',char(27)//'[38m')
 !!
-!!        write(*,'(a)',advance='no') attr('<r>RED</r>,')
-!!        write(*,'(a)',advance='no') attr('<b>BLUE</b>,')
-!!        write(*,'(a)',advance='yes') attr('<g>GREEN</g>')
+!!         write(*,*)
+!!         write(*,'(a)') attr('<blink>Items for Friday</blink>')
 !!
-!!        ! delete
-!!        call attr_update('r')
-!!        call attr_update('/r')
-!!        ! replace
-!!        call attr_update('b','<<<<')
-!!        call attr_update('/b','>>>>')
-!!        write(*,'(a)',advance='no') attr('<r>RED</r>,')
-!!        write(*,'(a)',advance='no') attr('<b>BLUE</b>,')
-!!        write(*,'(a)',advance='yes') attr('<g>GREEN</g>')
+!!         call attr_update('ouch',attr( &
+!!         ' <R><bo><w>BIG mistake!</R></w> '))
+!!         write(*,*)
+!!         write(*,'(a)') attr('<ouch> Did not see that coming.')
 !!
-!!     end program demo_update
+!!         write(*,*)
+!!         write(*,'(a)') attr( &
+!!         'ORIGINALLY: <r>Apple</r>, <b>Sky</b>, <g>Grass</g>')
+!!
+!!         ! delete
+!!         call attr_update('r')
+!!         call attr_update('/r')
+!!
+!!         ! replace (or create)
+!!         call attr_update('b','<<<<')
+!!         call attr_update('/b','>>>>')
+!!         write(*,*)
+!!         write(*,'(a)') attr( &
+!!         'CUSTOMIZED: <r>Apple</r>, <b>Sky</b>, <g>Grass</g>')
+!!
+!!      end program demo_update
+!!
 !!
 !!##AUTHOR
 !!    John S. Urban, 2020
@@ -714,7 +839,7 @@ if(present(valin))then
       call insert(mono_values,mono_val,iabs(place))
    else
       call replace(values,val,place)
-      call replace(values,mono_val,place)
+      call replace(mono_values,mono_val,place)
    endif
 else
    call locate(keywords,key,place)

@@ -126,19 +126,19 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title="18.6% of total for programs.">49 statements</a>
+    title="28.6% of total for programs.">96 statements</a>
      </li> 
      
      
      
-    <li><i class="fa fa-code"></i><a href="../src/main.f90"> Source File</a></li>
+    <li><i class="fa fa-code"></i><a href="../src/redirect.F90"> Source File</a></li>
      
      
   </ul>
   <ol class="breadcrumb in-well text-right">
   
     
-     <li><a href='../sourcefile/main.f90.html'>main.f90</a></li>
+     <li><a href='../sourcefile/redirect.f90.html'>redirect.F90</a></li>
     
   
      <li class="active">roots</li>
@@ -173,17 +173,19 @@
       
       <a class="list-group-item" href="../program/roots.html#variable-b">b</a>
       
+      <a class="list-group-item" href="../program/roots.html#variable-buffer">buffer</a>
+      
       <a class="list-group-item" href="../program/roots.html#variable-c">c</a>
       
       <a class="list-group-item" href="../program/roots.html#variable-discriminant">discriminant</a>
       
       <a class="list-group-item" href="../program/roots.html#variable-dp">dp</a>
       
-      <a class="list-group-item" href="../program/roots.html#variable-ios~2">ios</a>
-      
-      <a class="list-group-item" href="../program/roots.html#variable-line~2">line</a>
+      <a class="list-group-item" href="../program/roots.html#variable-ios">ios</a>
       
       <a class="list-group-item" href="../program/roots.html#variable-message">message</a>
+      
+      <a class="list-group-item" href="../program/roots.html#variable-numbers">numbers</a>
       
       <a class="list-group-item" href="../program/roots.html#variable-paws">paws</a>
       
@@ -211,6 +213,30 @@
 
 
 
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#funcs-0">Functions</a></h3></div>
+  <div id="funcs-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../program/roots.html#proc-system_isatty">system_isatty</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#subs-0">Subroutines</a></h3></div>
+  <div class="list-group">
+    <div id="subs-0" class="panel-collapse collapse">
+      
+      <a class="list-group-item" href="../program/roots.html#proc-text">text</a>
+      
+    </div>
+  </div>
+</div>
 
 
 
@@ -278,17 +304,19 @@
       
       <a class="list-group-item" href="../program/roots.html#variable-b">b</a>
       
+      <a class="list-group-item" href="../program/roots.html#variable-buffer">buffer</a>
+      
       <a class="list-group-item" href="../program/roots.html#variable-c">c</a>
       
       <a class="list-group-item" href="../program/roots.html#variable-discriminant">discriminant</a>
       
       <a class="list-group-item" href="../program/roots.html#variable-dp">dp</a>
       
-      <a class="list-group-item" href="../program/roots.html#variable-ios~2">ios</a>
-      
-      <a class="list-group-item" href="../program/roots.html#variable-line~2">line</a>
+      <a class="list-group-item" href="../program/roots.html#variable-ios">ios</a>
       
       <a class="list-group-item" href="../program/roots.html#variable-message">message</a>
+      
+      <a class="list-group-item" href="../program/roots.html#variable-numbers">numbers</a>
       
       <a class="list-group-item" href="../program/roots.html#variable-paws">paws</a>
       
@@ -316,6 +344,30 @@
 
 
 
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#funcs-1">Functions</a></h3></div>
+  <div id="funcs-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../program/roots.html#proc-system_isatty">system_isatty</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#subs-1">Subroutines</a></h3></div>
+  <div class="list-group">
+    <div id="subs-1" class="panel-collapse collapse">
+      
+      <a class="list-group-item" href="../program/roots.html#proc-text">text</a>
+      
+    </div>
+  </div>
+</div>
 
 
 
@@ -386,6 +438,20 @@
   
 <tr>
   
+  <td><span class="anchor" id="variable-buffer"></span>character(len=1024)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>buffer</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
   <td><span class="anchor" id="variable-c"></span>real(kind=dp)</td>
   
   
@@ -428,25 +494,11 @@
   
 <tr>
   
-  <td><span class="anchor" id="variable-ios~2"></span>integer</td>
+  <td><span class="anchor" id="variable-ios"></span>integer</td>
   
   
   <td></td><td>::</td>
   <td><strong>ios</strong></td><td></td><td></td><td></td>
-  
-</tr>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><span class="anchor" id="variable-line~2"></span>character(len=:),</td>
-  
-  
-  <td>allocatable</td><td>::</td>
-  <td><strong>line</strong></td><td></td><td></td><td></td>
   
 </tr>
 
@@ -461,6 +513,20 @@
   
   <td></td><td>::</td>
   <td><strong>message</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-numbers"></span>character(len=*),</td>
+  
+  
+  <td>parameter</td><td>::</td>
+  <td><strong>numbers</strong></td><td> =</td><td>'("<B><w><bo>&nbsp;&nbsp;&nbsp;",*("(",g0.8,",",g0.8,")":,1x))'</td><td></td>
   
 </tr>
 
@@ -563,9 +629,139 @@
 
     
     
+     
+    <section>
+    <h2>Functions</h2>
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-system_isatty"></span><h3>
+function <a href='../proc/system_isatty.html'>system_isatty</a>(lun)
+    
+    
+   
+</h3></div>
+  <div class="panel-body">
+       
     
 
 
+
+
+
+
+
+<p>call compiler-specific ISATTY() function or return .FALSE.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer,</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lun</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>logical
+  </small></h4>
+  
+    
+
+  </div>
+  </div>
+
+    
+    </section>
+    <br>
+    
+
+
+    
+    <section>
+    <h2>Subroutines</h2>
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-text"></span><h3>
+subroutine <a href='../proc/text.html'>text</a>(string)
+    
+    
+   
+</h3></div>
+  <div class="panel-body">
+       
+    
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>character(len=*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>string</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  </div>
+  </div>
+
+    
+    </section>    
     
     
     
@@ -581,53 +777,140 @@
 <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="n">dp</span><span class="p">)</span>                   <span class="kd">::</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x</span> <span class="c">! Real roots of the equation</span>
 <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="n">dp</span><span class="p">)</span>                   <span class="kd">::</span> <span class="n">x_real</span>    <span class="c">! Real part of complex root of the equation</span>
 <span class="kt">REAL</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="n">dp</span><span class="p">)</span>                   <span class="kd">::</span> <span class="n">x_complex</span> <span class="c">! Imaginary part of complex root of the equation</span>
-<span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="p">:),</span><span class="k">allocatable</span>    <span class="kd">::</span> <span class="n">line</span>
 <span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>              <span class="kd">::</span> <span class="n">message</span>
 <span class="kt">integer</span>                         <span class="kd">::</span> <span class="n">ios</span>
 <span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>                <span class="kd">::</span> <span class="n">paws</span>
-   <span class="k">if</span><span class="p">(</span><span class="nb">isatty</span><span class="p">(</span><span class="n">stdout</span><span class="p">))</span><span class="k">then</span> <span class="c">! ISATTY() is an extension, but found in Intel, GNU, PGI, ... compiler</span>
+<span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>             <span class="kd">::</span> <span class="n">buffer</span>
+<span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=*</span><span class="p">),</span><span class="k">parameter</span>      <span class="kd">::</span> <span class="n">numbers</span><span class="o">=</span><span class="s1">&#39;(&quot;&lt;B&gt;&lt;w&gt;&lt;bo&gt;   &quot;,*(&quot;(&quot;,g0.8,&quot;,&quot;,g0.8,&quot;)&quot;:,1x))&#39;</span>
+   <span class="k">if</span><span class="p">(</span><span class="n">system_isatty</span><span class="p">(</span><span class="n">stdout</span><span class="p">))</span><span class="k">then</span> <span class="c">! ISATTY() is an extension, but found in Intel, GNU, PGI, ... compiler</span>
       <span class="k">call </span><span class="n">attr_mode</span><span class="p">(</span><span class="s1">&#39;color&#39;</span><span class="p">)</span>
    <span class="k">else</span>
-<span class="k">      call </span><span class="n">attr_mode</span><span class="p">(</span><span class="s1">&#39;plain&#39;</span><span class="p">)</span> 
+<span class="k">      call </span><span class="n">attr_mode</span><span class="p">(</span><span class="s1">&#39;plain&#39;</span><span class="p">)</span>
    <span class="k">endif</span>
 
 <span class="k">   </span><span class="n">INFINITE</span><span class="p">:</span> <span class="k">do</span>
       <span class="c">! clear screen, set attributes and print messages</span>
-      <span class="n">line</span><span class="o">=</span><span class="s2">&quot;&lt;clear&gt;&lt;B&gt;&lt;w&gt;&lt;bo&gt;Enter the quadratic equation coefficients a, b and c&quot;</span>
-      <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(*(a))&#39;</span><span class="p">,</span><span class="n">advance</span><span class="o">=</span><span class="s1">&#39;no&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;B&gt;&lt;w&gt;&lt;bo&gt;&#39;</span><span class="o">//</span><span class="nb">repeat</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">))</span><span class="o">//</span><span class="s1">&#39;&lt;&#39;</span><span class="p">),</span> <span class="nb">char</span><span class="p">(</span><span class="mi">13</span><span class="p">),</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;B&gt;&lt;y&gt;ENTER&gt;&#39;</span><span class="p">)</span>
+      <span class="k">call </span><span class="n">text</span><span class="p">(</span><span class="s2">&quot;&lt;reset&gt;&lt;clear&gt;&quot;</span><span class="p">)</span>
+      <span class="k">call </span><span class="n">text</span><span class="p">(</span><span class="s2">&quot;For the quadratic equation &lt;m&gt;A&lt;/m&gt;&lt;g&gt;*x**2 +&lt;m&gt;B&lt;/m&gt;&lt;g&gt;*x + &lt;m&gt;C&lt;/m&gt; &quot;</span><span class="p">)</span>
+      <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(*(a))&#39;</span><span class="p">,</span><span class="n">advance</span><span class="o">=</span><span class="s1">&#39;no&#39;</span><span class="p">)</span> <span class="p">&amp;</span>
+      <span class="p">&amp;</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;B&gt;&lt;w&gt;&lt;bo&gt;&#39;</span><span class="o">//</span><span class="nb">repeat</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span><span class="mi">78</span><span class="p">)</span><span class="o">//</span><span class="s1">&#39;  &#39;</span><span class="p">),</span> <span class="p">&amp;</span>
+      <span class="p">&amp;</span> <span class="nb">char</span><span class="p">(</span><span class="mi">13</span><span class="p">),&amp;</span>
+      <span class="p">&amp;</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;B&gt;&lt;g&gt;&lt;bo&gt;enter coefficients &lt;m&gt;A,B,C&lt;/m&gt;&lt;g&gt;:&lt;y&gt;&lt;gt&gt;&lt;ul&gt;&#39;</span><span class="p">,&amp;</span>
+      <span class="p">&amp;</span> <span class="n">reset</span><span class="o">=</span><span class="p">.</span><span class="n">false</span><span class="p">.)</span>
       <span class="k">read</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">ios</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">message</span><span class="p">)</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span>
-      <span class="c">!write(*,&#39;(a)&#39;,advance=&#39;no&#39;)attr(&#39;reset&#39;)</span>
+      <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">,</span><span class="n">advance</span><span class="o">=</span><span class="s1">&#39;no&#39;</span><span class="p">)</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;reset&gt;&#39;</span><span class="p">)</span>
       <span class="k">if</span><span class="p">(</span><span class="n">ios</span><span class="p">.</span><span class="n">ne</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span><span class="k">then</span>
 <span class="k">         write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(*(g0))&#39;</span><span class="p">)</span><span class="n">ios</span><span class="p">,</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="nb">trim</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
       <span class="k">else</span>
-         <span class="c">! Given the equation &quot;A*x**2 + B*x + C = 0&quot;</span>
+         <span class="c">! Given the equation &quot;A*X**2 + B*X + C = 0&quot;</span>
          <span class="c">! Use the quadratic formula to determine the root values of the equation.</span>
          <span class="c">! prompt for new value</span>
-      
-         <span class="k">WRITE</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(*(g0))&#39;</span><span class="p">)</span> <span class="s1">&#39;for &#39;</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="s1">&#39;*x**2 + &#39;</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="s1">&#39;*x + &#39;</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="s1">&#39; = 0&#39;</span>
+
+         <span class="k">call </span><span class="n">text</span><span class="p">()</span>
+         <span class="k">call </span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;Given the equation&#39;</span><span class="p">)</span>
+         <span class="k">call </span><span class="n">text</span><span class="p">()</span>
+         <span class="k">write</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="s1">&#39;(*(g0.8))&#39;</span><span class="p">)</span> <span class="s1">&#39;&lt;B&gt;&lt;w&gt;&lt;bo&gt;   &#39;</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="s1">&#39;&lt;m&gt;*X**2&lt;/m&gt;&lt;w&gt; + &#39;</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="s1">&#39;&lt;m&gt;*X&lt;/m&gt;&lt;w&gt; + &#39;</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="s1">&#39; = 0&#39;</span>
+         <span class="k">call </span><span class="n">text</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
+         <span class="k">call </span><span class="n">text</span><span class="p">()</span>
+
          <span class="n">discriminant</span> <span class="o">=</span> <span class="n">b</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">c</span>
-      
-         <span class="k">IF</span> <span class="p">(</span> <span class="n">discriminant</span><span class="o">&gt;</span><span class="mi">0</span> <span class="p">)</span> <span class="k">THEN</span>
-<span class="k">            write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;the roots (ie. &quot;x intercepts&quot;) are real so the parabola crosses the x-axis at two points:&#39;</span>
+
+         <span class="k">if</span> <span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">eq</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span><span class="k">then</span>
+<span class="k">            call </span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;&lt;ERROR&gt; &lt;m&gt;If &lt;m&gt;a&lt;/m&gt;&lt;g&gt; is zero this is a linear, not quadratic equation&#39;</span><span class="p">)</span>
+         <span class="n">elseif</span> <span class="p">(</span> <span class="n">discriminant</span><span class="o">&gt;</span><span class="mi">0</span> <span class="p">)</span> <span class="k">then</span>
+<span class="k">            call </span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;the &lt;m&gt;roots&lt;/m&gt;&lt;g&gt; (ie. &quot;x intercepts&quot;) are &lt;m&gt;real&lt;m&gt;&lt;g&gt; so the parabola &#39;</span><span class="p">)</span>
+            <span class="k">call </span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;crosses the x-axis at &lt;m&gt;two points&lt;/m&gt;&lt;g&gt;:&#39;</span><span class="p">)</span>
+            <span class="k">call </span><span class="n">text</span><span class="p">()</span>
             <span class="n">x1</span> <span class="o">=</span> <span class="p">(</span> <span class="o">-</span><span class="n">b</span> <span class="o">+</span> <span class="nb">sqrt</span><span class="p">(</span><span class="n">discriminant</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span>
             <span class="n">x2</span> <span class="o">=</span> <span class="p">(</span> <span class="o">-</span><span class="n">b</span> <span class="o">-</span> <span class="nb">sqrt</span><span class="p">(</span><span class="n">discriminant</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span>
-            <span class="k">PRINT</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;Real roots:&quot;</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span>
-         <span class="n">ELSEIF</span> <span class="p">(</span> <span class="n">discriminant</span><span class="o">==</span><span class="mi">0</span> <span class="p">)</span> <span class="k">THEN</span>
-<span class="k">            PRINT</span> <span class="o">*</span><span class="p">,</span><span class="s1">&#39;the roots (ie. &quot;x intercepts&quot;) are repeated (real and equal) so the parabola just touches the x-axis at:&#39;</span>
-            <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span>
-            <span class="k">PRINT</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;Two identical Real roots&quot;</span><span class="p">,</span> <span class="n">x</span>
-         <span class="k">ELSE</span>
-<span class="k">            PRINT</span> <span class="o">*</span><span class="p">,</span> <span class="s1">&#39;the roots(ie. &quot;x intercepts&quot;)  are complex:&#39;</span>
+            <span class="k">write</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="n">numbers</span><span class="p">)</span><span class="n">x1</span><span class="p">,</span><span class="mf">0.0d0</span>
+            <span class="k">call </span><span class="n">text</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
+            <span class="k">write</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="n">numbers</span><span class="p">)</span><span class="n">x2</span><span class="p">,</span><span class="mf">0.0d0</span>
+            <span class="k">call </span><span class="n">text</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
+            <span class="k">call </span><span class="n">text</span><span class="p">()</span>
+         <span class="n">elseif</span> <span class="p">(</span> <span class="n">discriminant</span><span class="o">==</span><span class="mi">0</span> <span class="p">)</span> <span class="k">then</span>
+
+<span class="k">            call </span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;the &lt;m&gt;roots&lt;/m&gt;&lt;g&gt; (ie. &quot;x intercepts&quot;) are repeated &lt;m&gt;(real and equal)&lt;/m&gt;&lt;g&gt;&#39;</span><span class="p">)</span>
+            <span class="k">call </span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;so the parabola just touches the x-axis at:&#39;</span><span class="p">)</span>
+            <span class="k">call </span><span class="n">text</span><span class="p">()</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">ne</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span><span class="k">then</span>
+<span class="k">               </span><span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span>
+            <span class="k">else</span>
+<span class="k">               </span><span class="n">x</span> <span class="o">=</span> <span class="mf">0.0d0</span>
+            <span class="k">endif</span>
+<span class="k">            write</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="n">numbers</span><span class="p">)</span><span class="n">x</span><span class="p">,</span><span class="mf">0.0d0</span>
+            <span class="k">call </span><span class="n">text</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
+            <span class="k">call </span><span class="n">text</span><span class="p">()</span>
+         <span class="k">else</span>
+<span class="k">            call </span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;the &lt;m&gt;roots&lt;/m&gt;&lt;g&gt;(ie. &quot;x intercepts&quot;)  are &lt;m&gt;complex&lt;/m&gt;&lt;g&gt;:&#39;</span><span class="p">)</span>
             <span class="n">x_real</span>     <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span>
             <span class="n">x_complex</span>  <span class="o">=</span> <span class="nb">sqrt</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">discriminant</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span>
-            <span class="k">PRINT</span> <span class="o">*</span><span class="p">,</span> <span class="n">x_real</span><span class="p">,</span> <span class="s2">&quot;+i&quot;</span><span class="p">,</span><span class="n">x_complex</span> <span class="p">,</span> <span class="n">x_real</span><span class="p">,</span> <span class="s2">&quot;-i&quot;</span><span class="p">,</span><span class="n">x_complex</span>
-         <span class="k">ENDIF</span>
-<span class="k">            PRINT</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;discriminant =&quot;</span><span class="p">,</span> <span class="n">discriminant</span>
+            <span class="k">call </span><span class="n">text</span><span class="p">()</span>
+            <span class="k">WRITE</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="s1">&#39;(a,*(&quot;(&quot;,g0.8,&quot;, +i&quot;,g0.8,&quot;)&quot;,:,1x))&#39;</span><span class="p">)</span> <span class="s1">&#39;&lt;B&gt;&lt;w&gt;&lt;bo&gt;   &#39;</span><span class="p">,</span> <span class="n">x_real</span><span class="p">,</span><span class="n">x_complex</span>
+            <span class="k">call </span><span class="n">text</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
+            <span class="k">WRITE</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="s1">&#39;(a,*(&quot;(&quot;,g0.8,&quot;, -i&quot;,g0.8,&quot;)&quot;,:,1x))&#39;</span><span class="p">)</span> <span class="s1">&#39;&lt;B&gt;&lt;w&gt;&lt;bo&gt;   &#39;</span><span class="p">,</span> <span class="n">x_real</span><span class="p">,</span><span class="n">x_complex</span>
+            <span class="k">call </span><span class="n">text</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
+            <span class="k">call </span><span class="n">text</span><span class="p">()</span>
+         <span class="k">endif</span>
+<span class="k">         call </span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;with&#39;</span><span class="p">)</span>
+         <span class="k">call </span><span class="n">text</span><span class="p">()</span>
+         <span class="k">write</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="s1">&#39;(g0,*(g0.8,1x))&#39;</span><span class="p">)</span><span class="s2">&quot;&lt;B&gt;&lt;w&gt;&lt;bo&gt;   &lt;m&gt;discriminate&lt;/m&gt;&lt;w&gt; = &quot;</span><span class="p">,</span> <span class="n">discriminant</span>
+         <span class="k">call </span><span class="n">text</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
+         <span class="k">call </span><span class="n">text</span><span class="p">()</span>
       <span class="k">endif</span>
-<span class="k">      write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(*(g0))&#39;</span><span class="p">)</span><span class="s1">&#39;press &lt;return&gt; to continue, &lt;q&gt; to quit&#39;</span>
+<span class="k">      write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(*(g0))&#39;</span><span class="p">,</span><span class="n">advance</span><span class="o">=</span><span class="s1">&#39;no&#39;</span><span class="p">)</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;B&gt;&lt;e&gt;press &lt;g&gt;return&lt;/g&gt;&lt;e&gt; to continue, &quot;&lt;g&gt;q&lt;/g&gt;&lt;e&gt;&quot; to quit:&#39;</span><span class="p">,</span><span class="n">chars</span><span class="o">=</span><span class="mi">79</span><span class="p">)</span>
       <span class="k">read</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="n">advance</span><span class="o">=</span><span class="s1">&#39;yes&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">ios</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(a)&#39;</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">message</span><span class="p">)</span><span class="n">paws</span>
       <span class="k">if</span><span class="p">(</span><span class="n">paws</span><span class="p">.</span><span class="n">ne</span><span class="p">.</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="k">exit </span><span class="n">INFINITE</span>
    <span class="k">enddo </span><span class="n">INFINITE</span>
+<span class="k">contains</span>
+<span class="k">subroutine </span><span class="n">text</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+<span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=*</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="k">optional</span> <span class="kd">::</span> <span class="n">string</span>
+   <span class="k">if</span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">string</span><span class="p">))</span><span class="k">then</span>
+<span class="k">      write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(*(g0))&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;B&gt;&lt;g&gt;&lt;bo&gt;&#39;</span><span class="o">//</span><span class="n">string</span><span class="p">,</span><span class="n">chars</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+   <span class="k">else</span>
+<span class="k">      write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(*(g0))&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;B&gt;&lt;g&gt;&lt;bo&gt;&#39;</span><span class="p">,</span><span class="n">chars</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+   <span class="k">endif</span>
+<span class="k">end subroutine </span><span class="n">text</span>
+<span class="c">!&gt;  call compiler-specific ISATTY() function or return .FALSE.</span>
+<span class="cp">#undef ISATTY</span>
+
+<span class="cp">#ifdef __INTEL_COMPILER</span>
+    <span class="k">function </span><span class="n">system_isatty</span><span class="p">(</span><span class="n">lun</span><span class="p">)</span>
+    <span class="k">use </span><span class="n">IFPORT</span>
+    <span class="kt">integer</span><span class="p">,</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">lun</span>
+    <span class="kt">logical</span> <span class="kd">::</span> <span class="n">system_isatty</span>
+       <span class="n">system_isatty</span><span class="o">=</span><span class="nb">isatty</span><span class="p">(</span><span class="n">lun</span><span class="p">)</span>
+    <span class="k">end function </span><span class="n">system_isatty</span>
+<span class="cp">#define ISATTY</span>
+<span class="cp">#endif</span>
+
+<span class="cp">#ifdef __NVCOMPILER_MAJOR__X</span>
+    <span class="c">! __NVCOMPILER_MAJOR__ __NVCOMPILER_MINOR__ __NVCOMPILER_PATCHLEVEL__</span>
+    <span class="k">function </span><span class="n">system_isatty</span><span class="p">(</span><span class="n">lun</span><span class="p">)</span>
+    <span class="k">use </span><span class="n">DFPORT</span>
+    <span class="kt">integer</span><span class="p">,</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">lun</span>
+    <span class="kt">logical</span> <span class="kd">::</span> <span class="n">system_isatty</span>
+       <span class="n">system_isatty</span><span class="o">=</span><span class="nb">isatty</span><span class="p">(</span><span class="n">lun</span><span class="p">)</span>
+    <span class="k">end function </span><span class="n">system_isatty</span>
+<span class="cp">#define ISATTY</span>
+<span class="cp">#endif</span>
+
+<span class="cp">#ifdef __GFORTRAN__</span>
+    <span class="k">function </span><span class="n">system_isatty</span><span class="p">(</span><span class="n">lun</span><span class="p">)</span>
+    <span class="kt">integer</span><span class="p">,</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">lun</span>
+    <span class="kt">logical</span> <span class="kd">::</span> <span class="n">system_isatty</span>
+       <span class="n">system_isatty</span><span class="o">=</span><span class="nb">isatty</span><span class="p">(</span><span class="n">lun</span><span class="p">)</span>
+    <span class="k">end function </span><span class="n">system_isatty</span>
+<span class="cp">#define ISATTY</span>
+<span class="cp">#endif</span>
+<span class="cp">#ifndef ISATTY</span>
+    <span class="k">function </span><span class="n">system_isatty</span><span class="p">(</span><span class="n">lun</span><span class="p">)</span>
+    <span class="kt">integer</span><span class="p">,</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">lun</span>
+    <span class="kt">logical</span> <span class="kd">::</span> <span class="n">system_isatty</span>
+       <span class="n">system_isatty</span><span class="o">=</span><span class="p">.</span><span class="n">false</span><span class="p">.</span>
+    <span class="k">end function </span><span class="n">system_isatty</span>
+<span class="cp">#define ISATTY</span>
+<span class="cp">#endif</span>
 <span class="k">END PROGRAM </span><span class="n">roots</span>
 </pre></div>
 
@@ -649,7 +932,7 @@
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/cmacmackin/ford">FORD</a>
-             on 2021-07-24 13:50  
+             on 2021-07-26 09:23  
           </p>
         </div>
         <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> M_attr was developed by John S. Urban</p></div>

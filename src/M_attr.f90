@@ -30,7 +30,7 @@
 !!    it back to plain text( see app/plain.f90), or displays it to a screen
 !!    in color(see app/light.f90) or perhaps converts it to another format.
 !!
-!!    By making each line self-contained by default this can still be done
+!!    By making each line self-contained (by default) this can still be done
 !!    with any arbitrarily selected group of lines from the file.
 !!
 !!    So in addition to printing colored lines to your screen this module
@@ -351,16 +351,13 @@ contains
 !!       write(*,'(a)') attr('<bo><ul><it><w>WHITE</w> and <e>EBONY</e></ul></bo>')
 !!
 !!       write(*,'(a)') attr('Adding <in>inverse</in>')
-!!       write(*,'(a)') attr(&
-!!        &'<in><bo><ul><it><r>RED</r>,<g>GREEN</g>,&
+!!       write(*,'(a)') attr('<in><bo><ul><it><r>RED</r>,<g>GREEN</g>,&
 !!        &<b>BLUE</b></it></ul></bo></in>')
-!!       write(*,'(a)') attr(&
-!!        &'<in><bo><ul><it><c>CYAN</c>,<m>MAGENTA</g>,&
+!!       write(*,'(a)') attr('<in><bo><ul><it><c>CYAN</c>,<m>MAGENTA</g>,&
 !!        &<y>YELLOW</it></y></ul></bo></in>')
 !!       write(*,'(a)') attr(&
 !!        &'<in><bo><ul><it><w>WHITE</w> and <e>EBONY</e></ul></bo></in>')
 !!     end subroutine printstuff
-!!
 !!     end program demo_esc
 !!
 !!##AUTHOR
@@ -436,6 +433,7 @@ if( (index(expanded,escape).ne.0).and.(clear_at_end))then
       expanded=expanded//CODE_RESET                                   ! Clear all styles
    endif
 endif
+expanded=trim(expanded)
 end function attr_scalar
 
 function attr_matrix(string,reset,chars) result (expanded)
@@ -460,7 +458,6 @@ integer                      :: len_local
 integer                      :: len_local2
 
 allocate(character(len=0) :: expanded(0))
-
 if(present(chars))then
    right=chars
 else
@@ -470,7 +467,6 @@ if(.not.allocated(mode))then  ! set substitution mode
    mode='color' ! 'color'|'raw'|'plain'
    call vt102()
 endif
-
 do i=1,size(string)
    if(mode.eq.'color')then
       len_local2=len_trim(attr_scalar(string(i)))
@@ -503,7 +499,6 @@ subroutine vt102()
 
    call wipe_dictionary()
    ! insert and replace entries
-
    call attr_update('bold',bold)
    call attr_update('/bold',unbold)
    call attr_update('bo',bold)
@@ -512,33 +507,27 @@ subroutine vt102()
    call attr_update('/livid',unbold)
    call attr_update('li',bold)
    call attr_update('/li',unbold)
-
    call attr_update('italic',italic)
    call attr_update('/italic',unitalic)
    call attr_update('it',italic)
    call attr_update('/it',unitalic)
-
    call attr_update('inverse',inverse)
    call attr_update('/inverse',uninverse)
    call attr_update('in',inverse)
    call attr_update('/in',uninverse)
-
    call attr_update('underline',underline)
    call attr_update('/underline',ununderline)
    call attr_update('un',underline)
    call attr_update('/un',ununderline)
    call attr_update('ul',underline)
    call attr_update('/ul',ununderline)
-
    call attr_update('attr',ESCAPE)
    call attr_update('escape',ESCAPE)
-
    call attr_update('clear',clear)
    call attr_update('reset',reset)
    call attr_update('bell',BELL)
    call attr_update('gt','>')
    call attr_update('lt','<')
-
    ! foreground colors
    call attr_update('r',fg_red)
        call attr_update('/r',fg_default)
@@ -576,7 +565,6 @@ subroutine vt102()
        call attr_update('/x',fg_default)
        call attr_update('black',fg_ebony)
        call attr_update('/black',fg_default)
-
    ! background colors
    call attr_update('R',bg_red)
        call attr_update('/R',bg_default)
@@ -614,11 +602,9 @@ subroutine vt102()
        call attr_update('/X',bg_default)
        call attr_update('BLACK',bg_ebony)
        call attr_update('/BLACK',bg_default)
-
    call attr_update('ERROR',fg_red//bold//bg_ebony//'error:'//bg_default//fg_default,'ERROR:')
    call attr_update('WARNING',fg_magenta//bold//bg_ebony//'warning:'//bg_default//fg_default,'WARNING:')
    call attr_update('INFO',fg_yellow//bold//bg_ebony//'info:'//bg_default//fg_default,'INFO:')
-
 end subroutine vt102
 !>
 !! !>
@@ -734,7 +720,6 @@ end subroutine wipe_dictionary
 !!
 !!##SYNOPSIS
 !!
-!!
 !!    subroutine attr_update(key,val)
 !!
 !!     character(len=*),intent(in)           :: key
@@ -771,42 +756,33 @@ end subroutine wipe_dictionary
 !!
 !!##EXAMPLE
 !!
-!!
 !!    Sample program
 !!
 !!      program demo_update
 !!      use M_attr, only : attr, attr_update
-!!         write(*,'(a)') attr('<clear>TEST CUSTOMIZED:')
-!!
+!!         write(*,'(a)') attr('<clear>TEST CUSTOMIZATIONS:')
 !!         ! add custom keywords
 !!         call attr_update('blink',char(27)//'[5m')
 !!         call attr_update('/blink',char(27)//'[38m')
-!!
 !!         write(*,*)
 !!         write(*,'(a)') attr('<blink>Items for Friday</blink>')
-!!
 !!         call attr_update('ouch',attr( &
 !!         ' <R><bo><w>BIG mistake!</R></w> '))
 !!         write(*,*)
 !!         write(*,'(a)') attr('<ouch> Did not see that coming.')
-!!
 !!         write(*,*)
 !!         write(*,'(a)') attr( &
 !!         'ORIGINALLY: <r>Apple</r>, <b>Sky</b>, <g>Grass</g>')
-!!
 !!         ! delete
 !!         call attr_update('r')
 !!         call attr_update('/r')
-!!
 !!         ! replace (or create)
 !!         call attr_update('b','<<<<')
 !!         call attr_update('/b','>>>>')
 !!         write(*,*)
 !!         write(*,'(a)') attr( &
 !!         'CUSTOMIZED: <r>Apple</r>, <b>Sky</b>, <g>Grass</g>')
-!!
 !!      end program demo_update
-!!
 !!
 !!##AUTHOR
 !!    John S. Urban, 2020
@@ -898,7 +874,6 @@ integer                                 :: error
 
    LOOP: block
    do i=1,maxtry
-
       if(value.eq.list(PLACE))then
          exit LOOP
       else if(value.gt.list(place))then
@@ -906,7 +881,6 @@ integer                                 :: error
       else
          imin=place+1
       endif
-
       if(imin.gt.imax)then
          place=-imin
          if(iabs(place).gt.arraysize)then ! ran off end of list. Where new value should go or an unsorted input array'
@@ -914,15 +888,12 @@ integer                                 :: error
          endif
          exit LOOP
       endif
-
       place=(imax+imin)/2
-
       if(place.gt.arraysize.or.place.le.0)then
          message='*locate* error: search is out of bounds of list. Probably an unsorted input array'
          error=-1
          exit LOOP
       endif
-
    enddo
    message='*locate* exceeded allowed tries. Probably an unsorted input array'
    endblock LOOP
@@ -980,21 +951,17 @@ integer                      :: end
 end subroutine replace
 
 subroutine insert(list,value,place)
-
 character(len=*),intent(in)  :: value
 character(len=:),allocatable :: list(:)
 character(len=:),allocatable :: kludge(:)
 integer,intent(in)           :: place
 integer                      :: ii
 integer                      :: end
-
    if(.not.allocated(list))then
       list=[character(len=max(len_trim(value),2)) :: ]
    endif
-
    ii=max(len_trim(value),len(list),2)
    end=size(list)
-
    if(end.eq.0)then                                          ! empty array
       list=[character(len=ii) :: value ]
    elseif(place.eq.1)then                                    ! put in front of array
@@ -1009,7 +976,6 @@ integer                      :: end
    else                                                      ! index out of range
       write(stderr,*)'*insert* error: index out of range. end=',end,' index=',place,' value=',value
    endif
-
 end subroutine insert
 
 end module M_attr

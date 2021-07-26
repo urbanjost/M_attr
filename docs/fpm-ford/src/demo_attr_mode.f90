@@ -1,27 +1,29 @@
            program demo_attr_mode
            use M_attr, only : attr, attr_mode
            implicit none
-           character(len=1024) :: line
-           real :: value
+           character(len=:),allocatable :: lines(:)
+           character(len=:),allocatable :: outlines(:)
+           integer :: i
+              lines=[character(len=110):: &
+              '<B><y>',&
+              '<B><y>  Suffice it to say that <W><e>black</e></W><B><y>&
+              & and <E><w>white</w></E><B><y> are also colors',&
+              '<B><y>  for their simultaneous contrast is as striking as that ',&
+              '<B><y>  of <R><g>green</g></R><B><y> and <G><r>red</r></G><B><y>,&
+              & for instance. --- <bo>Vincent van Gogh',&
+              '<B><y>',&
+              ' ']
 
-             value=3.4567
-             if( (value>0.0) .and. (value<100.0))then
-               write(line,fmt='("&
-              &<w><G>GREAT</G></w>: The value <Y><b>",f8.4,"</b></Y> is in range &
-              &")')value
-             else
-               write(line,fmt='("&
-              &<R><e>ERROR</e></R>:The new value <Y><b>",g0,"</b></Y> is out of range&
-              & ")')value
-             endif
+              outlines=attr(lines,chars=57)
+              write(*,'(a)')(trim(outlines(i)),i=1,size(outlines))
 
-             write(*,'(a)')attr(trim(line))
+              call attr_mode(manner='plain') ! write as plain text
+              write(*,'(a)')attr(lines)
+              call attr_mode(manner='raw')   ! write as-is
+              write(*,'(a)')attr(lines)
 
-             call attr_mode(manner='plain') ! write as plain text
-             write(*,'(a)')attr(trim(line))
-             call attr_mode(manner='raw')   ! write as-is
-             write(*,'(a)')attr(trim(line))
-             call attr_mode(manner='ansi')  ! return to default mode
-             write(*,'(a)')attr(trim(line))
+              call attr_mode(manner='ansi')  ! return to default mode
+              outlines=attr(lines,chars=80)
+              write(*,'(a)')(trim(outlines(i)),i=1,size(outlines))
 
-              end program demo_attr_mode
+           end program demo_attr_mode
