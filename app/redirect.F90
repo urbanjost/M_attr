@@ -23,15 +23,18 @@ character(len=*),parameter      :: numbers='("<B><w><bo>   ",*("(",g0.8,",",g0.8
       ! clear screen, set attributes and print messages
       call text("<reset><clear>")
       call text("For the quadratic equation <m>A</m><g>*x**2 +<m>B</m><g>*x + <m>C</m> ")
-      write(*,'(*(a))',advance='no') &
+      write(stdout,'(*(a))',advance='no') &
       & attr('<B><w><bo>'//repeat('_',78)//'  '), &
       & char(13),&
       & attr('<B><g><bo>enter coefficients <m>A,B,C</m><g>:<y><gt><ul>',&
       & reset=.false.)
-      read(*,*,iostat=ios,iomsg=message)a,b,c
-      write(*,'(a)',advance='no')attr('<reset>')
+      read(stdin,*,iostat=ios,iomsg=message)a,b,c
+      write(stdout,'(a)',advance='no')attr('<reset>')
       if(ios.ne.0)then
-         write(*,'(*(g0))')ios,' ',trim(message)
+         write(stdout,*)
+         write(stdout,'(*(g0))')ios,' ',trim(message)
+         rewind(unit=stdin,iostat=ios)
+         backspace(unit=stdin,iostat=ios)
       else
          ! Given the equation "A*X**2 + B*X + C = 0"
          ! Use the quadratic formula to determine the root values of the equation.
@@ -89,17 +92,17 @@ character(len=*),parameter      :: numbers='("<B><w><bo>   ",*("(",g0.8,",",g0.8
          call text(buffer)
          call text()
       endif
-      write(*,'(*(g0))',advance='no')attr('<B><e>press <g>return</g><e> to continue, "<g>q</g><e>" to quit:',chars=79)
-      read(*,advance='yes',iostat=ios,fmt='(a)',iomsg=message)paws
+      write(stdout,'(*(g0))',advance='no')attr('<B><e>press <g>return</g><e> to continue, "<g>q</g><e>" to quit:',chars=79)
+      read(stdin,advance='yes',iostat=ios,fmt='(a)',iomsg=message)paws
       if(paws.ne.'')exit INFINITE
    enddo INFINITE
 contains
 subroutine text(string)
 character(len=*),intent(in),optional :: string
    if(present(string))then
-      write(*,'(*(g0))') attr('<B><g><bo>'//string,chars=80)
+      write(stdout,'(*(g0))') attr('<B><g><bo>'//string,chars=80)
    else
-      write(*,'(*(g0))') attr('<B><g><bo>',chars=80)
+      write(stdout,'(*(g0))') attr('<B><g><bo>',chars=80)
    endif
 end subroutine text
 !>  call compiler-specific ISATTY() function or return .FALSE.

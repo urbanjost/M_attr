@@ -147,9 +147,41 @@ character(len=:),allocatable,save :: mode
 
 ! mnemonics
 character(len=*),parameter  :: NL=new_line('a')                     ! New line character.
-character(len=*),parameter  :: ESCAPE=achar(27)                     ! "\" character.
+! DECIMAL
+! *-------*-------*-------*-------*-------*-------*-------*-------*
+! | 00 nul| 01 soh| 02 stx| 03 etx| 04 eot| 05 enq| 06 ack| 07 bel|
+! | 08 bs | 09 ht | 10 nl | 11 vt | 12 np | 13 cr | 14 so | 15 si |
+! | 16 dle| 17 dc1| 18 dc2| 19 dc3| 20 dc4| 21 nak| 22 syn| 23 etb|
+! | 24 can| 25 em | 26 sub| 27 esc| 28 fs | 29 gs | 30 rs | 31 us |
+! | 32 sp | 33  ! | 34  " | 35  # | 36  $ | 37  % | 38  & | 39  ' |
+! | 40  ( | 41  ) | 42  * | 43  + | 44  , | 45  - | 46  . | 47  / |
+! | 48  0 | 49  1 | 50  2 | 51  3 | 52  4 | 53  5 | 54  6 | 55  7 |
+! | 56  8 | 57  9 | 58  : | 59  ; | 60  < | 61  = | 62  > | 63  ? |
+! | 64  @ | 65  A | 66  B | 67  C | 68  D | 69  E | 70  F | 71  G |
+! | 72  H | 73  I | 74  J | 75  K | 76  L | 77  M | 78  N | 79  O |
+! | 80  P | 81  Q | 82  R | 83  S | 84  T | 85  U | 86  V | 87  W |
+! | 88  X | 89  Y | 90  Z | 91  [ | 92  \ | 93  ] | 94  ^ | 95  _ |
+! | 96  ` | 97  a | 98  b | 99  c |100  d |101  e |102  f |103  g |
+! |104  h |105  i |106  j |107  k |108  l |109  m |110  n |111  o |
+! |112  p |113  q |114  r |115  s |116  t |117  u |118  v |119  w |
+! |120  x |121  y |122  z |123  { |124  | |125  } |126  ~ |127 del|
+! *-------*-------*-------*-------*-------*-------*-------*-------*
+character(len=*),parameter  :: nul=achar(0)
+character(len=*),parameter  :: bel =achar(7)   ! ^G beeps;
+character(len=*),parameter  :: bs =achar(8)    ! ^H backspaces one column (but not past the beginning of the line);
+character(len=*),parameter  :: ht =achar(9)    ! ^I goes to next tab stop or to the end of the line if there is no earlier tab stop
+character(len=*),parameter  :: lf =achar(10)   ! ^J
+character(len=*),parameter  :: vt =achar(11)   ! ^K
+character(len=*),parameter  :: ff =achar(12)   ! ^L all give a linefeed, and if LF/NL (new-line mode) is set also a carriage return
+character(len=*),parameter  :: cr =achar(13)   ! ^M gives a carriage return;
+character(len=*),parameter  :: so =achar(14)   ! ^N activates the G1 character set;
+character(len=*),parameter  :: si =achar(15)   ! ^O activates the G0 character set;
+character(len=*),parameter  :: can =achar(24)  ! ^X interrupt escape sequences;
+character(len=*),parameter  :: sub=achar(26)   ! ^Z interrupt escape sequences;
+character(len=*),parameter  :: esc =achar(27)  ! ^[ starts an escape sequence;
+character(len=*),parameter  :: del =achar(127) ! is ignored;
 ! codes
-character(len=*),parameter  :: CODE_START=ESCAPE//'['               ! Start ANSI code, "\[".
+character(len=*),parameter  :: CODE_START=esc//'['               ! Start ANSI code, "\[".
 character(len=*),parameter  :: CODE_END='m'                         ! End ANSI code, "m".
 character(len=*),parameter  :: CODE_RESET=CODE_START//'0'//CODE_END ! Clear all styles, "\[0m".
 
@@ -264,18 +296,45 @@ contains
 !!        y,         yellow,    Y,  YELLOW
 !!        e,         ebony,     E,  EBONY
 !!        w,         white,     W,  WHITE
+!!
 !!      attributes:
 !!        it,        italic
 !!        bo,        bold
 !!        un,        underline
-!!       other:
+!!
+!!      basic control characters:
+!!       nul
+!!       bel  (0x07, ^G) beeps;
+!!       bs   (0x08, ^H) backspaces one column (but not past the beginning of
+!!                       the line);
+!!       ht   (0x09, ^I) goes to the next tab stop or to the end of the line if
+!!                       there is no earlier tab stop;
+!!       lf   (0x0A, ^J),
+!!       vt   (0x0B, ^K)
+!!       ff   (0x0C, ^L) all give a linefeed, and if LF/NL (new-line mode) is
+!!                       set also a carriage return
+!!       cr   (0x0D, ^M) gives a carriage return;
+!!       so   (0x0E, ^N) activates the G1 character set;
+!!       si   (0x0F, ^O) activates the G0 character set;
+!!       can  (0x18, ^X) and SUB (0x1A, ^Z) interrupt escape sequences;
+!!       sub
+!!       esc  (0x1B, ^[) starts an escape sequence;
+!!       del  (0x7F) is ignored;
+!!
+!!      other:
 !!        clear
-!!        escape
 !!        default
 !!        reset
 !!        gt
 !!        lt
+!!        save,DECSC     Save  current state (cursor coordinates, attributes,
+!!                       character sets pointed at by G0, G1).
+!!        restore,DECRC  Restore state most recently saved by ESC 7.
+!!        CSI            "Control Sequence Introducer"(0x9B) is equivalent to
+!!                       "ESC [".
+!!
 !!      dual-value (one for color, one for mono):
+!!
 !!        write(*,*)attr('<ERROR>an error message')
 !!        write(*,*)attr('<WARNING>a warning message')
 !!        write(*,*)attr('<INFO>an informational message')
@@ -428,7 +487,7 @@ do
    end select
    if(i >= maxlen+1)exit
 enddo
-if( (index(expanded,escape).ne.0).and.(clear_at_end))then
+if( (index(expanded,esc).ne.0).and.(clear_at_end))then
    if((mode.ne.'raw').and.(mode.ne.'plain'))then
       expanded=expanded//CODE_RESET                                   ! Clear all styles
    endif
@@ -521,13 +580,36 @@ subroutine vt102()
    call attr_update('/un',ununderline)
    call attr_update('ul',underline)
    call attr_update('/ul',ununderline)
-   call attr_update('attr',ESCAPE)
-   call attr_update('escape',ESCAPE)
+
+   call attr_update('bell',BELL)
+   call attr_update('nul', nul )
+   call attr_update('bel', bel )
+   call attr_update('bs', bs )
+   call attr_update('ht', ht )
+   call attr_update('lf', lf )
+   call attr_update('vt', vt )
+   call attr_update('ff', ff )
+   call attr_update('cr', cr )
+   call attr_update('so', so )
+   call attr_update('si', si )
+   call attr_update('can', can )
+   call attr_update('sub', sub )
+   call attr_update('esc', esc )
+   call attr_update('escape',esc)
+   call attr_update('del', del )
+
+   call attr_update('save',esc//'7')
+   call attr_update('DECSC',esc//'7')
+   call attr_update('restore',esc//'8')
+   call attr_update('DECRC',esc//'8')
+   call attr_update('CSI',esc//'[')
+
    call attr_update('clear',clear)
    call attr_update('reset',reset)
-   call attr_update('bell',BELL)
+
    call attr_update('gt','>')
    call attr_update('lt','<')
+
    ! foreground colors
    call attr_update('r',fg_red)
        call attr_update('/r',fg_default)
@@ -565,6 +647,7 @@ subroutine vt102()
        call attr_update('/x',fg_default)
        call attr_update('black',fg_ebony)
        call attr_update('/black',fg_default)
+
    ! background colors
    call attr_update('R',bg_red)
        call attr_update('/R',bg_default)
@@ -602,9 +685,12 @@ subroutine vt102()
        call attr_update('/X',bg_default)
        call attr_update('BLACK',bg_ebony)
        call attr_update('/BLACK',bg_default)
+
+   ! compound
    call attr_update('ERROR',fg_red//bold//bg_ebony//'error:'//bg_default//fg_default,'ERROR:')
    call attr_update('WARNING',fg_magenta//bold//bg_ebony//'warning:'//bg_default//fg_default,'WARNING:')
    call attr_update('INFO',fg_yellow//bold//bg_ebony//'info:'//bg_default//fg_default,'INFO:')
+
 end subroutine vt102
 !>
 !! !>
