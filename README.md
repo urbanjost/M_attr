@@ -60,7 +60,8 @@ more forat - archive files of man(1) pages that can be installed on ULS
 
 ## DOWNLOAD 
 
-### gmake ![gmake](docs/images/heckert_gnu.transp.small.png)
+### gmake ![gmake](docs/images/gnu.gif)
+
    ```bash
        git clone https://github.com/urbanjost/M_attr.git
        cd M_attr/src
