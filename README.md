@@ -23,6 +23,14 @@
    "\<attribute\> My regular text \</attribute\>" and the "attribute"
    and "/attribute" names will be replaced with ANSI escape sequences or
    user-defined strings associated with those keywords.
+```fortran
+   program demo_M_attr
+   use M_attr, only : attr
+      print *, attr('<GREEN><bold><white> Hello World!</white></bold></GREEN><reset>')
+      ! or
+      print *, attr('<G><bo><w> Hello World!')
+   end program demo_M_attr
+```
 
 ## USER DOCUMENTATION
 
@@ -86,18 +94,18 @@ The included demo programs provide templates for the most common usage:
 
 - [demo6](test/dump.f90)    dump the dictionary. Intended for debugging but might be generally useful.
 
-- [demo7](test/functional.f90)    use attr(3f) instead of attr(3f) for a more functionally-oriented programming interface
+- [demo7](test/functional.f90)  use attr(3f) instead of attr(3f) for a more functionally-oriented programming interface
 
----
-   a simple filter program that strips raw mode output back to
-   [plain text](app/plain.f90)
----
-   or another displays it to a screen [in color](app/light.f90) (or displays command line arguments). So you can read
-   in a file generated in "raw" mode and display it in color, or use it for testing commands or for adding color from
-   scripts:
+- [plain text](app/plain.f90)   a simple filter program that strips "raw mode" output back to plain text
 
+- [in color](app/light.f90) a filter program that displays a "raw mode" input file in color
+                            (or displays command line arguments). So you
+                            can read in a file generated in "raw" mode
+                            and display it in color, or use it for testing
+                            commands or for adding color from scripts:
+```text
         light "<clear><WHITE><blue><bold> WARNING: <reset> that would not be prudent"
----
+```
 
 ### A BASIC INTRODUCTORY PROGRAM
 
