@@ -50,7 +50,7 @@
    [_book_](https://urbanjost.github.io/M_attr/BOOK_M_attr.html) form that can easily be printed
    as a single document.
 
-## real man-pages
+## real man-pages ![gmake](docs/images/manpages.gif)
 These documents are contained in the docs/ directory along with one
 more format - archive files of man(1) pages that can be installed on ULS
 (Unix-Like Systems):
