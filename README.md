@@ -47,7 +47,7 @@
 
  - Another view of these documents (that uses javascript to combine all
    the HTML descriptions of the manpages) is in a
-   [book_](https://urbanjost.github.io/M_attr/BOOK_M_attr.html) form that can easily be printed
+   [_book_](https://urbanjost.github.io/M_attr/BOOK_M_attr.html) form that can easily be printed
    as a single document.
 
 ## real man-pages
@@ -158,15 +158,17 @@ or terminal emulator:
 * [**Rosetta Code examples**](https://rosettacode.org/wiki/Terminal_control/Coloured_text) for how other languages do color.
   I find the Ncurses, Fortran, bash and C++ examples particularly interesting.
 * [**Wikipedia**](https://en.wikipedia.org/wiki/ANSI_escape_code) a description of the basic ANSI escape sequences.
-* [**FACE**](https://github.com/szaghi/FACE) A Fortran library for generating ANSI escape sequences
-* [**foul**](http://foul.sourceforge.net/) A library for controlling the attributes of output text using Fortran
 * [**Fortran Standard Library project**](https://github.com/fortran-lang/stdlib/issues/229) discussion about
   adding ANSI control sequences to the Fortran Standard Library project.
 * [terminal colors](http://www.pixelbeat.org/docs/terminal_colours/)
 
 ### OF INTEREST
 * [ansi2html](https://github.com/ralphbean/ansi2html) ANSI escape codes to HTML from programs and as a bash shell
+
+### ALTERNATIVES
 * [M_ncurses](https://github.com/urbanjost/M_ncurses) A Fortran interface to Ncurses(3c)
+* [**FACE**](https://github.com/szaghi/FACE) A Fortran library for generating ANSI escape sequences
+* [**foul**](http://foul.sourceforge.net/) A library for controlling the attributes of output text using Fortran
 
 ### OTHER LANGUAGES
 
