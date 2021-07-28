@@ -6,10 +6,8 @@ use M_attr, only : attr
     integer          :: z
     character(len=1) :: p
     integer          :: fg, bg
-    integer          :: pair
     real             :: r
     real             :: c
-    integer          :: ierr
     character(len=10),parameter :: colors(8)=[character(len=10) :: 'RED','GREEN','BLUE','CYAN','MAGENTA','YELLOW','BLACK','WHITE']
     fg = 8
     bg = 7

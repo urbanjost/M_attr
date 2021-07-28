@@ -46,7 +46,7 @@
 ### All man-pages amalgamated as HTML
 
  - Another view of these documents (that uses javascript to combine all
-   the HTML descriptions of the manpages) is in a
+   the HTML descriptions of the man-pages) is in a
    [_book_](https://urbanjost.github.io/M_attr/BOOK_M_attr.html) form that can easily be printed
    as a single document.
 

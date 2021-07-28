@@ -21,11 +21,11 @@
            character(len=:),allocatable :: array(:)
              call attr_mode(manner=label)
 
-             array=[character(len=60) ::    &
-              'TEST MANNER='//label,                      &
-              '<r>RED</r>,<g>GREEN</g>,<b>BLUE</b>',      &
-              '<c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</y>', &
-              '<w>WHITE</w> and <e>EBONY</e>']
+             array=[character(len=60) ::                    &
+              & 'TEST MANNER='//label,                      &
+              & '<r>RED</r>,<g>GREEN</g>,<b>BLUE</b>',      &
+              & '<c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</y>', &
+              & '<w>WHITE</w> and <e>EBONY</e>']
              write(*,'(a)') attr(array)
 
              write(*,'(a)') attr('Adding <bo>bold</bo>')

@@ -16,7 +16,7 @@
    devices. A lot of the vendors that already had a large market share
    did not really want to standardize as it allowed newcomers into their
    markets; but standards did emerge. However, the computer vendors for
-   the most part were ooncentrating on their computers -- not printers
+   the most part were concentrating on their computers -- not printers
    and terminals (That was lucky for the likes of Xerox and HP who made
    a lot of money from printing, and Lear Zeigler and Tektronix who did
    pretty well with terminals and graphics displays).
@@ -67,7 +67,7 @@
    Code which only supported uppercase, ASCII 6/12 which required two
    "characters" to represent a lowercase letter, ...). This was long
    before UNICODE, so there were not many character glyphs, but this
-   character set was pretty much now ubiquitious.
+   character set was pretty much now ubiquitous.
 
    Well, keyboards were not even standardized early-on, so you might
    not have a tilde or pound key to hit though!
