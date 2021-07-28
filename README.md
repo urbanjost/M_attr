@@ -117,7 +117,7 @@ The included demo programs provide templates for the most common usage:
 
 ### A BASIC INTRODUCTORY PROGRAM
 
-This short program will display red and yellow text on an ANSI-compatible color terminal
+This short program will display colored text on an ANSI-compatible color terminal
 or terminal emulator:
 
 ```fortran
