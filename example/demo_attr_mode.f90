@@ -19,10 +19,11 @@
 
               call attr_mode(manner='plain') ! write as plain text
               write(*,'(a)')attr(lines)
+
               call attr_mode(manner='raw')   ! write as-is
               write(*,'(a)')attr(lines)
 
-              call attr_mode(manner='ansi')  ! return to default mode
+              call attr_mode(manner='color')  ! return to default mode
               outlines=attr(lines,chars=80)
               write(*,'(a)')(trim(outlines(i)),i=1,size(outlines))
 

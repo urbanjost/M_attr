@@ -51,8 +51,8 @@
    as a single document.
 
 ## real man-pages
-Tthese documents are contained in the docs/ directory along with one
-more forat - archive files of man(1) pages that can be installed on ULS
+These documents are contained in the docs/ directory along with one
+more format - archive files of man(1) pages that can be installed on ULS
 (Unix-Like Systems):
 
    + [manpages.zip](https://urbanjost.github.io/M_attr/manpages.zip) 
@@ -93,17 +93,17 @@ more forat - archive files of man(1) pages that can be installed on ULS
 ## EXAMPLE PROGRAMS
 The included demo programs provide templates for the most common usage:
 
-- [demo1](test/default.f90) simple demo setting color
-- [demo5](test/custom.f90)  how to add, delete, and replace attribute strings
-- [demo9](test/mixed.f90)   multiple modes and mixed attributes
+- [default](test/default.f90) - simple demo setting color
+- [custom](test/custom.f90) - how to add, delete, and replace attribute strings
+- [mixed](test/mixed.f90) - multiple modes and mixed attributes
 
-- [demo6](test/dump.f90)    dump the dictionary. Intended for debugging but might be generally useful.
+- [dump](test/dump.f90) - dump the dictionary. Intended for debugging but might be generally useful.
 
-- [demo7](test/functional.f90)  use attr(3f) instead of attr(3f) for a more functionally-oriented programming interface
+- [plain text](app/plain.f90) - a simple filter program that strips "raw mode" output back to plain text
 
-- [plain text](app/plain.f90)   a simple filter program that strips "raw mode" output back to plain text
+- [message](test/message.f90) - using pre-defined message prefixes of various types
 
-- [in color](app/light.f90) a filter program that displays a "raw mode" input file in color
+- [color](app/light.f90) - a filter program that displays a "raw mode" input file in color
                             (or displays command line arguments). So you
                             can read in a file generated in "raw" mode
                             and display it in color, or use it for testing
