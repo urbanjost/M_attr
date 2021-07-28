@@ -58,7 +58,9 @@ more forat - archive files of man(1) pages that can be installed on ULS
    + [manpages.zip](https://urbanjost.github.io/M_attr/manpages.zip) 
    + [manpages.tgz](https://urbanjost.github.io/M_attr/manpages.tgz) 
 
-## DOWNLOAD
+## DOWNLOAD 
+
+### gmake ![gmake](docs/images/heckert_gnu.transp.small.png)
    ```bash
        git clone https://github.com/urbanjost/M_attr.git
        cd M_attr/src
@@ -69,7 +71,7 @@ more forat - archive files of man(1) pages that can be installed on ULS
    ```
    This will compile the M_attr module and example programs.
 
-## SUPPORTS FPM ![fpm](docs/images/fpm_logo.gif)
+### fpm ![fpm](docs/images/fpm_logo.gif)
 
    Alternatively, download the github repository and build it with
    fpm ( as described at [Fortran Package Manager](https://github.com/fortran-lang/fpm) )
