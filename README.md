@@ -37,7 +37,7 @@
 ### Individual man-pages
 
  - An [index](https://urbanjost.github.io/M_attr/man3.html) to HTML versions
-   of the manpages describes all the routines. Alternatively, they may be accessed indiviually:
+   of the manpages describes all the routines. Alternatively, they may be accessed individually:
    - [M_attr](https://urbanjost.github.io/M_attr/M_attr.3M_attr.html)  -- An overview of the M_attr module
    - [attr](https://urbanjost.github.io/M_attr/attr.3M_attr.html)  -- the main function
    - [attr_mode](https://urbanjost.github.io/M_attr/attr_mode.3M_attr.html)  -- setting processed or plain output mode
