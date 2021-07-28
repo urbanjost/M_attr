@@ -1,0 +1,173 @@
+\hypertarget{interfaceattr}{}\doxysection{attr Interface Reference}
+\label{interfaceattr}\index{attr@{attr}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+character(len=\+:) function, allocatable \mbox{\hyperlink{interfaceattr_a75e08908b27fc339b9247b1830980542}{attr\+\_\+scalar}} (string, clear\+\_\+at\+\_\+end)
+\item 
+character(len=\+:) function, dimension(\+:), allocatable \mbox{\hyperlink{interfaceattr_a06e7f1d791da826613f323c68d6c0d15}{attr\+\_\+matrix}} (string, clear\+\_\+at\+\_\+end, chars)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\hypertarget{interfaceattr_autotoc_md0}{}\doxysubsubsection{N\+A\+ME}\label{interfaceattr_autotoc_md0}
+M\+\_\+attr(3f) -\/ \mbox{[}M\+\_\+attr\mbox{]} control text attributes on terminals (L\+I\+C\+E\+N\+SE\+:M\+IT)\hypertarget{interfaceattr_autotoc_md1}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{interfaceattr_autotoc_md1}
+\begin{DoxyVerb}  use M_attr, only : attr, attr_mode, attr_update
+\end{DoxyVerb}
+\hypertarget{interfaceattr_autotoc_md2}{}\doxysubsubsection{M\+A\+J\+O\+R F\+E\+A\+T\+U\+R\+ES}\label{interfaceattr_autotoc_md2}
+o Add text attributes with an H\+T\+M\+L-\/like syntax using \mbox{\hyperlink{interfaceattr}{attr(3f)}}. o suppress the escape sequence output with attr\+\_\+mode(3f). o customize what strings are produced using attr\+\_\+update(3f).\hypertarget{interfaceattr_autotoc_md3}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{interfaceattr_autotoc_md3}
+M\+\_\+attr(3f) is a Fortran module that writes common A\+N\+SI escape sequences which control terminal attributes like text color. It is designed to allow the sequences to be suppressed and for the user program to completely customize it -- the user can add, delete and replace the sequences associated with a keyword without changing the code.
+
+Attributes are specified by writing lines with H\+T\+M\+L-\/like structure.
+
+The advantage of the approach of replacing in-\/band escape sequences with formatting directives contained on each line is that it is easy to turn off when running batch, but more importantly your program can be run in \char`\"{}raw\char`\"{} mode and write a clean text file with the directives in it that can then be read back in by a simple filter program that strips it back to plain text( see app/plain.\+f90), or displays it to a screen in color(see app/light.\+f90) or perhaps converts it to another format.
+
+By making each line self-\/contained by default this can still be done with any arbitrarily selected group of lines from the file.
+
+So in addition to printing colored lines to your screen this module makes it trivial to read specially-\/formatted data from a file like a message catalog (perhaps with various versions in different languages) and colorize it or display it as plain text using the included \mbox{\hyperlink{interfaceattr}{attr(3f)}} procedure, for example.\hypertarget{interfaceattr_autotoc_md4}{}\doxysubsubsection{L\+I\+M\+I\+T\+A\+T\+I\+O\+NS}\label{interfaceattr_autotoc_md4}
+o colors are not nestable. o keywords are case-\/sensitive, o A\+N\+SI escape sequences are not universally supported by all terminal emulators; and normally should be suppressed when not going to a tty device. Therefore, you should use M\+\_\+system\+::system\+\_\+istty(3f) or the common Fortran extension I\+S\+A\+T\+T\+Y() to set the default to \char`\"{}plain\char`\"{} instead of \char`\"{}color\char`\"{} when the output file is not a conforming terminal. On basic M\+S\+Windows console windows, it is best to use Windows 10+ and/or the Linux mode; you may have to enable A\+N\+SI escape sequence mode on M\+S\+Windows. It does work as-\/is with Cyg\+Win and Min\+GW and Putty windows and mintty(1) as tested.\hypertarget{interfaceattr_autotoc_md5}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{interfaceattr_autotoc_md5}
+\begin{DoxyVerb}Sample program
+
+ program demo_M_attr
+ use M_attr, only : attr, attr_mode
+ implicit none
+ character(len=256) :: line
+ character(len=*),parameter :: f='( &
+ &"   <bo><w><G> GREAT: </G></w>&
+ &The new value <Y><b>",f8.4,"</b></Y> is in range"&
+ &)'
+ real :: value
+    write(*,'(a)')&
+    &attr('   <r><W><bo> ERROR: </W>red text on a white background</y>')
+
+    value=3.4567
+    write(line,fmt=f) value
+    write(*,'(a)')attr(trim(line))
+
+    ! write same string as plain text
+    call attr_mode(manner='plain')
+    write(*,'(a)')attr(trim(line))
+
+ end program demo_M_attr
+\end{DoxyVerb}
+\hypertarget{interfaceattr_autotoc_md6}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{interfaceattr_autotoc_md6}
+John S. Urban, 2020\hypertarget{interfaceattr_autotoc_md7}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{interfaceattr_autotoc_md7}
+M\+IT\hypertarget{interfaceattr_autotoc_md8}{}\doxysubsubsection{S\+E\+E A\+L\+SO}\label{interfaceattr_autotoc_md8}
+\mbox{\hyperlink{interfaceattr}{attr(3f)}}, attr\+\_\+mode(3f), attr\+\_\+update(3f)
+
+Related information\+:
+
+terminfo(3c), termlib(3c), tput(1), reset(1), clear(1), console\+\_\+codes(4), E\+C\+M\+A-\/48, \href{https://en.wikipedia.org/wiki/ANSI_escape_code}{\texttt{ https\+://en.\+wikipedia.\+org/wiki/\+A\+N\+S\+I\+\_\+escape\+\_\+code}} 
+
+\doxysubsection{Member Function/\+Subroutine Documentation}
+\mbox{\Hypertarget{interfaceattr_a06e7f1d791da826613f323c68d6c0d15}\label{interfaceattr_a06e7f1d791da826613f323c68d6c0d15}} 
+\index{attr@{attr}!attr\_matrix@{attr\_matrix}}
+\index{attr\_matrix@{attr\_matrix}!attr@{attr}}
+\doxysubsubsection{\texorpdfstring{attr\_matrix()}{attr\_matrix()}}
+{\footnotesize\ttfamily character(len=\+:) function, dimension(\+:), allocatable attr\+::attr\+\_\+matrix (\begin{DoxyParamCaption}\item[{character(len=$\ast$), dimension(\+:), intent(in)}]{string,  }\item[{logical, intent(in), optional}]{clear\+\_\+at\+\_\+end,  }\item[{integer, intent(in), optional}]{chars }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{interfaceattr_a75e08908b27fc339b9247b1830980542}\label{interfaceattr_a75e08908b27fc339b9247b1830980542}} 
+\index{attr@{attr}!attr\_scalar@{attr\_scalar}}
+\index{attr\_scalar@{attr\_scalar}!attr@{attr}}
+\doxysubsubsection{\texorpdfstring{attr\_scalar()}{attr\_scalar()}}
+{\footnotesize\ttfamily character(len=\+:) function, allocatable attr\+::attr\+\_\+scalar (\begin{DoxyParamCaption}\item[{character(len=$\ast$), intent(in)}]{string,  }\item[{logical, intent(in), optional}]{clear\+\_\+at\+\_\+end }\end{DoxyParamCaption})}
+
+\hypertarget{M__attr_8f90_autotoc_md9}{}\doxysubsubsection{N\+A\+ME}\label{M__attr_8f90_autotoc_md9}
+\mbox{\hyperlink{interfaceattr}{attr(3f)}} -\/ \mbox{[}M\+\_\+attr\mbox{]} substitute escape sequences for H\+T\+M\+L-\/like syntax in strings (L\+I\+C\+E\+N\+SE\+:M\+IT)\hypertarget{M__attr_8f90_autotoc_md10}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{M__attr_8f90_autotoc_md10}
+\begin{DoxyVerb}  function attr(string,clear_at_end) result (expanded)
+
+    ! scalar
+    character(len=*),intent(in) :: string
+    logical,intent(in),optional :: clear_at_end
+    character(len=:),allocatable :: expanded
+    ! or array
+    character(len=*),intent(in) :: string(:)
+    logical,intent(in),optional :: clear_at_end
+    character(len=:),allocatable :: expanded(:)
+\end{DoxyVerb}
+\hypertarget{M__attr_8f90_autotoc_md11}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{M__attr_8f90_autotoc_md11}
+Use H\+T\+M\+L-\/like syntax to add attributes to terminal output such as color on devices that recognize A\+N\+SI escape sequences.\hypertarget{M__attr_8f90_autotoc_md12}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{M__attr_8f90_autotoc_md12}
+string input string of form \begin{DoxyVerb}            "<attribute_name>string</attribute_name> ...".
+
+           where the current attributes are color names,
+           bold, italic, underline, ...
+\end{DoxyVerb}
+
+
+clear\+\_\+at\+\_\+end By default, a sequence to clear all text attributes is sent at the end of the returned text if an escape character appears in the output string. This can be turned off by setting this value to false. Each line being self-\/contained has advantages when output is filtered with commands such as grep(1). \hypertarget{M__attr_8f90_autotoc_md13}{}\doxysubsubsection{K\+E\+Y\+W\+O\+R\+DS}\label{M__attr_8f90_autotoc_md13}
+primary default keywords
+
+colors\+: r, red, R, R\+ED g, green, G, G\+R\+E\+EN b, blue, B, B\+L\+UE m, magenta, M, M\+A\+G\+E\+N\+TA c, cyan, C, C\+Y\+AN y, yellow, Y, Y\+E\+L\+L\+OW e, ebony, E, E\+B\+O\+NY w, white, W, W\+H\+I\+TE attributes\+: it, italic bo, bold un, underline other\+: clear escape default reset gt lt dual-\/value (one for color, one for mono)\+: write($\ast$,$\ast$)\textquotesingle{}$<$\+E\+R\+R\+O\+R$>$an error message\textquotesingle{} write($\ast$,$\ast$)\textquotesingle{}$<$\+W\+A\+R\+N\+I\+N\+G$>$a warning message\textquotesingle{} write($\ast$,$\ast$)\textquotesingle{}$<$\+I\+N\+F\+O$>$an informational message\textquotesingle{}
+
+By default, if the color mnemonics (ie. the keywords) are uppercase they change the background color. If lowercase, the foreground color. When preceded by a \char`\"{}/\char`\"{} character the attribute is returned to the default.
+
+The \char`\"{}default\char`\"{} keyword is typically used explicitly when clear\+\_\+at\+\_\+end=.false, and sets all text attributes to their initial defaults.\hypertarget{M__attr_8f90_autotoc_md14}{}\doxysubsubsection{L\+I\+M\+I\+T\+A\+T\+I\+O\+NS}\label{M__attr_8f90_autotoc_md14}
+o colors are not nestable, keywords are case-\/sensitive, o not all terminals obey the sequences. On Windows, it is best if you use Windows 10+ and/or the Linux mode; although it has worked with all Cyg\+Win and Min\+GW and Putty windows and mintty. o you should use \char`\"{}$<$gt$>$\char`\"{} and \char`\"{}$<$lt$>$\char`\"{} instead of \char`\"{}$>$\char`\"{} and \char`\"{}$<$\char`\"{} in a string processed by \mbox{\hyperlink{interfaceattr}{attr(3f)}} instead of in any plain text output so that the raw mode will create correct input for the \mbox{\hyperlink{interfaceattr}{attr(3f)}} function if read back in.\hypertarget{M__attr_8f90_autotoc_md15}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{M__attr_8f90_autotoc_md15}
+\begin{DoxyVerb}Sample program
+
+ program demo_esc
+ use M_attr, only : attr, attr_mode, attr_update
+    call printstuff('defaults')
+
+    call attr_mode(manner='plain')
+    call printstuff('plain:')
+
+    call printstuff('raw:')
+
+    call attr_mode(manner='color')
+    call printstuff('')
+
+    write(*,'(a)') attr('TEST ADDING A CUSTOM SEQUENCE:')
+    call attr_update('blink',char(27)//'[5m')
+    call attr_update('/blink',char(27)//'[38m')
+    write(*,'(a)') attr('<blink>Items for Friday</blink>')
+
+ contains
+ subroutine printstuff(label)
+ character(len=*),intent(in) :: label
+   call attr_mode(manner=label)
+   write(*,'(a)') attr('TEST MANNER='//label)
+   write(*,'(a)') attr('<r>RED</r>,<g>GREEN</g>,<b>BLUE</b>')
+   write(*,'(a)') attr('<c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</y>')
+   write(*,'(a)') attr('<w>WHITE</w> and <e>EBONY</e>')
+
+   write(*,'(a)') attr('Adding <bo>bold</bo>')
+   write(*,'(a)') attr('<bo><r>RED</r>,<g>GREEN</g>,<b>BLUE</b></bo>')
+   write(*,'(a)') attr('<bo><c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</y></bo>')
+   write(*,'(a)') attr('<bo><w>WHITE</w> and <e>EBONY</e></bo>')
+
+   write(*,'(a)') attr('Adding <ul>underline</ul>')
+   write(*,'(a)') attr(&
+    &'<bo><ul><r>RED</r>,<g>GREEN</g>,<b>BLUE</b></ul></bo>')
+   write(*,'(a)') attr(&
+    &'<bo><ul><c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</y></ul></bo>')
+   write(*,'(a)') attr('<bo><ul><w>WHITE</w> and <e>EBONY</e></ul></bo>')
+
+   write(*,'(a)') attr('Adding <ul>italic</ul>')
+   write(*,'(a)') attr(&
+    &'<bo><ul><it><r>RED</r>,<g>GREEN</g>,<b>BLUE</b></it></ul></bo>')
+   write(*,'(a)') attr(&
+    &'<bo><ul><it><c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</it></y></ul></bo>')
+   write(*,'(a)') attr('<bo><ul><it><w>WHITE</w> and <e>EBONY</e></ul></bo>')
+
+   write(*,'(a)') attr('Adding <in>inverse</in>')
+   write(*,'(a)') attr(&
+    &'<in><bo><ul><it><r>RED</r>,<g>GREEN</g>,&
+    &<b>BLUE</b></it></ul></bo></in>')
+   write(*,'(a)') attr(&
+    &'<in><bo><ul><it><c>CYAN</c>,<m>MAGENTA</g>,&
+    &<y>YELLOW</it></y></ul></bo></in>')
+   write(*,'(a)') attr(&
+    &'<in><bo><ul><it><w>WHITE</w> and <e>EBONY</e></ul></bo></in>')
+ end subroutine printstuff
+
+ end program demo_esc
+\end{DoxyVerb}
+\hypertarget{M__attr_8f90_autotoc_md16}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{M__attr_8f90_autotoc_md16}
+John S. Urban, 2020\hypertarget{M__attr_8f90_autotoc_md17}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{M__attr_8f90_autotoc_md17}
+M\+IT\hypertarget{M__attr_8f90_autotoc_md18}{}\doxysubsubsection{S\+E\+E A\+L\+SO}\label{M__attr_8f90_autotoc_md18}
+attr\+\_\+mode(3f), attr\+\_\+update(3f) 
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/urbanjs/venus/\+V600/github/\+M\+\_\+attr/src/\mbox{\hyperlink{M__attr_8f90}{M\+\_\+attr.\+f90}}\end{DoxyCompactItemize}

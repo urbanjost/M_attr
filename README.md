@@ -157,7 +157,7 @@ or terminal emulator:
 
 ### ford
 
-- [ford(1) output](https://urbanjost.github.io/M_attr/fpm-fordindex.html).
+- [ford(1) output](https://urbanjost.github.io/M_attr/fpm-ford/index.html).
 ---
 ### REFERENCES
 * [**Fortran Wiki example**](http://fortranwiki.org/fortran/show/ansi_colors) for an example that covers the basics
