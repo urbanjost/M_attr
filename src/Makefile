@@ -24,25 +24,25 @@ AR=ar
 ARFLAGS=rU
 RANLIB=ranlib
 
-gfortran: F90=gfortran
+gfortran: FC=gfortran
 gfortran: FFLAGS := -g -O -Wall -std=f2018 -Wextra -Wno-maybe-uninitialized -Wno-uninitialized
 gfortran: all
-	@echo built with $(F90)
+	@echo built with $(FC)
 
-nvfortran: F90=nvfortran
+nvfortran: FC=nvfortran
 nvfortran: FFLAGS := -Minform=inform -Mbackslash -traceback
 nvfortran: all
-	@echo built with $(F90)
+	@echo built with $(FC)
 
-ifort: F90=ifort
+ifort: FC=ifort
 ifort: FFLAGS := -warn all -traceback
 ifort: all
-	@echo built with $(F90)
+	@echo built with $(FC)
 
-nagfor: F90=nagfor
+nagfor: FC=nagfor
 nagfor: FFLAGS := -C all
 nagfor: all
-	@echo built with $(F90)
+	@echo built with $(FC)
 
 # name of library to build of the form lib$NAME.a
 LIBNAME=M_attr
@@ -69,7 +69,7 @@ $(LIBRARY): $(LIBOBJS)
 >   @ echo "TARGETS FOR $(LIBRARY) UP TO DATE"
 #-------------------------------------------------------------------------------
 $(PROG): $(LIBRARY)
->   -$(FC) $(LDFLAGS) $@.f90 -o $@ $(LIBS)||echo "ouch: $@.f90 "
+>   -$(FC) $(FFLAGS) $(LDFLAGS) $@.f90 -o $@ $(LIBS)||echo "ouch: $@.f90 "
 #-------------------------------------------------------------------------------
 .phony: clean
 clean:

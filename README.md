@@ -2,7 +2,7 @@
 
 ## NAME
 
-# M_attr ## name
+# M_attr 
 ### - use in-band signaling to control the text attributes, formatting, color, and other output options on ANSI video text terminals
 
 ## DESCRIPTION
@@ -16,14 +16,14 @@
 
 ## FUNCTIONAL SPECIFICATION
 
-  Attributes are specified by writing lines with HTML-like structure.
+   Attributes are specified by writing lines with HTML-like structure.
 
-  **This is how the interface works --**
+   **This is how the interface works --**
 
-  Call the attr(3f) function with strings that include syntax like
-  "\<attribute\> My regular text \</attribute\>" and the "attribute"
-  and "/attribute" names will be replaced with ANSI escape sequences or
-  user-defined strings associated with those keywords.
+   Call the attr(3f) function with strings that include syntax like
+   "\<attribute\> My regular text \</attribute\>" and the "attribute"
+   and "/attribute" names will be replaced with ANSI escape sequences or
+   user-defined strings associated with those keywords.
 
 ## USER DOCUMENTATION
 
@@ -54,18 +54,9 @@ that can be installed on ULS (Unix-Like Systems) is also included:
        git clone https://github.com/urbanjost/M_attr.git
        cd M_attr/src
        # change Makefile if not using one of the listed compilers
-     
-       # for gfortran
-       make clean
-       make F90=gfortran gfortran
-     
-       # for ifort
-       make clean
-       make F90=ifort ifort
-
-       # for nvfortran
-       make clean
-       make F90=nvfortran nvfortran
+       make clean; make gfortran    # for gfortran
+       make clean; make ifort       # for ifort 
+       make clean; make nvfortran   # for nvfortran
    ```
    This will compile the M_attr module and example programs.
 
@@ -87,7 +78,6 @@ that can be installed on ULS (Unix-Like Systems) is also included:
         M_attr        = { git = "https://github.com/urbanjost/M_attr.git" }
 ```
 
-
 ## EXAMPLE PROGRAMS
 The included demo programs provide templates for the most common usage:
 
@@ -102,7 +92,6 @@ The included demo programs provide templates for the most common usage:
 ---
    a simple filter program that strips raw mode output back to
    [plain text](app/plain.f90)
-
 ---
    or another displays it to a screen [in color](app/light.f90) (or displays command line arguments). So you can read
    in a file generated in "raw" mode and display it in color, or use it for testing commands or for adding color from
@@ -137,12 +126,9 @@ or terminal emulator:
 ```
 ![sample](docs/images/snap1.gif)
 
-
-
 ### NOTE:
    where supported the isatty(3f) function can be used to turn off the sequences when the file is
    not a tty.  isatty(3f) is an extension, but supported by GNU, Intel, PGI, ...
-
 
 ---
 ## [CHANGELOG](CHANGELOG.md)
@@ -184,5 +170,4 @@ Please provide feedback on the
 [__issues__](https://github.com/urbanjost/M_attr/issues) section
 and please star the repository if you use the module (or let me know
 why not and let others know what you did use!).
-
 -------
