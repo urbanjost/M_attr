@@ -38,10 +38,10 @@
 
  - An [index](https://urbanjost.github.io/M_attr/man3.html) to HTML versions
    of the man-pages describes all the routines. Alternatively, they may be accessed individually:
-   - [M_attr](https://urbanjost.github.io/M_attr/M_attr.3M_attr.html)  -- An overview of the M_attr module
-   - [attr](https://urbanjost.github.io/M_attr/attr.3M_attr.html)  -- the main function
-   - [attr_mode](https://urbanjost.github.io/M_attr/attr_mode.3M_attr.html)  -- setting processed or plain output mode
-   - [attr_update](https://urbanjost.github.io/M_attr/attr_update.3M_attr.html)  -- customizing
+   - [M_attr](https://urbanjost.github.io/M_attr/M_attr.3m_attr.html)  -- An overview of the M_attr module
+   - [attr](https://urbanjost.github.io/M_attr/attr.3m_attr.html)  -- the main function
+   - [attr_mode](https://urbanjost.github.io/M_attr/attr_mode.3m_attr.html)  -- setting processed or plain output mode
+   - [attr_update](https://urbanjost.github.io/M_attr/attr_update.3m_attr.html)  -- customizing
 
 ### All man-pages amalgamated as HTML
 
