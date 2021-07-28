@@ -2,8 +2,7 @@
 
 ## NAME
 
-# M_attr 
-### - use in-band signaling to control the text attributes, formatting, color, and other output options on ANSI video text terminals
+### M_attr - use in-band signaling to control the text attributes, formatting, color, and other output options on ANSI video text terminals
 
 ## DESCRIPTION
 
