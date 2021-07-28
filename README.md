@@ -54,8 +54,8 @@ Tthese documents are contained in the docs/ directory along with one
 more forat - archive files of man(1) pages that can be installed on ULS
 (Unix-Like Systems):
 
-    + [manpages.zip](https://urbanjost.github.io/M_attr/manpages.zip) 
-    + [manpages.tgz](https://urbanjost.github.io/M_attr/manpages.tgz) 
+   + [manpages.zip](https://urbanjost.github.io/M_attr/manpages.zip) 
+   + [manpages.tgz](https://urbanjost.github.io/M_attr/manpages.tgz) 
 
 ## DOWNLOAD
    ```bash
