@@ -99,9 +99,12 @@ The included demo programs provide templates for the most common usage:
 
 - [dump](test/dump.f90) - dump the dictionary. Intended for debugging but might be generally useful.
 
-- [plain text](app/plain.f90) - a simple filter program that strips "raw mode" output back to plain text
-
 - [message](test/message.f90) - using pre-defined message prefixes of various types
+
+- [redirect](app/redirect.f90) - a complete little application showing how to call ISATTY(3f) in
+                                 gfortran(3f) and ifort(3f) to automatically turn color off when output
+				 is not to a tty device.
+- [plain](app/plain.f90) - a simple filter program that strips "raw mode" output back to plain text
 
 - [color](app/light.f90) - a filter program that displays a "raw mode" input file in color
                             (or displays command line arguments). So you
