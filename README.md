@@ -1,11 +1,9 @@
-# M_attr.f90 and associated files
-
 ![sample](docs/images/snap2b.gif)
 
 ## NAME
 
-### M_attr - use in-band signaling to control the text attributes, formatting, color, and other output options on ANSI video text terminals
-
+# M_attr ## name
+### - use in-band signaling to control the text attributes, formatting, color, and other output options on ANSI video text terminals
 
 ## DESCRIPTION
 
@@ -16,22 +14,36 @@
    replace the sequences associated with a keyword without changing
    the code.
 
-   Attributes are specified by writing lines with HTML-like structure.
+## FUNCTIONAL SPECIFICATION
 
-   a simple filter program that strips raw mode output back to
-   [plain text](app/plain.f90)
+  Attributes are specified by writing lines with HTML-like structure.
 
-   or another displays it to a screen [in color](app/light.f90)
+  **This is how the interface works --**
+
+  Call the attr(3f) function with strings that include syntax like
+  "\<attribute\> My regular text \</attribute\>" and the "attribute"
+  and "/attribute" names will be replaced with ANSI escape sequences or
+  user-defined strings associated with those keywords.
 
 ## USER DOCUMENTATION
- - A single page that uses javascript to combine all the HTML descriptions
-   of the manpages is at
-   [BOOK_FORTRAN](https://urbanjost.github.io/M_attr/BOOK_M_attr.html).
+
+### Individual man-pages
 
  - An [index](https://urbanjost.github.io/M_attr/man3.html) to HTML versions
    of the manpages 
+   - [M_attr](https://urbanjost.github.io/M_attr/M_attr.3M_attr.html)  -- An overview of the M_attr module
+   - [attr](https://urbanjost.github.io/M_attr/attr.3M_attr.html)  -- the main function
+   - [attr_mode](https://urbanjost.github.io/M_attr/attr_mode.3M_attr.html)  -- setting processed or plain output mode
+   - [attr_update](https://urbanjost.github.io/M_attr/attr_update.3M_attr.html)  -- customizing
 
-in addition in the docs/ directory there is
+### All manpages amalgamated
+
+ - Another view of these documents that can be easily printed as a single
+   page (that uses javascript to combine all the HTML descriptions of the manpages) is at
+   [BOOK_FORTRAN](https://urbanjost.github.io/M_attr/BOOK_M_attr.html).
+
+These documents are contained in the docs/ directory along with archive files of man(1) pages
+that can be installed on ULS (Unix-Like Systems) is also included:
 
  - manpages in 
     + [manpages.zip](https://urbanjost.github.io/M_attr/manpages.zip) 
@@ -75,20 +87,9 @@ in addition in the docs/ directory there is
         M_attr        = { git = "https://github.com/urbanjost/M_attr.git" }
 ```
 
-## FUNCTIONAL SPECIFICATION
 
-**This is how the interface works --**
-
-* call the attr(3f) function with strings that include syntax like
-  "\<attribute\> My regular text \</attribute\>" and the "attribute"
-  and "/attribute" names will be replaced with ANSI escape sequences or
-  user-defined strings associated with those keywords.
-
-
-## DOCUMENTATION
+## EXAMPLE PROGRAMS
 The included demo programs provide templates for the most common usage:
-
-functional.f90
 
 - [demo1](test/default.f90) simple demo setting color
 - [demo5](test/custom.f90)  how to add, delete, and replace attribute strings
@@ -98,21 +99,22 @@ functional.f90
 
 - [demo7](test/functional.f90)    use attr(3f) instead of attr(3f) for a more functionally-oriented programming interface
 
-### manpages
-- [M_attr](https://urbanjost.github.io/M_attr/M_attr.3M_attr.html)  -- An overview of the M_attr module
-- [attr](https://urbanjost.github.io/M_attr/attr.3M_attr.html)  -- the main function
-- [attr_mode](https://urbanjost.github.io/M_attr/attr_mode.3M_attr.html)  -- setting processed or plain output mode
-- [attr_update](https://urbanjost.github.io/M_attr/attr_update.3M_attr.html)  -- customizing
+---
+   a simple filter program that strips raw mode output back to
+   [plain text](app/plain.f90)
 
+---
+   or another displays it to a screen [in color](app/light.f90) (or displays command line arguments). So you can read
+   in a file generated in "raw" mode and display it in color, or use it for testing commands or for adding color from
+   scripts:
 
-### All manpages amalgamated
-- [BOOK_M_attr](https://urbanjost.github.io/M_attr/BOOK_M_attr.html) -- All manpages consolidated using JavaScript
+        light "<clear><WHITE><blue><bold> WARNING: <reset> that would not be prudent"
+---
 
-
-## EXAMPLE PROGRAM
+### A BASIC INTRODUCTORY PROGRAM
 
 This short program will display red and yellow text on an ANSI-compatible color terminal
-or emulator of such:
+or terminal emulator:
 
 ```fortran
    program demo_M_attr
@@ -121,7 +123,7 @@ or emulator of such:
       write(*,'(/,a,/)')attr('<GREEN><bold><white> COLOR <reset>')
       call printme()
 
-      write(*,'(/,a,/)')attr('<G><bo><w> DO THE SAME THING IN "PLAIN" MODE<reset>')
+      write(*,'(/,a,/)')attr('<G><bo><w> DO THE SAME THING IN "PLAIN" MODE')
       call attr_mode(manner='plain')
       call printme()
 
