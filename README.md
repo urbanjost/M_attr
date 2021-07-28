@@ -37,7 +37,7 @@
 ### Individual man-pages
 
  - An [index](https://urbanjost.github.io/M_attr/man3.html) to HTML versions
-   of the manpages 
+   of the manpages describes all the routines. Alternatively, they may be accessed indiviually:
    - [M_attr](https://urbanjost.github.io/M_attr/M_attr.3M_attr.html)  -- An overview of the M_attr module
    - [attr](https://urbanjost.github.io/M_attr/attr.3M_attr.html)  -- the main function
    - [attr_mode](https://urbanjost.github.io/M_attr/attr_mode.3M_attr.html)  -- setting processed or plain output mode
@@ -45,15 +45,17 @@
 
 ### All manpages amalgamated
 
- - Another view of these documents that can be easily printed as a single
-   page (that uses javascript to combine all the HTML descriptions of the manpages) is at
-   [BOOK_FORTRAN](https://urbanjost.github.io/M_attr/BOOK_M_attr.html).
+ - Another view of these documents (that uses javascript to combine all
+   the HTML descriptions of the manpages) is in a
+   [book_](https://urbanjost.github.io/M_attr/BOOK_M_attr.html) form that can easily be printed
+   as a single document.
 
-These documents are contained in the docs/ directory along with archive files of man(1) pages
-that can be installed on ULS (Unix-Like Systems) is also included:
+Tthese documents are contained in the docs/ directory along with one
+more forat - archive files of man(1) pages that can be installed on ULS
+(Unix-Like Systems):
 
- - manpages in 
     + [manpages.zip](https://urbanjost.github.io/M_attr/manpages.zip) 
+    or
     + [manpages.tgz](https://urbanjost.github.io/M_attr/manpages.tgz) 
 
 ## DOWNLOAD
