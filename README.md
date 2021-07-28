@@ -173,7 +173,7 @@ or terminal emulator:
 
 ### ALTERNATIVES
 * [**M_ncurses**](https://github.com/urbanjost/M_ncurses) A Fortran interface to Ncurses(3c)
-* [**M_escape**](https://github.com/urbanjost/M_ncurses) A multi-mode exploratory version from which M_attr(3f) evolved
+* [**M_escape**](https://github.com/urbanjost/M_escape) A multi-mode exploratory version from which M_attr(3f) evolved
 * [**FACE**](https://github.com/szaghi/FACE) A Fortran library for generating ANSI escape sequences
 * [**foul**](http://foul.sourceforge.net/) A library for controlling the attributes of output text using Fortran
 
