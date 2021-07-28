@@ -69,7 +69,7 @@ $(LIBRARY): $(LIBOBJS)
 >   @ echo "TARGETS FOR $(LIBRARY) UP TO DATE"
 #-------------------------------------------------------------------------------
 $(PROG): $(LIBRARY)
->   -$(FC) $(FFLAGS) $(LDFLAGS) $@.f90 -o $@ $(LIBS)||echo "ouch: $@.f90 "
+>   -$(FC) $(FFLAGS) $(LDFLAGS) $@.f90 -o $@ $(LIBS)
 #-------------------------------------------------------------------------------
 .phony: clean
 clean:

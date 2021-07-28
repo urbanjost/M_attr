@@ -5,7 +5,8 @@ use M_attr, only : attr
 ! need to count last character with a background attribute or something different
 implicit none
 integer :: i
-character(len=*),parameter :: text(*)= [character(len=132) :: &
+!nvfortran bug!character(len=*),parameter :: text(*)= [character(len=132) :: &
+character(len=*),parameter :: text(23)= [character(len=132) :: &
 '<E>                                                                            ',&
 '<E>                                                                            ',&
 '<E>                                                                            ',&
