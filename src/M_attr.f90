@@ -687,9 +687,9 @@ subroutine vt102()
        call attr_update('/BLACK',bg_default)
 
    ! compound
-   call attr_update('ERROR',fg_red//bold//bg_ebony//'error:'//bg_default//fg_default,'ERROR:')
-   call attr_update('WARNING',fg_magenta//bold//bg_ebony//'warning:'//bg_default//fg_default,'WARNING:')
-   call attr_update('INFO',fg_yellow//bold//bg_ebony//'info:'//bg_default//fg_default,'INFO:')
+   call attr_update('ERROR',fg_red//bold//bg_ebony     //':error:  '//bg_default//fg_default,':error:')
+   call attr_update('WARNING',fg_yellow//bold//bg_ebony//':warning:'//bg_default//fg_default,':warning:')
+   call attr_update('INFO',fg_green//bold//bg_ebony    //':info:   '//bg_default//fg_default,':info:')
 
 end subroutine vt102
 !>
