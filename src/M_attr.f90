@@ -501,8 +501,8 @@ character(len=*),intent(in)  :: string(:)
 logical,intent(in),optional  :: reset
 integer,intent(in),optional  :: chars
 character(len=:),allocatable :: expanded(:)
-!gfortran does not return allocatable array from a function properly, but works with subroutine
-call kludge_bug(string,reset,chars,expanded)
+   ! gfortran does not return allocatable array from a function properly, but works with subroutine
+   call kludge_bug(string,reset,chars,expanded)
 end function attr_matrix
 
 subroutine kludge_bug(string,reset,chars,expanded)
@@ -523,11 +523,14 @@ if(present(chars))then
 else
    right=len(string)
 endif
+
 if(.not.allocated(mode))then  ! set substitution mode
    mode='color' ! 'color'|'raw'|'plain'
    call vt102()
 endif
+
 do i=1,size(string)
+
    if(mode.eq.'color')then
       len_local2=len_trim(attr_scalar(string(i)))
       mode='plain'
@@ -537,10 +540,12 @@ do i=1,size(string)
    else
       hold=string(i)
    endif
-   hold=attr_scalar(hold,reset=reset)
+
+   hold=trim(attr_scalar(hold,reset=reset))
    width=max(len(hold),len(expanded))
    expanded=[character(len=width) :: expanded,hold]
 enddo
+
 end subroutine kludge_bug
 
 function attr_scalar_width(string,reset,chars) result (expanded)

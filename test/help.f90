@@ -1,11 +1,9 @@
-program version
+program fancy
+use, intrinsic :: iso_fortran_env, only : stderr=>ERROR_UNIT,stdin=>INPUT_UNIT,stdout=>OUTPUT_UNIT
 use M_attr, only : attr, attr_update, attr_mode
-! shows a limitation if periods are replaced with spaces the CHAR= option does not
-! count the colored blanks so if no text after the blanks too much padding is appended to the line
-! need to count last character with a background attribute or something different
 implicit none
 integer :: i
-!nvfortran bug!character(len=*),parameter :: text(*)= [character(len=132) :: &
+
 character(len=256),parameter ::   help_list_nodash(*)=[character(len=256) :: &
 !'<clear>', &
 '<E><w><b><bo>F</bo>ortran <bo>P</bo>ackage <bo>M</bo>anager:</b>', &
@@ -32,6 +30,8 @@ character(len=256),parameter ::   help_list_nodash(*)=[character(len=256) :: &
 '<E><w> <bo>Note:</bo> color mode is controlled by the environment variable FPM_COLOR. The', &
 '<E><w>       set of allowable values is {<g><bo>always,never,auto</bo></g><w>}. The default is "<g><bo>auto</bo></g><w>". ', &
 '<E><w> ']
+
+
 character(len=256),parameter ::   help_list_dash(*) = [character(len=256) :: &
 !'<clear>', &
 '<E><w><b><bo>F</bo>ortran </bo>P</bo>ackage <bo>M</bo>anager:</b>', &
@@ -62,7 +62,63 @@ character(len=256),parameter ::   help_list_dash(*) = [character(len=256) :: &
 &[<g>--no-rebuild</g><w>] [<g>--prefix</g><w> <m>PATH</m><w>] ', &
 '<E><w> <bo>        <w>[<m>OPTIONS</m><w>]', &
 '<E><w> ']
+
+
+! shows a limitation if periods are replaced with spaces the CHAR= option does not
+! count the colored blanks so if no text after the blanks too much padding is appended to the line
+! need to count last character with a background attribute or something different
+!nvfortran bug!character(len=*),parameter :: text(*)= [character(len=132) :: &
+character(len=*),parameter :: text(22)= [character(len=132) :: &
+'<E><e> <end>                                               ',&
+'<E><e>        <C>                                   </W><E><end>',&
+'<E><e>        <C>      LLL        </C><bo><w> F</bo>ortran </w></E><C>        <c></bo><end></C><E>',&
+'<E><e>        <C>     LL LL        </C><bo><w> P</bo>ackage </w></E><C>       <c></bo><end></C><E>',&
+'<E><e>        <C>     LL            </C><bo><w> M</bo>anager </w></E><C>      <c></bo><end></C><E>',&
+'<E><e>        <C>   LLLLLL                          <E><end>',&
+'<E><e>        <C>     LL                            <E><end>',&
+'<E><e>        <C>     LL               LLLLL LLL    <E><end>',&
+'<E><e>        <C>     LL     LLLLLL     LL  L  LL   <E><end>',&
+'<E><e>        <C>     LL    LL     L    LL  L  LL   <E><end>',&
+'<E><e>        <C>     LL    LL     L    LL  L  LL   <E><end>',&
+'<E><e>        <C>     LL    LLLLLLL     LL  L  LL   <E><end>',&
+'<E><e>        <C>           LL                      <E><end>',&
+'<E><e>        <C>           LL                      <E><end>',&
+'<E><e>        <C>           LL                      <E><end>',&
+'<E><e>        <C>                                   <E><end>',&
+'<E><e>                                                 <end>',&
+'<E><bo><b>Program:</b><w>     fpm(1)                                     ',&
+'<E><bo><b>Description:</b><w> package manager and build system for Fortran',&
+'<E><bo><b>Version:</b><w>     0.3.0, alpha                               ',&
+'<E><bo><b>License:</b><w>     MIT                                        ',&
+'<E><bo><b>Home Page:</b><w>   https://github.com/fortran-lang/fpm        ']
    call attr_mode(manner='color')
+
    write(*,'(a)')(attr(trim(help_list_nodash(i)),chars=80),i=1,size(help_list_nodash))
+   call paws()
+
    write(*,'(a)')(attr(trim(help_list_dash(i)),chars=80),i=1,size(help_list_dash))
-end program version
+   call paws()
+
+   ! add custom keywords
+   call attr_mode(manner='plain')
+   call attr_update('end','.',' ')
+   write(*,'(a)')(attr(trim(text(i)),chars=80),i=1,size(text))
+   call paws()
+
+   call attr_mode(manner='color')
+   call attr_update('end','.',char(0))
+   write(*,'(a)')(attr(trim(text(i)),chars=80),i=1,size(text))
+   call paws()
+contains
+
+subroutine paws()
+character(len=1) :: letter
+integer :: ios
+   write(stdout,'(a)',advance='no',iostat=ios)'Enter [RETURN] to continue ...'
+   read(*,'(a)',iostat=ios)letter
+   write(stdout,'(a)')attr('<clear>')
+   flush(unit=stdout,iostat=ios)
+
+end subroutine paws
+
+end program fancy

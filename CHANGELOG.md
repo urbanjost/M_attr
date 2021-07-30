@@ -6,6 +6,15 @@ list of notable changes including`records of change such as bug fixes,
 new features, changes, and relevant notifications.
 
 ---
+**2021-07-29**  John S. Urban  <https://github.com/urbanjost>
+
+### :green_circle: ADD:
+       + advice(3f) was added to provide a standardized message format simply.
+### :red_circle: FIX:
+       + </bo> did not work on several terminal types, changed it to a more
+         universally accepted value.
+---
+---
 **2021-07-25**  John S. Urban  <https://github.com/urbanjost>
 
 ### :green_circle: ADD:
