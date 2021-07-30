@@ -33,7 +33,9 @@ subroutine, private \mbox{\hyperlink{namespacem__attr_ac91d4e9d24c3b4cb9d46dfc8c
 subroutine, private \mbox{\hyperlink{namespacem__attr_aa70700df053289657efdf1168d8b0381}{replace}} (list, value, place)
 \item 
 subroutine, private \mbox{\hyperlink{namespacem__attr_a6d2cdb036e195b3738da45b1e07ddaea}{insert}} (list, value, place)
-\end{DoxyCompactItemize}
+\item 
+subroutine, public \mbox{\hyperlink{namespacem__attr_afd08aeaf1428903178a7dcb044627331}{advice}} (type, message)
+\begin{DoxyCompactList}\small\item\em !$>$ \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -173,7 +175,7 @@ character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_a5f3
 \item 
 character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_ad25d4dcd29f9499606be1e527498f132}{underline}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//ON//A\+T\+\_\+\+U\+N\+D\+E\+R\+L\+I\+NE//C\+O\+D\+E\+\_\+\+E\+ND
 \item 
-character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_a48baec32513cc6f02bb887b6071bc352}{unbold}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//O\+FF//A\+T\+\_\+\+B\+O\+LD//C\+O\+D\+E\+\_\+\+E\+ND
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_a48baec32513cc6f02bb887b6071bc352}{unbold}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//\textquotesingle{}22\textquotesingle{}//C\+O\+D\+E\+\_\+\+E\+ND
 \item 
 character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_af4d0788a38acb447da350781524f2b88}{unitalic}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//O\+FF//A\+T\+\_\+\+I\+T\+A\+L\+IC//C\+O\+D\+E\+\_\+\+E\+ND
 \item 
@@ -191,6 +193,7 @@ character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_af3a
 \hypertarget{namespacem__attr_autotoc_md0}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__attr_autotoc_md0}
 M\+\_\+attr(3f) -\/ \mbox{[}M\+\_\+attr\mbox{]} control text attributes on terminals (L\+I\+C\+E\+N\+SE\+:M\+IT)\hypertarget{namespacem__attr_autotoc_md1}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__attr_autotoc_md1}
 \begin{DoxyVerb}  use M_attr, only : attr, attr_mode, attr_update
+  use M_attr, only : advice
 \end{DoxyVerb}
 \hypertarget{namespacem__attr_autotoc_md2}{}\doxysubsubsection{M\+A\+J\+O\+R F\+E\+A\+T\+U\+R\+ES}\label{namespacem__attr_autotoc_md2}
 o Add text attributes with an H\+T\+M\+L-\/like syntax using attr(3f). o suppress the escape sequence output with attr\+\_\+mode(3f). o customize what strings are produced using attr\+\_\+update(3f).\hypertarget{namespacem__attr_autotoc_md3}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__attr_autotoc_md3}
@@ -245,7 +248,7 @@ o colors are not nestable. o keywords are case-\/sensitive, o A\+N\+SI escape se
  end program demo_M_attr
 \end{DoxyVerb}
 \hypertarget{namespacem__attr_autotoc_md6}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__attr_autotoc_md6}
-John S. Urban, 2020\hypertarget{namespacem__attr_autotoc_md7}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__attr_autotoc_md7}
+John S. Urban, 2021\hypertarget{namespacem__attr_autotoc_md7}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__attr_autotoc_md7}
 M\+IT\hypertarget{namespacem__attr_autotoc_md8}{}\doxysubsubsection{S\+E\+E A\+L\+SO}\label{namespacem__attr_autotoc_md8}
 attr(3f), attr\+\_\+mode(3f), attr\+\_\+update(3f)
 
@@ -254,6 +257,64 @@ Related information\+:
 terminfo(3c), termlib(3c), tput(1), reset(1), clear(1), console\+\_\+codes(4), E\+C\+M\+A-\/48, \href{https://en.wikipedia.org/wiki/ANSI_escape_code}{\texttt{ https\+://en.\+wikipedia.\+org/wiki/\+A\+N\+S\+I\+\_\+escape\+\_\+code}} 
 
 \doxysubsection{Function/\+Subroutine Documentation}
+\mbox{\Hypertarget{namespacem__attr_afd08aeaf1428903178a7dcb044627331}\label{namespacem__attr_afd08aeaf1428903178a7dcb044627331}} 
+\index{m\_attr@{m\_attr}!advice@{advice}}
+\index{advice@{advice}!m\_attr@{m\_attr}}
+\doxysubsubsection{\texorpdfstring{advice()}{advice()}}
+{\footnotesize\ttfamily subroutine, public m\+\_\+attr\+::advice (\begin{DoxyParamCaption}\item[{character(len=$\ast$), intent(in), optional}]{type,  }\item[{character(len=$\ast$), intent(in), optional}]{message }\end{DoxyParamCaption})}
+
+
+
+!$>$ 
+
+\hypertarget{namespacem__attr_autotoc_md34}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__attr_autotoc_md34}
+advice(3f) -\/ \mbox{[}M\+\_\+attr\mbox{]} print messages using a standard format including time and program name (L\+I\+C\+E\+N\+SE\+:M\+IT)\hypertarget{namespacem__attr_autotoc_md35}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__attr_autotoc_md35}
+\begin{DoxyVerb} subroutine advice(message)
+
+    character(len=*),intent(in),optional :: type
+    character(len=*),intent(in),optional :: message
+\end{DoxyVerb}
+\hypertarget{namespacem__attr_autotoc_md36}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__attr_autotoc_md36}
+Display a message to stderr prefixed with the name of the calling program and a timestamp when the T\+Y\+PE is specified as any of \textquotesingle{}error\textquotesingle{},\textquotesingle{}warn\textquotesingle{}, or \textquotesingle{}info\textquotesingle{}. It also allows the keywords $<$\+A\+R\+G0$>$,$<$\+T\+Z$>$,$<$\+Y\+E$>$,$<$\+M\+O$>$,$<$\+D\+A$>$,\DoxyHorRuler{0}
+,$<$\+M\+I$>$,$<$\+S\+E$>$,$<$\+M\+S$>$ to be used in the message (which is passed to A\+T\+T\+R(3f)). Note that time stamp keywords will only be updated when using A\+D\+V\+I\+C\+E(3f).\hypertarget{namespacem__attr_autotoc_md37}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__attr_autotoc_md37}
+T\+Y\+PE if present and one of \textquotesingle{}warn\textquotesingle{},\textquotesingle{}message\textquotesingle{},\textquotesingle{}info\textquotesingle{} a predefined message is written to stderr of the form
+
+$\ast$$\ast$ ($<$\+A\+R\+G0$>$)\+: type $\ast$$\ast$\+: \DoxyHorRuler{0}
+\+:$<$\+M\+I$>$\+:$<$\+S\+E$>$.$<$\+M\+S$>$\+: message
+
+M\+E\+S\+S\+A\+GE the user-\/supplied message to display via a call to A\+T\+T\+R(3f)
+
+if no parameters are supplied the macros are updated but no output is generated.\hypertarget{namespacem__attr_autotoc_md38}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__attr_autotoc_md38}
+\begin{DoxyVerb}Sample program
+
+ program demo_advice
+ use M_attr, only : advice, attr
+ implicit none
+    call advice("error", "Say you didn't!")
+    call advice("warn",  "I wouldn't if I were you, Will Robinson.")
+    call advice("info",  "I fixed that for you, but it was a bad idea.")
+    call advice("???    ",  "not today you don't")
+    ! call to just update the macros
+    call advice()
+    ! conventional call to ATTR(3f) using the ADVICE(3f)-defined macros
+    write(*,*)attr('<bo>The year was <g><YE></g>, the month was <g><MO></g>')
+ end program demo_advice
+\end{DoxyVerb}
+ Results\+:
+
+$\ast$$\ast$ (demo\+\_\+advice)\+: error $\ast$$\ast$\+: 16\+:33\+:50.\+0300\+: Say you didn\textquotesingle{}t! $\ast$$\ast$ (demo\+\_\+advice)\+: warning $\ast$$\ast$\+: 16\+:33\+:50.\+0301\+: I wouldn\textquotesingle{}t if I were you, Will Robinson. $\ast$$\ast$ (demo\+\_\+advice)\+: info $\ast$$\ast$\+: 16\+:33\+:50.\+0301\+: I fixed that for you, but it was a bad idea. $\ast$$\ast$ (demo\+\_\+advice)\+: ??? $\ast$$\ast$\+: 16\+:33\+:50.\+0301\+: not today you don\textquotesingle{}t The year was 2021, the month was 7\hypertarget{namespacem__attr_autotoc_md39}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__attr_autotoc_md39}
+John S. Urban, 2021\hypertarget{namespacem__attr_autotoc_md40}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__attr_autotoc_md40}
+M\+IT 
+
+References attr\+\_\+update(), and values.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacem__attr_afd08aeaf1428903178a7dcb044627331_cgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{namespacem__attr_acb968f54a74cf89739d5e0c502cc9937}\label{namespacem__attr_acb968f54a74cf89739d5e0c502cc9937}} 
 \index{m\_attr@{m\_attr}!attr\_matrix@{attr\_matrix}}
 \index{attr\_matrix@{attr\_matrix}!m\_attr@{m\_attr}}
@@ -332,7 +393,7 @@ plain suppress the output associated with keywords color(default) commonly suppo
  end program demo_attr_mode
 \end{DoxyVerb}
 \hypertarget{namespacem__attr_autotoc_md24}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__attr_autotoc_md24}
-John S. Urban, 2020\hypertarget{namespacem__attr_autotoc_md25}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__attr_autotoc_md25}
+John S. Urban, 2021\hypertarget{namespacem__attr_autotoc_md25}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__attr_autotoc_md25}
 M\+IT 
 
 References keywords, mode, mono\+\_\+values, values, and vt102().
@@ -458,7 +519,7 @@ o colors are not nestable, keywords are case-\/sensitive, o not all terminals ob
  end program demo_esc
 \end{DoxyVerb}
 \hypertarget{namespacem__attr_autotoc_md16}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__attr_autotoc_md16}
-John S. Urban, 2020\hypertarget{namespacem__attr_autotoc_md17}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__attr_autotoc_md17}
+John S. Urban, 2021\hypertarget{namespacem__attr_autotoc_md17}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__attr_autotoc_md17}
 M\+IT\hypertarget{namespacem__attr_autotoc_md18}{}\doxysubsubsection{S\+E\+E A\+L\+SO}\label{namespacem__attr_autotoc_md18}
 attr\+\_\+mode(3f), attr\+\_\+update(3f) 
 
@@ -556,16 +617,16 @@ ul,underline it,italics (often produces inverse colors on many devices\hypertarg
   end program demo_update
 \end{DoxyVerb}
 \hypertarget{namespacem__attr_autotoc_md32}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__attr_autotoc_md32}
-John S. Urban, 2020\hypertarget{namespacem__attr_autotoc_md33}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__attr_autotoc_md33}
+John S. Urban, 2021\hypertarget{namespacem__attr_autotoc_md33}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__attr_autotoc_md33}
 M\+IT 
 
-References insert(), keywords, locate(), mono\+\_\+values, remove(), replace(), and values.
+References insert(), keywords, locate(), mode, mono\+\_\+values, remove(), replace(), values, and vt102().
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=319pt]{namespacem__attr_aba8630a36c29aaeba84ec458812f59ec_cgraph}
+\includegraphics[width=350pt]{namespacem__attr_aba8630a36c29aaeba84ec458812f59ec_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:\nopagebreak
@@ -1113,7 +1174,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{m\_attr@{m\_attr}!unbold@{unbold}}
 \index{unbold@{unbold}!m\_attr@{m\_attr}}
 \doxysubsubsection{\texorpdfstring{unbold}{unbold}}
-{\footnotesize\ttfamily character(len=$\ast$), parameter, public m\+\_\+attr\+::unbold = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//O\+FF//A\+T\+\_\+\+B\+O\+LD//C\+O\+D\+E\+\_\+\+E\+ND}
+{\footnotesize\ttfamily character(len=$\ast$), parameter, public m\+\_\+attr\+::unbold = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//\textquotesingle{}22\textquotesingle{}//C\+O\+D\+E\+\_\+\+E\+ND}
 
 \mbox{\Hypertarget{namespacem__attr_ad25d4dcd29f9499606be1e527498f132}\label{namespacem__attr_ad25d4dcd29f9499606be1e527498f132}} 
 \index{m\_attr@{m\_attr}!underline@{underline}}

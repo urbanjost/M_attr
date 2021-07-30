@@ -6,6 +6,7 @@
 !!##SYNOPSIS
 !!
 !!      use M_attr, only : attr, attr_mode, attr_update
+!!      use M_attr, only : advice
 !!
 !!##MAJOR FEATURES
 !!   o Add text attributes with an HTML-like syntax using attr(3f).
@@ -96,7 +97,7 @@
 !!     end program demo_M_attr
 !!
 !!##AUTHOR
-!!    John S. Urban, 2020
+!!    John S. Urban, 2021
 !!
 !!##LICENSE
 !!    MIT
@@ -117,6 +118,7 @@ private
 public  :: attr
 public  :: attr_mode
 public  :: attr_update
+public  :: advice
 
 private :: attr_matrix
 private :: attr_scalar
@@ -227,7 +229,7 @@ character(len=*),parameter,public :: bold        =  CODE_START//ON//AT_BOLD//COD
 character(len=*),parameter,public :: italic      =  CODE_START//ON//AT_ITALIC//CODE_END
 character(len=*),parameter,public :: inverse     =  CODE_START//ON//AT_INVERSE//CODE_END
 character(len=*),parameter,public :: underline   =  CODE_START//ON//AT_UNDERLINE//CODE_END
-character(len=*),parameter,public :: unbold      =  CODE_START//OFF//AT_BOLD//CODE_END
+character(len=*),parameter,public :: unbold      =  CODE_START//'22'//CODE_END
 character(len=*),parameter,public :: unitalic    =  CODE_START//OFF//AT_ITALIC//CODE_END
 character(len=*),parameter,public :: uninverse   =  CODE_START//OFF//AT_INVERSE//CODE_END
 character(len=*),parameter,public :: ununderline =  CODE_START//OFF//AT_UNDERLINE//CODE_END
@@ -237,7 +239,6 @@ character(len=*),parameter,public :: clear       =  HOME_DISPLAY//CLEAR_DISPLAY
 
 
 contains
-
 !>
 !!##NAME
 !!    attr(3f) - [M_attr] substitute escape sequences for HTML-like syntax
@@ -420,7 +421,7 @@ contains
 !!     end program demo_esc
 !!
 !!##AUTHOR
-!!    John S. Urban, 2020
+!!    John S. Urban, 2021
 !!
 !!##LICENSE
 !!    MIT
@@ -562,10 +563,6 @@ subroutine vt102()
    call attr_update('/bold',unbold)
    call attr_update('bo',bold)
    call attr_update('/bo',unbold)
-   call attr_update('livid',bold)
-   call attr_update('/livid',unbold)
-   call attr_update('li',bold)
-   call attr_update('/li',unbold)
    call attr_update('italic',italic)
    call attr_update('/italic',unitalic)
    call attr_update('it',italic)
@@ -755,7 +752,7 @@ end subroutine vt102
 !!     end program demo_attr_mode
 !!
 !!##AUTHOR
-!!    John S. Urban, 2020
+!!    John S. Urban, 2021
 !!
 !!##LICENSE
 !!    MIT
@@ -871,7 +868,7 @@ end subroutine wipe_dictionary
 !!      end program demo_update
 !!
 !!##AUTHOR
-!!    John S. Urban, 2020
+!!    John S. Urban, 2021
 !!
 !!##LICENSE
 !!    MIT
@@ -882,6 +879,11 @@ character(len=*),intent(in),optional  :: mono_valin
 integer                               :: place
 character(len=:),allocatable          :: val
 character(len=:),allocatable          :: mono_val
+
+if(.not.allocated(mode))then  ! set substitution mode
+   mode='color' ! 'color'|'raw'|'plain'
+   call vt102()
+endif
 
 if(present(mono_valin))then
    mono_val=mono_valin
@@ -1063,5 +1065,112 @@ integer                      :: end
       write(stderr,*)'*insert* error: index out of range. end=',end,' index=',place,' value=',value
    endif
 end subroutine insert
+!>
+!! !>
+!!##NAME
+!!    advice(3f) - [M_attr] print messages using a standard format including time and program name
+!!    (LICENSE:MIT)
+!!
+!!##SYNOPSIS
+!!
+!!     subroutine advice(message)
+!!
+!!        character(len=*),intent(in),optional :: type
+!!        character(len=*),intent(in),optional :: message
+!!
+!!##DESCRIPTION
+!!    Display a message to stderr prefixed with the name of the
+!!    calling program and a timestamp when the TYPE is specified as
+!!    any of 'error','warn', or 'info'.  It also allows the keywords
+!!    <ARG0>,<TZ>,<YE>,<MO>,<DA>,<HR>,<MI>,<SE>,<MS> to be used in
+!!    the message (which is passed to ATTR(3f)). Note that time stamp
+!!    keywords will only be updated when using ADVICE(3f).
+!!
+!!##OPTIONS
+!!    TYPE     if present and one of 'warn','message','info' a predefined
+!!             message is written to stderr of the form
+!!
+!!              ** (<ARG0>): type **: <HR>:<MI>:<SE>.<MS>: message
+!!
+!!    MESSAGE  the user-supplied message to display via a call to ATTR(3f)
+!!
+!!    if no parameters are supplied the macros are updated but no output is generated.
+!!
+!!##EXAMPLE
+!!
+!!    Sample program
+!!
+!!     program demo_advice
+!!     use M_attr, only : advice, attr
+!!     implicit none
+!!        call advice("error", "Say you didn't!")
+!!        call advice("warn",  "I wouldn't if I were you, Will Robinson.")
+!!        call advice("info",  "I fixed that for you, but it was a bad idea.")
+!!        call advice("???    ",  "not today you don't")
+!!        ! call to just update the macros
+!!        call advice()
+!!        ! conventional call to ATTR(3f) using the ADVICE(3f)-defined macros
+!!        write(*,*)attr('<bo>The year was <g><YE></g>, the month was <g><MO></g>')
+!!     end program demo_advice
+!!   Results:
+!!
+!!    ** (demo_advice): error   **: 16:33:50.0300: Say you didn't!
+!!    ** (demo_advice): warning **: 16:33:50.0301: I wouldn't if I were you, Will Robinson.
+!!    ** (demo_advice): info    **: 16:33:50.0301: I fixed that for you, but it was a bad idea.
+!!    ** (demo_advice): ???     **: 16:33:50.0301: not today you don't
+!!        The year was 2021, the month was 7
+!!
+!!##AUTHOR
+!!    John S. Urban, 2021
+!!
+!!##LICENSE
+!!    MIT
+subroutine advice(type,message)
+! TODO: could add a warning level to ignore info, or info|warning, or all
+implicit none
+character(len=*),intent(in),optional :: type
+character(len=*),intent(in),optional :: message
+character(len=8)     :: dt
+character(len=10)    :: tm
+character(len=5)     :: zone
+integer,dimension(8) :: values
+character(len=4096)  :: arg0
+character(len=4096)  :: new_message
+   call date_and_time(dt,tm,zone,values)
+   call attr_update('YE',dt(1:4))
+   call attr_update('MO',dt(5:6))
+   call attr_update('DA',dt(7:8))
+   call attr_update('HR',tm(1:2))
+   call attr_update('MI',tm(3:4))
+   call attr_update('SE',tm(5:6))
+   call attr_update('MS',tm(8:10))
+   call attr_update('TZ',zone)
+   call get_command_argument(0,arg0)
+   if(index(arg0,'/').ne.0) arg0=arg0(index(arg0,'/',back=.true.)+1:)
+   if(index(arg0,'\').ne.0) arg0=arg0(index(arg0,'\',back=.true.)+1:)
+   call attr_update('ARG0',arg0)
+   if(present(type))then
+      new_message= ' <b>'//tm(1:2)//':'//tm(3:4)//':'//tm(5:6)//'.'//tm(8:10)//'</b>: '//message
+      select case(type)
+
+      case('warn','WARN','warning','WARNING')
+       new_message= '** ('//trim(arg0)//'): <bo><y>warning</y> **:'//new_message
+
+      case('info','INFO','information','INFORMATION')
+       new_message= '** ('//trim(arg0)//'): <bo><g>info   </g> **:'//new_message
+
+      case('error','ERROR')
+       new_message= '** ('//trim(arg0)//'): <bo><r>error  </r> **:'//new_message
+
+      case default
+       new_message= '** ('//trim(arg0)//'): <bo><c>'//type//'</c> **:'//new_message
+
+      end select
+    write(stderr,'(a)')attr(trim(new_message))
+
+   elseif(present(message))then
+    write(stderr,'(a)')attr(trim(message))
+   endif
+end subroutine advice
 
 end module M_attr
