@@ -13,25 +13,37 @@ integer                         :: ios
 character(len=1)                :: paws
 character(len=1024)             :: buffer
 character(len=*),parameter      :: numbers='("<B><w><bo>   ",*("(",g0.8,",",g0.8,")":,1x))'
+character(len=:),allocatable    :: TERM
+
    if(system_isatty(stdout))then ! ISATTY() is an extension, but found in Intel, GNU, PGI, ... compiler
       call attr_mode('color')
    else
       call attr_mode('plain')
    endif
 
+   TERM=system_getenv('TERM','vt102') ! perhaps change or add strings based on terminal type
+   select case(TERM)
+   case('xterm')
+      call attr_update('mono',attr( '<esc>]11;black<bel><esc>]10;white<bel>' )) ! change default bg and fg
+   case('screen')
+   end select
+
    INFINITE: do
       ! clear screen, set attributes and print messages
       call text("<reset><clear>")
       call text("For the quadratic equation <m>A</m><g>*x**2 +<m>B</m><g>*x + <m>C</m> ")
-      write(*,'(*(a))',advance='no') &
+      write(stdout,'(*(a))',advance='no') &
       & attr('<B><w><bo>'//repeat('_',78)//'  '), &
       & char(13),&
       & attr('<B><g><bo>enter coefficients <m>A,B,C</m><g>:<y><gt><ul>',&
       & reset=.false.)
-      read(*,*,iostat=ios,iomsg=message)a,b,c
-      write(*,'(a)',advance='no')attr('<reset>')
+      read(stdin,*,iostat=ios,iomsg=message)a,b,c
+      write(stdout,'(a)',advance='no')attr('<reset>')
       if(ios.ne.0)then
-         write(*,'(*(g0))')ios,' ',trim(message)
+         write(stdout,*)
+         write(stdout,'(*(g0))')ios,' ',trim(message)
+         rewind(unit=stdin,iostat=ios)
+         backspace(unit=stdin,iostat=ios)
       else
          ! Given the equation "A*X**2 + B*X + C = 0"
          ! Use the quadratic formula to determine the root values of the equation.
@@ -89,17 +101,17 @@ character(len=*),parameter      :: numbers='("<B><w><bo>   ",*("(",g0.8,",",g0.8
          call text(buffer)
          call text()
       endif
-      write(*,'(*(g0))',advance='no')attr('<B><e>press <g>return</g><e> to continue, "<g>q</g><e>" to quit:',chars=79)
-      read(*,advance='yes',iostat=ios,fmt='(a)',iomsg=message)paws
+      write(stdout,'(*(g0))',advance='no')attr('<B><e>press <g>return</g><e> to continue, "<g>q</g><e>" to quit:',chars=79)
+      read(stdin,advance='yes',iostat=ios,fmt='(a)',iomsg=message)paws
       if(paws.ne.'')exit INFINITE
    enddo INFINITE
 contains
 subroutine text(string)
 character(len=*),intent(in),optional :: string
    if(present(string))then
-      write(*,'(*(g0))') attr('<B><g><bo>'//string,chars=80)
+      write(stdout,'(*(g0))') attr('<B><g><bo>'//string,chars=80)
    else
-      write(*,'(*(g0))') attr('<B><g><bo>',chars=80)
+      write(stdout,'(*(g0))') attr('<B><g><bo>',chars=80)
    endif
 end subroutine text
 !>  call compiler-specific ISATTY() function or return .FALSE.
@@ -142,4 +154,37 @@ end subroutine text
     end function system_isatty
 #define ISATTY
 #endif
+function system_getenv(name,default) result(value)
+
+!$@(#) M_system::system_getenv(3f): call get_environment_variable as a function with a default value(3f)
+
+character(len=*),intent(in)          :: name
+character(len=*),intent(in),optional :: default
+integer                              :: howbig
+integer                              :: stat
+character(len=:),allocatable         :: value
+
+   if(NAME.ne.'')then
+      call get_environment_variable(name, length=howbig, status=stat, trim_name=.true.)  ! get length required to hold value
+      if(howbig.ne.0)then
+         select case (stat)
+         case (1)     ! print *, NAME, " is not defined in the environment. Strange..."
+            value=''
+         case (2)     ! print *, "This processor doesn't support environment variables. Boooh!"
+            value=''
+         case default ! make string to hold value of sufficient size and get value
+            if(allocated(value))deallocate(value)
+            allocate(character(len=max(howbig,1)) :: VALUE)
+            call get_environment_variable(name,value,status=stat,trim_name=.true.)
+            if(stat.ne.0)VALUE=''
+         end select
+      else
+         value=''
+      endif
+   else
+      value=''
+   endif
+   if(value.eq.''.and.present(default))value=default
+
+end function system_getenv
 END PROGRAM roots

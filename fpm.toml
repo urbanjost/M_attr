@@ -1,6 +1,6 @@
 # TOML file for fpm as described at https://github.com/fortran-lang/fpm/blob/master/manifest-reference.md
 name = "M_attr"
-version = "1.0.0"
+version = "1.0.2"
 license = "MIT"
 author = "John S. Urban"
 maintainer = "urbanjost@comcast.net"
@@ -12,6 +12,9 @@ homepage = "https://github.com/urbanjost/M_attr.git"
 
 [build]
 external-modules = ["ifport", "dfport"]
+
+[install]
+library="true"
 
 [[executable]]
 name="redirect"
@@ -27,3 +30,10 @@ main="plain.f90"
 name="light"
 source-dir="app"
 main="light.f90"
+
+[[test]]
+name="test_suite"
+source-dir="test"
+main="test_suite_M_attr.f90"
+[test.dependencies]
+M_msg          = { git = "https://github.com/urbanjost/M_msg.git" }

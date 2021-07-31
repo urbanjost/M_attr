@@ -126,7 +126,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title="28.6% of total for programs.">96 statements</a>
+    title="26.6% of total for programs.">134 statements</a>
      </li> 
      
      
@@ -169,6 +169,8 @@
   <div id="vars-0" class="panel-collapse collapse">
     <div class="list-group">
       
+      <a class="list-group-item" href="../program/roots.html#variable-term">TERM</a>
+      
       <a class="list-group-item" href="../program/roots.html#variable-a">a</a>
       
       <a class="list-group-item" href="../program/roots.html#variable-b">b</a>
@@ -181,9 +183,9 @@
       
       <a class="list-group-item" href="../program/roots.html#variable-dp">dp</a>
       
-      <a class="list-group-item" href="../program/roots.html#variable-ios">ios</a>
+      <a class="list-group-item" href="../program/roots.html#variable-ios~2">ios</a>
       
-      <a class="list-group-item" href="../program/roots.html#variable-message">message</a>
+      <a class="list-group-item" href="../program/roots.html#variable-message~2">message</a>
       
       <a class="list-group-item" href="../program/roots.html#variable-numbers">numbers</a>
       
@@ -218,6 +220,8 @@
   <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#funcs-0">Functions</a></h3></div>
   <div id="funcs-0" class="panel-collapse collapse">
     <div class="list-group">
+      
+      <a class="list-group-item" href="../program/roots.html#proc-system_getenv">system_getenv</a>
       
       <a class="list-group-item" href="../program/roots.html#proc-system_isatty">system_isatty</a>
       
@@ -300,6 +304,8 @@
   <div id="vars-1" class="panel-collapse collapse">
     <div class="list-group">
       
+      <a class="list-group-item" href="../program/roots.html#variable-term">TERM</a>
+      
       <a class="list-group-item" href="../program/roots.html#variable-a">a</a>
       
       <a class="list-group-item" href="../program/roots.html#variable-b">b</a>
@@ -312,9 +318,9 @@
       
       <a class="list-group-item" href="../program/roots.html#variable-dp">dp</a>
       
-      <a class="list-group-item" href="../program/roots.html#variable-ios">ios</a>
+      <a class="list-group-item" href="../program/roots.html#variable-ios~2">ios</a>
       
-      <a class="list-group-item" href="../program/roots.html#variable-message">message</a>
+      <a class="list-group-item" href="../program/roots.html#variable-message~2">message</a>
       
       <a class="list-group-item" href="../program/roots.html#variable-numbers">numbers</a>
       
@@ -349,6 +355,8 @@
   <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#funcs-1">Functions</a></h3></div>
   <div id="funcs-1" class="panel-collapse collapse">
     <div class="list-group">
+      
+      <a class="list-group-item" href="../program/roots.html#proc-system_getenv">system_getenv</a>
       
       <a class="list-group-item" href="../program/roots.html#proc-system_isatty">system_isatty</a>
       
@@ -403,6 +411,20 @@
 
 
 <tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-term"></span>character(len=:),</td>
+  
+  
+  <td>allocatable</td><td>::</td>
+  <td><strong>TERM</strong></td><td></td><td></td><td></td>
+  
+</tr>
 
   
   
@@ -494,7 +516,7 @@
   
 <tr>
   
-  <td><span class="anchor" id="variable-ios"></span>integer</td>
+  <td><span class="anchor" id="variable-ios~2"></span>integer</td>
   
   
   <td></td><td>::</td>
@@ -508,7 +530,7 @@
   
 <tr>
   
-  <td><span class="anchor" id="variable-message"></span>character(len=256)</td>
+  <td><span class="anchor" id="variable-message~2"></span>character(len=256)</td>
   
   
   <td></td><td>::</td>
@@ -632,6 +654,81 @@
      
     <section>
     <h2>Functions</h2>
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-system_getenv"></span><h3>
+function <a href='../proc/system_getenv.html'>system_getenv</a>(name, default) result(value)
+    
+    
+   
+</h3></div>
+  <div class="panel-body">
+       
+    
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>character(len=*),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>name</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>character(len=*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>default</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>character(len=:),
+  allocatable</small></h4>
+  
+    
+
+  </div>
+  </div>
+
     
     
   <div class="panel panel-default">
@@ -782,25 +879,37 @@ subroutine <a href='../proc/text.html'>text</a>(string)
 <span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>                <span class="kd">::</span> <span class="n">paws</span>
 <span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>             <span class="kd">::</span> <span class="n">buffer</span>
 <span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=*</span><span class="p">),</span><span class="k">parameter</span>      <span class="kd">::</span> <span class="n">numbers</span><span class="o">=</span><span class="s1">&#39;(&quot;&lt;B&gt;&lt;w&gt;&lt;bo&gt;   &quot;,*(&quot;(&quot;,g0.8,&quot;,&quot;,g0.8,&quot;)&quot;:,1x))&#39;</span>
+<span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="p">:),</span><span class="k">allocatable</span>    <span class="kd">::</span> <span class="n">TERM</span>
+
    <span class="k">if</span><span class="p">(</span><span class="n">system_isatty</span><span class="p">(</span><span class="n">stdout</span><span class="p">))</span><span class="k">then</span> <span class="c">! ISATTY() is an extension, but found in Intel, GNU, PGI, ... compiler</span>
       <span class="k">call </span><span class="n">attr_mode</span><span class="p">(</span><span class="s1">&#39;color&#39;</span><span class="p">)</span>
    <span class="k">else</span>
 <span class="k">      call </span><span class="n">attr_mode</span><span class="p">(</span><span class="s1">&#39;plain&#39;</span><span class="p">)</span>
    <span class="k">endif</span>
 
+<span class="k">   </span><span class="n">TERM</span><span class="o">=</span><span class="n">system_getenv</span><span class="p">(</span><span class="s1">&#39;TERM&#39;</span><span class="p">,</span><span class="s1">&#39;vt102&#39;</span><span class="p">)</span> <span class="c">! perhaps change or add strings based on terminal type</span>
+   <span class="k">select case</span><span class="p">(</span><span class="n">TERM</span><span class="p">)</span>
+   <span class="k">case</span><span class="p">(</span><span class="s1">&#39;xterm&#39;</span><span class="p">)</span>
+      <span class="k">call </span><span class="n">attr_update</span><span class="p">(</span><span class="s1">&#39;mono&#39;</span><span class="p">,</span><span class="n">attr</span><span class="p">(</span> <span class="s1">&#39;&lt;esc&gt;]11;black&lt;bel&gt;&lt;esc&gt;]10;white&lt;bel&gt;&#39;</span> <span class="p">))</span> <span class="c">! change default bg and fg</span>
+   <span class="k">case</span><span class="p">(</span><span class="s1">&#39;screen&#39;</span><span class="p">)</span>
+   <span class="k">end select</span>
+
 <span class="k">   </span><span class="n">INFINITE</span><span class="p">:</span> <span class="k">do</span>
       <span class="c">! clear screen, set attributes and print messages</span>
       <span class="k">call </span><span class="n">text</span><span class="p">(</span><span class="s2">&quot;&lt;reset&gt;&lt;clear&gt;&quot;</span><span class="p">)</span>
       <span class="k">call </span><span class="n">text</span><span class="p">(</span><span class="s2">&quot;For the quadratic equation &lt;m&gt;A&lt;/m&gt;&lt;g&gt;*x**2 +&lt;m&gt;B&lt;/m&gt;&lt;g&gt;*x + &lt;m&gt;C&lt;/m&gt; &quot;</span><span class="p">)</span>
-      <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(*(a))&#39;</span><span class="p">,</span><span class="n">advance</span><span class="o">=</span><span class="s1">&#39;no&#39;</span><span class="p">)</span> <span class="p">&amp;</span>
+      <span class="k">write</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span><span class="s1">&#39;(*(a))&#39;</span><span class="p">,</span><span class="n">advance</span><span class="o">=</span><span class="s1">&#39;no&#39;</span><span class="p">)</span> <span class="p">&amp;</span>
       <span class="p">&amp;</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;B&gt;&lt;w&gt;&lt;bo&gt;&#39;</span><span class="o">//</span><span class="nb">repeat</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span><span class="mi">78</span><span class="p">)</span><span class="o">//</span><span class="s1">&#39;  &#39;</span><span class="p">),</span> <span class="p">&amp;</span>
       <span class="p">&amp;</span> <span class="nb">char</span><span class="p">(</span><span class="mi">13</span><span class="p">),&amp;</span>
       <span class="p">&amp;</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;B&gt;&lt;g&gt;&lt;bo&gt;enter coefficients &lt;m&gt;A,B,C&lt;/m&gt;&lt;g&gt;:&lt;y&gt;&lt;gt&gt;&lt;ul&gt;&#39;</span><span class="p">,&amp;</span>
       <span class="p">&amp;</span> <span class="n">reset</span><span class="o">=</span><span class="p">.</span><span class="n">false</span><span class="p">.)</span>
-      <span class="k">read</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">ios</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">message</span><span class="p">)</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span>
-      <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">,</span><span class="n">advance</span><span class="o">=</span><span class="s1">&#39;no&#39;</span><span class="p">)</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;reset&gt;&#39;</span><span class="p">)</span>
+      <span class="k">read</span><span class="p">(</span><span class="n">stdin</span><span class="p">,</span><span class="o">*</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">ios</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">message</span><span class="p">)</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span>
+      <span class="k">write</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">,</span><span class="n">advance</span><span class="o">=</span><span class="s1">&#39;no&#39;</span><span class="p">)</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;reset&gt;&#39;</span><span class="p">)</span>
       <span class="k">if</span><span class="p">(</span><span class="n">ios</span><span class="p">.</span><span class="n">ne</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span><span class="k">then</span>
-<span class="k">         write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(*(g0))&#39;</span><span class="p">)</span><span class="n">ios</span><span class="p">,</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="nb">trim</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+<span class="k">         write</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span><span class="o">*</span><span class="p">)</span>
+         <span class="k">write</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span><span class="s1">&#39;(*(g0))&#39;</span><span class="p">)</span><span class="n">ios</span><span class="p">,</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="nb">trim</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+         <span class="k">rewind</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">stdin</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">ios</span><span class="p">)</span>
+         <span class="k">backspace</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">stdin</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">ios</span><span class="p">)</span>
       <span class="k">else</span>
          <span class="c">! Given the equation &quot;A*X**2 + B*X + C = 0&quot;</span>
          <span class="c">! Use the quadratic formula to determine the root values of the equation.</span>
@@ -858,17 +967,17 @@ subroutine <a href='../proc/text.html'>text</a>(string)
          <span class="k">call </span><span class="n">text</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
          <span class="k">call </span><span class="n">text</span><span class="p">()</span>
       <span class="k">endif</span>
-<span class="k">      write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(*(g0))&#39;</span><span class="p">,</span><span class="n">advance</span><span class="o">=</span><span class="s1">&#39;no&#39;</span><span class="p">)</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;B&gt;&lt;e&gt;press &lt;g&gt;return&lt;/g&gt;&lt;e&gt; to continue, &quot;&lt;g&gt;q&lt;/g&gt;&lt;e&gt;&quot; to quit:&#39;</span><span class="p">,</span><span class="n">chars</span><span class="o">=</span><span class="mi">79</span><span class="p">)</span>
-      <span class="k">read</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="n">advance</span><span class="o">=</span><span class="s1">&#39;yes&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">ios</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(a)&#39;</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">message</span><span class="p">)</span><span class="n">paws</span>
+<span class="k">      write</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span><span class="s1">&#39;(*(g0))&#39;</span><span class="p">,</span><span class="n">advance</span><span class="o">=</span><span class="s1">&#39;no&#39;</span><span class="p">)</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;B&gt;&lt;e&gt;press &lt;g&gt;return&lt;/g&gt;&lt;e&gt; to continue, &quot;&lt;g&gt;q&lt;/g&gt;&lt;e&gt;&quot; to quit:&#39;</span><span class="p">,</span><span class="n">chars</span><span class="o">=</span><span class="mi">79</span><span class="p">)</span>
+      <span class="k">read</span><span class="p">(</span><span class="n">stdin</span><span class="p">,</span><span class="n">advance</span><span class="o">=</span><span class="s1">&#39;yes&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">ios</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;(a)&#39;</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">message</span><span class="p">)</span><span class="n">paws</span>
       <span class="k">if</span><span class="p">(</span><span class="n">paws</span><span class="p">.</span><span class="n">ne</span><span class="p">.</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="k">exit </span><span class="n">INFINITE</span>
    <span class="k">enddo </span><span class="n">INFINITE</span>
 <span class="k">contains</span>
 <span class="k">subroutine </span><span class="n">text</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
 <span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=*</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="k">optional</span> <span class="kd">::</span> <span class="n">string</span>
    <span class="k">if</span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">string</span><span class="p">))</span><span class="k">then</span>
-<span class="k">      write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(*(g0))&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;B&gt;&lt;g&gt;&lt;bo&gt;&#39;</span><span class="o">//</span><span class="n">string</span><span class="p">,</span><span class="n">chars</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+<span class="k">      write</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span><span class="s1">&#39;(*(g0))&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;B&gt;&lt;g&gt;&lt;bo&gt;&#39;</span><span class="o">//</span><span class="n">string</span><span class="p">,</span><span class="n">chars</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
    <span class="k">else</span>
-<span class="k">      write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(*(g0))&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;B&gt;&lt;g&gt;&lt;bo&gt;&#39;</span><span class="p">,</span><span class="n">chars</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+<span class="k">      write</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span><span class="s1">&#39;(*(g0))&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;B&gt;&lt;g&gt;&lt;bo&gt;&#39;</span><span class="p">,</span><span class="n">chars</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
    <span class="k">endif</span>
 <span class="k">end subroutine </span><span class="n">text</span>
 <span class="c">!&gt;  call compiler-specific ISATTY() function or return .FALSE.</span>
@@ -911,6 +1020,39 @@ subroutine <a href='../proc/text.html'>text</a>(string)
     <span class="k">end function </span><span class="n">system_isatty</span>
 <span class="cp">#define ISATTY</span>
 <span class="cp">#endif</span>
+<span class="k">function </span><span class="n">system_getenv</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">default</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="k">value</span><span class="p">)</span>
+
+<span class="c">!$@(#) M_system::system_getenv(3f): call get_environment_variable as a function with a default value(3f)</span>
+
+<span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=*</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span>          <span class="kd">::</span> <span class="n">name</span>
+<span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=*</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="k">optional</span> <span class="kd">::</span> <span class="n">default</span>
+<span class="kt">integer</span>                              <span class="kd">::</span> <span class="n">howbig</span>
+<span class="kt">integer</span>                              <span class="kd">::</span> <span class="nb">stat</span>
+<span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="p">:),</span><span class="k">allocatable</span>         <span class="kd">::</span> <span class="k">value</span>
+
+<span class="k">   if</span><span class="p">(</span><span class="n">NAME</span><span class="p">.</span><span class="n">ne</span><span class="p">.</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="k">then</span>
+<span class="k">      call </span><span class="nb">get_environment_variable</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="n">howbig</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="nb">stat</span><span class="p">,</span> <span class="n">trim_name</span><span class="o">=</span><span class="p">.</span><span class="n">true</span><span class="p">.)</span>  <span class="c">! get length required to hold value</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">howbig</span><span class="p">.</span><span class="n">ne</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span><span class="k">then</span>
+<span class="k">         select case</span> <span class="p">(</span><span class="nb">stat</span><span class="p">)</span>
+         <span class="k">case</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>     <span class="c">! print *, NAME, &quot; is not defined in the environment. Strange...&quot;</span>
+            <span class="k">value</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+         <span class="k">case</span> <span class="p">(</span><span class="mi">2</span><span class="p">)</span>     <span class="c">! print *, &quot;This processor doesn&#39;t support environment variables. Boooh!&quot;</span>
+            <span class="k">value</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+         <span class="k">case </span><span class="n">default</span> <span class="c">! make string to hold value of sufficient size and get value</span>
+            <span class="k">if</span><span class="p">(</span><span class="nb">allocated</span><span class="p">(</span><span class="k">value</span><span class="p">))</span><span class="k">deallocate</span><span class="p">(</span><span class="k">value</span><span class="p">)</span>
+            <span class="k">allocate</span><span class="p">(</span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">howbig</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> <span class="kd">::</span> <span class="k">VALUE</span><span class="p">)</span>
+            <span class="k">call </span><span class="nb">get_environment_variable</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="k">value</span><span class="p">,</span><span class="n">status</span><span class="o">=</span><span class="nb">stat</span><span class="p">,</span><span class="n">trim_name</span><span class="o">=</span><span class="p">.</span><span class="n">true</span><span class="p">.)</span>
+            <span class="k">if</span><span class="p">(</span><span class="nb">stat</span><span class="p">.</span><span class="n">ne</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span><span class="k">VALUE</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+         <span class="k">end select</span>
+<span class="k">      else</span>
+<span class="k">         value</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+      <span class="k">endif</span>
+<span class="k">   else</span>
+<span class="k">      value</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+   <span class="k">endif</span>
+<span class="k">   if</span><span class="p">(</span><span class="k">value</span><span class="p">.</span><span class="n">eq</span><span class="p">.</span><span class="s1">&#39;&#39;</span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="nb">present</span><span class="p">(</span><span class="n">default</span><span class="p">))</span><span class="k">value</span><span class="o">=</span><span class="n">default</span>
+
+<span class="k">end function </span><span class="n">system_getenv</span>
 <span class="k">END PROGRAM </span><span class="n">roots</span>
 </pre></div>
 
@@ -932,7 +1074,7 @@ subroutine <a href='../proc/text.html'>text</a>(string)
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/cmacmackin/ford">FORD</a>
-             on 2021-07-26 09:23  
+             on 2021-07-31 16:59  
           </p>
         </div>
         <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> M_attr was developed by John S. Urban</p></div>

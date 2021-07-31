@@ -126,7 +126,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title=" 4.8% of total for programs.">16 statements</a>
+    title=" 7.5% of total for programs.">38 statements</a>
      </li> 
      
      
@@ -171,7 +171,9 @@
       
       <a class="list-group-item" href="../program/demo_attr.html#variable-expanded">expanded</a>
       
-      <a class="list-group-item" href="../program/demo_attr.html#variable-ios~2">ios</a>
+      <a class="list-group-item" href="../program/demo_attr.html#variable-icount">icount</a>
+      
+      <a class="list-group-item" href="../program/demo_attr.html#variable-ios~3">ios</a>
       
       <a class="list-group-item" href="../program/demo_attr.html#variable-line">line</a>
       
@@ -189,6 +191,18 @@
 
 
 
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#subs-0">Subroutines</a></h3></div>
+  <div class="list-group">
+    <div id="subs-0" class="panel-collapse collapse">
+      
+      <a class="list-group-item" href="../program/demo_attr.html#proc-args">args</a>
+      
+    </div>
+  </div>
+</div>
 
 
 
@@ -252,7 +266,9 @@
       
       <a class="list-group-item" href="../program/demo_attr.html#variable-expanded">expanded</a>
       
-      <a class="list-group-item" href="../program/demo_attr.html#variable-ios~2">ios</a>
+      <a class="list-group-item" href="../program/demo_attr.html#variable-icount">icount</a>
+      
+      <a class="list-group-item" href="../program/demo_attr.html#variable-ios~3">ios</a>
       
       <a class="list-group-item" href="../program/demo_attr.html#variable-line">line</a>
       
@@ -270,6 +286,18 @@
 
 
 
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#subs-1">Subroutines</a></h3></div>
+  <div class="list-group">
+    <div id="subs-1" class="panel-collapse collapse">
+      
+      <a class="list-group-item" href="../program/demo_attr.html#proc-args">args</a>
+      
+    </div>
+  </div>
+</div>
 
 
 
@@ -326,7 +354,21 @@
   
 <tr>
   
-  <td><span class="anchor" id="variable-ios~2"></span>integer</td>
+  <td><span class="anchor" id="variable-icount"></span>integer</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>icount</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-ios~3"></span>integer</td>
   
   
   <td></td><td>::</td>
@@ -367,6 +409,33 @@
 
 
     
+    <section>
+    <h2>Subroutines</h2>
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-args"></span><h3>
+subroutine <a href='../proc/args.html'>args</a>()
+    
+    
+   
+</h3></div>
+  <div class="panel-body">
+       
+    
+    
+    <h4>Arguments</h4>
+    
+      <em>None</em>
+    
+    
+
+  </div>
+  </div>
+
+    
+    </section>    
+    
     
     
     <section>
@@ -377,16 +446,42 @@
 <span class="k">implicit none</span>
 <span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>          <span class="kd">::</span> <span class="n">line</span>
 <span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="p">:),</span><span class="k">allocatable</span> <span class="kd">::</span> <span class="n">expanded</span>
-<span class="kt">integer</span> <span class="kd">::</span> <span class="n">ios</span>
+<span class="kt">integer</span>                      <span class="kd">::</span> <span class="n">icount</span>
+<span class="kt">integer</span>                      <span class="kd">::</span> <span class="n">ios</span>
    <span class="n">line</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
    <span class="k">call </span><span class="n">attr_update</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span><span class="nb">char</span><span class="p">(</span><span class="mi">27</span><span class="p">)</span><span class="o">//</span><span class="s1">&#39;[1m&#39;</span><span class="p">)</span>
-   <span class="k">do </span>
-<span class="k">      read</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">ios</span><span class="p">)</span><span class="n">line</span>
-      <span class="n">expanded</span> <span class="o">=</span> <span class="n">attr</span><span class="p">(</span><span class="nb">trim</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
-      <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">expanded</span>
-      <span class="k">if</span><span class="p">(</span><span class="n">ios</span><span class="p">.</span><span class="n">ne</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span><span class="k">exit</span>
-<span class="k">   enddo</span>
-<span class="k">   write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">,</span><span class="n">advance</span><span class="o">=</span><span class="s1">&#39;no&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;reset&gt;&#39;</span><span class="p">)</span>
+   <span class="n">icount</span><span class="o">=</span><span class="nb">command_argument_count</span><span class="p">()</span> <span class="c">! get number of arguments</span>
+   <span class="c">! if command arguments use those instead of reading stdin</span>
+   <span class="c">! example: light &#39;&lt;clear&gt;&lt;B&gt;&lt;w&gt;&lt;bo&gt;&lt;CSI&gt;12;36f Good Morning! &#39;</span>
+   <span class="k">if</span><span class="p">(</span><span class="n">icount</span><span class="p">.</span><span class="n">gt</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span><span class="k">then</span>
+<span class="k">      call </span><span class="n">args</span><span class="p">()</span>
+   <span class="k">else</span>
+<span class="k">      do </span>
+<span class="k">         read</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">ios</span><span class="p">)</span><span class="n">line</span>
+         <span class="k">if</span><span class="p">(</span><span class="n">ios</span><span class="p">.</span><span class="n">ne</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span><span class="k">exit</span>
+<span class="k">         </span><span class="n">expanded</span> <span class="o">=</span> <span class="n">attr</span><span class="p">(</span><span class="nb">trim</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
+         <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">expanded</span>
+      <span class="k">enddo</span>
+<span class="k">      write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">,</span><span class="n">advance</span><span class="o">=</span><span class="s1">&#39;no&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;reset&gt;&#39;</span><span class="p">)</span>
+   <span class="k">endif</span>
+<span class="k">contains</span>
+<span class="k">subroutine </span><span class="n">args</span><span class="p">()</span>
+<span class="k">implicit none</span>
+<span class="kt">integer</span>                      <span class="kd">::</span> <span class="n">i</span>
+<span class="kt">integer</span>                      <span class="kd">::</span> <span class="n">istat</span>
+<span class="kt">integer</span>                      <span class="kd">::</span> <span class="n">argument_length</span>
+<span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="p">:),</span><span class="k">allocatable</span> <span class="kd">::</span> <span class="n">argument</span>
+   <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">icount</span>
+       <span class="k">call </span><span class="nb">get_command_argument</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="n">i</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="n">argument_length</span><span class="p">)</span>
+       <span class="c">! allocate string array big enough to hold command line argument</span>
+       <span class="k">if</span><span class="p">(</span><span class="nb">allocated</span><span class="p">(</span><span class="n">argument</span><span class="p">))</span><span class="k">deallocate</span><span class="p">(</span><span class="n">argument</span><span class="p">)</span>
+       <span class="k">allocate</span><span class="p">(</span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="n">argument_length</span><span class="p">)</span> <span class="kd">::</span> <span class="n">argument</span><span class="p">)</span>
+       <span class="c">! read the argument </span>
+       <span class="k">call </span><span class="nb">get_command_argument</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">argument</span><span class="p">,</span><span class="n">status</span><span class="o">=</span><span class="n">istat</span><span class="p">)</span>
+       <span class="n">expanded</span> <span class="o">=</span> <span class="n">attr</span><span class="p">(</span><span class="nb">trim</span><span class="p">(</span><span class="n">argument</span><span class="p">))</span>
+       <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">expanded</span>
+   <span class="k">enddo</span>
+<span class="k">   end subroutine </span><span class="n">args</span>
 <span class="k">end program </span><span class="n">demo_attr</span>
 </pre></div>
 
@@ -408,7 +503,7 @@
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/cmacmackin/ford">FORD</a>
-             on 2021-07-26 09:23  
+             on 2021-07-31 16:59  
           </p>
         </div>
         <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> M_attr was developed by John S. Urban</p></div>

@@ -5,18 +5,25 @@
 !!
 !!##SYNOPSIS
 !!
-!!      use M_attr, only : attr, attr_mode, attr_update
+!!   core functions
 !!
-!!##MAJOR FEATURES
-!!   o Add text attributes with an HTML-like syntax using attr(3f).
-!!   o suppress the escape sequence output with attr_mode(3f).
-!!   o customize what strings are produced using attr_update(3f).
+!!      ! Add text attributes like color with an HTML-like syntax
+!!      use M_attr, only : attr
+!!      ! suppress the escape sequence output
+!!      use M_attr, only : attr_mode
+!!      ! customize what output strings are produced
+!!      use M_attr, only : attr_update
+!!
+!!   for generating standard messages
+!!
+!!      use M_attr, only : advice
+!!
 !!
 !!##DESCRIPTION
-!!    M_attr(3f) is a Fortran module that writes common ANSI escape
-!!    sequences which control terminal attributes like text color. It is
-!!    designed to allow the sequences to be suppressed and for the user
-!!    program to completely customize it -- the user can add, delete and
+!!    M_attr(3f) is a Fortran module that writes common ANSI escape sequences
+!!    which control terminal text attributes. It is designed to allow the
+!!    sequences to be suppressed when desired and for the user program to
+!!    completely customize the keywords -- the user can add, delete and
 !!    replace the sequences associated with a keyword without changing
 !!    the code.
 !!
@@ -30,14 +37,13 @@
 !!    it back to plain text( see app/plain.f90), or displays it to a screen
 !!    in color(see app/light.f90) or perhaps converts it to another format.
 !!
-!!    By making each line self-contained by default this can still be done
+!!    By making each line self-contained (by default) this can still be done
 !!    with any arbitrarily selected group of lines from the file.
 !!
-!!    So in addition to printing colored lines to your screen this module
-!!    makes it trivial to read specially-formatted data from a file like a
-!!    message catalog (perhaps with various versions in different languages)
-!!    and colorize it or display it as plain text using the included attr(3f)
-!!    procedure, for example.
+!!    So this module makes it trivial to read specially-formatted data
+!!    from a file like a message catalog (perhaps with various versions
+!!    in different languages) and colorize it or display it as plain text
+!!    using the attr(3f) procedure.
 !!
 !!##LIMITATIONS
 !!   o colors are not nestable.
@@ -96,7 +102,7 @@
 !!     end program demo_M_attr
 !!
 !!##AUTHOR
-!!    John S. Urban, 2020
+!!    John S. Urban, 2021
 !!
 !!##LICENSE
 !!    MIT
@@ -117,6 +123,7 @@ private
 public  :: attr
 public  :: attr_mode
 public  :: attr_update
+public  :: advice
 
 private :: attr_matrix
 private :: attr_scalar
@@ -147,9 +154,41 @@ character(len=:),allocatable,save :: mode
 
 ! mnemonics
 character(len=*),parameter  :: NL=new_line('a')                     ! New line character.
-character(len=*),parameter  :: ESCAPE=achar(27)                     ! "\" character.
+! DECIMAL
+! *-------*-------*-------*-------*-------*-------*-------*-------*
+! | 00 nul| 01 soh| 02 stx| 03 etx| 04 eot| 05 enq| 06 ack| 07 bel|
+! | 08 bs | 09 ht | 10 nl | 11 vt | 12 np | 13 cr | 14 so | 15 si |
+! | 16 dle| 17 dc1| 18 dc2| 19 dc3| 20 dc4| 21 nak| 22 syn| 23 etb|
+! | 24 can| 25 em | 26 sub| 27 esc| 28 fs | 29 gs | 30 rs | 31 us |
+! | 32 sp | 33  ! | 34  " | 35  # | 36  $ | 37  % | 38  & | 39  ' |
+! | 40  ( | 41  ) | 42  * | 43  + | 44  , | 45  - | 46  . | 47  / |
+! | 48  0 | 49  1 | 50  2 | 51  3 | 52  4 | 53  5 | 54  6 | 55  7 |
+! | 56  8 | 57  9 | 58  : | 59  ; | 60  < | 61  = | 62  > | 63  ? |
+! | 64  @ | 65  A | 66  B | 67  C | 68  D | 69  E | 70  F | 71  G |
+! | 72  H | 73  I | 74  J | 75  K | 76  L | 77  M | 78  N | 79  O |
+! | 80  P | 81  Q | 82  R | 83  S | 84  T | 85  U | 86  V | 87  W |
+! | 88  X | 89  Y | 90  Z | 91  [ | 92  \ | 93  ] | 94  ^ | 95  _ |
+! | 96  ` | 97  a | 98  b | 99  c |100  d |101  e |102  f |103  g |
+! |104  h |105  i |106  j |107  k |108  l |109  m |110  n |111  o |
+! |112  p |113  q |114  r |115  s |116  t |117  u |118  v |119  w |
+! |120  x |121  y |122  z |123  { |124  | |125  } |126  ~ |127 del|
+! *-------*-------*-------*-------*-------*-------*-------*-------*
+character(len=*),parameter  :: nul=achar(0)
+character(len=*),parameter  :: bel =achar(7)   ! ^G beeps;
+character(len=*),parameter  :: bs =achar(8)    ! ^H backspaces one column (but not past the beginning of the line);
+character(len=*),parameter  :: ht =achar(9)    ! ^I goes to next tab stop or to the end of the line if there is no earlier tab stop
+character(len=*),parameter  :: lf =achar(10)   ! ^J
+character(len=*),parameter  :: vt =achar(11)   ! ^K
+character(len=*),parameter  :: ff =achar(12)   ! ^L all give a linefeed, and if LF/NL (new-line mode) is set also a carriage return
+character(len=*),parameter  :: cr =achar(13)   ! ^M gives a carriage return;
+character(len=*),parameter  :: so =achar(14)   ! ^N activates the G1 character set;
+character(len=*),parameter  :: si =achar(15)   ! ^O activates the G0 character set;
+character(len=*),parameter  :: can =achar(24)  ! ^X interrupt escape sequences;
+character(len=*),parameter  :: sub=achar(26)   ! ^Z interrupt escape sequences;
+character(len=*),parameter  :: esc =achar(27)  ! ^[ starts an escape sequence;
+character(len=*),parameter  :: del =achar(127) ! is ignored;
 ! codes
-character(len=*),parameter  :: CODE_START=ESCAPE//'['               ! Start ANSI code, "\[".
+character(len=*),parameter  :: CODE_START=esc//'['               ! Start ANSI code, "\[".
 character(len=*),parameter  :: CODE_END='m'                         ! End ANSI code, "m".
 character(len=*),parameter  :: CODE_RESET=CODE_START//'0'//CODE_END ! Clear all styles, "\[0m".
 
@@ -195,7 +234,7 @@ character(len=*),parameter,public :: bold        =  CODE_START//ON//AT_BOLD//COD
 character(len=*),parameter,public :: italic      =  CODE_START//ON//AT_ITALIC//CODE_END
 character(len=*),parameter,public :: inverse     =  CODE_START//ON//AT_INVERSE//CODE_END
 character(len=*),parameter,public :: underline   =  CODE_START//ON//AT_UNDERLINE//CODE_END
-character(len=*),parameter,public :: unbold      =  CODE_START//OFF//AT_BOLD//CODE_END
+character(len=*),parameter,public :: unbold      =  CODE_START//'22'//CODE_END
 character(len=*),parameter,public :: unitalic    =  CODE_START//OFF//AT_ITALIC//CODE_END
 character(len=*),parameter,public :: uninverse   =  CODE_START//OFF//AT_INVERSE//CODE_END
 character(len=*),parameter,public :: ununderline =  CODE_START//OFF//AT_UNDERLINE//CODE_END
@@ -205,7 +244,6 @@ character(len=*),parameter,public :: clear       =  HOME_DISPLAY//CLEAR_DISPLAY
 
 
 contains
-
 !>
 !!##NAME
 !!    attr(3f) - [M_attr] substitute escape sequences for HTML-like syntax
@@ -264,18 +302,45 @@ contains
 !!        y,         yellow,    Y,  YELLOW
 !!        e,         ebony,     E,  EBONY
 !!        w,         white,     W,  WHITE
+!!
 !!      attributes:
 !!        it,        italic
 !!        bo,        bold
 !!        un,        underline
-!!       other:
+!!
+!!      basic control characters:
+!!       nul
+!!       bel  (0x07, ^G) beeps;
+!!       bs   (0x08, ^H) backspaces one column (but not past the beginning of
+!!                       the line);
+!!       ht   (0x09, ^I) goes to the next tab stop or to the end of the line if
+!!                       there is no earlier tab stop;
+!!       lf   (0x0A, ^J),
+!!       vt   (0x0B, ^K)
+!!       ff   (0x0C, ^L) all give a linefeed, and if LF/NL (new-line mode) is
+!!                       set also a carriage return
+!!       cr   (0x0D, ^M) gives a carriage return;
+!!       so   (0x0E, ^N) activates the G1 character set;
+!!       si   (0x0F, ^O) activates the G0 character set;
+!!       can  (0x18, ^X) and SUB (0x1A, ^Z) interrupt escape sequences;
+!!       sub
+!!       esc  (0x1B, ^[) starts an escape sequence;
+!!       del  (0x7F) is ignored;
+!!
+!!      other:
 !!        clear
-!!        escape
 !!        default
 !!        reset
 !!        gt
 !!        lt
+!!        save,DECSC     Save  current state (cursor coordinates, attributes,
+!!                       character sets pointed at by G0, G1).
+!!        restore,DECRC  Restore state most recently saved by ESC 7.
+!!        CSI            "Control Sequence Introducer"(0x9B) is equivalent to
+!!                       "ESC [".
+!!
 !!      dual-value (one for color, one for mono):
+!!
 !!        write(*,*)attr('<ERROR>an error message')
 !!        write(*,*)attr('<WARNING>a warning message')
 !!        write(*,*)attr('<INFO>an informational message')
@@ -351,20 +416,17 @@ contains
 !!       write(*,'(a)') attr('<bo><ul><it><w>WHITE</w> and <e>EBONY</e></ul></bo>')
 !!
 !!       write(*,'(a)') attr('Adding <in>inverse</in>')
-!!       write(*,'(a)') attr(&
-!!        &'<in><bo><ul><it><r>RED</r>,<g>GREEN</g>,&
+!!       write(*,'(a)') attr('<in><bo><ul><it><r>RED</r>,<g>GREEN</g>,&
 !!        &<b>BLUE</b></it></ul></bo></in>')
-!!       write(*,'(a)') attr(&
-!!        &'<in><bo><ul><it><c>CYAN</c>,<m>MAGENTA</g>,&
+!!       write(*,'(a)') attr('<in><bo><ul><it><c>CYAN</c>,<m>MAGENTA</g>,&
 !!        &<y>YELLOW</it></y></ul></bo></in>')
 !!       write(*,'(a)') attr(&
 !!        &'<in><bo><ul><it><w>WHITE</w> and <e>EBONY</e></ul></bo></in>')
 !!     end subroutine printstuff
-!!
 !!     end program demo_esc
 !!
 !!##AUTHOR
-!!    John S. Urban, 2020
+!!    John S. Urban, 2021
 !!
 !!##LICENSE
 !!    MIT
@@ -431,7 +493,7 @@ do
    end select
    if(i >= maxlen+1)exit
 enddo
-if( (index(expanded,escape).ne.0).and.(clear_at_end))then
+if( (index(expanded,esc).ne.0).and.(clear_at_end))then
    if((mode.ne.'raw').and.(mode.ne.'plain'))then
       expanded=expanded//CODE_RESET                                   ! Clear all styles
    endif
@@ -444,8 +506,8 @@ character(len=*),intent(in)  :: string(:)
 logical,intent(in),optional  :: reset
 integer,intent(in),optional  :: chars
 character(len=:),allocatable :: expanded(:)
-!gfortran does not return allocatable array from a function properly, but works with subroutine
-call kludge_bug(string,reset,chars,expanded)
+   ! gfortran does not return allocatable array from a function properly, but works with subroutine
+   call kludge_bug(string,reset,chars,expanded)
 end function attr_matrix
 
 subroutine kludge_bug(string,reset,chars,expanded)
@@ -461,18 +523,19 @@ integer                      :: len_local
 integer                      :: len_local2
 
 allocate(character(len=0) :: expanded(0))
-
 if(present(chars))then
    right=chars
 else
    right=len(string)
 endif
+
 if(.not.allocated(mode))then  ! set substitution mode
    mode='color' ! 'color'|'raw'|'plain'
    call vt102()
 endif
 
 do i=1,size(string)
+
    if(mode.eq.'color')then
       len_local2=len_trim(attr_scalar(string(i)))
       mode='plain'
@@ -482,10 +545,12 @@ do i=1,size(string)
    else
       hold=string(i)
    endif
-   hold=attr_scalar(hold,reset=reset)
+
+   hold=trim(attr_scalar(hold,reset=reset))
    width=max(len(hold),len(expanded))
    expanded=[character(len=width) :: expanded,hold]
 enddo
+
 end subroutine kludge_bug
 
 function attr_scalar_width(string,reset,chars) result (expanded)
@@ -504,26 +569,18 @@ subroutine vt102()
 
    call wipe_dictionary()
    ! insert and replace entries
-
    call attr_update('bold',bold)
    call attr_update('/bold',unbold)
    call attr_update('bo',bold)
    call attr_update('/bo',unbold)
-   call attr_update('livid',bold)
-   call attr_update('/livid',unbold)
-   call attr_update('li',bold)
-   call attr_update('/li',unbold)
-
    call attr_update('italic',italic)
    call attr_update('/italic',unitalic)
    call attr_update('it',italic)
    call attr_update('/it',unitalic)
-
    call attr_update('inverse',inverse)
    call attr_update('/inverse',uninverse)
    call attr_update('in',inverse)
    call attr_update('/in',uninverse)
-
    call attr_update('underline',underline)
    call attr_update('/underline',ununderline)
    call attr_update('un',underline)
@@ -531,12 +588,32 @@ subroutine vt102()
    call attr_update('ul',underline)
    call attr_update('/ul',ununderline)
 
-   call attr_update('attr',ESCAPE)
-   call attr_update('escape',ESCAPE)
+   call attr_update('bell',BELL)
+   call attr_update('nul', nul )
+   call attr_update('bel', bel )
+   call attr_update('bs', bs )
+   call attr_update('ht', ht )
+   call attr_update('lf', lf )
+   call attr_update('vt', vt )
+   call attr_update('ff', ff )
+   call attr_update('cr', cr )
+   call attr_update('so', so )
+   call attr_update('si', si )
+   call attr_update('can', can )
+   call attr_update('sub', sub )
+   call attr_update('esc', esc )
+   call attr_update('escape',esc)
+   call attr_update('del', del )
+
+   call attr_update('save',esc//'7')
+   call attr_update('DECSC',esc//'7')
+   call attr_update('restore',esc//'8')
+   call attr_update('DECRC',esc//'8')
+   call attr_update('CSI',esc//'[')
 
    call attr_update('clear',clear)
    call attr_update('reset',reset)
-   call attr_update('bell',BELL)
+
    call attr_update('gt','>')
    call attr_update('lt','<')
 
@@ -616,9 +693,10 @@ subroutine vt102()
        call attr_update('BLACK',bg_ebony)
        call attr_update('/BLACK',bg_default)
 
-   call attr_update('ERROR',fg_red//bold//bg_ebony//'error:'//bg_default//fg_default,'ERROR:')
-   call attr_update('WARNING',fg_magenta//bold//bg_ebony//'warning:'//bg_default//fg_default,'WARNING:')
-   call attr_update('INFO',fg_yellow//bold//bg_ebony//'info:'//bg_default//fg_default,'INFO:')
+   ! compound
+   call attr_update('ERROR',fg_red//bold//bg_ebony     //':error:  '//bg_default//fg_default,':error:')
+   call attr_update('WARNING',fg_yellow//bold//bg_ebony//':warning:'//bg_default//fg_default,':warning:')
+   call attr_update('INFO',fg_green//bold//bg_ebony    //':info:   '//bg_default//fg_default,':info:')
 
 end subroutine vt102
 !>
@@ -684,7 +762,7 @@ end subroutine vt102
 !!     end program demo_attr_mode
 !!
 !!##AUTHOR
-!!    John S. Urban, 2020
+!!    John S. Urban, 2021
 !!
 !!##LICENSE
 !!    MIT
@@ -735,7 +813,6 @@ end subroutine wipe_dictionary
 !!
 !!##SYNOPSIS
 !!
-!!
 !!    subroutine attr_update(key,val)
 !!
 !!     character(len=*),intent(in)           :: key
@@ -772,45 +849,36 @@ end subroutine wipe_dictionary
 !!
 !!##EXAMPLE
 !!
-!!
 !!    Sample program
 !!
 !!      program demo_update
 !!      use M_attr, only : attr, attr_update
-!!         write(*,'(a)') attr('<clear>TEST CUSTOMIZED:')
-!!
+!!         write(*,'(a)') attr('<clear>TEST CUSTOMIZATIONS:')
 !!         ! add custom keywords
 !!         call attr_update('blink',char(27)//'[5m')
 !!         call attr_update('/blink',char(27)//'[38m')
-!!
 !!         write(*,*)
 !!         write(*,'(a)') attr('<blink>Items for Friday</blink>')
-!!
 !!         call attr_update('ouch',attr( &
 !!         ' <R><bo><w>BIG mistake!</R></w> '))
 !!         write(*,*)
 !!         write(*,'(a)') attr('<ouch> Did not see that coming.')
-!!
 !!         write(*,*)
 !!         write(*,'(a)') attr( &
 !!         'ORIGINALLY: <r>Apple</r>, <b>Sky</b>, <g>Grass</g>')
-!!
 !!         ! delete
 !!         call attr_update('r')
 !!         call attr_update('/r')
-!!
 !!         ! replace (or create)
 !!         call attr_update('b','<<<<')
 !!         call attr_update('/b','>>>>')
 !!         write(*,*)
 !!         write(*,'(a)') attr( &
 !!         'CUSTOMIZED: <r>Apple</r>, <b>Sky</b>, <g>Grass</g>')
-!!
 !!      end program demo_update
 !!
-!!
 !!##AUTHOR
-!!    John S. Urban, 2020
+!!    John S. Urban, 2021
 !!
 !!##LICENSE
 !!    MIT
@@ -821,6 +889,11 @@ character(len=*),intent(in),optional  :: mono_valin
 integer                               :: place
 character(len=:),allocatable          :: val
 character(len=:),allocatable          :: mono_val
+
+if(.not.allocated(mode))then  ! set substitution mode
+   mode='color' ! 'color'|'raw'|'plain'
+   call vt102()
+endif
 
 if(present(mono_valin))then
    mono_val=mono_valin
@@ -899,7 +972,6 @@ integer                                 :: error
 
    LOOP: block
    do i=1,maxtry
-
       if(value.eq.list(PLACE))then
          exit LOOP
       else if(value.gt.list(place))then
@@ -907,7 +979,6 @@ integer                                 :: error
       else
          imin=place+1
       endif
-
       if(imin.gt.imax)then
          place=-imin
          if(iabs(place).gt.arraysize)then ! ran off end of list. Where new value should go or an unsorted input array'
@@ -915,15 +986,12 @@ integer                                 :: error
          endif
          exit LOOP
       endif
-
       place=(imax+imin)/2
-
       if(place.gt.arraysize.or.place.le.0)then
          message='*locate* error: search is out of bounds of list. Probably an unsorted input array'
          error=-1
          exit LOOP
       endif
-
    enddo
    message='*locate* exceeded allowed tries. Probably an unsorted input array'
    endblock LOOP
@@ -981,21 +1049,17 @@ integer                      :: end
 end subroutine replace
 
 subroutine insert(list,value,place)
-
 character(len=*),intent(in)  :: value
 character(len=:),allocatable :: list(:)
 character(len=:),allocatable :: kludge(:)
 integer,intent(in)           :: place
 integer                      :: ii
 integer                      :: end
-
    if(.not.allocated(list))then
       list=[character(len=max(len_trim(value),2)) :: ]
    endif
-
    ii=max(len_trim(value),len(list),2)
    end=size(list)
-
    if(end.eq.0)then                                          ! empty array
       list=[character(len=ii) :: value ]
    elseif(place.eq.1)then                                    ! put in front of array
@@ -1010,7 +1074,113 @@ integer                      :: end
    else                                                      ! index out of range
       write(stderr,*)'*insert* error: index out of range. end=',end,' index=',place,' value=',value
    endif
-
 end subroutine insert
+!>
+!! !>
+!!##NAME
+!!    advice(3f) - [M_attr] print messages using a standard format including time and program name
+!!    (LICENSE:MIT)
+!!
+!!##SYNOPSIS
+!!
+!!     subroutine advice(message)
+!!
+!!        character(len=*),intent(in),optional :: type
+!!        character(len=*),intent(in),optional :: message
+!!
+!!##DESCRIPTION
+!!    Display a message to stderr prefixed with the name of the
+!!    calling program and a timestamp when the TYPE is specified as
+!!    any of 'error','warn', or 'info'.  It also allows the keywords
+!!    <ARG0>,<TZ>,<YE>,<MO>,<DA>,<HR>,<MI>,<SE>,<MS> to be used in
+!!    the message (which is passed to ATTR(3f)). Note that time stamp
+!!    keywords will only be updated when using ADVICE(3f).
+!!
+!!##OPTIONS
+!!    TYPE     if present and one of 'warn','message','info' a predefined
+!!             message is written to stderr of the form
+!!
+!!              ** (<ARG0>): type **: <HR>:<MI>:<SE>.<MS>: message
+!!
+!!    MESSAGE  the user-supplied message to display via a call to ATTR(3f)
+!!
+!!    if no parameters are supplied the macros are updated but no output is generated.
+!!
+!!##EXAMPLE
+!!
+!!    Sample program
+!!
+!!     program demo_advice
+!!     use M_attr, only : advice, attr
+!!     implicit none
+!!        call advice("error", "Say you didn't!")
+!!        call advice("warn",  "I wouldn't if I were you, Will Robinson.")
+!!        call advice("info",  "I fixed that for you, but it was a bad idea.")
+!!        call advice("???    ",  "not today you don't")
+!!        ! call to just update the macros
+!!        call advice()
+!!        ! conventional call to ATTR(3f) using the ADVICE(3f)-defined macros
+!!        write(*,*)attr('<bo>The year was <g><YE></g>, the month was <g><MO></g>')
+!!     end program demo_advice
+!!   Results:
+!!
+!!    ** (demo_advice): error   **: 16:33:50.0300: Say you didn't!
+!!    ** (demo_advice): warning **: 16:33:50.0301: I wouldn't if I were you, Will Robinson.
+!!    ** (demo_advice): info    **: 16:33:50.0301: I fixed that for you, but it was a bad idea.
+!!    ** (demo_advice): ???     **: 16:33:50.0301: not today you don't
+!!        The year was 2021, the month was 7
+!!
+!!##AUTHOR
+!!    John S. Urban, 2021
+!!
+!!##LICENSE
+!!    MIT
+subroutine advice(type,message)
+! TODO: could add a warning level to ignore info, or info|warning, or all
+implicit none
+character(len=*),intent(in),optional :: type
+character(len=*),intent(in),optional :: message
+character(len=8)     :: dt
+character(len=10)    :: tm
+character(len=5)     :: zone
+integer,dimension(8) :: values
+character(len=4096)  :: arg0
+character(len=4096)  :: new_message
+   call date_and_time(dt,tm,zone,values)
+   call attr_update('YE',dt(1:4))
+   call attr_update('MO',dt(5:6))
+   call attr_update('DA',dt(7:8))
+   call attr_update('HR',tm(1:2))
+   call attr_update('MI',tm(3:4))
+   call attr_update('SE',tm(5:6))
+   call attr_update('MS',tm(8:10))
+   call attr_update('TZ',zone)
+   call get_command_argument(0,arg0)
+   if(index(arg0,'/').ne.0) arg0=arg0(index(arg0,'/',back=.true.)+1:)
+   if(index(arg0,'\').ne.0) arg0=arg0(index(arg0,'\',back=.true.)+1:)
+   call attr_update('ARG0',arg0)
+   if(present(type))then
+      new_message= ' <b>'//tm(1:2)//':'//tm(3:4)//':'//tm(5:6)//'.'//tm(8:10)//'</b>: '//message
+      select case(type)
+
+      case('warn','WARN','warning','WARNING')
+       new_message= '** ('//trim(arg0)//'): <bo><y>warning</y> **:'//new_message
+
+      case('info','INFO','information','INFORMATION')
+       new_message= '** ('//trim(arg0)//'): <bo><g>info   </g> **:'//new_message
+
+      case('error','ERROR')
+       new_message= '** ('//trim(arg0)//'): <bo><r>error  </r> **:'//new_message
+
+      case default
+       new_message= '** ('//trim(arg0)//'): <bo><c>'//type//'</c> **:'//new_message
+
+      end select
+    write(stderr,'(a)')attr(trim(new_message))
+
+   elseif(present(message))then
+    write(stderr,'(a)')attr(trim(message))
+   endif
+end subroutine advice
 
 end module M_attr

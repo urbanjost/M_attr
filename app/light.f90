@@ -16,9 +16,9 @@ integer                      :: ios
    else
       do 
          read(*,'(a)',iostat=ios)line
+         if(ios.ne.0)exit
          expanded = attr(trim(line))
          write(*,'(a)') expanded
-         if(ios.ne.0)exit
       enddo
       write(*,'(a)',advance='no') attr('<reset>')
    endif

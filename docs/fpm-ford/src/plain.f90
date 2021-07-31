@@ -8,8 +8,8 @@ integer :: ios
    call attr_mode(manner='plain')
    do 
       read(*,'(a)',iostat=ios)line
-      write(*,'(a)') attr(trim(line))
       if(ios.ne.0)exit
+      write(*,'(a)') attr(trim(line))
    enddo
    write(*,'(a)',advance='no') attr('<reset>')
 end program demo_attr

@@ -3,9 +3,9 @@
              write(*,'(a)') attr('<clear>TEST CUSTOMIZED:')
              ! add custom keywords
              call attr_update('blink',char(27)//'[5m')
-             call attr_update('/blink',char(27)//'[38m')
+             call attr_update('/blink',char(27)//'[25m')
 
-             write(*,'(a)') attr('<blink>Items for Friday</blink>')
+             write(*,'(a)') attr('<blink>Items for Friday</blink> not before')
 
              write(*,'(a)',advance='no') attr('<r>RED</r>,')
              write(*,'(a)',advance='no') attr('<b>BLUE</b>,')

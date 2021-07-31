@@ -48,14 +48,11 @@
              write(*,'(a)') attr('<bo><ul><it><w>WHITE</w> and <e>EBONY</e></ul></bo>')
 
              write(*,'(a)') attr('Adding <in>inverse</in>')
-             write(*,'(a)') attr(&
-              &'<in><bo><ul><it><r>RED</r>,<g>GREEN</g>,&
+             write(*,'(a)') attr('<in><bo><ul><it><r>RED</r>,<g>GREEN</g>,&
               &<b>BLUE</b></it></ul></bo></in>')
-             write(*,'(a)') attr(&
-              &'<in><bo><ul><it><c>CYAN</c>,<m>MAGENTA</g>,&
+             write(*,'(a)') attr('<in><bo><ul><it><c>CYAN</c>,<m>MAGENTA</g>,&
               &<y>YELLOW</it></y></ul></bo></in>')
              write(*,'(a)') attr(&
               &'<in><bo><ul><it><w>WHITE</w> and <e>EBONY</e></ul></bo></in>')
            end subroutine printstuff
-
            end program demo_esc
