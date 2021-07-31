@@ -5,19 +5,25 @@
 !!
 !!##SYNOPSIS
 !!
-!!      use M_attr, only : attr, attr_mode, attr_update
+!!   core functions
+!!
+!!      ! Add text attributes like color with an HTML-like syntax
+!!      use M_attr, only : attr
+!!      ! suppress the escape sequence output
+!!      use M_attr, only : attr_mode
+!!      ! customize what output strings are produced
+!!      use M_attr, only : attr_update
+!!
+!!   for generating standard messages
+!!
 !!      use M_attr, only : advice
 !!
-!!##MAJOR FEATURES
-!!   o Add text attributes with an HTML-like syntax using attr(3f).
-!!   o suppress the escape sequence output with attr_mode(3f).
-!!   o customize what strings are produced using attr_update(3f).
 !!
 !!##DESCRIPTION
-!!    M_attr(3f) is a Fortran module that writes common ANSI escape
-!!    sequences which control terminal attributes like text color. It is
-!!    designed to allow the sequences to be suppressed and for the user
-!!    program to completely customize it -- the user can add, delete and
+!!    M_attr(3f) is a Fortran module that writes common ANSI escape sequences
+!!    which control terminal text attributes. It is designed to allow the
+!!    sequences to be suppressed when desired and for the user program to
+!!    completely customize the keywords -- the user can add, delete and
 !!    replace the sequences associated with a keyword without changing
 !!    the code.
 !!
@@ -34,11 +40,10 @@
 !!    By making each line self-contained (by default) this can still be done
 !!    with any arbitrarily selected group of lines from the file.
 !!
-!!    So in addition to printing colored lines to your screen this module
-!!    makes it trivial to read specially-formatted data from a file like a
-!!    message catalog (perhaps with various versions in different languages)
-!!    and colorize it or display it as plain text using the included attr(3f)
-!!    procedure, for example.
+!!    So this module makes it trivial to read specially-formatted data
+!!    from a file like a message catalog (perhaps with various versions
+!!    in different languages) and colorize it or display it as plain text
+!!    using the attr(3f) procedure.
 !!
 !!##LIMITATIONS
 !!   o colors are not nestable.

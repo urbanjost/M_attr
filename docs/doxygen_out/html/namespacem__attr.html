@@ -267,22 +267,21 @@ NAME</h2>
 <p>M_attr(3f) - [M_attr] control text attributes on terminals (LICENSE:MIT)</p>
 <h2><a class="anchor" id="autotoc_md1"></a>
 SYNOPSIS</h2>
-<pre class="fragment">  use M_attr, only : attr, attr_mode, attr_update
-  use M_attr, only : advice
-</pre><h2><a class="anchor" id="autotoc_md2"></a>
-MAJOR FEATURES</h2>
-<p>o Add text attributes with an HTML-like syntax using attr(3f). o suppress the escape sequence output with attr_mode(3f). o customize what strings are produced using attr_update(3f).</p>
-<h2><a class="anchor" id="autotoc_md3"></a>
+<p>core functions</p>
+<p>! Add text attributes like color with an HTML-like syntax use M_attr, only : attr ! suppress the escape sequence output use M_attr, only : attr_mode ! customize what output strings are produced use M_attr, only : attr_update</p>
+<p>for generating standard messages</p>
+<p>use M_attr, only : advice</p>
+<h2><a class="anchor" id="autotoc_md2"></a>
 DESCRIPTION</h2>
-<p>M_attr(3f) is a Fortran module that writes common ANSI escape sequences which control terminal attributes like text color. It is designed to allow the sequences to be suppressed and for the user program to completely customize it &ndash; the user can add, delete and replace the sequences associated with a keyword without changing the code.</p>
+<p>M_attr(3f) is a Fortran module that writes common ANSI escape sequences which control terminal text attributes. It is designed to allow the sequences to be suppressed when desired and for the user program to completely customize the keywords &ndash; the user can add, delete and replace the sequences associated with a keyword without changing the code.</p>
 <p>Attributes are specified by writing lines with HTML-like structure.</p>
 <p>The advantage of the approach of replacing in-band escape sequences with formatting directives contained on each line is that it is easy to turn off when running batch, but more importantly your program can be run in "raw" mode and write a clean text file with the directives in it that can then be read back in by a simple filter program that strips it back to plain text( see app/plain.f90), or displays it to a screen in color(see app/light.f90) or perhaps converts it to another format.</p>
 <p>By making each line self-contained (by default) this can still be done with any arbitrarily selected group of lines from the file.</p>
-<p>So in addition to printing colored lines to your screen this module makes it trivial to read specially-formatted data from a file like a message catalog (perhaps with various versions in different languages) and colorize it or display it as plain text using the included attr(3f) procedure, for example.</p>
-<h2><a class="anchor" id="autotoc_md4"></a>
+<p>So this module makes it trivial to read specially-formatted data from a file like a message catalog (perhaps with various versions in different languages) and colorize it or display it as plain text using the attr(3f) procedure.</p>
+<h2><a class="anchor" id="autotoc_md3"></a>
 LIMITATIONS</h2>
 <p>o colors are not nestable. o keywords are case-sensitive, o ANSI escape sequences are not universally supported by all terminal emulators; and normally should be suppressed when not going to a tty device. Therefore, you should use M_system::system_istty(3f) or the common Fortran extension ISATTY() to set the default to "plain" instead of "color" when the output file is not a conforming terminal. On basic MSWindows console windows, it is best to use Windows 10+ and/or the Linux mode; you may have to enable ANSI escape sequence mode on MSWindows. It does work as-is with CygWin and MinGW and Putty windows and mintty(1) as tested.</p>
-<h2><a class="anchor" id="autotoc_md5"></a>
+<h2><a class="anchor" id="autotoc_md4"></a>
 EXAMPLE</h2>
 <pre class="fragment">Sample program
 
@@ -323,13 +322,13 @@ EXAMPLE</h2>
     write(*,'(a)')attr('&lt;MYERROR&gt; my custom message style')
 
  end program demo_M_attr
-</pre><h2><a class="anchor" id="autotoc_md6"></a>
+</pre><h2><a class="anchor" id="autotoc_md5"></a>
 AUTHOR</h2>
 <p>John S. Urban, 2021</p>
-<h2><a class="anchor" id="autotoc_md7"></a>
+<h2><a class="anchor" id="autotoc_md6"></a>
 LICENSE</h2>
 <p>MIT</p>
-<h2><a class="anchor" id="autotoc_md8"></a>
+<h2><a class="anchor" id="autotoc_md7"></a>
 SEE ALSO</h2>
 <p>attr(3f), attr_mode(3f), attr_update(3f)</p>
 <p>Related information:</p>
@@ -362,27 +361,27 @@ SEE ALSO</h2>
 </div><div class="memdoc">
 
 <p>!&gt; </p>
-<h2><a class="anchor" id="autotoc_md34"></a>
+<h2><a class="anchor" id="autotoc_md33"></a>
 NAME</h2>
 <p>advice(3f) - [M_attr] print messages using a standard format including time and program name (LICENSE:MIT)</p>
-<h2><a class="anchor" id="autotoc_md35"></a>
+<h2><a class="anchor" id="autotoc_md34"></a>
 SYNOPSIS</h2>
 <pre class="fragment"> subroutine advice(message)
 
     character(len=*),intent(in),optional :: type
     character(len=*),intent(in),optional :: message
-</pre><h2><a class="anchor" id="autotoc_md36"></a>
+</pre><h2><a class="anchor" id="autotoc_md35"></a>
 DESCRIPTION</h2>
 <p>Display a message to stderr prefixed with the name of the calling program and a timestamp when the TYPE is specified as any of 'error','warn', or 'info'. It also allows the keywords &lt;ARG0&gt;,&lt;TZ&gt;,&lt;YE&gt;,&lt;MO&gt;,&lt;DA&gt;,</p><hr  />
 <p>,&lt;MI&gt;,&lt;SE&gt;,&lt;MS&gt; to be used in the message (which is passed to ATTR(3f)). Note that time stamp keywords will only be updated when using ADVICE(3f).</p>
-<h2><a class="anchor" id="autotoc_md37"></a>
+<h2><a class="anchor" id="autotoc_md36"></a>
 OPTIONS</h2>
 <p>TYPE if present and one of 'warn','message','info' a predefined message is written to stderr of the form</p>
 <p>** (&lt;ARG0&gt;): type **: </p><hr  />
 <p>:&lt;MI&gt;:&lt;SE&gt;.&lt;MS&gt;: message</p>
 <p>MESSAGE the user-supplied message to display via a call to ATTR(3f)</p>
 <p>if no parameters are supplied the macros are updated but no output is generated.</p>
-<h2><a class="anchor" id="autotoc_md38"></a>
+<h2><a class="anchor" id="autotoc_md37"></a>
 EXAMPLE</h2>
 <pre class="fragment">Sample program
 
@@ -400,10 +399,10 @@ EXAMPLE</h2>
  end program demo_advice
 </pre><p> Results:</p>
 <p>** (demo_advice): error **: 16:33:50.0300: Say you didn't! ** (demo_advice): warning **: 16:33:50.0301: I wouldn't if I were you, Will Robinson. ** (demo_advice): info **: 16:33:50.0301: I fixed that for you, but it was a bad idea. ** (demo_advice): ??? **: 16:33:50.0301: not today you don't The year was 2021, the month was 7</p>
-<h2><a class="anchor" id="autotoc_md39"></a>
+<h2><a class="anchor" id="autotoc_md38"></a>
 AUTHOR</h2>
 <p>John S. Urban, 2021</p>
-<h2><a class="anchor" id="autotoc_md40"></a>
+<h2><a class="anchor" id="autotoc_md39"></a>
 LICENSE</h2>
 <p>MIT </p>
 
@@ -514,22 +513,22 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p>!&gt; </p>
-<h2><a class="anchor" id="autotoc_md19"></a>
+<h2><a class="anchor" id="autotoc_md18"></a>
 NAME</h2>
 <p>attr_mode(3f) - [M_attr] select processing mode for output from attr(3f) (LICENSE:MIT)</p>
-<h2><a class="anchor" id="autotoc_md20"></a>
+<h2><a class="anchor" id="autotoc_md19"></a>
 SYNOPSIS</h2>
 <pre class="fragment"> subroutine attr_mode(manner)
 
     character(len=*),intent(in) :: manner
-</pre><h2><a class="anchor" id="autotoc_md21"></a>
+</pre><h2><a class="anchor" id="autotoc_md20"></a>
 DESCRIPTION</h2>
 <p>Turn off the generation of strings associated with the HTML keywords in the string generated by the attr(3f) function, or display the text in raw mode as it was passed to attr(3f) or return to ANSI escape control sequence generation.</p>
-<h2><a class="anchor" id="autotoc_md22"></a>
+<h2><a class="anchor" id="autotoc_md21"></a>
 OPTIONS</h2>
 <p>MANNER The current manners or modes supported via the attr_mode(3f) procedure are</p>
 <p>plain suppress the output associated with keywords color(default) commonly supported escape sequences raw echo the input to attr(3f) as its output reload restore original keyword meanings deleted or replaced by calls to attr_update(3f).</p>
-<h2><a class="anchor" id="autotoc_md23"></a>
+<h2><a class="anchor" id="autotoc_md22"></a>
 EXAMPLE</h2>
 <pre class="fragment">Sample program
 
@@ -562,10 +561,10 @@ EXAMPLE</h2>
     write(*,'(a)')(trim(outlines(i)),i=1,size(outlines))
 
  end program demo_attr_mode
-</pre><h2><a class="anchor" id="autotoc_md24"></a>
+</pre><h2><a class="anchor" id="autotoc_md23"></a>
 AUTHOR</h2>
 <p>John S. Urban, 2021</p>
-<h2><a class="anchor" id="autotoc_md25"></a>
+<h2><a class="anchor" id="autotoc_md24"></a>
 LICENSE</h2>
 <p>MIT </p>
 
@@ -621,10 +620,10 @@ Here is the call graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
-<h2><a class="anchor" id="autotoc_md9"></a>
+<h2><a class="anchor" id="autotoc_md8"></a>
 NAME</h2>
 <p>attr(3f) - [M_attr] substitute escape sequences for HTML-like syntax in strings (LICENSE:MIT)</p>
-<h2><a class="anchor" id="autotoc_md10"></a>
+<h2><a class="anchor" id="autotoc_md9"></a>
 SYNOPSIS</h2>
 <pre class="fragment">  function attr(string,reset) result (expanded)
 
@@ -637,10 +636,10 @@ SYNOPSIS</h2>
     logical,intent(in),optional  :: reset
     character(len=:),allocatable :: expanded(:)
     integer,intent(in),optional  :: chars
-</pre><h2><a class="anchor" id="autotoc_md11"></a>
+</pre><h2><a class="anchor" id="autotoc_md10"></a>
 DESCRIPTION</h2>
 <p>Use HTML-like syntax to add attributes to terminal output such as color on devices that recognize ANSI escape sequences.</p>
-<h2><a class="anchor" id="autotoc_md12"></a>
+<h2><a class="anchor" id="autotoc_md11"></a>
 OPTIONS</h2>
 <p>string input string of form </p><pre class="fragment">            "&lt;attribute_name&gt;string&lt;/attribute_name&gt; ...".
 
@@ -649,7 +648,7 @@ OPTIONS</h2>
 </pre><p>reset By default, a sequence to clear all text attributes is sent at the end of each returned line if an escape character appears in the output string. This can be turned off by setting RESET to .false. .</p>
 <p>Note if turning off the reset attributes may be continued accross lines, but if each line is not self-contained attributes may not display properly when filtered with commands such as grep(1).</p>
 <p>chars For arrays, a reset will be placed after the Nth displayable column count in order to make it easier to generate consistent right borders for non-default background colors for a text block. </p>
-<h2><a class="anchor" id="autotoc_md13"></a>
+<h2><a class="anchor" id="autotoc_md12"></a>
 KEYWORDS</h2>
 <p>primary default keywords</p>
 <p>colors: r, red, R, RED g, green, G, GREEN b, blue, B, BLUE m, magenta, M, MAGENTA c, cyan, C, CYAN y, yellow, Y, YELLOW e, ebony, E, EBONY w, white, W, WHITE</p>
@@ -660,10 +659,10 @@ KEYWORDS</h2>
 <p>write(*,*)attr('&lt;ERROR&gt;an error message') write(*,*)attr('&lt;WARNING&gt;a warning message') write(*,*)attr('&lt;INFO&gt;an informational message')</p>
 <p>By default, if the color mnemonics (ie. the keywords) are uppercase they change the background color. If lowercase, the foreground color. When preceded by a "/" character the attribute is returned to the default.</p>
 <p>The "default" keyword is typically used explicitly when reset=.false, and sets all text attributes to their initial defaults.</p>
-<h2><a class="anchor" id="autotoc_md14"></a>
+<h2><a class="anchor" id="autotoc_md13"></a>
 LIMITATIONS</h2>
 <p>o colors are not nestable, keywords are case-sensitive, o not all terminals obey the sequences. On Windows, it is best if you use Windows 10+ and/or the Linux mode; although it has worked with all CygWin and MinGW and Putty windows and mintty. o you should use "&lt;gt&gt;" and "&lt;lt&gt;" instead of "&gt;" and "&lt;" in a string processed by attr(3f) instead of in any plain text output so that the raw mode will create correct input for the attr(3f) function if read back in.</p>
-<h2><a class="anchor" id="autotoc_md15"></a>
+<h2><a class="anchor" id="autotoc_md14"></a>
 EXAMPLE</h2>
 <pre class="fragment">Sample program
 
@@ -725,13 +724,13 @@ EXAMPLE</h2>
     &amp;'&lt;in&gt;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;w&gt;WHITE&lt;/w&gt; and &lt;e&gt;EBONY&lt;/e&gt;&lt;/ul&gt;&lt;/bo&gt;&lt;/in&gt;')
  end subroutine printstuff
  end program demo_esc
-</pre><h2><a class="anchor" id="autotoc_md16"></a>
+</pre><h2><a class="anchor" id="autotoc_md15"></a>
 AUTHOR</h2>
 <p>John S. Urban, 2021</p>
-<h2><a class="anchor" id="autotoc_md17"></a>
+<h2><a class="anchor" id="autotoc_md16"></a>
 LICENSE</h2>
 <p>MIT</p>
-<h2><a class="anchor" id="autotoc_md18"></a>
+<h2><a class="anchor" id="autotoc_md17"></a>
 SEE ALSO</h2>
 <p>attr_mode(3f), attr_update(3f) </p>
 
@@ -862,23 +861,23 @@ Here is the call graph for this function:</div>
 </div><div class="memdoc">
 
 <p>!&gt; </p>
-<h2><a class="anchor" id="autotoc_md26"></a>
+<h2><a class="anchor" id="autotoc_md25"></a>
 NAME</h2>
 <p>attr_update(3f) - [M_attr] update internal dictionary given keyword and value (LICENSE:MIT)</p>
-<h2><a class="anchor" id="autotoc_md27"></a>
+<h2><a class="anchor" id="autotoc_md26"></a>
 SYNOPSIS</h2>
 <pre class="fragment">subroutine attr_update(key,val)
 
  character(len=*),intent(in)           :: key
  character(len=*),intent(in),optional  :: val
  character(len=*),intent(in),optional  :: mono_val
-</pre><h2><a class="anchor" id="autotoc_md28"></a>
+</pre><h2><a class="anchor" id="autotoc_md27"></a>
 DESCRIPTION</h2>
 <p>Update internal dictionary in M_attr(3fm) module.</p>
-<h2><a class="anchor" id="autotoc_md29"></a>
+<h2><a class="anchor" id="autotoc_md28"></a>
 OPTIONS</h2>
 <p>key name of keyword to add, replace, or delete from dictionary val if present add or replace value associated with keyword. If not present remove keyword entry from dictionary. mono_val if present add or replace second value associated with keyword used for plain text mode. Must only be specified if VAL is also specified.</p>
-<h2><a class="anchor" id="autotoc_md30"></a>
+<h2><a class="anchor" id="autotoc_md29"></a>
 KEYWORDS</h2>
 <p>The following keywords are defined by default</p>
 <p>colors:</p>
@@ -886,7 +885,7 @@ KEYWORDS</h2>
 <p>If the color keywords are capitalized they control the text background instead of the text color.</p>
 <p>attributes:</p>
 <p>ul,underline it,italics (often produces inverse colors on many devices</p>
-<h2><a class="anchor" id="autotoc_md31"></a>
+<h2><a class="anchor" id="autotoc_md30"></a>
 EXAMPLE</h2>
 <pre class="fragment">Sample program
 
@@ -915,10 +914,10 @@ EXAMPLE</h2>
      write(*,'(a)') attr( &amp;
      'CUSTOMIZED: &lt;r&gt;Apple&lt;/r&gt;, &lt;b&gt;Sky&lt;/b&gt;, &lt;g&gt;Grass&lt;/g&gt;')
   end program demo_update
-</pre><h2><a class="anchor" id="autotoc_md32"></a>
+</pre><h2><a class="anchor" id="autotoc_md31"></a>
 AUTHOR</h2>
 <p>John S. Urban, 2021</p>
-<h2><a class="anchor" id="autotoc_md33"></a>
+<h2><a class="anchor" id="autotoc_md32"></a>
 LICENSE</h2>
 <p>MIT </p>
 

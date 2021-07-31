@@ -34,6 +34,10 @@
 
 ## USER DOCUMENTATION
 
+All documents are contained in the docs/ directory including
+archive files of man(1) pages that can be installed on ULS
+(Unix-Like Systems).
+
 ### Individual man-pages as HTML
 
  - An [index](https://urbanjost.github.io/M_attr/man3.html) to HTML versions
@@ -51,9 +55,6 @@
    as a single document.
 
 ## real man-pages ![gmake](docs/images/manpages.gif)
-These documents are contained in the docs/ directory along with one
-more format - archive files of man(1) pages that can be installed on ULS
-(Unix-Like Systems):
 
    + [manpages.zip](https://urbanjost.github.io/M_attr/manpages.zip) 
    + [manpages.tgz](https://urbanjost.github.io/M_attr/manpages.tgz) 

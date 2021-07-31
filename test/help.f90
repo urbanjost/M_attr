@@ -69,23 +69,23 @@ character(len=256),parameter ::   help_list_dash(*) = [character(len=256) :: &
 ! need to count last character with a background attribute or something different
 !nvfortran bug!character(len=*),parameter :: text(*)= [character(len=132) :: &
 character(len=*),parameter :: text(22)= [character(len=132) :: &
-'<E><e> <end>                                               ',&
-'<E><e>        <C>                                   </W><E><end>',&
-'<E><e>        <C>      LLL        </C><bo><w> F</bo>ortran </w></E><C>        <c></bo><end></C><E>',&
-'<E><e>        <C>     LL LL        </C><bo><w> P</bo>ackage </w></E><C>       <c></bo><end></C><E>',&
-'<E><e>        <C>     LL            </C><bo><w> M</bo>anager </w></E><C>      <c></bo><end></C><E>',&
-'<E><e>        <C>   LLLLLL                          <E><end>',&
-'<E><e>        <C>     LL                            <E><end>',&
-'<E><e>        <C>     LL               LLLLL LLL    <E><end>',&
-'<E><e>        <C>     LL     LLLLLL     LL  L  LL   <E><end>',&
-'<E><e>        <C>     LL    LL     L    LL  L  LL   <E><end>',&
-'<E><e>        <C>     LL    LL     L    LL  L  LL   <E><end>',&
-'<E><e>        <C>     LL    LLLLLLL     LL  L  LL   <E><end>',&
-'<E><e>        <C>           LL                      <E><end>',&
-'<E><e>        <C>           LL                      <E><end>',&
-'<E><e>        <C>           LL                      <E><end>',&
-'<E><e>        <C>                                   <E><end>',&
-'<E><e>                                                 <end>',&
+'<E><e>                                                     ',&
+'<E><w><bo>       <C>                                   </C><E></bo><e><end>',&
+'<E><w><bo>       <C>      LLL   </C><bo><B><w> F</bo>ortran   </B><C>            </bo><W> <e></C><E><end>',&
+'<E><w><bo>       <C>     LL LL  </C><bo><B><w>  P</bo>ackage  </B><C>            </bo><W> <e></C><E><end>',&
+'<E><w><bo>       <C>     LL     </C><bo><B><w>   M</bo>anager </B><C>            </bo><W> <e></C><E><end>',&
+'<E><w><bo>       <C>   LLLLLL                          <W> <E></bo><e><end>',&
+'<E><w><bo>       <C>     LL                            <W> <E></bo><e><end>',&
+'<E><w><bo>       <C>     LL               LLLLL LLL    <W> <E></bo><e><end>',&
+'<E><w><bo>       <C>     LL     LLLLLL     LL  L  LL   <W> <E></bo><e><end>',&
+'<E><w><bo>       <C>     LL    LL     L    LL  L  LL   <W> <E></bo><e><end>',&
+'<E><w><bo>       <C>     LL    LL     L    LL  L  LL   <W> <E></bo><e><end>',&
+'<E><w><bo>       <C>     LL    LLLLLLL     LL  L  LL   <W> <E></bo><e><end>',&
+'<E><w><bo>       <C>           LL                      <W> <E></bo><e><end>',&
+'<E><w><bo>       <C>           LL                      <W> <E></bo><e><end>',&
+'<E><w><bo>       <C>           LL                      <W> <E></bo><e><end>',&
+'<E><w><bo>       <C>                                   <W> <E></bo><e><end>',&
+'<E><w><bo>        <W>                                   <E></bo><e>    <end>',&
 '<E><bo><b>Program:</b><w>     fpm(1)                                     ',&
 '<E><bo><b>Description:</b><w> package manager and build system for Fortran',&
 '<E><bo><b>Version:</b><w>     0.3.0, alpha                               ',&
@@ -100,10 +100,12 @@ character(len=*),parameter :: text(22)= [character(len=132) :: &
    call paws()
 
    ! add custom keywords
+   IF(.FALSE.)THEN
    call attr_mode(manner='plain')
    call attr_update('end','.',' ')
    write(*,'(a)')(attr(trim(text(i)),chars=80),i=1,size(text))
    call paws()
+   ENDIF
 
    call attr_mode(manner='color')
    call attr_update('end','.',char(0))
@@ -114,6 +116,7 @@ contains
 subroutine paws()
 character(len=1) :: letter
 integer :: ios
+
    write(stdout,'(a)',advance='no',iostat=ios)'Enter [RETURN] to continue ...'
    read(*,'(a)',iostat=ios)letter
    write(stdout,'(a)')attr('<clear>')
