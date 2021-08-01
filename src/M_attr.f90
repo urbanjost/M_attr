@@ -444,74 +444,75 @@ integer                      :: i
 integer                      :: ii
 integer                      :: maxlen
 integer                      :: place
-if(present(reset))then
-   clear_at_end=reset
-else
-   clear_at_end=.true.
-endif
-if(.not.allocated(mode))then  ! set substitution mode
-   mode='color' ! 'color'|'raw'|'plain'
-   call vt102()
-endif
-
-if(mode=='raw')then
-   expanded=string
-   return
-endif
-
-maxlen=len(string)
-padded=string//' '
-i=1
-expanded=''
-do
-   select case(padded(i:i))
-   case('>')  ! should not get here unless unmatched
-      i=i+1
-      expanded=expanded//'>'
-   case('<')  ! assuming not nested for now
-      ii=index(padded(i+1:),'>')
-      if(ii.eq.0)then
-         expanded=expanded//'<'
-         i=i+1
-      else
-         name=padded(i+1:i+ii-1)
-         name=trim(adjustl(name))
-         call locate(keywords,name,place)
-
-         if(mode.eq.'plain')then
-            expanded=expanded//get(name)
-         elseif(place.le.0)then     ! unknown name; print what you found
-            expanded=expanded//padded(i:i+ii)
-         else
-            expanded=expanded//get(name)
-         endif
-         i=ii+i+1
-      endif
-   case default
-      expanded=expanded//padded(i:i)
-      i=i+1
-   end select
-   if(i >= maxlen+1)exit
-enddo
-if( (index(expanded,esc).ne.0).and.(clear_at_end))then
-   if((mode.ne.'raw').and.(mode.ne.'plain'))then
-      expanded=expanded//CODE_RESET                                   ! Clear all styles
+   if(present(reset))then
+      clear_at_end=reset
+   else
+      clear_at_end=.true.
    endif
-endif
-expanded=trim(expanded)
+   if(.not.allocated(mode))then  ! set substitution mode
+      mode='color' ! 'color'|'raw'|'plain'
+      call vt102()
+   endif
+
+   if(mode=='raw')then
+      expanded=string
+      return
+   endif
+
+   maxlen=len(string)
+   padded=string//' '
+   i=1
+   expanded=''
+   do
+      select case(padded(i:i))
+      case('>')  ! should not get here unless unmatched
+         i=i+1
+         expanded=expanded//'>'
+      case('<')  ! assuming not nested for now
+         ii=index(padded(i+1:),'>')
+         if(ii.eq.0)then
+            expanded=expanded//'<'
+            i=i+1
+         else
+            name=padded(i+1:i+ii-1)
+            name=trim(adjustl(name))
+            call locate(keywords,name,place)
+
+            if(mode.eq.'plain')then
+               expanded=expanded//get(name)
+            elseif(place.le.0)then     ! unknown name; print what you found
+               expanded=expanded//padded(i:i+ii)
+               maxlen=maxlen-ii-1
+            else
+               expanded=expanded//get(name)
+            endif
+            i=ii+i+1
+         endif
+      case default
+         expanded=expanded//padded(i:i)
+         i=i+1
+      end select
+      if(i >= maxlen+1)exit
+   enddo
+   if( (index(expanded,esc).ne.0).and.(clear_at_end))then
+      if((mode.ne.'raw').and.(mode.ne.'plain'))then
+         expanded=expanded//CODE_RESET                                   ! Clear all styles
+      endif
+   endif
+   expanded=expanded
 end function attr_scalar
 
-function attr_matrix(string,reset,chars) result (expanded)
-character(len=*),intent(in)  :: string(:)
+function attr_matrix(strings,reset,chars) result (expanded)
+character(len=*),intent(in)  :: strings(:)
 logical,intent(in),optional  :: reset
 integer,intent(in),optional  :: chars
 character(len=:),allocatable :: expanded(:)
    ! gfortran does not return allocatable array from a function properly, but works with subroutine
-   call kludge_bug(string,reset,chars,expanded)
+   call kludge_bug(strings,reset,chars,expanded)
 end function attr_matrix
 
-subroutine kludge_bug(string,reset,chars,expanded)
-character(len=*),intent(in)  :: string(:)
+subroutine kludge_bug(strings,reset,chars,expanded)
+character(len=*),intent(in)  :: strings(:)
 logical,intent(in),optional  :: reset
 integer,intent(in),optional  :: chars
 character(len=:),allocatable :: expanded(:)
@@ -520,13 +521,12 @@ character(len=:),allocatable :: hold
 integer                      :: i
 integer                      :: right
 integer                      :: len_local
-integer                      :: len_local2
 
 allocate(character(len=0) :: expanded(0))
 if(present(chars))then
    right=chars
 else
-   right=len(string)
+   right=len(strings)
 endif
 
 if(.not.allocated(mode))then  ! set substitution mode
@@ -534,16 +534,15 @@ if(.not.allocated(mode))then  ! set substitution mode
    call vt102()
 endif
 
-do i=1,size(string)
+do i=1,size(strings)
 
    if(mode.eq.'color')then
-      len_local2=len_trim(attr_scalar(string(i)))
       mode='plain'
-      len_local=len_trim(attr_scalar(string(i)))
-      hold=trim(string(i))//repeat(' ',max(0,right-len_local))
+      len_local=len(attr_scalar(strings(i)))
+      hold=trim(strings(i))//repeat(' ',max(0,right-len_local))
       mode='color'
    else
-      hold=string(i)
+      hold=strings(i)
    endif
 
    hold=trim(attr_scalar(hold,reset=reset))

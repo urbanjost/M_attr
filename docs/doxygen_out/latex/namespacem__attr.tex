@@ -10,9 +10,9 @@ interface \mbox{\hyperlink{interfacem__attr_1_1attr}{attr}}
 \item 
 character(len=\+:) function, allocatable, private \mbox{\hyperlink{namespacem__attr_a46eba7c8e021da09c2ba477d23138dca}{attr\+\_\+scalar}} (string, \mbox{\hyperlink{namespacem__attr_a7fbabaa819e5276aa2fff7a9a833aff0}{reset}})
 \item 
-character(len=\+:) function, dimension(\+:), allocatable, private \mbox{\hyperlink{namespacem__attr_acb968f54a74cf89739d5e0c502cc9937}{attr\+\_\+matrix}} (string, \mbox{\hyperlink{namespacem__attr_a7fbabaa819e5276aa2fff7a9a833aff0}{reset}}, chars)
+character(len=\+:) function, dimension(\+:), allocatable, private \mbox{\hyperlink{namespacem__attr_aa1c99b1d2eb001a2768afbc6779f23e1}{attr\+\_\+matrix}} (strings, \mbox{\hyperlink{namespacem__attr_a7fbabaa819e5276aa2fff7a9a833aff0}{reset}}, chars)
 \item 
-subroutine \mbox{\hyperlink{namespacem__attr_a1f31ecd938fee718efbcf01c7be2cd96}{kludge\+\_\+bug}} (string, \mbox{\hyperlink{namespacem__attr_a7fbabaa819e5276aa2fff7a9a833aff0}{reset}}, chars, expanded)
+subroutine \mbox{\hyperlink{namespacem__attr_a7b32a6654c75d29be63017228406cc16}{kludge\+\_\+bug}} (strings, \mbox{\hyperlink{namespacem__attr_a7fbabaa819e5276aa2fff7a9a833aff0}{reset}}, chars, expanded)
 \item 
 character(len=\+:) function, allocatable, private \mbox{\hyperlink{namespacem__attr_a8bf4df5eb60c36c22c287fa82486e5a5}{attr\+\_\+scalar\+\_\+width}} (string, \mbox{\hyperlink{namespacem__attr_a7fbabaa819e5276aa2fff7a9a833aff0}{reset}}, chars)
 \item 
@@ -317,11 +317,11 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{namespacem__attr_afd08aeaf1428903178a7dcb044627331_cgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{namespacem__attr_acb968f54a74cf89739d5e0c502cc9937}\label{namespacem__attr_acb968f54a74cf89739d5e0c502cc9937}} 
+\mbox{\Hypertarget{namespacem__attr_aa1c99b1d2eb001a2768afbc6779f23e1}\label{namespacem__attr_aa1c99b1d2eb001a2768afbc6779f23e1}} 
 \index{m\_attr@{m\_attr}!attr\_matrix@{attr\_matrix}}
 \index{attr\_matrix@{attr\_matrix}!m\_attr@{m\_attr}}
 \doxysubsubsection{\texorpdfstring{attr\_matrix()}{attr\_matrix()}}
-{\footnotesize\ttfamily character(len=\+:) function, dimension(\+:), allocatable, private m\+\_\+attr\+::attr\+\_\+matrix (\begin{DoxyParamCaption}\item[{character(len=$\ast$), dimension(\+:), intent(in)}]{string,  }\item[{logical, intent(in), optional}]{reset,  }\item[{integer, intent(in), optional}]{chars }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily character(len=\+:) function, dimension(\+:), allocatable, private m\+\_\+attr\+::attr\+\_\+matrix (\begin{DoxyParamCaption}\item[{character(len=$\ast$), dimension(\+:), intent(in)}]{strings,  }\item[{logical, intent(in), optional}]{reset,  }\item[{integer, intent(in), optional}]{chars }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -331,14 +331,14 @@ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{namespacem__attr_acb968f54a74cf89739d5e0c502cc9937_cgraph}
+\includegraphics[width=350pt]{namespacem__attr_aa1c99b1d2eb001a2768afbc6779f23e1_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=333pt]{namespacem__attr_acb968f54a74cf89739d5e0c502cc9937_icgraph}
+\includegraphics[width=333pt]{namespacem__attr_aa1c99b1d2eb001a2768afbc6779f23e1_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{namespacem__attr_a1667b54d5580bcf8e99732896b2017c2}\label{namespacem__attr_a1667b54d5580bcf8e99732896b2017c2}} 
@@ -675,11 +675,11 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{namespacem__attr_a6d2cdb036e195b3738da45b1e07ddaea_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{namespacem__attr_a1f31ecd938fee718efbcf01c7be2cd96}\label{namespacem__attr_a1f31ecd938fee718efbcf01c7be2cd96}} 
+\mbox{\Hypertarget{namespacem__attr_a7b32a6654c75d29be63017228406cc16}\label{namespacem__attr_a7b32a6654c75d29be63017228406cc16}} 
 \index{m\_attr@{m\_attr}!kludge\_bug@{kludge\_bug}}
 \index{kludge\_bug@{kludge\_bug}!m\_attr@{m\_attr}}
 \doxysubsubsection{\texorpdfstring{kludge\_bug()}{kludge\_bug()}}
-{\footnotesize\ttfamily subroutine m\+\_\+attr\+::kludge\+\_\+bug (\begin{DoxyParamCaption}\item[{character(len=$\ast$), dimension(\+:), intent(in)}]{string,  }\item[{logical, intent(in), optional}]{reset,  }\item[{integer, intent(in), optional}]{chars,  }\item[{character(len=\+:), dimension(\+:), allocatable}]{expanded }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily subroutine m\+\_\+attr\+::kludge\+\_\+bug (\begin{DoxyParamCaption}\item[{character(len=$\ast$), dimension(\+:), intent(in)}]{strings,  }\item[{logical, intent(in), optional}]{reset,  }\item[{integer, intent(in), optional}]{chars,  }\item[{character(len=\+:), dimension(\+:), allocatable}]{expanded }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -689,14 +689,14 @@ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{namespacem__attr_a1f31ecd938fee718efbcf01c7be2cd96_cgraph}
+\includegraphics[width=350pt]{namespacem__attr_a7b32a6654c75d29be63017228406cc16_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{namespacem__attr_a1f31ecd938fee718efbcf01c7be2cd96_icgraph}
+\includegraphics[width=350pt]{namespacem__attr_a7b32a6654c75d29be63017228406cc16_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{namespacem__attr_a2910d09c004b3ddb45d2271beb5c1420}\label{namespacem__attr_a2910d09c004b3ddb45d2271beb5c1420}} 

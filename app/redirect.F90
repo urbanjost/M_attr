@@ -33,10 +33,10 @@ character(len=:),allocatable    :: TERM
       call text("<reset><clear>")
       call text("For the quadratic equation <m>A</m><g>*x**2 +<m>B</m><g>*x + <m>C</m> ")
       write(stdout,'(*(a))',advance='no') &
-      & attr('<B><w><bo>'//repeat('_',78)//'  '), &
+      & attr('<B><w><bo>',chars=80), &
       & char(13),&
       & attr('<B><g><bo>enter coefficients <m>A,B,C</m><g>:<y><gt><ul>',&
-      & reset=.false.)
+      & reset=.false.,chars=80)
       read(stdin,*,iostat=ios,iomsg=message)a,b,c
       write(stdout,'(a)',advance='no')attr('<reset>')
       if(ios.ne.0)then
@@ -109,7 +109,7 @@ contains
 subroutine text(string)
 character(len=*),intent(in),optional :: string
    if(present(string))then
-      write(stdout,'(*(g0))') attr('<B><g><bo>'//string,chars=80)
+      write(stdout,'(*(g0))') attr('<B><g><bo>'//trim(string),chars=80)
    else
       write(stdout,'(*(g0))') attr('<B><g><bo>',chars=80)
    endif

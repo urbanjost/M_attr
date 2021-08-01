@@ -17,6 +17,13 @@ external-modules = ["ifport", "dfport"]
 library="true"
 
 [[executable]]
+name="tat"
+source-dir="app"
+main="tat.f90"
+[executable.dependencies]
+M_CLI2 = { git = "https://github.com/urbanjost/M_CLI2.git" }
+
+[[executable]]
 name="redirect"
 source-dir="app"
 main="redirect.F90"

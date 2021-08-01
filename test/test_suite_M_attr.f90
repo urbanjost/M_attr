@@ -74,7 +74,7 @@ integer :: i
    allpassed=allpassed  .and.  test('<EBONY>EBONY',      '<EBONY>EBONY')
    allpassed=allpassed  .and.  test('<WHITE>WHITE',      '<WHITE>WHITE')
 
-   call unit_check('attr',allpassed,msg='')
+   call unit_check('attr',allpassed,msg='basic colors passed foreground and background')
    call unit_check_done('attr')
 
    contains
@@ -89,7 +89,7 @@ integer :: i
       if(passed)then
          write(std_error,*)"Passed on ",in, " converted to ", ExpectedResult
       else
-         write(std_error,*)"Failed on ",in, " got ", attr(in), " Expected ",ExpectedResult
+         write(std_error,*)"Failed on ",in, " got ", attr(in), " Expect ",ExpectedResult
       endif
       endif
 
@@ -115,15 +115,15 @@ character(len=:),allocatable :: out
 
    in=attr('<blink>blink!</blink> stare!')
    out=esc//'[5mblink!'//esc//'[25m stare!'//esc//'[0m'
-   call unit_check('attr_update',in.eq.out,'add blink, in=',in,' out=',attr(in),' expected=',out)
+   call unit_check('attr_update',in.eq.out,'add blink, in=',in,'out=',attr(in),'expect=',out)
 
    in=attr('<r>red removed</r>')
    out='<r>red removed</r>'
-   call unit_check('attr_update',in.eq.out,'removed, in=',in,' out=',attr(in),' expected=',out)
+   call unit_check('attr_update',in.eq.out,'in=',in,'out=',attr(in),'expect=',out)
 
    in=attr('<b>blue replaced</b>')
    out='<<<<blue replaced>>>>'
-   call unit_check('attr_update',in.eq.out,'blue replaced, in=',in,' out=',attr(in),' expected=',out)
+   call unit_check('attr_update',in.eq.out,'in=',in,'out=',attr(in),'expect=',out)
 
    call unit_check_done('attr_update')
 end subroutine test_attr_update

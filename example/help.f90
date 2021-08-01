@@ -70,22 +70,22 @@ character(len=256),parameter ::   help_list_dash(*) = [character(len=256) :: &
 !nvfortran bug!character(len=*),parameter :: text(*)= [character(len=132) :: &
 character(len=*),parameter :: text(22)= [character(len=132) :: &
 '<E><e>                                                     ',&
-'<E><w><bo>       <C>                                   </C><E></bo><e><end>',&
-'<E><w><bo>       <C>      LLL   </C><bo><B><w> F</bo>ortran   </B><C>            </bo><W> <e></C><E><end>',&
-'<E><w><bo>       <C>     LL LL  </C><bo><B><w>  P</bo>ackage  </B><C>            </bo><W> <e></C><E><end>',&
-'<E><w><bo>       <C>     LL     </C><bo><B><w>   M</bo>anager </B><C>            </bo><W> <e></C><E><end>',&
-'<E><w><bo>       <C>   LLLLLL                          <W> <E></bo><e><end>',&
-'<E><w><bo>       <C>     LL                            <W> <E></bo><e><end>',&
-'<E><w><bo>       <C>     LL               LLLLL LLL    <W> <E></bo><e><end>',&
-'<E><w><bo>       <C>     LL     LLLLLL     LL  L  LL   <W> <E></bo><e><end>',&
-'<E><w><bo>       <C>     LL    LL     L    LL  L  LL   <W> <E></bo><e><end>',&
-'<E><w><bo>       <C>     LL    LL     L    LL  L  LL   <W> <E></bo><e><end>',&
-'<E><w><bo>       <C>     LL    LLLLLLL     LL  L  LL   <W> <E></bo><e><end>',&
-'<E><w><bo>       <C>           LL                      <W> <E></bo><e><end>',&
-'<E><w><bo>       <C>           LL                      <W> <E></bo><e><end>',&
-'<E><w><bo>       <C>           LL                      <W> <E></bo><e><end>',&
-'<E><w><bo>       <C>                                   <W> <E></bo><e><end>',&
-'<E><w><bo>        <W>                                   <E></bo><e>    <end>',&
+'<E><w><bo>       <C>                                   </C><E></bo>',&
+'<E><w><bo>       <C>      LLL   </C><bo><B><w> F</bo>ortran   </B><C>            </bo><W> <e></C><E>',&
+'<E><w><bo>       <C>     LL LL  </C><bo><B><w>  P</bo>ackage  </B><C>            </bo><W> <e></C><E>',&
+'<E><w><bo>       <C>     LL     </C><bo><B><w>   M</bo>anager </B><C>            </bo><W> <e></C><E>',&
+'<E><w><bo>       <C>   LLLLLL                          <W> <E></bo>',&
+'<E><w><bo>       <C>     LL                            <W> <E></bo>',&
+'<E><w><bo>       <C>     LL               LLLLL LLL    <W> <E></bo>',&
+'<E><w><bo>       <C>     LL     LLLLLL     LL  L  LL   <W> <E></bo>',&
+'<E><w><bo>       <C>     LL    LL     L    LL  L  LL   <W> <E></bo>',&
+'<E><w><bo>       <C>     LL    LL     L    LL  L  LL   <W> <E></bo>',&
+'<E><w><bo>       <C>     LL    LLLLLLL     LL  L  LL   <W> <E></bo>',&
+'<E><w><bo>       <C>           LL                      <W> <E></bo>',&
+'<E><w><bo>       <C>           LL                      <W> <E></bo>',&
+'<E><w><bo>       <C>           LL                      <W> <E></bo>',&
+'<E><w><bo>       <C>                                   <W> <E></bo>',&
+'<E><w><bo>        <W>                                   <E></bo><e>   ',&
 '<E><bo><b>Program:</b><w>     fpm(1)                                     ',&
 '<E><bo><b>Description:</b><w> package manager and build system for Fortran',&
 '<E><bo><b>Version:</b><w>     0.3.0, alpha                               ',&
@@ -100,15 +100,11 @@ character(len=*),parameter :: text(22)= [character(len=132) :: &
    call paws()
 
    ! add custom keywords
-   IF(.FALSE.)THEN
    call attr_mode(manner='plain')
-   call attr_update('end','.',' ')
    write(*,'(a)')(attr(trim(text(i)),chars=80),i=1,size(text))
    call paws()
-   ENDIF
 
    call attr_mode(manner='color')
-   call attr_update('end','.',char(0))
    write(*,'(a)')(attr(trim(text(i)),chars=80),i=1,size(text))
    call paws()
 contains
