@@ -44,6 +44,26 @@
 !!    from a file like a message catalog (perhaps with various versions
 !!    in different languages) and colorize it or display it as plain text
 !!    using the attr(3f) procedure.
+!!##ACCESS
+!!    Via git(1):
+!!
+!!        git clone https://github.com/urbanjost/M_attr.git
+!!        cd M_attr/src
+!!        # change Makefile if not using one of the listed compilers
+!!        make clean; make gfortran    # for gfortran
+!!        make clean; make ifort       # for ifort
+!!        make clean; make nvfortran   # for nvfortran
+!!
+!!    This will compile the M_attr module and example programs.
+!!
+!!    Via fpm ( described at https://github.com/fortran-lang/fpm):
+!!
+!!         git clone https://github.com/urbanjost/M_attr.git
+!!
+!!    or just list it as a dependency in your fpm.toml project file.
+!!
+!!         [dependencies]
+!!         M_attr        = { git = "https://github.com/urbanjost/M_attr.git" }
 !!
 !!##LIMITATIONS
 !!   o colors are not nestable.

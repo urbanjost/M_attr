@@ -207,8 +207,27 @@ The advantage of the approach of replacing in-\/band escape sequences with forma
 
 By making each line self-\/contained (by default) this can still be done with any arbitrarily selected group of lines from the file.
 
-So this module makes it trivial to read specially-\/formatted data from a file like a message catalog (perhaps with various versions in different languages) and colorize it or display it as plain text using the attr(3f) procedure.\hypertarget{namespacem__attr_autotoc_md3}{}\doxysubsubsection{L\+I\+M\+I\+T\+A\+T\+I\+O\+NS}\label{namespacem__attr_autotoc_md3}
-o colors are not nestable. o keywords are case-\/sensitive, o A\+N\+SI escape sequences are not universally supported by all terminal emulators; and normally should be suppressed when not going to a tty device. Therefore, you should use M\+\_\+system\+::system\+\_\+istty(3f) or the common Fortran extension I\+S\+A\+T\+T\+Y() to set the default to \char`\"{}plain\char`\"{} instead of \char`\"{}color\char`\"{} when the output file is not a conforming terminal. On basic M\+S\+Windows console windows, it is best to use Windows 10+ and/or the Linux mode; you may have to enable A\+N\+SI escape sequence mode on M\+S\+Windows. It does work as-\/is with Cyg\+Win and Min\+GW and Putty windows and mintty(1) as tested.\hypertarget{namespacem__attr_autotoc_md4}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__attr_autotoc_md4}
+So this module makes it trivial to read specially-\/formatted data from a file like a message catalog (perhaps with various versions in different languages) and colorize it or display it as plain text using the attr(3f) procedure. \hypertarget{namespacem__attr_autotoc_md3}{}\doxysubsubsection{A\+C\+C\+E\+SS}\label{namespacem__attr_autotoc_md3}
+Via git(1)\+: \begin{DoxyVerb}git clone https://github.com/urbanjost/M_attr.git
+cd M_attr/src
+# change Makefile if not using one of the listed compilers
+make clean; make gfortran    # for gfortran
+make clean; make ifort       # for ifort
+make clean; make nvfortran   # for nvfortran
+\end{DoxyVerb}
+
+
+This will compile the M\+\_\+attr module and example programs.
+
+Via fpm ( described at \href{https://github.com/fortran-lang/fpm}{\texttt{ https\+://github.\+com/fortran-\/lang/fpm}})\+: \begin{DoxyVerb} git clone https://github.com/urbanjost/M_attr.git
+\end{DoxyVerb}
+
+
+or just list it as a dependency in your fpm.\+toml project file. \begin{DoxyVerb} [dependencies]
+ M_attr        = { git = "https://github.com/urbanjost/M_attr.git" }
+\end{DoxyVerb}
+\hypertarget{namespacem__attr_autotoc_md4}{}\doxysubsubsection{L\+I\+M\+I\+T\+A\+T\+I\+O\+NS}\label{namespacem__attr_autotoc_md4}
+o colors are not nestable. o keywords are case-\/sensitive, o A\+N\+SI escape sequences are not universally supported by all terminal emulators; and normally should be suppressed when not going to a tty device. Therefore, you should use M\+\_\+system\+::system\+\_\+istty(3f) or the common Fortran extension I\+S\+A\+T\+T\+Y() to set the default to \char`\"{}plain\char`\"{} instead of \char`\"{}color\char`\"{} when the output file is not a conforming terminal. On basic M\+S\+Windows console windows, it is best to use Windows 10+ and/or the Linux mode; you may have to enable A\+N\+SI escape sequence mode on M\+S\+Windows. It does work as-\/is with Cyg\+Win and Min\+GW and Putty windows and mintty(1) as tested.\hypertarget{namespacem__attr_autotoc_md5}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__attr_autotoc_md5}
 \begin{DoxyVerb}Sample program
 
  program demo_M_attr
@@ -249,9 +268,9 @@ o colors are not nestable. o keywords are case-\/sensitive, o A\+N\+SI escape se
 
  end program demo_M_attr
 \end{DoxyVerb}
-\hypertarget{namespacem__attr_autotoc_md5}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__attr_autotoc_md5}
-John S. Urban, 2021\hypertarget{namespacem__attr_autotoc_md6}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__attr_autotoc_md6}
-M\+IT\hypertarget{namespacem__attr_autotoc_md7}{}\doxysubsubsection{S\+E\+E A\+L\+SO}\label{namespacem__attr_autotoc_md7}
+\hypertarget{namespacem__attr_autotoc_md6}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__attr_autotoc_md6}
+John S. Urban, 2021\hypertarget{namespacem__attr_autotoc_md7}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__attr_autotoc_md7}
+M\+IT\hypertarget{namespacem__attr_autotoc_md8}{}\doxysubsubsection{S\+E\+E A\+L\+SO}\label{namespacem__attr_autotoc_md8}
 attr(3f), attr\+\_\+mode(3f), attr\+\_\+update(3f)
 
 Related information\+:
@@ -269,16 +288,16 @@ terminfo(3c), termlib(3c), tput(1), reset(1), clear(1), console\+\_\+codes(4), E
 
 !$>$ 
 
-\hypertarget{namespacem__attr_autotoc_md33}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__attr_autotoc_md33}
-advice(3f) -\/ \mbox{[}M\+\_\+attr\mbox{]} print messages using a standard format including time and program name (L\+I\+C\+E\+N\+SE\+:M\+IT)\hypertarget{namespacem__attr_autotoc_md34}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__attr_autotoc_md34}
+\hypertarget{namespacem__attr_autotoc_md34}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__attr_autotoc_md34}
+advice(3f) -\/ \mbox{[}M\+\_\+attr\mbox{]} print messages using a standard format including time and program name (L\+I\+C\+E\+N\+SE\+:M\+IT)\hypertarget{namespacem__attr_autotoc_md35}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__attr_autotoc_md35}
 \begin{DoxyVerb} subroutine advice(message)
 
     character(len=*),intent(in),optional :: type
     character(len=*),intent(in),optional :: message
 \end{DoxyVerb}
-\hypertarget{namespacem__attr_autotoc_md35}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__attr_autotoc_md35}
+\hypertarget{namespacem__attr_autotoc_md36}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__attr_autotoc_md36}
 Display a message to stderr prefixed with the name of the calling program and a timestamp when the T\+Y\+PE is specified as any of \textquotesingle{}error\textquotesingle{},\textquotesingle{}warn\textquotesingle{}, or \textquotesingle{}info\textquotesingle{}. It also allows the keywords $<$\+A\+R\+G0$>$,$<$\+T\+Z$>$,$<$\+Y\+E$>$,$<$\+M\+O$>$,$<$\+D\+A$>$,\DoxyHorRuler{0}
-,$<$\+M\+I$>$,$<$\+S\+E$>$,$<$\+M\+S$>$ to be used in the message (which is passed to A\+T\+T\+R(3f)). Note that time stamp keywords will only be updated when using A\+D\+V\+I\+C\+E(3f).\hypertarget{namespacem__attr_autotoc_md36}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__attr_autotoc_md36}
+,$<$\+M\+I$>$,$<$\+S\+E$>$,$<$\+M\+S$>$ to be used in the message (which is passed to A\+T\+T\+R(3f)). Note that time stamp keywords will only be updated when using A\+D\+V\+I\+C\+E(3f).\hypertarget{namespacem__attr_autotoc_md37}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__attr_autotoc_md37}
 T\+Y\+PE if present and one of \textquotesingle{}warn\textquotesingle{},\textquotesingle{}message\textquotesingle{},\textquotesingle{}info\textquotesingle{} a predefined message is written to stderr of the form
 
 $\ast$$\ast$ ($<$\+A\+R\+G0$>$)\+: type $\ast$$\ast$\+: \DoxyHorRuler{0}
@@ -286,7 +305,7 @@ $\ast$$\ast$ ($<$\+A\+R\+G0$>$)\+: type $\ast$$\ast$\+: \DoxyHorRuler{0}
 
 M\+E\+S\+S\+A\+GE the user-\/supplied message to display via a call to A\+T\+T\+R(3f)
 
-if no parameters are supplied the macros are updated but no output is generated.\hypertarget{namespacem__attr_autotoc_md37}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__attr_autotoc_md37}
+if no parameters are supplied the macros are updated but no output is generated.\hypertarget{namespacem__attr_autotoc_md38}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__attr_autotoc_md38}
 \begin{DoxyVerb}Sample program
 
  program demo_advice
@@ -304,8 +323,8 @@ if no parameters are supplied the macros are updated but no output is generated.
 \end{DoxyVerb}
  Results\+:
 
-$\ast$$\ast$ (demo\+\_\+advice)\+: error $\ast$$\ast$\+: 16\+:33\+:50.\+0300\+: Say you didn\textquotesingle{}t! $\ast$$\ast$ (demo\+\_\+advice)\+: warning $\ast$$\ast$\+: 16\+:33\+:50.\+0301\+: I wouldn\textquotesingle{}t if I were you, Will Robinson. $\ast$$\ast$ (demo\+\_\+advice)\+: info $\ast$$\ast$\+: 16\+:33\+:50.\+0301\+: I fixed that for you, but it was a bad idea. $\ast$$\ast$ (demo\+\_\+advice)\+: ??? $\ast$$\ast$\+: 16\+:33\+:50.\+0301\+: not today you don\textquotesingle{}t The year was 2021, the month was 7\hypertarget{namespacem__attr_autotoc_md38}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__attr_autotoc_md38}
-John S. Urban, 2021\hypertarget{namespacem__attr_autotoc_md39}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__attr_autotoc_md39}
+$\ast$$\ast$ (demo\+\_\+advice)\+: error $\ast$$\ast$\+: 16\+:33\+:50.\+0300\+: Say you didn\textquotesingle{}t! $\ast$$\ast$ (demo\+\_\+advice)\+: warning $\ast$$\ast$\+: 16\+:33\+:50.\+0301\+: I wouldn\textquotesingle{}t if I were you, Will Robinson. $\ast$$\ast$ (demo\+\_\+advice)\+: info $\ast$$\ast$\+: 16\+:33\+:50.\+0301\+: I fixed that for you, but it was a bad idea. $\ast$$\ast$ (demo\+\_\+advice)\+: ??? $\ast$$\ast$\+: 16\+:33\+:50.\+0301\+: not today you don\textquotesingle{}t The year was 2021, the month was 7\hypertarget{namespacem__attr_autotoc_md39}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__attr_autotoc_md39}
+John S. Urban, 2021\hypertarget{namespacem__attr_autotoc_md40}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__attr_autotoc_md40}
 M\+IT 
 
 References attr\+\_\+update(), and values.
@@ -351,17 +370,17 @@ Here is the caller graph for this function\+:\nopagebreak
 
 !$>$ 
 
-\hypertarget{namespacem__attr_autotoc_md18}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__attr_autotoc_md18}
-attr\+\_\+mode(3f) -\/ \mbox{[}M\+\_\+attr\mbox{]} select processing mode for output from attr(3f) (L\+I\+C\+E\+N\+SE\+:M\+IT)\hypertarget{namespacem__attr_autotoc_md19}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__attr_autotoc_md19}
+\hypertarget{namespacem__attr_autotoc_md19}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__attr_autotoc_md19}
+attr\+\_\+mode(3f) -\/ \mbox{[}M\+\_\+attr\mbox{]} select processing mode for output from attr(3f) (L\+I\+C\+E\+N\+SE\+:M\+IT)\hypertarget{namespacem__attr_autotoc_md20}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__attr_autotoc_md20}
 \begin{DoxyVerb} subroutine attr_mode(manner)
 
     character(len=*),intent(in) :: manner
 \end{DoxyVerb}
-\hypertarget{namespacem__attr_autotoc_md20}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__attr_autotoc_md20}
-Turn off the generation of strings associated with the H\+T\+ML keywords in the string generated by the attr(3f) function, or display the text in raw mode as it was passed to attr(3f) or return to A\+N\+SI escape control sequence generation.\hypertarget{namespacem__attr_autotoc_md21}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__attr_autotoc_md21}
+\hypertarget{namespacem__attr_autotoc_md21}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__attr_autotoc_md21}
+Turn off the generation of strings associated with the H\+T\+ML keywords in the string generated by the attr(3f) function, or display the text in raw mode as it was passed to attr(3f) or return to A\+N\+SI escape control sequence generation.\hypertarget{namespacem__attr_autotoc_md22}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__attr_autotoc_md22}
 M\+A\+N\+N\+ER The current manners or modes supported via the attr\+\_\+mode(3f) procedure are
 
-plain suppress the output associated with keywords color(default) commonly supported escape sequences raw echo the input to attr(3f) as its output reload restore original keyword meanings deleted or replaced by calls to attr\+\_\+update(3f).\hypertarget{namespacem__attr_autotoc_md22}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__attr_autotoc_md22}
+plain suppress the output associated with keywords color(default) commonly supported escape sequences raw echo the input to attr(3f) as its output reload restore original keyword meanings deleted or replaced by calls to attr\+\_\+update(3f).\hypertarget{namespacem__attr_autotoc_md23}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__attr_autotoc_md23}
 \begin{DoxyVerb}Sample program
 
  program demo_attr_mode
@@ -394,8 +413,8 @@ plain suppress the output associated with keywords color(default) commonly suppo
 
  end program demo_attr_mode
 \end{DoxyVerb}
-\hypertarget{namespacem__attr_autotoc_md23}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__attr_autotoc_md23}
-John S. Urban, 2021\hypertarget{namespacem__attr_autotoc_md24}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__attr_autotoc_md24}
+\hypertarget{namespacem__attr_autotoc_md24}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__attr_autotoc_md24}
+John S. Urban, 2021\hypertarget{namespacem__attr_autotoc_md25}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__attr_autotoc_md25}
 M\+IT 
 
 References keywords, mode, mono\+\_\+values, values, and vt102().
@@ -413,8 +432,8 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{attr\_scalar()}{attr\_scalar()}}
 {\footnotesize\ttfamily character(len=\+:) function, allocatable, private m\+\_\+attr\+::attr\+\_\+scalar (\begin{DoxyParamCaption}\item[{character(len=$\ast$), intent(in)}]{string,  }\item[{logical, intent(in), optional}]{reset }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
-\hypertarget{namespacem__attr_autotoc_md8}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__attr_autotoc_md8}
-attr(3f) -\/ \mbox{[}M\+\_\+attr\mbox{]} substitute escape sequences for H\+T\+M\+L-\/like syntax in strings (L\+I\+C\+E\+N\+SE\+:M\+IT)\hypertarget{namespacem__attr_autotoc_md9}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__attr_autotoc_md9}
+\hypertarget{namespacem__attr_autotoc_md9}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__attr_autotoc_md9}
+attr(3f) -\/ \mbox{[}M\+\_\+attr\mbox{]} substitute escape sequences for H\+T\+M\+L-\/like syntax in strings (L\+I\+C\+E\+N\+SE\+:M\+IT)\hypertarget{namespacem__attr_autotoc_md10}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__attr_autotoc_md10}
 \begin{DoxyVerb}  function attr(string,reset) result (expanded)
 
     ! scalar
@@ -427,8 +446,8 @@ attr(3f) -\/ \mbox{[}M\+\_\+attr\mbox{]} substitute escape sequences for H\+T\+M
     character(len=:),allocatable :: expanded(:)
     integer,intent(in),optional  :: chars
 \end{DoxyVerb}
-\hypertarget{namespacem__attr_autotoc_md10}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__attr_autotoc_md10}
-Use H\+T\+M\+L-\/like syntax to add attributes to terminal output such as color on devices that recognize A\+N\+SI escape sequences.\hypertarget{namespacem__attr_autotoc_md11}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__attr_autotoc_md11}
+\hypertarget{namespacem__attr_autotoc_md11}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__attr_autotoc_md11}
+Use H\+T\+M\+L-\/like syntax to add attributes to terminal output such as color on devices that recognize A\+N\+SI escape sequences.\hypertarget{namespacem__attr_autotoc_md12}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__attr_autotoc_md12}
 string input string of form \begin{DoxyVerb}            "<attribute_name>string</attribute_name> ...".
 
            where the current attributes are color names,
@@ -440,7 +459,7 @@ reset By default, a sequence to clear all text attributes is sent at the end of 
 
 Note if turning off the reset attributes may be continued accross lines, but if each line is not self-\/contained attributes may not display properly when filtered with commands such as grep(1).
 
-chars For arrays, a reset will be placed after the Nth displayable column count in order to make it easier to generate consistent right borders for non-\/default background colors for a text block. \hypertarget{namespacem__attr_autotoc_md12}{}\doxysubsubsection{K\+E\+Y\+W\+O\+R\+DS}\label{namespacem__attr_autotoc_md12}
+chars For arrays, a reset will be placed after the Nth displayable column count in order to make it easier to generate consistent right borders for non-\/default background colors for a text block. \hypertarget{namespacem__attr_autotoc_md13}{}\doxysubsubsection{K\+E\+Y\+W\+O\+R\+DS}\label{namespacem__attr_autotoc_md13}
 primary default keywords
 
 colors\+: r, red, R, R\+ED g, green, G, G\+R\+E\+EN b, blue, B, B\+L\+UE m, magenta, M, M\+A\+G\+E\+N\+TA c, cyan, C, C\+Y\+AN y, yellow, Y, Y\+E\+L\+L\+OW e, ebony, E, E\+B\+O\+NY w, white, W, W\+H\+I\+TE
@@ -457,8 +476,8 @@ write($\ast$,$\ast$)attr(\textquotesingle{}$<$\+E\+R\+R\+O\+R$>$an error message
 
 By default, if the color mnemonics (ie. the keywords) are uppercase they change the background color. If lowercase, the foreground color. When preceded by a \char`\"{}/\char`\"{} character the attribute is returned to the default.
 
-The \char`\"{}default\char`\"{} keyword is typically used explicitly when reset=.false, and sets all text attributes to their initial defaults.\hypertarget{namespacem__attr_autotoc_md13}{}\doxysubsubsection{L\+I\+M\+I\+T\+A\+T\+I\+O\+NS}\label{namespacem__attr_autotoc_md13}
-o colors are not nestable, keywords are case-\/sensitive, o not all terminals obey the sequences. On Windows, it is best if you use Windows 10+ and/or the Linux mode; although it has worked with all Cyg\+Win and Min\+GW and Putty windows and mintty. o you should use \char`\"{}$<$gt$>$\char`\"{} and \char`\"{}$<$lt$>$\char`\"{} instead of \char`\"{}$>$\char`\"{} and \char`\"{}$<$\char`\"{} in a string processed by attr(3f) instead of in any plain text output so that the raw mode will create correct input for the attr(3f) function if read back in.\hypertarget{namespacem__attr_autotoc_md14}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__attr_autotoc_md14}
+The \char`\"{}default\char`\"{} keyword is typically used explicitly when reset=.false, and sets all text attributes to their initial defaults.\hypertarget{namespacem__attr_autotoc_md14}{}\doxysubsubsection{L\+I\+M\+I\+T\+A\+T\+I\+O\+NS}\label{namespacem__attr_autotoc_md14}
+o colors are not nestable, keywords are case-\/sensitive, o not all terminals obey the sequences. On Windows, it is best if you use Windows 10+ and/or the Linux mode; although it has worked with all Cyg\+Win and Min\+GW and Putty windows and mintty. o you should use \char`\"{}$<$gt$>$\char`\"{} and \char`\"{}$<$lt$>$\char`\"{} instead of \char`\"{}$>$\char`\"{} and \char`\"{}$<$\char`\"{} in a string processed by attr(3f) instead of in any plain text output so that the raw mode will create correct input for the attr(3f) function if read back in.\hypertarget{namespacem__attr_autotoc_md15}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__attr_autotoc_md15}
 \begin{DoxyVerb}Sample program
 
  program demo_esc
@@ -520,9 +539,9 @@ o colors are not nestable, keywords are case-\/sensitive, o not all terminals ob
  end subroutine printstuff
  end program demo_esc
 \end{DoxyVerb}
-\hypertarget{namespacem__attr_autotoc_md15}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__attr_autotoc_md15}
-John S. Urban, 2021\hypertarget{namespacem__attr_autotoc_md16}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__attr_autotoc_md16}
-M\+IT\hypertarget{namespacem__attr_autotoc_md17}{}\doxysubsubsection{S\+E\+E A\+L\+SO}\label{namespacem__attr_autotoc_md17}
+\hypertarget{namespacem__attr_autotoc_md16}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__attr_autotoc_md16}
+John S. Urban, 2021\hypertarget{namespacem__attr_autotoc_md17}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__attr_autotoc_md17}
+M\+IT\hypertarget{namespacem__attr_autotoc_md18}{}\doxysubsubsection{S\+E\+E A\+L\+SO}\label{namespacem__attr_autotoc_md18}
 attr\+\_\+mode(3f), attr\+\_\+update(3f) 
 
 References code\+\_\+reset, esc, get(), keywords, locate(), mode, reset, and vt102().
@@ -568,17 +587,17 @@ Here is the call graph for this function\+:\nopagebreak
 
 !$>$ 
 
-\hypertarget{namespacem__attr_autotoc_md25}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__attr_autotoc_md25}
-attr\+\_\+update(3f) -\/ \mbox{[}M\+\_\+attr\mbox{]} update internal dictionary given keyword and value (L\+I\+C\+E\+N\+SE\+:M\+IT)\hypertarget{namespacem__attr_autotoc_md26}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__attr_autotoc_md26}
+\hypertarget{namespacem__attr_autotoc_md26}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__attr_autotoc_md26}
+attr\+\_\+update(3f) -\/ \mbox{[}M\+\_\+attr\mbox{]} update internal dictionary given keyword and value (L\+I\+C\+E\+N\+SE\+:M\+IT)\hypertarget{namespacem__attr_autotoc_md27}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__attr_autotoc_md27}
 \begin{DoxyVerb}subroutine attr_update(key,val)
 
  character(len=*),intent(in)           :: key
  character(len=*),intent(in),optional  :: val
  character(len=*),intent(in),optional  :: mono_val
 \end{DoxyVerb}
-\hypertarget{namespacem__attr_autotoc_md27}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__attr_autotoc_md27}
-Update internal dictionary in M\+\_\+attr(3fm) module.\hypertarget{namespacem__attr_autotoc_md28}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__attr_autotoc_md28}
-key name of keyword to add, replace, or delete from dictionary val if present add or replace value associated with keyword. If not present remove keyword entry from dictionary. mono\+\_\+val if present add or replace second value associated with keyword used for plain text mode. Must only be specified if V\+AL is also specified.\hypertarget{namespacem__attr_autotoc_md29}{}\doxysubsubsection{K\+E\+Y\+W\+O\+R\+DS}\label{namespacem__attr_autotoc_md29}
+\hypertarget{namespacem__attr_autotoc_md28}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__attr_autotoc_md28}
+Update internal dictionary in M\+\_\+attr(3fm) module.\hypertarget{namespacem__attr_autotoc_md29}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__attr_autotoc_md29}
+key name of keyword to add, replace, or delete from dictionary val if present add or replace value associated with keyword. If not present remove keyword entry from dictionary. mono\+\_\+val if present add or replace second value associated with keyword used for plain text mode. Must only be specified if V\+AL is also specified.\hypertarget{namespacem__attr_autotoc_md30}{}\doxysubsubsection{K\+E\+Y\+W\+O\+R\+DS}\label{namespacem__attr_autotoc_md30}
 The following keywords are defined by default
 
 colors\+:
@@ -589,7 +608,7 @@ If the color keywords are capitalized they control the text background instead o
 
 attributes\+:
 
-ul,underline it,italics (often produces inverse colors on many devices\hypertarget{namespacem__attr_autotoc_md30}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__attr_autotoc_md30}
+ul,underline it,italics (often produces inverse colors on many devices\hypertarget{namespacem__attr_autotoc_md31}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__attr_autotoc_md31}
 \begin{DoxyVerb}Sample program
 
   program demo_update
@@ -618,8 +637,8 @@ ul,underline it,italics (often produces inverse colors on many devices\hypertarg
      'CUSTOMIZED: <r>Apple</r>, <b>Sky</b>, <g>Grass</g>')
   end program demo_update
 \end{DoxyVerb}
-\hypertarget{namespacem__attr_autotoc_md31}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__attr_autotoc_md31}
-John S. Urban, 2021\hypertarget{namespacem__attr_autotoc_md32}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__attr_autotoc_md32}
+\hypertarget{namespacem__attr_autotoc_md32}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__attr_autotoc_md32}
+John S. Urban, 2021\hypertarget{namespacem__attr_autotoc_md33}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__attr_autotoc_md33}
 M\+IT 
 
 References insert(), keywords, locate(), mode, mono\+\_\+values, remove(), replace(), values, and vt102().

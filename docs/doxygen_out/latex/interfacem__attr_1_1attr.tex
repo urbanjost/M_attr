@@ -24,8 +24,8 @@ character(len=\+:) function, allocatable \mbox{\hyperlink{interfacem__attr_1_1at
 \doxysubsubsection{\texorpdfstring{attr\_scalar()}{attr\_scalar()}}
 {\footnotesize\ttfamily character(len=\+:) function, allocatable m\+\_\+attr\+::attr\+::attr\+\_\+scalar (\begin{DoxyParamCaption}\item[{character(len=$\ast$), intent(in)}]{string,  }\item[{logical, intent(in), optional}]{reset }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
-\hypertarget{namespacem__attr_autotoc_md8}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__attr_autotoc_md8}
-attr(3f) -\/ \mbox{[}M\+\_\+attr\mbox{]} substitute escape sequences for H\+T\+M\+L-\/like syntax in strings (L\+I\+C\+E\+N\+SE\+:M\+IT)\hypertarget{namespacem__attr_autotoc_md9}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__attr_autotoc_md9}
+\hypertarget{namespacem__attr_autotoc_md9}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__attr_autotoc_md9}
+attr(3f) -\/ \mbox{[}M\+\_\+attr\mbox{]} substitute escape sequences for H\+T\+M\+L-\/like syntax in strings (L\+I\+C\+E\+N\+SE\+:M\+IT)\hypertarget{namespacem__attr_autotoc_md10}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__attr_autotoc_md10}
 \begin{DoxyVerb}  function attr(string,reset) result (expanded)
 
     ! scalar
@@ -38,8 +38,8 @@ attr(3f) -\/ \mbox{[}M\+\_\+attr\mbox{]} substitute escape sequences for H\+T\+M
     character(len=:),allocatable :: expanded(:)
     integer,intent(in),optional  :: chars
 \end{DoxyVerb}
-\hypertarget{namespacem__attr_autotoc_md10}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__attr_autotoc_md10}
-Use H\+T\+M\+L-\/like syntax to add attributes to terminal output such as color on devices that recognize A\+N\+SI escape sequences.\hypertarget{namespacem__attr_autotoc_md11}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__attr_autotoc_md11}
+\hypertarget{namespacem__attr_autotoc_md11}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__attr_autotoc_md11}
+Use H\+T\+M\+L-\/like syntax to add attributes to terminal output such as color on devices that recognize A\+N\+SI escape sequences.\hypertarget{namespacem__attr_autotoc_md12}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__attr_autotoc_md12}
 string input string of form \begin{DoxyVerb}            "<attribute_name>string</attribute_name> ...".
 
            where the current attributes are color names,
@@ -51,7 +51,7 @@ reset By default, a sequence to clear all text attributes is sent at the end of 
 
 Note if turning off the reset attributes may be continued accross lines, but if each line is not self-\/contained attributes may not display properly when filtered with commands such as grep(1).
 
-chars For arrays, a reset will be placed after the Nth displayable column count in order to make it easier to generate consistent right borders for non-\/default background colors for a text block. \hypertarget{namespacem__attr_autotoc_md12}{}\doxysubsubsection{K\+E\+Y\+W\+O\+R\+DS}\label{namespacem__attr_autotoc_md12}
+chars For arrays, a reset will be placed after the Nth displayable column count in order to make it easier to generate consistent right borders for non-\/default background colors for a text block. \hypertarget{namespacem__attr_autotoc_md13}{}\doxysubsubsection{K\+E\+Y\+W\+O\+R\+DS}\label{namespacem__attr_autotoc_md13}
 primary default keywords
 
 colors\+: r, red, R, R\+ED g, green, G, G\+R\+E\+EN b, blue, B, B\+L\+UE m, magenta, M, M\+A\+G\+E\+N\+TA c, cyan, C, C\+Y\+AN y, yellow, Y, Y\+E\+L\+L\+OW e, ebony, E, E\+B\+O\+NY w, white, W, W\+H\+I\+TE
@@ -68,8 +68,8 @@ write($\ast$,$\ast$)attr(\textquotesingle{}$<$\+E\+R\+R\+O\+R$>$an error message
 
 By default, if the color mnemonics (ie. the keywords) are uppercase they change the background color. If lowercase, the foreground color. When preceded by a \char`\"{}/\char`\"{} character the attribute is returned to the default.
 
-The \char`\"{}default\char`\"{} keyword is typically used explicitly when reset=.false, and sets all text attributes to their initial defaults.\hypertarget{namespacem__attr_autotoc_md13}{}\doxysubsubsection{L\+I\+M\+I\+T\+A\+T\+I\+O\+NS}\label{namespacem__attr_autotoc_md13}
-o colors are not nestable, keywords are case-\/sensitive, o not all terminals obey the sequences. On Windows, it is best if you use Windows 10+ and/or the Linux mode; although it has worked with all Cyg\+Win and Min\+GW and Putty windows and mintty. o you should use \char`\"{}$<$gt$>$\char`\"{} and \char`\"{}$<$lt$>$\char`\"{} instead of \char`\"{}$>$\char`\"{} and \char`\"{}$<$\char`\"{} in a string processed by attr(3f) instead of in any plain text output so that the raw mode will create correct input for the attr(3f) function if read back in.\hypertarget{namespacem__attr_autotoc_md14}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__attr_autotoc_md14}
+The \char`\"{}default\char`\"{} keyword is typically used explicitly when reset=.false, and sets all text attributes to their initial defaults.\hypertarget{namespacem__attr_autotoc_md14}{}\doxysubsubsection{L\+I\+M\+I\+T\+A\+T\+I\+O\+NS}\label{namespacem__attr_autotoc_md14}
+o colors are not nestable, keywords are case-\/sensitive, o not all terminals obey the sequences. On Windows, it is best if you use Windows 10+ and/or the Linux mode; although it has worked with all Cyg\+Win and Min\+GW and Putty windows and mintty. o you should use \char`\"{}$<$gt$>$\char`\"{} and \char`\"{}$<$lt$>$\char`\"{} instead of \char`\"{}$>$\char`\"{} and \char`\"{}$<$\char`\"{} in a string processed by attr(3f) instead of in any plain text output so that the raw mode will create correct input for the attr(3f) function if read back in.\hypertarget{namespacem__attr_autotoc_md15}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__attr_autotoc_md15}
 \begin{DoxyVerb}Sample program
 
  program demo_esc
@@ -131,9 +131,9 @@ o colors are not nestable, keywords are case-\/sensitive, o not all terminals ob
  end subroutine printstuff
  end program demo_esc
 \end{DoxyVerb}
-\hypertarget{namespacem__attr_autotoc_md15}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__attr_autotoc_md15}
-John S. Urban, 2021\hypertarget{namespacem__attr_autotoc_md16}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__attr_autotoc_md16}
-M\+IT\hypertarget{namespacem__attr_autotoc_md17}{}\doxysubsubsection{S\+E\+E A\+L\+SO}\label{namespacem__attr_autotoc_md17}
+\hypertarget{namespacem__attr_autotoc_md16}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__attr_autotoc_md16}
+John S. Urban, 2021\hypertarget{namespacem__attr_autotoc_md17}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__attr_autotoc_md17}
+M\+IT\hypertarget{namespacem__attr_autotoc_md18}{}\doxysubsubsection{S\+E\+E A\+L\+SO}\label{namespacem__attr_autotoc_md18}
 attr\+\_\+mode(3f), attr\+\_\+update(3f) \mbox{\Hypertarget{interfacem__attr_1_1attr_a38ae4ff202c072251e503ab49b4e763b}\label{interfacem__attr_1_1attr_a38ae4ff202c072251e503ab49b4e763b}} 
 \index{m\_attr::attr@{m\_attr::attr}!attr\_scalar\_width@{attr\_scalar\_width}}
 \index{attr\_scalar\_width@{attr\_scalar\_width}!m\_attr::attr@{m\_attr::attr}}

@@ -159,10 +159,10 @@ Private Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<h2><a class="anchor" id="autotoc_md8"></a>
+<h2><a class="anchor" id="autotoc_md9"></a>
 NAME</h2>
 <p>attr(3f) - [M_attr] substitute escape sequences for HTML-like syntax in strings (LICENSE:MIT)</p>
-<h2><a class="anchor" id="autotoc_md9"></a>
+<h2><a class="anchor" id="autotoc_md10"></a>
 SYNOPSIS</h2>
 <pre class="fragment">  function attr(string,reset) result (expanded)
 
@@ -175,10 +175,10 @@ SYNOPSIS</h2>
     logical,intent(in),optional  :: reset
     character(len=:),allocatable :: expanded(:)
     integer,intent(in),optional  :: chars
-</pre><h2><a class="anchor" id="autotoc_md10"></a>
+</pre><h2><a class="anchor" id="autotoc_md11"></a>
 DESCRIPTION</h2>
 <p>Use HTML-like syntax to add attributes to terminal output such as color on devices that recognize ANSI escape sequences.</p>
-<h2><a class="anchor" id="autotoc_md11"></a>
+<h2><a class="anchor" id="autotoc_md12"></a>
 OPTIONS</h2>
 <p>string input string of form </p><pre class="fragment">            "&lt;attribute_name&gt;string&lt;/attribute_name&gt; ...".
 
@@ -187,7 +187,7 @@ OPTIONS</h2>
 </pre><p>reset By default, a sequence to clear all text attributes is sent at the end of each returned line if an escape character appears in the output string. This can be turned off by setting RESET to .false. .</p>
 <p>Note if turning off the reset attributes may be continued accross lines, but if each line is not self-contained attributes may not display properly when filtered with commands such as grep(1).</p>
 <p>chars For arrays, a reset will be placed after the Nth displayable column count in order to make it easier to generate consistent right borders for non-default background colors for a text block. </p>
-<h2><a class="anchor" id="autotoc_md12"></a>
+<h2><a class="anchor" id="autotoc_md13"></a>
 KEYWORDS</h2>
 <p>primary default keywords</p>
 <p>colors: r, red, R, RED g, green, G, GREEN b, blue, B, BLUE m, magenta, M, MAGENTA c, cyan, C, CYAN y, yellow, Y, YELLOW e, ebony, E, EBONY w, white, W, WHITE</p>
@@ -198,10 +198,10 @@ KEYWORDS</h2>
 <p>write(*,*)attr('&lt;ERROR&gt;an error message') write(*,*)attr('&lt;WARNING&gt;a warning message') write(*,*)attr('&lt;INFO&gt;an informational message')</p>
 <p>By default, if the color mnemonics (ie. the keywords) are uppercase they change the background color. If lowercase, the foreground color. When preceded by a "/" character the attribute is returned to the default.</p>
 <p>The "default" keyword is typically used explicitly when reset=.false, and sets all text attributes to their initial defaults.</p>
-<h2><a class="anchor" id="autotoc_md13"></a>
+<h2><a class="anchor" id="autotoc_md14"></a>
 LIMITATIONS</h2>
 <p>o colors are not nestable, keywords are case-sensitive, o not all terminals obey the sequences. On Windows, it is best if you use Windows 10+ and/or the Linux mode; although it has worked with all CygWin and MinGW and Putty windows and mintty. o you should use "&lt;gt&gt;" and "&lt;lt&gt;" instead of "&gt;" and "&lt;" in a string processed by attr(3f) instead of in any plain text output so that the raw mode will create correct input for the attr(3f) function if read back in.</p>
-<h2><a class="anchor" id="autotoc_md14"></a>
+<h2><a class="anchor" id="autotoc_md15"></a>
 EXAMPLE</h2>
 <pre class="fragment">Sample program
 
@@ -263,13 +263,13 @@ EXAMPLE</h2>
     &amp;'&lt;in&gt;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;w&gt;WHITE&lt;/w&gt; and &lt;e&gt;EBONY&lt;/e&gt;&lt;/ul&gt;&lt;/bo&gt;&lt;/in&gt;')
  end subroutine printstuff
  end program demo_esc
-</pre><h2><a class="anchor" id="autotoc_md15"></a>
+</pre><h2><a class="anchor" id="autotoc_md16"></a>
 AUTHOR</h2>
 <p>John S. Urban, 2021</p>
-<h2><a class="anchor" id="autotoc_md16"></a>
+<h2><a class="anchor" id="autotoc_md17"></a>
 LICENSE</h2>
 <p>MIT</p>
-<h2><a class="anchor" id="autotoc_md17"></a>
+<h2><a class="anchor" id="autotoc_md18"></a>
 SEE ALSO</h2>
 <p>attr_mode(3f), attr_update(3f) </p>
 
