@@ -1,6 +1,6 @@
 #@(#) make(1) rules for maintaining a FORTRAN90/C library. Makefile started by makeout(1) 2020-01-14 01:11:41
 NULL=
-PROGFILES = $(wildcard ../app/*.f90) $(wildcard ../example/*.f90) $(wildcard ../test/*.f90)
+PROGFILES = $(wildcard ../app/*.f90) $(wildcard ../example/*.f90) $(wildcard ../example/*/*.f90)
 PROG = ${PROGFILES:.f90=}
 SRCS = $(wildcard ./*.f90) $(wildcard ./*.c ) $(wildcard ./*.h )
 LIBS := -Llib -lM_attr 
@@ -98,6 +98,7 @@ help:
 >: man     '-- show all manpages as text'
 >: clean   '-- clean directory of object files and executables'
 >: doxygen '-- run doxygen(1) if you have it'
+>: ford    '-- run ford(1) if you have it'
 >: help    '-- display this text'
 >
 #-------------------------------------------------------------------------------
@@ -109,6 +110,10 @@ run: $(PROG)
 .PHONY: doxygen
 doxygen: 
 >doxygen dox.in
+#-------------------------------------------------------------------------------
+.PHONY: ford
+ford: 
+>cd ..;ford ford.md
 #-------------------------------------------------------------------------------
 .PHONY: man
 man:

@@ -5,6 +5,7 @@ use M_attr
 implicit none
 character(len=*),parameter :: options=' -section 3 -library libGPF -filename `pwd`/m_attr.FF &
 & -documentation y -ufpp   y -ccall  n -archive  GPF.a '
+character(len=1),parameter :: esc=char(27)
 contains
 !TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
 subroutine test_suite_m_attr()
@@ -20,22 +21,22 @@ integer :: i
    call unit_check_start('attr',' -description display text with attributes'//OPTIONS)
    allpassed = .true.
    call attr_mode('color')
-   allpassed=allpassed  .and.  test('<red>red',          char(27)//'[31mred'//char(27)//'[0m')
-   allpassed=allpassed  .and.  test('<green>green',      char(27)//'[32mgreen'//char(27)//'[0m')
-   allpassed=allpassed  .and.  test('<blue>blue',        char(27)//'[34mblue'//char(27)//'[0m')
-   allpassed=allpassed  .and.  test('<cyan>cyan',        char(27)//'[36mcyan'//char(27)//'[0m')
-   allpassed=allpassed  .and.  test('<magenta>magenta',  char(27)//'[35mmagenta'//char(27)//'[0m')
-   allpassed=allpassed  .and.  test('<yellow>yellow',    char(27)//'[33myellow'//char(27)//'[0m')
-   allpassed=allpassed  .and.  test('<ebony>ebony',      char(27)//'[30mebony'//char(27)//'[0m')
-   allpassed=allpassed  .and.  test('<white>white',      char(27)//'[37mwhite'//char(27)//'[0m')
-   allpassed=allpassed  .and.  test('<RED>RED',          char(27)//'[41mRED'//char(27)//'[0m')
-   allpassed=allpassed  .and.  test('<GREEN>GREEN',      char(27)//'[42mGREEN'//char(27)//'[0m')
-   allpassed=allpassed  .and.  test('<BLUE>BLUE',        char(27)//'[44mBLUE'//char(27)//'[0m')
-   allpassed=allpassed  .and.  test('<CYAN>CYAN',        char(27)//'[46mCYAN'//char(27)//'[0m')
-   allpassed=allpassed  .and.  test('<MAGENTA>MAGENTA',  char(27)//'[45mMAGENTA'//char(27)//'[0m')
-   allpassed=allpassed  .and.  test('<YELLOW>YELLOW',    char(27)//'[43mYELLOW'//char(27)//'[0m')
-   allpassed=allpassed  .and.  test('<EBONY>EBONY',      char(27)//'[40mEBONY'//char(27)//'[0m')
-   allpassed=allpassed  .and.  test('<WHITE>WHITE',      char(27)//'[47mWHITE'//char(27)//'[0m')
+   allpassed=allpassed  .and.  test('<red>red',          esc//'[31mred'//esc//'[0m')
+   allpassed=allpassed  .and.  test('<green>green',      esc//'[32mgreen'//esc//'[0m')
+   allpassed=allpassed  .and.  test('<blue>blue',        esc//'[34mblue'//esc//'[0m')
+   allpassed=allpassed  .and.  test('<cyan>cyan',        esc//'[36mcyan'//esc//'[0m')
+   allpassed=allpassed  .and.  test('<magenta>magenta',  esc//'[35mmagenta'//esc//'[0m')
+   allpassed=allpassed  .and.  test('<yellow>yellow',    esc//'[33myellow'//esc//'[0m')
+   allpassed=allpassed  .and.  test('<ebony>ebony',      esc//'[30mebony'//esc//'[0m')
+   allpassed=allpassed  .and.  test('<white>white',      esc//'[37mwhite'//esc//'[0m')
+   allpassed=allpassed  .and.  test('<RED>RED',          esc//'[41mRED'//esc//'[0m')
+   allpassed=allpassed  .and.  test('<GREEN>GREEN',      esc//'[42mGREEN'//esc//'[0m')
+   allpassed=allpassed  .and.  test('<BLUE>BLUE',        esc//'[44mBLUE'//esc//'[0m')
+   allpassed=allpassed  .and.  test('<CYAN>CYAN',        esc//'[46mCYAN'//esc//'[0m')
+   allpassed=allpassed  .and.  test('<MAGENTA>MAGENTA',  esc//'[45mMAGENTA'//esc//'[0m')
+   allpassed=allpassed  .and.  test('<YELLOW>YELLOW',    esc//'[43mYELLOW'//esc//'[0m')
+   allpassed=allpassed  .and.  test('<EBONY>EBONY',      esc//'[40mEBONY'//esc//'[0m')
+   allpassed=allpassed  .and.  test('<WHITE>WHITE',      esc//'[47mWHITE'//esc//'[0m')
 
    call attr_mode('plain')
    allpassed=allpassed  .and.  test('<red>red',          'red')
@@ -84,10 +85,12 @@ integer :: i
       logical                     :: Passed
       passed = attr(in).eq.ExpectedResult
 
+      if(.false.)then
       if(passed)then
          write(std_error,*)"Passed on ",in, " converted to ", ExpectedResult
       else
          write(std_error,*)"Failed on ",in, " got ", attr(in), " Expected ",ExpectedResult
+      endif
       endif
 
    end function test
@@ -95,19 +98,42 @@ end subroutine test_attr
 !TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
 subroutine test_attr_update()
 character(len=:),allocatable :: targetline
+character(len=:),allocatable :: in
+character(len=:),allocatable :: out
    call unit_check_start('attr_update',' '//OPTIONS)
    !call unit_check('attr_update',targetline.eq.'a b ab baaa aaCCCC CCCC CCCC a a a aa aaaaaa','example of using RANGE',targetline)
    if(unit_check_level.gt.0)then
    endif
+   call attr_mode(manner='color')
+   call attr_update('/b','>>>>')
+   call attr_update('b','<<<<')
+   call attr_update('blink',esc//'[5m')
+   call attr_update('/blink',esc//'[25m')
+   call attr_update('mono',attr( '<esc>]11;black<bel><esc>]10;white<bel>' )) ! change default bg and fg
+   call attr_update('/r')
+   call attr_update('r')
+
+   in=attr('<blink>blink!</blink> stare!')
+   out=esc//'[5mblink!'//esc//'[25m stare!'//esc//'[0m'
+   call unit_check('attr_update',in.eq.out,'add blink, in=',in,' out=',attr(in),' expected=',out)
+
+   in=attr('<r>red removed</r>')
+   out='<r>red removed</r>'
+   call unit_check('attr_update',in.eq.out,'removed, in=',in,' out=',attr(in),' expected=',out)
+
+   in=attr('<b>blue replaced</b>')
+   out='<<<<blue replaced>>>>'
+   call unit_check('attr_update',in.eq.out,'blue replaced, in=',in,' out=',attr(in),' expected=',out)
+
    call unit_check_done('attr_update')
 end subroutine test_attr_update
 !TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
 subroutine test_attr_mode()
 character(len=*),parameter :: in='<B><bo>Hello!</bo></B> <G><y>Hello Again!</y></G>'
 character(len=*),parameter :: expected_color= &
-   & char(27)//'[44m'//char(27)//'[1mHello!'// &
-   & char(27)//'[22m'//char(27)//'[49m '//char(27)//'[42m'//char(27)//'[33mHello Again!'// &
-   & char(27)//'[39m'//char(27)//'[49m'//char(27)//'[0m'
+   & esc//'[44m'//esc//'[1mHello!'// &
+   & esc//'[22m'//esc//'[49m '//esc//'[42m'//esc//'[33mHello Again!'// &
+   & esc//'[39m'//esc//'[49m'//esc//'[0m'
 character(len=*),parameter :: expected_plain='Hello! Hello Again!'
    call unit_check_start('attr_mode',' '//OPTIONS)
    call attr_mode(manner='color')

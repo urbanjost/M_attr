@@ -680,7 +680,7 @@ EXAMPLE</h2>
 
     write(*,'(a)') attr('TEST ADDING A CUSTOM SEQUENCE:')
     call attr_update('blink',char(27)//'[5m')
-    call attr_update('/blink',char(27)//'[38m')
+    call attr_update('/blink',char(27)//'[25m')
     write(*,'(a)') attr('&lt;blink&gt;Items for Friday&lt;/blink&gt;')
 
  contains
@@ -894,7 +894,7 @@ EXAMPLE</h2>
      write(*,'(a)') attr('&lt;clear&gt;TEST CUSTOMIZATIONS:')
      ! add custom keywords
      call attr_update('blink',char(27)//'[5m')
-     call attr_update('/blink',char(27)//'[38m')
+     call attr_update('/blink',char(27)//'[25m')
      write(*,*)
      write(*,'(a)') attr('&lt;blink&gt;Items for Friday&lt;/blink&gt;')
      call attr_update('ouch',attr( &amp;

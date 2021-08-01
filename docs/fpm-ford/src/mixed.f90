@@ -17,7 +17,7 @@
 
              write(*,'(a)') attr('TEST ADDING A CUSTOM SEQUENCE:')
              call attr_update('blink',char(27)//'[5m')
-             call attr_update('/blink',char(27)//'[38m')
+             call attr_update('/blink',char(27)//'[25m')
              write(*,'(a)') attr('<blink>Items for Friday</blink>')
 
           contains
