@@ -1,10 +1,10 @@
 # TOML file for fpm as described at https://github.com/fortran-lang/fpm/blob/master/manifest-reference.md
 name = "M_attr"
-version = "1.1.2"
+version = "1.1.3"
 license = "MIT"
 author = "John S. Urban"
 maintainer = "urbanjost@comcast.net"
-copyright = "2020 John S. Urban"
+copyright = "2021 John S. Urban"
 description= "ANSI control escape sequences using an XML-like syntax for attributes like color on video displays and emulators"
 categories = ["ANSI escape sequences"]
 keywords = ["fortran", "terminal control sequences", "escape sequences", "in-band terminal control" ]
