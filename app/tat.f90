@@ -1,7 +1,7 @@
 program terminal_attributes
 ! read stdin and run it through M_attr::attr to display color
 use M_attr,  only : attr, attr_update, attr_mode
-use M_CLI2,  only : set_args, sget, iget, remaining, lget, unnamed
+use M_CLI2,  only : set_args, sget, iget, remaining, lget, unnamed, specified
 implicit none
 character(len=1024)          :: line
 character(len=:),allocatable :: prefix
@@ -16,7 +16,11 @@ character(len=:),allocatable :: help_text(:), version_text(:)
    ! example: tat '<clear><B><w><bo><CSI>12;36f Good Morning! '
    iwidth=iget('chars')
    call attr_mode(sget('manner'))
-   prefix=sget('prefix')
+   if(specified(prefix))then
+      prefix=sget('prefix')
+   else
+      prefix=''
+   endif
 
    if(lget('debug'))then
       write(*,*)'REMAINING:',remaining

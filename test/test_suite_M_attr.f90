@@ -17,7 +17,6 @@ end subroutine test_suite_m_attr
 !TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
 subroutine test_attr()
 logical :: allpassed
-integer :: i
    call unit_check_start('attr',' -description display text with attributes'//OPTIONS)
    allpassed = .true.
    call attr_mode('color')
@@ -97,11 +96,9 @@ integer :: i
 end subroutine test_attr
 !TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
 subroutine test_attr_update()
-character(len=:),allocatable :: targetline
 character(len=:),allocatable :: in
 character(len=:),allocatable :: out
    call unit_check_start('attr_update',' '//OPTIONS)
-   !call unit_check('attr_update',targetline.eq.'a b ab baaa aaCCCC CCCC CCCC a a a aa aaaaaa','example of using RANGE',targetline)
    if(unit_check_level.gt.0)then
    endif
    call attr_mode(manner='color')
