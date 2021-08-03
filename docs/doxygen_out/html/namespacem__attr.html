@@ -298,7 +298,7 @@ EXAMPLE</h2>
 <pre class="fragment">Sample program
 
  program demo_M_attr
- use M_attr, only : attr, attr_mode, attr_update
+ use M_attr, only : attr, attr_mode, attr_update, advice
  implicit none
  character(len=256) :: line
  character(len=*),parameter :: f='( &amp;
@@ -325,6 +325,10 @@ EXAMPLE</h2>
     write(*,'(a)')attr('&lt;ERROR&gt; Woe is nigh.')
     write(*,'(a)')attr('&lt;WARNING&gt; The night is young.')
     write(*,'(a)')attr('&lt;INFO&gt; It is Monday')
+
+    call advice('&lt;ERROR&gt;', 'Woe is nigh.')
+    call advice('&lt;WARNING&gt;', 'The night is young.')
+    call advice('&lt;INFO&gt;', 'It is Monday')
 
     ! create a custom mneumonic
     call attr_update('MYERROR',attr(&amp;
