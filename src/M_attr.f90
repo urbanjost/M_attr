@@ -1143,6 +1143,7 @@ end subroutine insert
 !!        call alert("error", "Say you didn't!")
 !!        call alert("warn",  "I wouldn't if I were you, Will Robinson.")
 !!        call alert("info",  "I fixed that for you, but it was a bad idea.")
+!!        call alert("debug", "Who knows what is happening now?.")
 !!        call alert("???    ",  "not today you don't")
 !!        ! call to just update the macros
 !!        call alert()
@@ -1191,16 +1192,19 @@ character(len=4096)  :: new_message
       select case(type)
 
       case('warn','WARN','warning','WARNING')
-       new_message= '** ('//trim(arg0)//'): <bo><y>warning</y> **:'//new_message
+       new_message= '** ('//trim(arg0)//'): <EBONY><bo><y> warning </y></EBONY> **:'//new_message
 
       case('info','INFO','information','INFORMATION')
-       new_message= '** ('//trim(arg0)//'): <bo><g>info   </g> **:'//new_message
+       new_message= '** ('//trim(arg0)//'): <EBONY><bo><g> info    </g></EBONY> **:'//new_message
 
       case('error','ERROR')
-       new_message= '** ('//trim(arg0)//'): <bo><r>error  </r> **:'//new_message
+       new_message= '** ('//trim(arg0)//'): <EBONY><bo><r> error   </r></EBONY> **:'//new_message
+
+      case('debug','DEBUG')
+       new_message= '** ('//trim(arg0)//'): <EBONY><white><bo> debug   </white></EBONY> **:'//new_message
 
       case default
-       new_message= '** ('//trim(arg0)//'): <bo><c>'//type//'</c> **:'//new_message
+       new_message= '** ('//trim(arg0)//'): <EBONY><bo><c> '//type//' </c></EBONY> **:'//new_message
 
       end select
     write(stderr,'(a)')attr(trim(new_message))
