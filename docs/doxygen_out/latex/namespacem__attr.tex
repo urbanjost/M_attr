@@ -3,6 +3,8 @@
 \doxysubsection*{Data Types}
 \begin{DoxyCompactItemize}
 \item 
+interface \mbox{\hyperlink{interfacem__attr_1_1advice}{advice}}
+\item 
 interface \mbox{\hyperlink{interfacem__attr_1_1attr}{attr}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Functions/\+Subroutines}
@@ -34,7 +36,7 @@ subroutine, private \mbox{\hyperlink{namespacem__attr_aa70700df053289657efdf1168
 \item 
 subroutine, private \mbox{\hyperlink{namespacem__attr_a6d2cdb036e195b3738da45b1e07ddaea}{insert}} (list, value, place)
 \item 
-subroutine, public \mbox{\hyperlink{namespacem__attr_afd08aeaf1428903178a7dcb044627331}{advice}} (type, message)
+subroutine, public \mbox{\hyperlink{namespacem__attr_a900ed51598036175b4781737d4aee56f}{alert}} (type, message)
 \begin{DoxyCompactList}\small\item\em !$>$ \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
@@ -198,7 +200,7 @@ core functions
 
 for generating standard messages
 
-use M\+\_\+attr, only \+: advice\hypertarget{namespacem__attr_autotoc_md2}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__attr_autotoc_md2}
+use M\+\_\+attr, only \+: alert\hypertarget{namespacem__attr_autotoc_md2}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__attr_autotoc_md2}
 M\+\_\+attr(3f) is a Fortran module that writes common A\+N\+SI escape sequences which control terminal text attributes. It is designed to allow the sequences to be suppressed when desired and for the user program to completely customize the keywords -- the user can add, delete and replace the sequences associated with a keyword without changing the code.
 
 Attributes are specified by writing lines with H\+T\+M\+L-\/like structure.
@@ -231,7 +233,7 @@ o colors are not nestable. o keywords are case-\/sensitive, o A\+N\+SI escape se
 \begin{DoxyVerb}Sample program
 
  program demo_M_attr
- use M_attr, only : attr, attr_mode, attr_update, advice
+ use M_attr, only : attr, attr_mode, attr_update, alert
  implicit none
  character(len=256) :: line
  character(len=*),parameter :: f='( &
@@ -259,9 +261,9 @@ o colors are not nestable. o keywords are case-\/sensitive, o A\+N\+SI escape se
     write(*,'(a)')attr('<WARNING> The night is young.')
     write(*,'(a)')attr('<INFO> It is Monday')
 
-    call advice('<ERROR>', 'Woe is nigh.')
-    call advice('<WARNING>', 'The night is young.')
-    call advice('<INFO>', 'It is Monday')
+    call alert('<ERROR>', 'Woe is nigh.')
+    call alert('<WARNING>', 'The night is young.')
+    call alert('<INFO>', 'It is Monday')
 
     ! create a custom mneumonic
     call attr_update('MYERROR',attr(&
@@ -282,26 +284,26 @@ Related information\+:
 terminfo(3c), termlib(3c), tput(1), reset(1), clear(1), console\+\_\+codes(4), E\+C\+M\+A-\/48, \href{https://en.wikipedia.org/wiki/ANSI_escape_code}{\texttt{ https\+://en.\+wikipedia.\+org/wiki/\+A\+N\+S\+I\+\_\+escape\+\_\+code}} 
 
 \doxysubsection{Function/\+Subroutine Documentation}
-\mbox{\Hypertarget{namespacem__attr_afd08aeaf1428903178a7dcb044627331}\label{namespacem__attr_afd08aeaf1428903178a7dcb044627331}} 
-\index{m\_attr@{m\_attr}!advice@{advice}}
-\index{advice@{advice}!m\_attr@{m\_attr}}
-\doxysubsubsection{\texorpdfstring{advice()}{advice()}}
-{\footnotesize\ttfamily subroutine, public m\+\_\+attr\+::advice (\begin{DoxyParamCaption}\item[{character(len=$\ast$), intent(in), optional}]{type,  }\item[{character(len=$\ast$), intent(in), optional}]{message }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{namespacem__attr_a900ed51598036175b4781737d4aee56f}\label{namespacem__attr_a900ed51598036175b4781737d4aee56f}} 
+\index{m\_attr@{m\_attr}!alert@{alert}}
+\index{alert@{alert}!m\_attr@{m\_attr}}
+\doxysubsubsection{\texorpdfstring{alert()}{alert()}}
+{\footnotesize\ttfamily subroutine, public m\+\_\+attr\+::alert (\begin{DoxyParamCaption}\item[{character(len=$\ast$), intent(in), optional}]{type,  }\item[{character(len=$\ast$), intent(in), optional}]{message }\end{DoxyParamCaption})}
 
 
 
 !$>$ 
 
 \hypertarget{namespacem__attr_autotoc_md34}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__attr_autotoc_md34}
-advice(3f) -\/ \mbox{[}M\+\_\+attr\mbox{]} print messages using a standard format including time and program name (L\+I\+C\+E\+N\+SE\+:M\+IT)\hypertarget{namespacem__attr_autotoc_md35}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__attr_autotoc_md35}
-\begin{DoxyVerb} subroutine advice(message)
+alert(3f) -\/ \mbox{[}M\+\_\+attr\mbox{]} print messages using a standard format including time and program name (L\+I\+C\+E\+N\+SE\+:M\+IT)\hypertarget{namespacem__attr_autotoc_md35}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__attr_autotoc_md35}
+\begin{DoxyVerb} subroutine alert(message)
 
     character(len=*),intent(in),optional :: type
     character(len=*),intent(in),optional :: message
 \end{DoxyVerb}
 \hypertarget{namespacem__attr_autotoc_md36}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__attr_autotoc_md36}
 Display a message to stderr prefixed with the name of the calling program and a timestamp when the T\+Y\+PE is specified as any of \textquotesingle{}error\textquotesingle{},\textquotesingle{}warn\textquotesingle{}, or \textquotesingle{}info\textquotesingle{}. It also allows the keywords $<$\+A\+R\+G0$>$,$<$\+T\+Z$>$,$<$\+Y\+E$>$,$<$\+M\+O$>$,$<$\+D\+A$>$,\DoxyHorRuler{0}
-,$<$\+M\+I$>$,$<$\+S\+E$>$,$<$\+M\+S$>$ to be used in the message (which is passed to A\+T\+T\+R(3f)). Note that time stamp keywords will only be updated when using A\+D\+V\+I\+C\+E(3f).\hypertarget{namespacem__attr_autotoc_md37}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__attr_autotoc_md37}
+,$<$\+M\+I$>$,$<$\+S\+E$>$,$<$\+M\+S$>$ to be used in the message (which is passed to A\+T\+T\+R(3f)). Note that time stamp keywords will only be updated when using A\+L\+E\+R\+T(3f).\hypertarget{namespacem__attr_autotoc_md37}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__attr_autotoc_md37}
 T\+Y\+PE if present and one of \textquotesingle{}warn\textquotesingle{},\textquotesingle{}message\textquotesingle{},\textquotesingle{}info\textquotesingle{} a predefined message is written to stderr of the form
 
 $\ast$$\ast$ ($<$\+A\+R\+G0$>$)\+: type $\ast$$\ast$\+: \DoxyHorRuler{0}
@@ -312,32 +314,33 @@ M\+E\+S\+S\+A\+GE the user-\/supplied message to display via a call to A\+T\+T\+
 if no parameters are supplied the macros are updated but no output is generated.\hypertarget{namespacem__attr_autotoc_md38}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__attr_autotoc_md38}
 \begin{DoxyVerb}Sample program
 
- program demo_advice
- use M_attr, only : advice, attr
+ program demo_alert
+ use M_attr, only : alert, attr
  implicit none
-    call advice("error", "Say you didn't!")
-    call advice("warn",  "I wouldn't if I were you, Will Robinson.")
-    call advice("info",  "I fixed that for you, but it was a bad idea.")
-    call advice("???    ",  "not today you don't")
+    call alert("error", "Say you didn't!")
+    call alert("warn",  "I wouldn't if I were you, Will Robinson.")
+    call alert("info",  "I fixed that for you, but it was a bad idea.")
+    call alert("???    ",  "not today you don't")
     ! call to just update the macros
-    call advice()
-    ! conventional call to ATTR(3f) using the ADVICE(3f)-defined macros
+    call alert()
+    ! conventional call to ATTR(3f) using the ALERT(3f)-defined macros
     write(*,*)attr('<bo>The year was <g><YE></g>, the month was <g><MO></g>')
- end program demo_advice
+ end program demo_alert
 \end{DoxyVerb}
  Results\+:
 
-$\ast$$\ast$ (demo\+\_\+advice)\+: error $\ast$$\ast$\+: 16\+:33\+:50.\+0300\+: Say you didn\textquotesingle{}t! $\ast$$\ast$ (demo\+\_\+advice)\+: warning $\ast$$\ast$\+: 16\+:33\+:50.\+0301\+: I wouldn\textquotesingle{}t if I were you, Will Robinson. $\ast$$\ast$ (demo\+\_\+advice)\+: info $\ast$$\ast$\+: 16\+:33\+:50.\+0301\+: I fixed that for you, but it was a bad idea. $\ast$$\ast$ (demo\+\_\+advice)\+: ??? $\ast$$\ast$\+: 16\+:33\+:50.\+0301\+: not today you don\textquotesingle{}t The year was 2021, the month was 7\hypertarget{namespacem__attr_autotoc_md39}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__attr_autotoc_md39}
+$\ast$$\ast$ (demo\+\_\+alert)\+: error $\ast$$\ast$\+: 16\+:33\+:50.\+0300\+: Say you didn\textquotesingle{}t! $\ast$$\ast$ (demo\+\_\+alert)\+: warning $\ast$$\ast$\+: 16\+:33\+:50.\+0301\+: I wouldn\textquotesingle{}t if I were you, Will Robinson. $\ast$$\ast$ (demo\+\_\+alert)\+: info $\ast$$\ast$\+: 16\+:33\+:50.\+0301\+: I fixed that for you, but it was a bad idea. $\ast$$\ast$ (demo\+\_\+alert)\+: ??? $\ast$$\ast$\+: 16\+:33\+:50.\+0301\+: not today you don\textquotesingle{}t The year was 2021, the month was 7\hypertarget{namespacem__attr_autotoc_md39}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__attr_autotoc_md39}
 John S. Urban, 2021\hypertarget{namespacem__attr_autotoc_md40}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__attr_autotoc_md40}
 M\+IT 
 
 References attr\+\_\+update(), and values.
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{namespacem__attr_afd08aeaf1428903178a7dcb044627331_cgraph}
+\includegraphics[width=350pt]{namespacem__attr_a900ed51598036175b4781737d4aee56f_cgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{namespacem__attr_aa1c99b1d2eb001a2768afbc6779f23e1}\label{namespacem__attr_aa1c99b1d2eb001a2768afbc6779f23e1}} 
@@ -350,14 +353,16 @@ Here is the call graph for this function\+:\nopagebreak
 
 References kludge\+\_\+bug(), and reset.
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{namespacem__attr_aa1c99b1d2eb001a2768afbc6779f23e1_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -423,7 +428,8 @@ M\+IT
 
 References keywords, mode, mono\+\_\+values, values, and vt102().
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -550,14 +556,16 @@ attr\+\_\+mode(3f), attr\+\_\+update(3f)
 
 References code\+\_\+reset, esc, get(), keywords, locate(), mode, reset, and vt102().
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{namespacem__attr_a46eba7c8e021da09c2ba477d23138dca_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -574,7 +582,8 @@ Here is the caller graph for this function\+:\nopagebreak
 
 References attr\+\_\+matrix(), and reset.
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -647,14 +656,16 @@ M\+IT
 
 References insert(), keywords, locate(), mode, mono\+\_\+values, remove(), replace(), values, and vt102().
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{namespacem__attr_aba8630a36c29aaeba84ec458812f59ec_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -671,14 +682,16 @@ Here is the caller graph for this function\+:\nopagebreak
 
 References keywords, locate(), mode, mono\+\_\+values, and values.
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=272pt]{namespacem__attr_af46849cecb00919c8ce49afe84b6c1ee_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -691,7 +704,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{insert()}{insert()}}
 {\footnotesize\ttfamily subroutine, private m\+\_\+attr\+::insert (\begin{DoxyParamCaption}\item[{character(len=\+:), dimension(\+:), allocatable}]{list,  }\item[{character(len=$\ast$), intent(in)}]{value,  }\item[{integer, intent(in)}]{place }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -708,14 +722,16 @@ Here is the caller graph for this function\+:\nopagebreak
 
 References attr\+\_\+scalar(), mode, and vt102().
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{namespacem__attr_a7b32a6654c75d29be63017228406cc16_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -728,7 +744,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{locate()}{locate()}}
 {\footnotesize\ttfamily subroutine, private m\+\_\+attr\+::locate (\begin{DoxyParamCaption}\item[{character(len=\+:), dimension(\+:), allocatable}]{list,  }\item[{character(len=$\ast$), intent(in)}]{value,  }\item[{integer, intent(out)}]{place,  }\item[{integer, intent(out), optional}]{ier,  }\item[{character(len=$\ast$), intent(out), optional}]{errmsg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -741,7 +758,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{remove()}{remove()}}
 {\footnotesize\ttfamily subroutine, private m\+\_\+attr\+::remove (\begin{DoxyParamCaption}\item[{character(len=\+:), dimension(\+:), allocatable}]{list,  }\item[{integer, intent(in)}]{place }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -754,7 +772,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{replace()}{replace()}}
 {\footnotesize\ttfamily subroutine, private m\+\_\+attr\+::replace (\begin{DoxyParamCaption}\item[{character(len=\+:), dimension(\+:), allocatable}]{list,  }\item[{character(len=$\ast$), intent(in)}]{value,  }\item[{integer, intent(in)}]{place }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -771,14 +790,16 @@ Here is the caller graph for this function\+:\nopagebreak
 
 References attr\+\_\+update(), bel, bell, bg\+\_\+blue, bg\+\_\+cyan, bg\+\_\+default, bg\+\_\+ebony, bg\+\_\+green, bg\+\_\+magenta, bg\+\_\+red, bg\+\_\+white, bg\+\_\+yellow, bold, bs, can, clear, cr, del, esc, ff, fg\+\_\+blue, fg\+\_\+cyan, fg\+\_\+default, fg\+\_\+ebony, fg\+\_\+green, fg\+\_\+magenta, fg\+\_\+red, fg\+\_\+white, fg\+\_\+yellow, ht, inverse, italic, lf, nul, reset, si, so, sub, unbold, underline, uninverse, unitalic, ununderline, vt, and wipe\+\_\+dictionary().
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{namespacem__attr_a9c0a92fda25004390849bef90fefb386_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -795,7 +816,8 @@ Here is the caller graph for this function\+:\nopagebreak
 
 References keywords, mono\+\_\+values, and values.
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

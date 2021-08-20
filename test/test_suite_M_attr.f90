@@ -12,7 +12,7 @@ subroutine test_suite_m_attr()
    call test_attr()
    call test_attr_mode()
    call test_attr_update()
-   call test_advice()
+   call test_alert()
 end subroutine test_suite_m_attr
 !TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
 subroutine test_attr()
@@ -142,11 +142,11 @@ character(len=*),parameter :: expected_plain='Hello! Hello Again!'
    call unit_check_done('attr_mode')
 end subroutine test_attr_mode
 !TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
-subroutine test_advice()
-   call unit_check_start('advice',' '//OPTIONS)
-   !call unit_check('advice',targetline.eq.'a b ab baaa aaCCCC CCCC CCCC a a a aa aaaaaa','example of using RANGE',targetline)
-   call unit_check_done('advice')
-end subroutine test_advice
+subroutine test_alert()
+   call unit_check_start('alert',' '//OPTIONS)
+   !call unit_check('alert',targetline.eq.'a b ab baaa aaCCCC CCCC CCCC a a a aa aaaaaa','example of using RANGE',targetline)
+   call unit_check_done('alert')
+end subroutine test_alert
 !TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
 end module M_testsuite_M_attr
 

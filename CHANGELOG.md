@@ -6,6 +6,12 @@ list of notable changes including`records of change such as bug fixes,
 new features, changes, and relevant notifications.
 
 ---
+**2021-08-19**  John S. Urban  <https://github.com/urbanjost>
+
+### :orange_circle: DIFF:
+       + renamed ADVICE(3f) to ALERT(3f)
+
+---
 **2021-07-29**  John S. Urban  <https://github.com/urbanjost>
 
 ### :green_circle: ADD:
