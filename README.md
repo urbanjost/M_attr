@@ -1,6 +1,4 @@
 ![sample](docs/images/snap2b.gif)
-##### + [CHANGELOG](CHANGELOG.md)
-##### + [BUILD STATUS](STATUS.md)
 
 ## NAME
 
@@ -183,11 +181,8 @@ or terminal emulator:
 
 *  [python](https://python-prompt-toolkit.readthedocs.io/en/master/pages/printing_text.html#html) prompt-toolkit
 
-## FEEDBACK
-
-Please provide feedback on the
-[wiki](https://github.com/urbanjost/M_attr/wiki) or in the
-[__issues__](https://github.com/urbanjost/M_attr/issues) section
-and please star the repository if you use the module (or let me know
-why not and let others know what you did use!).
 -------
+##### + [WIKI FEEDBACK] (https://github.com/urbanjost/M_attr/wiki)
+##### + [ISSUES] (https://github.com/urbanjost/M_attr/issues) section
+##### + [CHANGELOG](CHANGELOG.md)
+##### + [BUILD STATUS](STATUS.md)
