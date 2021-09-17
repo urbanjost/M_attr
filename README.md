@@ -1,4 +1,6 @@
 ![sample](docs/images/snap2b.gif)
+##### + [CHANGELOG](CHANGELOG.md)
+##### + [BUILD STATUS](STATUS.md)
 
 ## NAME
 
@@ -147,11 +149,9 @@ or terminal emulator:
    where supported the isatty(3f) function can be used to turn off the sequences when the file is
    not a tty.  isatty(3f) is an extension, but supported by GNU, Intel, PGI, ...
 
----
-## [CHANGELOG](CHANGELOG.md)
----
+
 ## [HISTORY](HISTORY.md)
----
+
 ## DEVELOPER DOCUMENTATION
 ### doxygen
 
