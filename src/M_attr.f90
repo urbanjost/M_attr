@@ -18,7 +18,6 @@
 !!
 !!      use M_attr, only : alert
 !!
-!!
 !!##DESCRIPTION
 !!    M_attr(3f) is a Fortran module that writes common ANSI escape sequences
 !!    which control terminal text attributes. It is designed to allow the
@@ -116,7 +115,7 @@
 !!        call alert('<WARNING>', 'The night is young.')
 !!        call alert('<INFO>', 'It is Monday')
 !!
-!!        ! create a custom mneumonic
+!!        ! create a custom mnemonic
 !!        call attr_update('MYERROR',attr(&
 !!        ' <R><e> E<w>-<e>R<w>-<e>R<w>-<e>O<w>-<e>R: </e></R></bo>'&
 !!        ))
@@ -310,7 +309,7 @@ contains
 !!                   turned off by setting RESET to .false. .
 !!
 !!                   Note if turning off the reset attributes may be
-!!                   continued accross lines, but if each line is not
+!!                   continued across lines, but if each line is not
 !!                   self-contained attributes may not display properly
 !!                   when filtered with commands such as grep(1).
 !!
@@ -765,26 +764,23 @@ end subroutine vt102
 !!     character(len=:),allocatable :: outlines(:)
 !!     integer :: i
 !!        lines=[character(len=110):: &
-!!        '<B><y>',&
-!!        '<B><y>  Suffice it to say that <W><e>black</e></W><B><y>&
-!!        & and <E><w>white</w></E><B><y> are also colors',&
-!!        '<B><y>  for their simultaneous contrast is as striking as that ',&
-!!        '<B><y>  of <R><g>green</g></R><B><y> and <G><r>red</r></G><B><y>,&
-!!        & for instance. --- <bo>Vincent van Gogh',&
-!!        '<B><y>',&
-!!        ' ']
+!!        &'<M><y>',&
+!!        &'<M><y>  Suffice it to say that black and white are also colors',&
+!!        &'<M><y>  for their simultaneous contrast is as striking as that ',&
+!!        &'<M><y>  of green and red, for instance. &
+!!        & --- <y><bo>Vincent van Gogh</bo></y>',&
+!!        &' ']
 !!
 !!        outlines=attr(lines,chars=57)
 !!        write(*,'(a)')(trim(outlines(i)),i=1,size(outlines))
 !!
 !!        call attr_mode(manner='plain') ! write as plain text
 !!        write(*,'(a)')attr(lines)
+!!
 !!        call attr_mode(manner='raw')   ! write as-is
 !!        write(*,'(a)')attr(lines)
 !!
 !!        call attr_mode(manner='ansi')  ! return to default mode
-!!        outlines=attr(lines,chars=80)
-!!        write(*,'(a)')(trim(outlines(i)),i=1,size(outlines))
 !!
 !!     end program demo_attr_mode
 !!

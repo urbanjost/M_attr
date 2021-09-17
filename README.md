@@ -184,6 +184,6 @@ or terminal emulator:
 ---
 
 ##### + [WIKI](https://github.com/urbanjost/M_attr/wiki)
-##### + [ISSUES](https://github.com/urbanjost/M_attr/issues) section
+##### + [ISSUES](https://github.com/urbanjost/M_attr/issues)
 ##### + [CHANGELOG](CHANGELOG.md)
 ##### + [BUILD STATUS](STATUS.md)

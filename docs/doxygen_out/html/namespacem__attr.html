@@ -332,7 +332,7 @@ EXAMPLE</h2>
     call alert('&lt;WARNING&gt;', 'The night is young.')
     call alert('&lt;INFO&gt;', 'It is Monday')
 
-    ! create a custom mneumonic
+    ! create a custom mnemonic
     call attr_update('MYERROR',attr(&amp;
     ' &lt;R&gt;&lt;e&gt; E&lt;w&gt;-&lt;e&gt;R&lt;w&gt;-&lt;e&gt;R&lt;w&gt;-&lt;e&gt;O&lt;w&gt;-&lt;e&gt;R: &lt;/e&gt;&lt;/R&gt;&lt;/bo&gt;'&amp;
     ))
@@ -558,26 +558,23 @@ EXAMPLE</h2>
  character(len=:),allocatable :: outlines(:)
  integer :: i
     lines=[character(len=110):: &amp;
-    '&lt;B&gt;&lt;y&gt;',&amp;
-    '&lt;B&gt;&lt;y&gt;  Suffice it to say that &lt;W&gt;&lt;e&gt;black&lt;/e&gt;&lt;/W&gt;&lt;B&gt;&lt;y&gt;&amp;
-    &amp; and &lt;E&gt;&lt;w&gt;white&lt;/w&gt;&lt;/E&gt;&lt;B&gt;&lt;y&gt; are also colors',&amp;
-    '&lt;B&gt;&lt;y&gt;  for their simultaneous contrast is as striking as that ',&amp;
-    '&lt;B&gt;&lt;y&gt;  of &lt;R&gt;&lt;g&gt;green&lt;/g&gt;&lt;/R&gt;&lt;B&gt;&lt;y&gt; and &lt;G&gt;&lt;r&gt;red&lt;/r&gt;&lt;/G&gt;&lt;B&gt;&lt;y&gt;,&amp;
-    &amp; for instance. --- &lt;bo&gt;Vincent van Gogh',&amp;
-    '&lt;B&gt;&lt;y&gt;',&amp;
-    ' ']
+    &amp;'&lt;M&gt;&lt;y&gt;',&amp;
+    &amp;'&lt;M&gt;&lt;y&gt;  Suffice it to say that black and white are also colors',&amp;
+    &amp;'&lt;M&gt;&lt;y&gt;  for their simultaneous contrast is as striking as that ',&amp;
+    &amp;'&lt;M&gt;&lt;y&gt;  of green and red, for instance. &amp;
+    &amp; --- &lt;y&gt;&lt;bo&gt;Vincent van Gogh&lt;/bo&gt;&lt;/y&gt;',&amp;
+    &amp;' ']
 
     outlines=attr(lines,chars=57)
     write(*,'(a)')(trim(outlines(i)),i=1,size(outlines))
 
     call attr_mode(manner='plain') ! write as plain text
     write(*,'(a)')attr(lines)
+
     call attr_mode(manner='raw')   ! write as-is
     write(*,'(a)')attr(lines)
 
     call attr_mode(manner='ansi')  ! return to default mode
-    outlines=attr(lines,chars=80)
-    write(*,'(a)')(trim(outlines(i)),i=1,size(outlines))
 
  end program demo_attr_mode
 </pre><h2><a class="anchor" id="autotoc_md24"></a>
@@ -665,7 +662,7 @@ OPTIONS</h2>
            where the current attributes are color names,
            bold, italic, underline, ...
 </pre><p>reset By default, a sequence to clear all text attributes is sent at the end of each returned line if an escape character appears in the output string. This can be turned off by setting RESET to .false. .</p>
-<p>Note if turning off the reset attributes may be continued accross lines, but if each line is not self-contained attributes may not display properly when filtered with commands such as grep(1).</p>
+<p>Note if turning off the reset attributes may be continued across lines, but if each line is not self-contained attributes may not display properly when filtered with commands such as grep(1).</p>
 <p>chars For arrays, a reset will be placed after the Nth displayable column count in order to make it easier to generate consistent right borders for non-default background colors for a text block. </p>
 <h2><a class="anchor" id="autotoc_md13"></a>
 KEYWORDS</h2>
