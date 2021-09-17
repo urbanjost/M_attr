@@ -57,8 +57,8 @@ archive files of man(1) pages that can be installed on ULS
 
 ## real man-pages ![gmake](docs/images/manpages.gif)
 
-   + [manpages.zip](https://urbanjost.github.io/M_attr/manpages.zip) 
-   + [manpages.tgz](https://urbanjost.github.io/M_attr/manpages.tgz) 
+   + [manpages.zip](https://urbanjost.github.io/M_attr/manpages.zip)
+   + [manpages.tgz](https://urbanjost.github.io/M_attr/manpages.tgz)
 
 ## DOWNLOAD AND BUILD
 
@@ -69,7 +69,7 @@ archive files of man(1) pages that can be installed on ULS
        cd M_attr/src
        # change Makefile if not using one of the listed compilers
        make clean; make gfortran    # for gfortran
-       make clean; make ifort       # for ifort 
+       make clean; make ifort       # for ifort
        make clean; make nvfortran   # for nvfortran
    ```
    This will compile the M_attr module and example programs.
@@ -105,7 +105,7 @@ The included demo programs provide templates for the most common usage:
 
 - [redirect](app/redirect.f90) - a complete little application showing how to call ISATTY(3f) in
                                  gfortran(3f) and ifort(3f) to automatically turn color off when output
-				 is not to a tty device.
+                                 is not to a tty device.
 - [plain](app/plain.f90) - a simple filter program that strips "raw mode" output back to plain text
 
 - [color](app/light.f90) - a filter program that displays a "raw mode" input file in color
@@ -133,7 +133,7 @@ or terminal emulator:
       call attr_mode(manner='plain')
       call printme()
 
-   contains 
+   contains
    subroutine printme()
       write(*,'(3x,a)') attr('<W><bo><r> ERROR   </W>  This should appear as red text</y>')
       write(*,'(3x,a)') attr('<B><bo><y> WARNING </B></y>  This should appear as default text')
@@ -181,8 +181,9 @@ or terminal emulator:
 
 *  [python](https://python-prompt-toolkit.readthedocs.io/en/master/pages/printing_text.html#html) prompt-toolkit
 
--------
-##### + [WIKI FEEDBACK] (https://github.com/urbanjost/M_attr/wiki)
+---
+
+##### + [WIKI] (https://github.com/urbanjost/M_attr/wiki)
 ##### + [ISSUES] (https://github.com/urbanjost/M_attr/issues) section
 ##### + [CHANGELOG](CHANGELOG.md)
 ##### + [BUILD STATUS](STATUS.md)
