@@ -1,4 +1,4 @@
-![sample](docs/images/snap2b.gif)
+![sample](docs/images/snap3.gif)
 
 ## NAME
 
@@ -46,7 +46,7 @@ archive files of man(1) pages that can be installed on ULS
    - [attr](https://urbanjost.github.io/M_attr/attr.3m_attr.html)  -- the main function
    - [attr_mode](https://urbanjost.github.io/M_attr/attr_mode.3m_attr.html)  -- setting processed or plain output mode
    - [attr_update](https://urbanjost.github.io/M_attr/attr_update.3m_attr.html)  -- customizing
-   - [advice](https://urbanjost.github.io/M_attr/advice.3m_attr.html)  -- standard INFO, WARNING, ERROR format
+   - [alert](https://urbanjost.github.io/M_attr/alert.3m_attr.html)  -- standard INFO, WARNING, ERROR format ![alert](docs/images/alert.gif)
 
 ### All man-pages amalgamated as HTML
 
@@ -187,3 +187,4 @@ or terminal emulator:
 ##### + [ISSUES](https://github.com/urbanjost/M_attr/issues)
 ##### + [CHANGELOG](docs/CHANGELOG.md)
 ##### + [BUILD STATUS](docs/STATUS.md)
+![sample](docs/images/snap2b.gif)
