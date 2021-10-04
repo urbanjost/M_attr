@@ -92,7 +92,7 @@ archive files of man(1) pages that can be installed on ULS
         M_attr        = { git = "https://github.com/urbanjost/M_attr.git" }
 ```
 
-## EXAMPLE PROGRAMS
+## DEMO PROGRAMS![demos](docs/images/demo.gif)
 The included demo programs provide templates for the most common usage:
 
 - [default](test/default.f90) - simple demo setting color
@@ -185,5 +185,5 @@ or terminal emulator:
 
 ##### + [WIKI](https://github.com/urbanjost/M_attr/wiki)
 ##### + [ISSUES](https://github.com/urbanjost/M_attr/issues)
-##### + [CHANGELOG](CHANGELOG.md)
-##### + [BUILD STATUS](STATUS.md)
+##### + [CHANGELOG](docs/CHANGELOG.md)
+##### + [BUILD STATUS](docs/STATUS.md)
