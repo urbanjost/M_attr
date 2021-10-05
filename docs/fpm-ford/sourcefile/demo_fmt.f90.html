@@ -10,7 +10,7 @@
     <meta name="author" content="John S. Urban" >
     <link rel="icon" href="../favicon.png">
 
-    <title>message.f90 &ndash; M_attr</title>
+    <title>demo_fmt.f90 &ndash; M_attr</title>
 
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/pygments.css" rel="stylesheet">
@@ -108,7 +108,7 @@
     
   
   <div class="row">
-    <h1>message.f90
+    <h1>demo_fmt.f90
     <small>Source File</small>
     
     </h1>
@@ -126,12 +126,12 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title=" 1.0% of total for source files.">16 statements</a>
+    title=" 0.7% of total for source files.">11 statements</a>
      </li> 
      
      
      
-    <li><i class="fa fa-code"></i><a href="../src/message.f90"> Source File</a></li>
+    <li><i class="fa fa-code"></i><a href="../src/demo_fmt.f90"> Source File</a></li>
      
      
   </ul>
@@ -139,7 +139,7 @@
   
     
   
-     <li class="active">message.f90</li>
+     <li class="active">demo_fmt.f90</li>
   </ol>
 </div>
 </div>
@@ -169,7 +169,7 @@
   <div id="progs-0" class="panel-collapse collapse">
     <div class="list-group">
       
-      <a class="list-group-item" href="../program/mode.html">mode</a>
+      <a class="list-group-item" href="../program/demo_fmt.html">demo_fmt</a>
       
     </div>
   </div>
@@ -194,7 +194,7 @@
 <div class="panel panel-primary">
   <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
   <div class="list-group">
-    <a class="list-group-item" href="../sourcefile/message.f90.html#src">message.f90</a>
+    <a class="list-group-item" href="../sourcefile/demo_fmt.f90.html#src">demo_fmt.f90</a>
   </div>
 </div>
 
@@ -225,7 +225,7 @@
   <div id="progs-1" class="panel-collapse collapse">
     <div class="list-group">
       
-      <a class="list-group-item" href="../program/mode.html">mode</a>
+      <a class="list-group-item" href="../program/demo_fmt.html">demo_fmt</a>
       
     </div>
   </div>
@@ -250,7 +250,7 @@
 <div class="panel panel-primary">
   <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
   <div class="list-group">
-    <a class="list-group-item" href="../sourcefile/message.f90.html#src">message.f90</a>
+    <a class="list-group-item" href="../sourcefile/demo_fmt.f90.html#src">demo_fmt.f90</a>
   </div>
 </div>
 
@@ -261,22 +261,21 @@
 
     <section>
       <h2><span class="anchor" id="src"></span>Source Code</h2>
-    <div class="hl"><pre><span></span><a name="ln-1"></a><span class="k">program </span><span class="n">mode</span>
-<a name="ln-2"></a>   <span class="k">use </span><span class="n">M_attr</span><span class="p">,</span> <span class="k">only</span> <span class="p">:</span> <span class="n">attr</span><span class="p">,</span> <span class="n">attr_mode</span>
-<a name="ln-3"></a>   <span class="k">implicit none</span>
-<a name="ln-4"></a><span class="k">        call </span><span class="n">printme</span><span class="p">(</span><span class="s1">&#39;color&#39;</span><span class="p">)</span>
-<a name="ln-5"></a>        <span class="k">call </span><span class="n">printme</span><span class="p">(</span><span class="s1">&#39;plain&#39;</span><span class="p">)</span>
-<a name="ln-6"></a>        <span class="k">call </span><span class="n">printme</span><span class="p">(</span><span class="s1">&#39;raw&#39;</span><span class="p">)</span>
-<a name="ln-7"></a>   <span class="k">contains</span>
-<a name="ln-8"></a><span class="k">   subroutine </span><span class="n">printme</span><span class="p">(</span><span class="n">mymode</span><span class="p">)</span>
-<a name="ln-9"></a>   <span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=*</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">mymode</span>
-<a name="ln-10"></a>      <span class="k">call </span><span class="n">attr_mode</span><span class="p">(</span><span class="n">mymode</span><span class="p">)</span>
-<a name="ln-11"></a>      <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="n">mymode</span>
-<a name="ln-12"></a>      <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;ERROR&gt;Woe is nigh.&#39;</span><span class="p">)</span>
-<a name="ln-13"></a>      <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;WARNING&gt;The night is young.&#39;</span><span class="p">)</span>
-<a name="ln-14"></a>      <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;INFO&gt;It is Monday&#39;</span><span class="p">)</span>
-<a name="ln-15"></a>   <span class="k">end subroutine </span><span class="n">printme</span>
-<a name="ln-16"></a><span class="k">end program </span><span class="n">mode</span>
+    <div class="hl"><pre><span></span><a name="ln-1"></a>           <span class="k">program </span><span class="n">demo_fmt</span>
+<a name="ln-2"></a>           <span class="k">use</span> <span class="kd">::</span> <span class="n">M_attr</span><span class="p">,</span> <span class="k">only</span> <span class="p">:</span> <span class="n">fmt</span>
+<a name="ln-3"></a>           <span class="k">implicit none</span>
+<a name="ln-4"></a><span class="k">           </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="p">:),</span><span class="k">allocatable</span> <span class="kd">::</span> <span class="n">output</span>
+<a name="ln-5"></a>
+<a name="ln-6"></a>              <span class="n">output</span><span class="o">=</span><span class="n">fmt</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="s2">&quot;&#39;[&#39;,i0,&#39;]&#39;&quot;</span><span class="p">)</span>
+<a name="ln-7"></a>              <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="s1">&#39;result is &#39;</span><span class="p">,</span><span class="n">output</span>
+<a name="ln-8"></a>
+<a name="ln-9"></a>              <span class="n">output</span><span class="o">=</span><span class="n">fmt</span><span class="p">(</span><span class="mi">1</span><span class="mf">0.0</span><span class="o">/</span><span class="mf">3.0</span><span class="p">,</span><span class="s2">&quot;&#39;[&#39;,g0.5,&#39;]&#39;&quot;</span><span class="p">)</span>
+<a name="ln-10"></a>              <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="s1">&#39;result is &#39;</span><span class="p">,</span><span class="n">output</span>
+<a name="ln-11"></a>
+<a name="ln-12"></a>              <span class="n">output</span><span class="o">=</span><span class="n">fmt</span><span class="p">(.</span><span class="n">true</span><span class="p">.,</span><span class="s2">&quot;&#39;The final answer is [&#39;,g0,&#39;]&#39;&quot;</span><span class="p">)</span>
+<a name="ln-13"></a>              <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="s1">&#39;result is &#39;</span><span class="p">,</span><span class="n">output</span>
+<a name="ln-14"></a>
+<a name="ln-15"></a>              <span class="k">end program </span><span class="n">demo_fmt</span>
 </pre></div>
 
     </section>
