@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['remove_109',['remove',['../namespacem__attr.html#ac91d4e9d24c3b4cb9d46dfc8ce467cfc',1,'m_attr']]],
-  ['replace_110',['replace',['../namespacem__attr.html#aa70700df053289657efdf1168d8b0381',1,'m_attr']]]
+  ['locate_121',['locate',['../namespacem__attr.html#a2910d09c004b3ddb45d2271beb5c1420',1,'m_attr']]]
 ];

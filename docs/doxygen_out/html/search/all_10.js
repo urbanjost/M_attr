@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['unbold_83',['unbold',['../namespacem__attr.html#a48baec32513cc6f02bb887b6071bc352',1,'m_attr']]],
-  ['underline_84',['underline',['../namespacem__attr.html#ad25d4dcd29f9499606be1e527498f132',1,'m_attr']]],
-  ['uninverse_85',['uninverse',['../namespacem__attr.html#a07a266adc2d6b785c998251e3774425e',1,'m_attr']]],
-  ['unitalic_86',['unitalic',['../namespacem__attr.html#af4d0788a38acb447da350781524f2b88',1,'m_attr']]],
-  ['ununderline_87',['ununderline',['../namespacem__attr.html#afad32a2c30eb35b8d3a178360f85879d',1,'m_attr']]]
+  ['si_90',['si',['../namespacem__attr.html#a0dbb81fe0b5c2a282c28e1bd5fffbb0d',1,'m_attr']]],
+  ['so_91',['so',['../namespacem__attr.html#ac7a0cf49e617916bb26161f1994f5849',1,'m_attr']]],
+  ['str_92',['str',['../interfacem__attr_1_1str.html',1,'m_attr']]],
+  ['sub_93',['sub',['../namespacem__attr.html#a2a2a711f01e7586a3e750edcdec82470',1,'m_attr']]]
 ];

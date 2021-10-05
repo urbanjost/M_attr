@@ -6,6 +6,8 @@
 interface \mbox{\hyperlink{interfacem__attr_1_1attr}{m\+\_\+attr\+::attr}}
 \item 
 interface \mbox{\hyperlink{interfacem__attr_1_1advice}{m\+\_\+attr\+::advice}}
+\item 
+interface \mbox{\hyperlink{interfacem__attr_1_1str}{m\+\_\+attr\+::str}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Modules}
 \begin{DoxyCompactItemize}
@@ -41,8 +43,18 @@ subroutine, private \mbox{\hyperlink{namespacem__attr_aa70700df053289657efdf1168
 \item 
 subroutine, private \mbox{\hyperlink{namespacem__attr_a6d2cdb036e195b3738da45b1e07ddaea}{m\+\_\+attr\+::insert}} (list, value, place)
 \item 
-subroutine, public \mbox{\hyperlink{namespacem__attr_a900ed51598036175b4781737d4aee56f}{m\+\_\+attr\+::alert}} (type, message)
-\begin{DoxyCompactList}\small\item\em !$>$ \end{DoxyCompactList}\end{DoxyCompactItemize}
+subroutine, public \mbox{\hyperlink{namespacem__attr_a4b74e43b642bf4ce433be16e7e471ac8}{m\+\_\+attr\+::alert}} (type, message, g0, g1, g2, g3, g4, g5, g6, g7, g8, g9, ga, gb, gc, gd, ge, gf, gg, gh, gi, gj)
+\begin{DoxyCompactList}\small\item\em !$>$ \end{DoxyCompactList}\item 
+character(len=\+:) function, allocatable \mbox{\hyperlink{namespacem__attr_a9f58b2fe5028acae1575ae5b85883bb0}{m\+\_\+attr\+::msg\+\_\+scalar}} (generic0, generic1, generic2, generic3, generic4, generic5, generic6, generic7, generic8, generic9, generica, genericb, genericc, genericd, generice, genericf, genericg, generich, generici, genericj, sep)
+\item 
+subroutine \mbox{\hyperlink{M__attr_8f90_aaa8ee15f943d8e1543ae35ab732c3cd2}{print\+\_\+generic}} (generic)
+\item 
+character(len=\+:) function, allocatable \mbox{\hyperlink{namespacem__attr_a55260fba28b9c959aa904181106e3a42}{m\+\_\+attr\+::msg\+\_\+one}} (generic0, generic1, generic2, generic3, generic4, generic5, generic6, generic7, generic8, generic9, generica, genericb, genericc, genericd, generice, genericf, genericg, generich, generici, genericj, sep)
+\item 
+subroutine \mbox{\hyperlink{M__attr_8f90_a9d5e1620d474ac03a74eeb9b0f7d6ae1}{print\+\_\+generic}} (generic)
+\item 
+recursive character(len=\+:) function, allocatable, public \mbox{\hyperlink{namespacem__attr_a2c887b164e51339823c9cc6be8e5c61e}{m\+\_\+attr\+::fmt}} (generic, format)
+\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -193,4 +205,39 @@ character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_afad
 character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_a7fbabaa819e5276aa2fff7a9a833aff0}{m\+\_\+attr\+::reset}} = C\+O\+D\+E\+\_\+\+R\+E\+S\+ET
 \item 
 character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_af3a23c4e05227c51110ae9b3ccac2675}{m\+\_\+attr\+::clear}} = H\+O\+M\+E\+\_\+\+D\+I\+S\+P\+L\+AY//C\+L\+E\+A\+R\+\_\+\+D\+I\+S\+P\+L\+AY
+\item 
+integer, save \mbox{\hyperlink{namespacem__attr_a11187f8daec47b12ae94a03b0a121baf}{m\+\_\+attr\+::alert\+\_\+unit}} =stdout
+\item 
+logical, save \mbox{\hyperlink{namespacem__attr_a24a558beac923f29919b85f646aac5e4}{m\+\_\+attr\+::alert\+\_\+debug}} =.true.
+\item 
+logical, save \mbox{\hyperlink{namespacem__attr_af43ff72f37c575f8306e9ab3d2a28401}{m\+\_\+attr\+::alert\+\_\+warn}} =.true.
+\item 
+logical, save \mbox{\hyperlink{namespacem__attr_a5698aa625be65c1fb4da594bcc25af72}{m\+\_\+attr\+::alert\+\_\+info}} =.true.
+\item 
+logical, save \mbox{\hyperlink{namespacem__attr_ae5e62e97d776cad6e050b7f0349c0026}{m\+\_\+attr\+::alert\+\_\+error}} =.true.
+\item 
+logical, save \mbox{\hyperlink{namespacem__attr_a122958cefd3fa4b3301cf4720d33e415}{m\+\_\+attr\+::alert\+\_\+other}} =.true.
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Function/\+Subroutine Documentation}
+\mbox{\Hypertarget{M__attr_8f90_aaa8ee15f943d8e1543ae35ab732c3cd2}\label{M__attr_8f90_aaa8ee15f943d8e1543ae35ab732c3cd2}} 
+\index{M\_attr.f90@{M\_attr.f90}!print\_generic@{print\_generic}}
+\index{print\_generic@{print\_generic}!M\_attr.f90@{M\_attr.f90}}
+\doxysubsubsection{\texorpdfstring{print\_generic()}{print\_generic()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily subroutine msg\+\_\+scalar\+::print\+\_\+generic (\begin{DoxyParamCaption}\item[{class($\ast$), intent(in)}]{generic }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=306pt]{M__attr_8f90_aaa8ee15f943d8e1543ae35ab732c3cd2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{M__attr_8f90_a9d5e1620d474ac03a74eeb9b0f7d6ae1}\label{M__attr_8f90_a9d5e1620d474ac03a74eeb9b0f7d6ae1}} 
+\index{M\_attr.f90@{M\_attr.f90}!print\_generic@{print\_generic}}
+\index{print\_generic@{print\_generic}!M\_attr.f90@{M\_attr.f90}}
+\doxysubsubsection{\texorpdfstring{print\_generic()}{print\_generic()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily subroutine msg\+\_\+one\+::print\+\_\+generic (\begin{DoxyParamCaption}\item[{class($\ast$), dimension(\+:), intent(in), optional}]{generic }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
