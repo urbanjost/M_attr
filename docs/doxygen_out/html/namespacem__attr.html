@@ -117,8 +117,6 @@ Functions/Subroutines</h2></td></tr>
 <tr class="separator:a9f58b2fe5028acae1575ae5b85883bb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a55260fba28b9c959aa904181106e3a42"><td class="memItemLeft" align="right" valign="top">character(len=:) function, allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacem__attr.html#a55260fba28b9c959aa904181106e3a42">msg_one</a> (generic0, generic1, generic2, generic3, generic4, generic5, generic6, generic7, generic8, generic9, generica, genericb, genericc, genericd, generice, genericf, genericg, generich, generici, genericj, sep)</td></tr>
 <tr class="separator:a55260fba28b9c959aa904181106e3a42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c887b164e51339823c9cc6be8e5c61e"><td class="memItemLeft" align="right" valign="top">recursive character(len=:) function, allocatable, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacem__attr.html#a2c887b164e51339823c9cc6be8e5c61e">fmt</a> (generic, format)</td></tr>
-<tr class="separator:a2c887b164e51339823c9cc6be8e5c61e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -289,17 +287,24 @@ NAME</h2>
 <p>M_attr(3f) - [M_attr::INTRO] control text attributes on terminals (LICENSE:MIT)</p>
 <h2><a class="anchor" id="autotoc_md1"></a>
 SYNOPSIS</h2>
-<p>core functions</p>
-<p>! Add text attributes like color with an HTML-like syntax use M_attr, only : attr ! suppress the escape sequence output use M_attr, only : attr_mode ! customize what output strings are produced use M_attr, only : attr_update</p>
-<p>for generating standard messages</p>
-<p>use M_attr, only : alert</p>
-<h2><a class="anchor" id="autotoc_md2"></a>
+<pre class="fragment">  use M_attr, only : attr, attr_mode, attr_update
+
+  use M_attr, only : alert ! generate standard messages
+</pre><h2><a class="anchor" id="autotoc_md2"></a>
 DESCRIPTION</h2>
-<p>M_attr(3f) is a Fortran module that writes common ANSI escape sequences which control terminal text attributes. It is designed to allow the sequences to be suppressed when desired and for the user program to completely customize the keywords &ndash; the user can add, delete and replace the sequences associated with a keyword without changing the code.</p>
-<p>Attributes are specified by writing lines with HTML-like structure.</p>
-<p>The advantage of the approach of replacing in-band escape sequences with formatting directives contained on each line is that it is easy to turn off when running batch, but more importantly your program can be run in "raw" mode and write a clean text file with the directives in it that can then be read back in by a simple filter program that strips it back to plain text( see app/plain.f90), or displays it to a screen in color(see app/light.f90) or perhaps converts it to another format.</p>
-<p>By making each line self-contained (by default) this can still be done with any arbitrarily selected group of lines from the file.</p>
-<p>So this module makes it trivial to read specially-formatted data from a file like a message catalog (perhaps with various versions in different languages) and colorize it or display it as plain text using the attr(3f) procedure. </p>
+<p>M_attr(3f) is a Fortran module that uses common ANSI escape sequences to control terminal text attributes. </p><pre class="fragment"> use M_attr
+ write(*,*)attr('&lt;red&gt;Red Text!&lt;/red&gt; &lt;green&gt;Green Text!&lt;/green&gt;')
+ end
+</pre><p>It is designed to use three simple procedures to</p>
+<ul>
+<li>Specify attributes using simple HTML-like syntax</li>
+<li>allow the sequences to be suppressed when desired</li>
+<li>permit the user program to completely customize the keywords. The user can add, delete and replace the sequences associated with a keyword without changing the code.</li>
+</ul>
+<p>One advantage of the approach of using formatting directives which are replaced with in-band escape sequences is that it is easy to turn off when running batch.</p>
+<p>Another important capability is that programs can be run in "raw" mode and create a simple text file with the formatting directives in it that can then be read back in by a simple filter program that strips it back to plain text( see app/plain.f90), or displays it to a screen in color(see app/light.f90) or perhaps converts it to another format.</p>
+<p>So this approach makes it trivial to read specially-formatted data from a file like a message catalog (perhaps with various versions in different languages) and colorize it or display it as plain text</p>
+<p>By making each line self-contained (by default) lines can be filtered by external utilities and still display correctly.</p>
 <h2><a class="anchor" id="autotoc_md3"></a>
 ACCESS</h2>
 <p>Via git(1): </p><pre class="fragment">git clone https://github.com/urbanjost/M_attr.git
@@ -309,7 +314,7 @@ make clean; make gfortran    # for gfortran
 make clean; make ifort       # for ifort
 make clean; make nvfortran   # for nvfortran
 </pre><p>This will compile the M_attr module and example programs.</p>
-<p>Via fpm ( described at <a href="https://github.com/fortran-lang/fpm">https://github.com/fortran-lang/fpm</a>): </p><pre class="fragment"> git clone https://github.com/urbanjost/M_attr.git
+<p>Alternatively, via fpm ( described at <a href="https://github.com/fortran-lang/fpm">https://github.com/fortran-lang/fpm</a>): </p><pre class="fragment"> git clone https://github.com/urbanjost/M_attr.git
 </pre><p>or just list it as a dependency in your fpm.toml project file. </p><pre class="fragment"> [dependencies]
  M_attr        = { git = "https://github.com/urbanjost/M_attr.git" }
 </pre><h2><a class="anchor" id="autotoc_md4"></a>
@@ -835,7 +840,7 @@ LIMITATIONS</h2>
 EXAMPLE</h2>
 <pre class="fragment">Sample program
 
- program demo_esc
+ program demo_attr
  use M_attr, only : attr, attr_mode, attr_update
     call printstuff('defaults')
 
@@ -892,7 +897,7 @@ EXAMPLE</h2>
    write(*,'(a)') attr(&amp;
     &amp;'&lt;in&gt;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;w&gt;WHITE&lt;/w&gt; and &lt;e&gt;EBONY&lt;/e&gt;&lt;/ul&gt;&lt;/bo&gt;&lt;/in&gt;')
  end subroutine printstuff
- end program demo_esc
+ end program demo_attr
 </pre><h2><a class="anchor" id="autotoc_md16"></a>
 AUTHOR</h2>
 <p>John S. Urban, 2021</p>
@@ -1120,69 +1125,6 @@ Here is the caller graph for this function:</div>
 <area shape="rect" href="namespacem__attr.html#a8bf4df5eb60c36c22c287fa82486e5a5" title=" " alt="" coords="5,74,148,115"/>
 </map>
 </div>
-
-</div>
-</div>
-<a id="a2c887b164e51339823c9cc6be8e5c61e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2c887b164e51339823c9cc6be8e5c61e">&#9670;&nbsp;</a></span>fmt()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">recursive character(len=:) function, allocatable, public m_attr::fmt </td>
-          <td>(</td>
-          <td class="paramtype">class(*), intent(in)&#160;</td>
-          <td class="paramname"><em>generic</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">character(len=*), intent(in), optional&#160;</td>
-          <td class="paramname"><em>format</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<h2><a class="anchor" id="autotoc_md49"></a>
-NAME</h2>
-<p>fmt(3f) - [M_attr] convert any intrinsic to a string using specified format (LICENSE:PD) </p>
-<h2><a class="anchor" id="autotoc_md50"></a>
-SYNOPSIS</h2>
-<pre class="fragment">function fmt(value,format) result(string)
-
- class(*),intent(in),optional :: value
- character(len=*),intent(in),optional  :: format
- character(len=:),allocatable :: string
-</pre> <h2><a class="anchor" id="autotoc_md51"></a>
-DESCRIPTION</h2>
-<p>FMT(3f) converts any standard intrinsic value to a string using the specified format. </p>
-<h2><a class="anchor" id="autotoc_md52"></a>
-OPTIONS</h2>
-<p>value value to print the value of. May be of type INTEGER, LOGICAL, REAL, DOUBLEPRECISION, COMPLEX, or CHARACTER. format format to use to print value. It is up to the user to use an appropriate format. The format does not require being surrounded by parenthesis. If not present a default is selected similar to what would be produced with free format. </p>
-<h2><a class="anchor" id="autotoc_md53"></a>
-RETURNS</h2>
-<p>string A string value </p>
-<h2><a class="anchor" id="autotoc_md54"></a>
-EXAMPLES</h2>
-<p>Sample program:</p>
-<p>program demo_fmt use :: M_attr, only : fmt implicit none character(len=:),allocatable :: output</p>
-<p>output=fmt(10,"'[',i0,']'") write(*,*)'result is ',output</p>
-<p>output=fmt(10.0/3.0,"'[',g0.5,']'") write(*,*)'result is ',output</p>
-<p>output=fmt(.true.,"'The final answer is [',g0,']'") write(*,*)'result is ',output</p>
-<p>end program demo_fmt</p>
-<p>Results:</p>
-<p>result is [10] result is [3.3333] result is The final answer is [T]</p>
-<h2><a class="anchor" id="autotoc_md55"></a>
-AUTHOR</h2>
-<p>John S. Urban</p>
-<h2><a class="anchor" id="autotoc_md56"></a>
-LICENSE</h2>
-<p>Public Domain </p>
 
 </div>
 </div>

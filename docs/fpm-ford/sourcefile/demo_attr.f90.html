@@ -126,7 +126,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title=" 2.4% of total for source files.">37 statements</a>
+    title=" 2.5% of total for source files.">37 statements</a>
      </li> 
      
      
@@ -169,7 +169,7 @@
   <div id="progs-0" class="panel-collapse collapse">
     <div class="list-group">
       
-      <a class="list-group-item" href="../program/demo_esc.html">demo_esc</a>
+      <a class="list-group-item" href="../program/demo_attr~3.html">demo_attr</a>
       
     </div>
   </div>
@@ -225,7 +225,7 @@
   <div id="progs-1" class="panel-collapse collapse">
     <div class="list-group">
       
-      <a class="list-group-item" href="../program/demo_esc.html">demo_esc</a>
+      <a class="list-group-item" href="../program/demo_attr~3.html">demo_attr</a>
       
     </div>
   </div>
@@ -261,64 +261,64 @@
 
     <section>
       <h2><span class="anchor" id="src"></span>Source Code</h2>
-    <div class="hl"><pre><span></span><a name="ln-1"></a>           <span class="k">program </span><span class="n">demo_esc</span>
-<a name="ln-2"></a>           <span class="k">use </span><span class="n">M_attr</span><span class="p">,</span> <span class="k">only</span> <span class="p">:</span> <span class="n">attr</span><span class="p">,</span> <span class="n">attr_mode</span><span class="p">,</span> <span class="n">attr_update</span>
-<a name="ln-3"></a>              <span class="k">call </span><span class="n">printstuff</span><span class="p">(</span><span class="s1">&#39;defaults&#39;</span><span class="p">)</span>
+    <div class="hl"><pre><span></span><a name="ln-1"></a>      <span class="k">program </span><span class="n">demo_attr</span>
+<a name="ln-2"></a>      <span class="k">use </span><span class="n">M_attr</span><span class="p">,</span> <span class="k">only</span> <span class="p">:</span> <span class="n">attr</span><span class="p">,</span> <span class="n">attr_mode</span><span class="p">,</span> <span class="n">attr_update</span>
+<a name="ln-3"></a>         <span class="k">call </span><span class="n">printstuff</span><span class="p">(</span><span class="s1">&#39;defaults&#39;</span><span class="p">)</span>
 <a name="ln-4"></a>
-<a name="ln-5"></a>              <span class="k">call </span><span class="n">attr_mode</span><span class="p">(</span><span class="n">manner</span><span class="o">=</span><span class="s1">&#39;plain&#39;</span><span class="p">)</span>
-<a name="ln-6"></a>              <span class="k">call </span><span class="n">printstuff</span><span class="p">(</span><span class="s1">&#39;plain:&#39;</span><span class="p">)</span>
+<a name="ln-5"></a>         <span class="k">call </span><span class="n">attr_mode</span><span class="p">(</span><span class="n">manner</span><span class="o">=</span><span class="s1">&#39;plain&#39;</span><span class="p">)</span>
+<a name="ln-6"></a>         <span class="k">call </span><span class="n">printstuff</span><span class="p">(</span><span class="s1">&#39;plain:&#39;</span><span class="p">)</span>
 <a name="ln-7"></a>
-<a name="ln-8"></a>              <span class="k">call </span><span class="n">printstuff</span><span class="p">(</span><span class="s1">&#39;raw&#39;</span><span class="p">)</span>
+<a name="ln-8"></a>         <span class="k">call </span><span class="n">printstuff</span><span class="p">(</span><span class="s1">&#39;raw&#39;</span><span class="p">)</span>
 <a name="ln-9"></a>
-<a name="ln-10"></a>              <span class="k">call </span><span class="n">attr_mode</span><span class="p">(</span><span class="n">manner</span><span class="o">=</span><span class="s1">&#39;color&#39;</span><span class="p">)</span>
-<a name="ln-11"></a>              <span class="k">call </span><span class="n">printstuff</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<a name="ln-10"></a>         <span class="k">call </span><span class="n">attr_mode</span><span class="p">(</span><span class="n">manner</span><span class="o">=</span><span class="s1">&#39;color&#39;</span><span class="p">)</span>
+<a name="ln-11"></a>         <span class="k">call </span><span class="n">printstuff</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
 <a name="ln-12"></a>
-<a name="ln-13"></a>              <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;TEST ADDING A CUSTOM SEQUENCE:&#39;</span><span class="p">)</span>
-<a name="ln-14"></a>              <span class="k">call </span><span class="n">attr_update</span><span class="p">(</span><span class="s1">&#39;blink&#39;</span><span class="p">,</span><span class="nb">char</span><span class="p">(</span><span class="mi">27</span><span class="p">)</span><span class="o">//</span><span class="s1">&#39;[5m&#39;</span><span class="p">)</span>
-<a name="ln-15"></a>              <span class="k">call </span><span class="n">attr_update</span><span class="p">(</span><span class="s1">&#39;/blink&#39;</span><span class="p">,</span><span class="nb">char</span><span class="p">(</span><span class="mi">27</span><span class="p">)</span><span class="o">//</span><span class="s1">&#39;[25m&#39;</span><span class="p">)</span>
-<a name="ln-16"></a>              <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;blink&gt;Items for Friday&lt;/blink&gt;&#39;</span><span class="p">)</span>
+<a name="ln-13"></a>         <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;TEST ADDING A CUSTOM SEQUENCE:&#39;</span><span class="p">)</span>
+<a name="ln-14"></a>         <span class="k">call </span><span class="n">attr_update</span><span class="p">(</span><span class="s1">&#39;blink&#39;</span><span class="p">,</span><span class="nb">char</span><span class="p">(</span><span class="mi">27</span><span class="p">)</span><span class="o">//</span><span class="s1">&#39;[5m&#39;</span><span class="p">)</span>
+<a name="ln-15"></a>         <span class="k">call </span><span class="n">attr_update</span><span class="p">(</span><span class="s1">&#39;/blink&#39;</span><span class="p">,</span><span class="nb">char</span><span class="p">(</span><span class="mi">27</span><span class="p">)</span><span class="o">//</span><span class="s1">&#39;[25m&#39;</span><span class="p">)</span>
+<a name="ln-16"></a>         <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;blink&gt;Items for Friday&lt;/blink&gt;&#39;</span><span class="p">)</span>
 <a name="ln-17"></a>
-<a name="ln-18"></a>           <span class="k">contains</span>
-<a name="ln-19"></a><span class="k">           subroutine </span><span class="n">printstuff</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
-<a name="ln-20"></a>           <span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=*</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span>  <span class="kd">::</span> <span class="n">label</span>
-<a name="ln-21"></a>           <span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="p">:),</span><span class="k">allocatable</span> <span class="kd">::</span> <span class="k">array</span><span class="p">(:)</span>
-<a name="ln-22"></a>             <span class="k">call </span><span class="n">attr_mode</span><span class="p">(</span><span class="n">manner</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+<a name="ln-18"></a>      <span class="k">contains</span>
+<a name="ln-19"></a><span class="k">      subroutine </span><span class="n">printstuff</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+<a name="ln-20"></a>      <span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=*</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span>  <span class="kd">::</span> <span class="n">label</span>
+<a name="ln-21"></a>      <span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="p">:),</span><span class="k">allocatable</span> <span class="kd">::</span> <span class="k">array</span><span class="p">(:)</span>
+<a name="ln-22"></a>        <span class="k">call </span><span class="n">attr_mode</span><span class="p">(</span><span class="n">manner</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
 <a name="ln-23"></a>
-<a name="ln-24"></a>             <span class="k">array</span><span class="o">=</span><span class="p">[</span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span> <span class="kd">::</span>    <span class="p">&amp;</span>
-<a name="ln-25"></a>              <span class="s1">&#39;TEST MANNER=&#39;</span><span class="o">//</span><span class="n">label</span><span class="p">,</span>                      <span class="p">&amp;</span>
-<a name="ln-26"></a>              <span class="s1">&#39;&lt;r&gt;RED&lt;/r&gt;,&lt;g&gt;GREEN&lt;/g&gt;,&lt;b&gt;BLUE&lt;/b&gt;&#39;</span><span class="p">,</span>      <span class="p">&amp;</span>
-<a name="ln-27"></a>              <span class="s1">&#39;&lt;c&gt;CYAN&lt;/c&gt;,&lt;m&gt;MAGENTA&lt;/g&gt;,&lt;y&gt;YELLOW&lt;/y&gt;&#39;</span><span class="p">,</span> <span class="p">&amp;</span>
-<a name="ln-28"></a>              <span class="s1">&#39;&lt;w&gt;WHITE&lt;/w&gt; and &lt;e&gt;EBONY&lt;/e&gt;&#39;</span><span class="p">]</span>
-<a name="ln-29"></a>             <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="k">array</span><span class="p">)</span>
+<a name="ln-24"></a>        <span class="k">array</span><span class="o">=</span><span class="p">[</span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span> <span class="kd">::</span>    <span class="p">&amp;</span>
+<a name="ln-25"></a>         <span class="s1">&#39;TEST MANNER=&#39;</span><span class="o">//</span><span class="n">label</span><span class="p">,</span>                      <span class="p">&amp;</span>
+<a name="ln-26"></a>         <span class="s1">&#39;&lt;r&gt;RED&lt;/r&gt;,&lt;g&gt;GREEN&lt;/g&gt;,&lt;b&gt;BLUE&lt;/b&gt;&#39;</span><span class="p">,</span>      <span class="p">&amp;</span>
+<a name="ln-27"></a>         <span class="s1">&#39;&lt;c&gt;CYAN&lt;/c&gt;,&lt;m&gt;MAGENTA&lt;/g&gt;,&lt;y&gt;YELLOW&lt;/y&gt;&#39;</span><span class="p">,</span> <span class="p">&amp;</span>
+<a name="ln-28"></a>         <span class="s1">&#39;&lt;w&gt;WHITE&lt;/w&gt; and &lt;e&gt;EBONY&lt;/e&gt;&#39;</span><span class="p">]</span>
+<a name="ln-29"></a>        <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="k">array</span><span class="p">)</span>
 <a name="ln-30"></a>
-<a name="ln-31"></a>             <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;Adding &lt;bo&gt;bold&lt;/bo&gt;&#39;</span><span class="p">)</span>
-<a name="ln-32"></a>             <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;bo&gt;&lt;r&gt;RED&lt;/r&gt;,&lt;g&gt;GREEN&lt;/g&gt;,&lt;b&gt;BLUE&lt;/b&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
-<a name="ln-33"></a>             <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;bo&gt;&lt;c&gt;CYAN&lt;/c&gt;,&lt;m&gt;MAGENTA&lt;/g&gt;,&lt;y&gt;YELLOW&lt;/y&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
-<a name="ln-34"></a>             <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;bo&gt;&lt;w&gt;WHITE&lt;/w&gt; and &lt;e&gt;EBONY&lt;/e&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
+<a name="ln-31"></a>        <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;Adding &lt;bo&gt;bold&lt;/bo&gt;&#39;</span><span class="p">)</span>
+<a name="ln-32"></a>        <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;bo&gt;&lt;r&gt;RED&lt;/r&gt;,&lt;g&gt;GREEN&lt;/g&gt;,&lt;b&gt;BLUE&lt;/b&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
+<a name="ln-33"></a>        <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;bo&gt;&lt;c&gt;CYAN&lt;/c&gt;,&lt;m&gt;MAGENTA&lt;/g&gt;,&lt;y&gt;YELLOW&lt;/y&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
+<a name="ln-34"></a>        <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;bo&gt;&lt;w&gt;WHITE&lt;/w&gt; and &lt;e&gt;EBONY&lt;/e&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
 <a name="ln-35"></a>
-<a name="ln-36"></a>             <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;Adding &lt;ul&gt;underline&lt;/ul&gt;&#39;</span><span class="p">)</span>
-<a name="ln-37"></a>             <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(&amp;</span>
-<a name="ln-38"></a>              <span class="p">&amp;</span><span class="s1">&#39;&lt;bo&gt;&lt;ul&gt;&lt;r&gt;RED&lt;/r&gt;,&lt;g&gt;GREEN&lt;/g&gt;,&lt;b&gt;BLUE&lt;/b&gt;&lt;/ul&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
-<a name="ln-39"></a>             <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(&amp;</span>
-<a name="ln-40"></a>              <span class="p">&amp;</span><span class="s1">&#39;&lt;bo&gt;&lt;ul&gt;&lt;c&gt;CYAN&lt;/c&gt;,&lt;m&gt;MAGENTA&lt;/g&gt;,&lt;y&gt;YELLOW&lt;/y&gt;&lt;/ul&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
-<a name="ln-41"></a>             <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;bo&gt;&lt;ul&gt;&lt;w&gt;WHITE&lt;/w&gt; and &lt;e&gt;EBONY&lt;/e&gt;&lt;/ul&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
+<a name="ln-36"></a>        <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;Adding &lt;ul&gt;underline&lt;/ul&gt;&#39;</span><span class="p">)</span>
+<a name="ln-37"></a>        <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(&amp;</span>
+<a name="ln-38"></a>         <span class="p">&amp;</span><span class="s1">&#39;&lt;bo&gt;&lt;ul&gt;&lt;r&gt;RED&lt;/r&gt;,&lt;g&gt;GREEN&lt;/g&gt;,&lt;b&gt;BLUE&lt;/b&gt;&lt;/ul&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
+<a name="ln-39"></a>        <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(&amp;</span>
+<a name="ln-40"></a>         <span class="p">&amp;</span><span class="s1">&#39;&lt;bo&gt;&lt;ul&gt;&lt;c&gt;CYAN&lt;/c&gt;,&lt;m&gt;MAGENTA&lt;/g&gt;,&lt;y&gt;YELLOW&lt;/y&gt;&lt;/ul&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
+<a name="ln-41"></a>        <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;bo&gt;&lt;ul&gt;&lt;w&gt;WHITE&lt;/w&gt; and &lt;e&gt;EBONY&lt;/e&gt;&lt;/ul&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
 <a name="ln-42"></a>
-<a name="ln-43"></a>             <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;Adding &lt;ul&gt;italic&lt;/ul&gt;&#39;</span><span class="p">)</span>
-<a name="ln-44"></a>             <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(&amp;</span>
-<a name="ln-45"></a>              <span class="p">&amp;</span><span class="s1">&#39;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;r&gt;RED&lt;/r&gt;,&lt;g&gt;GREEN&lt;/g&gt;,&lt;b&gt;BLUE&lt;/b&gt;&lt;/it&gt;&lt;/ul&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
-<a name="ln-46"></a>             <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(&amp;</span>
-<a name="ln-47"></a>              <span class="p">&amp;</span><span class="s1">&#39;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;c&gt;CYAN&lt;/c&gt;,&lt;m&gt;MAGENTA&lt;/g&gt;,&lt;y&gt;YELLOW&lt;/it&gt;&lt;/y&gt;&lt;/ul&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
-<a name="ln-48"></a>             <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;w&gt;WHITE&lt;/w&gt; and &lt;e&gt;EBONY&lt;/e&gt;&lt;/ul&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
+<a name="ln-43"></a>        <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;Adding &lt;ul&gt;italic&lt;/ul&gt;&#39;</span><span class="p">)</span>
+<a name="ln-44"></a>        <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(&amp;</span>
+<a name="ln-45"></a>         <span class="p">&amp;</span><span class="s1">&#39;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;r&gt;RED&lt;/r&gt;,&lt;g&gt;GREEN&lt;/g&gt;,&lt;b&gt;BLUE&lt;/b&gt;&lt;/it&gt;&lt;/ul&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
+<a name="ln-46"></a>        <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(&amp;</span>
+<a name="ln-47"></a>         <span class="p">&amp;</span><span class="s1">&#39;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;c&gt;CYAN&lt;/c&gt;,&lt;m&gt;MAGENTA&lt;/g&gt;,&lt;y&gt;YELLOW&lt;/it&gt;&lt;/y&gt;&lt;/ul&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
+<a name="ln-48"></a>        <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;w&gt;WHITE&lt;/w&gt; and &lt;e&gt;EBONY&lt;/e&gt;&lt;/ul&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
 <a name="ln-49"></a>
-<a name="ln-50"></a>             <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;Adding &lt;in&gt;inverse&lt;/in&gt;&#39;</span><span class="p">)</span>
-<a name="ln-51"></a>             <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;in&gt;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;r&gt;RED&lt;/r&gt;,&lt;g&gt;GREEN&lt;/g&gt;,&amp;</span>
-<a name="ln-52"></a><span class="s1">              &amp;&lt;b&gt;BLUE&lt;/b&gt;&lt;/it&gt;&lt;/ul&gt;&lt;/bo&gt;&lt;/in&gt;&#39;</span><span class="p">)</span>
-<a name="ln-53"></a>             <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;in&gt;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;c&gt;CYAN&lt;/c&gt;,&lt;m&gt;MAGENTA&lt;/g&gt;,&amp;</span>
-<a name="ln-54"></a><span class="s1">              &amp;&lt;y&gt;YELLOW&lt;/it&gt;&lt;/y&gt;&lt;/ul&gt;&lt;/bo&gt;&lt;/in&gt;&#39;</span><span class="p">)</span>
-<a name="ln-55"></a>             <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(&amp;</span>
-<a name="ln-56"></a>              <span class="p">&amp;</span><span class="s1">&#39;&lt;in&gt;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;w&gt;WHITE&lt;/w&gt; and &lt;e&gt;EBONY&lt;/e&gt;&lt;/ul&gt;&lt;/bo&gt;&lt;/in&gt;&#39;</span><span class="p">)</span>
-<a name="ln-57"></a>           <span class="k">end subroutine </span><span class="n">printstuff</span>
-<a name="ln-58"></a>           <span class="k">end program </span><span class="n">demo_esc</span>
+<a name="ln-50"></a>        <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;Adding &lt;in&gt;inverse&lt;/in&gt;&#39;</span><span class="p">)</span>
+<a name="ln-51"></a>        <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;in&gt;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;r&gt;RED&lt;/r&gt;,&lt;g&gt;GREEN&lt;/g&gt;,&amp;</span>
+<a name="ln-52"></a><span class="s1">         &amp;&lt;b&gt;BLUE&lt;/b&gt;&lt;/it&gt;&lt;/ul&gt;&lt;/bo&gt;&lt;/in&gt;&#39;</span><span class="p">)</span>
+<a name="ln-53"></a>        <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;in&gt;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;c&gt;CYAN&lt;/c&gt;,&lt;m&gt;MAGENTA&lt;/g&gt;,&amp;</span>
+<a name="ln-54"></a><span class="s1">         &amp;&lt;y&gt;YELLOW&lt;/it&gt;&lt;/y&gt;&lt;/ul&gt;&lt;/bo&gt;&lt;/in&gt;&#39;</span><span class="p">)</span>
+<a name="ln-55"></a>        <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(&amp;</span>
+<a name="ln-56"></a>         <span class="p">&amp;</span><span class="s1">&#39;&lt;in&gt;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;w&gt;WHITE&lt;/w&gt; and &lt;e&gt;EBONY&lt;/e&gt;&lt;/ul&gt;&lt;/bo&gt;&lt;/in&gt;&#39;</span><span class="p">)</span>
+<a name="ln-57"></a>      <span class="k">end subroutine </span><span class="n">printstuff</span>
+<a name="ln-58"></a>      <span class="k">end program </span><span class="n">demo_attr</span>
 </pre></div>
 
     </section>
@@ -331,13 +331,13 @@
     <footer>
       <div class="container">
       <div class="row">
-        <div class="col-xs-6 col-md-4"><p>&copy; 2021 
+        <div class="col-xs-6 col-md-4"><p>&copy; 2022 
                                           </p></div>
         <div class="col-xs-6 col-md-4 col-md-push-4">
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/cmacmackin/ford">FORD</a>
-             on 2021-10-05 01:01  
+             on 2022-01-05 23:09  
           </p>
         </div>
         <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> M_attr was developed by John S. Urban</p></div>

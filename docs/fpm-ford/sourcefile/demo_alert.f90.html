@@ -126,7 +126,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title=" 1.1% of total for source files.">17 statements</a>
+    title=" 1.2% of total for source files.">17 statements</a>
      </li> 
      
      
@@ -261,27 +261,27 @@
 
     <section>
       <h2><span class="anchor" id="src"></span>Source Code</h2>
-    <div class="hl"><pre><span></span><a name="ln-1"></a>             <span class="k">program </span><span class="n">demo_alert</span>
-<a name="ln-2"></a>             <span class="k">use </span><span class="n">M_attr</span><span class="p">,</span> <span class="k">only</span> <span class="p">:</span> <span class="n">alert</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">attr_mode</span>
-<a name="ln-3"></a>             <span class="k">implicit none</span>
-<a name="ln-4"></a><span class="k">             </span><span class="kt">real </span><span class="n">X</span>
-<a name="ln-5"></a>                <span class="k">call </span><span class="n">attr_mode</span><span class="p">(</span><span class="n">manner</span><span class="o">=</span><span class="s1">&#39;plain&#39;</span><span class="p">)</span>
-<a name="ln-6"></a>                <span class="k">call </span><span class="n">attr_mode</span><span class="p">(</span><span class="n">manner</span><span class="o">=</span><span class="s1">&#39;color&#39;</span><span class="p">)</span>
-<a name="ln-7"></a>                <span class="k">call </span><span class="n">alert</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="s2">&quot;Say you didn&#39;t!&quot;</span><span class="p">)</span>
-<a name="ln-8"></a>                <span class="k">call </span><span class="n">alert</span><span class="p">(</span><span class="s2">&quot;warn&quot;</span><span class="p">,</span>  <span class="s2">&quot;I wouldn&#39;t if I were you, Will Robinson.&quot;</span><span class="p">)</span>
-<a name="ln-9"></a>                <span class="k">call </span><span class="n">alert</span><span class="p">(</span><span class="s2">&quot;info&quot;</span><span class="p">,</span>  <span class="s2">&quot;I fixed that for you, but it was a bad idea.&quot;</span><span class="p">)</span>
-<a name="ln-10"></a>                <span class="k">call </span><span class="n">alert</span><span class="p">(</span><span class="s2">&quot;debug&quot;</span><span class="p">,</span> <span class="s2">&quot;Who knows what is happening now?.&quot;</span><span class="p">)</span>
-<a name="ln-11"></a>                <span class="k">call </span><span class="n">alert</span><span class="p">(</span><span class="s2">&quot;???    &quot;</span><span class="p">,</span>  <span class="s2">&quot;not today you don&#39;t&quot;</span><span class="p">)</span>
-<a name="ln-12"></a>                <span class="c">! call to just update the macros</span>
-<a name="ln-13"></a>                <span class="k">call </span><span class="n">alert</span><span class="p">()</span>
-<a name="ln-14"></a>                <span class="c">! conventional call to ATTR(3f) using the ALERT(3f)-defined macros</span>
-<a name="ln-15"></a>                <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;bo&gt;The year was &lt;g&gt;&lt;YE&gt;&lt;/g&gt;, the month was &lt;g&gt;&lt;MO&gt;&lt;/g&gt;&#39;</span><span class="p">)</span>
-<a name="ln-16"></a>                <span class="c">! optional arguments</span>
-<a name="ln-17"></a>                <span class="n">X</span><span class="o">=</span><span class="mi">21</span><span class="mf">1.3</span>
-<a name="ln-18"></a>                <span class="k">call </span><span class="n">alert</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span><span class="s1">&#39;allowed range of X is 0 &lt;lt&gt; X &lt;lt&gt; 100, X=&lt;r&gt;&#39;</span><span class="p">,</span><span class="n">X</span><span class="p">)</span>
-<a name="ln-19"></a>                <span class="c">! up to twenty values are allowed of intrinsic type</span>
-<a name="ln-20"></a>                <span class="k">call </span><span class="n">alert</span><span class="p">(</span><span class="s1">&#39;info&#39;</span><span class="p">,</span><span class="s1">&#39;values are&lt;g&gt;&#39;</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">23</span><span class="mf">4.567</span><span class="p">,</span><span class="nb">cmplx</span><span class="p">(</span><span class="mi">1</span><span class="mf">1.0</span><span class="p">,</span><span class="mi">2</span><span class="mf">2.0</span><span class="p">),</span><span class="mi">12</span><span class="mf">3.456d0</span><span class="p">,</span><span class="s1">&#39;&lt;/g&gt;today&#39;</span><span class="p">)</span>
-<a name="ln-21"></a>             <span class="k">end program </span><span class="n">demo_alert</span>
+    <div class="hl"><pre><span></span><a name="ln-1"></a>        <span class="k">program </span><span class="n">demo_alert</span>
+<a name="ln-2"></a>        <span class="k">use </span><span class="n">M_attr</span><span class="p">,</span> <span class="k">only</span> <span class="p">:</span> <span class="n">alert</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">attr_mode</span>
+<a name="ln-3"></a>        <span class="k">implicit none</span>
+<a name="ln-4"></a><span class="k">        </span><span class="kt">real </span><span class="n">X</span>
+<a name="ln-5"></a>           <span class="k">call </span><span class="n">attr_mode</span><span class="p">(</span><span class="n">manner</span><span class="o">=</span><span class="s1">&#39;plain&#39;</span><span class="p">)</span>
+<a name="ln-6"></a>           <span class="k">call </span><span class="n">attr_mode</span><span class="p">(</span><span class="n">manner</span><span class="o">=</span><span class="s1">&#39;color&#39;</span><span class="p">)</span>
+<a name="ln-7"></a>           <span class="k">call </span><span class="n">alert</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="s2">&quot;Say you didn&#39;t!&quot;</span><span class="p">)</span>
+<a name="ln-8"></a>           <span class="k">call </span><span class="n">alert</span><span class="p">(</span><span class="s2">&quot;warn&quot;</span><span class="p">,</span>  <span class="s2">&quot;I wouldn&#39;t if I were you, Will Robinson.&quot;</span><span class="p">)</span>
+<a name="ln-9"></a>           <span class="k">call </span><span class="n">alert</span><span class="p">(</span><span class="s2">&quot;info&quot;</span><span class="p">,</span>  <span class="s2">&quot;I fixed that for you, but it was a bad idea.&quot;</span><span class="p">)</span>
+<a name="ln-10"></a>           <span class="k">call </span><span class="n">alert</span><span class="p">(</span><span class="s2">&quot;debug&quot;</span><span class="p">,</span> <span class="s2">&quot;Who knows what is happening now?.&quot;</span><span class="p">)</span>
+<a name="ln-11"></a>           <span class="k">call </span><span class="n">alert</span><span class="p">(</span><span class="s2">&quot;???    &quot;</span><span class="p">,</span>  <span class="s2">&quot;not today you don&#39;t&quot;</span><span class="p">)</span>
+<a name="ln-12"></a>           <span class="c">! call to just update the macros</span>
+<a name="ln-13"></a>           <span class="k">call </span><span class="n">alert</span><span class="p">()</span>
+<a name="ln-14"></a>           <span class="c">! conventional call to ATTR(3f) using the ALERT(3f)-defined macros</span>
+<a name="ln-15"></a>           <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;bo&gt;The year was &lt;g&gt;&lt;YE&gt;&lt;/g&gt;, the month was &lt;g&gt;&lt;MO&gt;&lt;/g&gt;&#39;</span><span class="p">)</span>
+<a name="ln-16"></a>           <span class="c">! optional arguments</span>
+<a name="ln-17"></a>           <span class="n">X</span><span class="o">=</span><span class="mi">21</span><span class="mf">1.3</span>
+<a name="ln-18"></a>           <span class="k">call </span><span class="n">alert</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span><span class="s1">&#39;allowed range of X is 0 &lt;lt&gt; X &lt;lt&gt; 100, X=&lt;r&gt;&#39;</span><span class="p">,</span><span class="n">X</span><span class="p">)</span>
+<a name="ln-19"></a>           <span class="c">! up to twenty values are allowed of intrinsic type</span>
+<a name="ln-20"></a>           <span class="k">call </span><span class="n">alert</span><span class="p">(</span><span class="s1">&#39;info&#39;</span><span class="p">,</span><span class="s1">&#39;values are&lt;g&gt;&#39;</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">23</span><span class="mf">4.567</span><span class="p">,</span><span class="nb">cmplx</span><span class="p">(</span><span class="mi">1</span><span class="mf">1.0</span><span class="p">,</span><span class="mi">2</span><span class="mf">2.0</span><span class="p">),</span><span class="mi">12</span><span class="mf">3.456d0</span><span class="p">,</span><span class="s1">&#39;&lt;/g&gt;today&#39;</span><span class="p">)</span>
+<a name="ln-21"></a>        <span class="k">end program </span><span class="n">demo_alert</span>
 </pre></div>
 
     </section>
@@ -294,13 +294,13 @@
     <footer>
       <div class="container">
       <div class="row">
-        <div class="col-xs-6 col-md-4"><p>&copy; 2021 
+        <div class="col-xs-6 col-md-4"><p>&copy; 2022 
                                           </p></div>
         <div class="col-xs-6 col-md-4 col-md-push-4">
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/cmacmackin/ford">FORD</a>
-             on 2021-10-05 01:01  
+             on 2022-01-05 23:09  
           </p>
         </div>
         <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> M_attr was developed by John S. Urban</p></div>

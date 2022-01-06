@@ -19,59 +19,60 @@ subroutine test_attr()
 logical :: allpassed
    call unit_check_start('attr',' -description display text with attributes'//OPTIONS)
    allpassed = .true.
+
    call attr_mode('color')
-   allpassed=allpassed  .and.  test('<red>red',          esc//'[31mred'//esc//'[0m')
-   allpassed=allpassed  .and.  test('<green>green',      esc//'[32mgreen'//esc//'[0m')
-   allpassed=allpassed  .and.  test('<blue>blue',        esc//'[34mblue'//esc//'[0m')
-   allpassed=allpassed  .and.  test('<cyan>cyan',        esc//'[36mcyan'//esc//'[0m')
-   allpassed=allpassed  .and.  test('<magenta>magenta',  esc//'[35mmagenta'//esc//'[0m')
-   allpassed=allpassed  .and.  test('<yellow>yellow',    esc//'[33myellow'//esc//'[0m')
-   allpassed=allpassed  .and.  test('<ebony>ebony',      esc//'[30mebony'//esc//'[0m')
-   allpassed=allpassed  .and.  test('<white>white',      esc//'[37mwhite'//esc//'[0m')
-   allpassed=allpassed  .and.  test('<RED>RED',          esc//'[41mRED'//esc//'[0m')
-   allpassed=allpassed  .and.  test('<GREEN>GREEN',      esc//'[42mGREEN'//esc//'[0m')
-   allpassed=allpassed  .and.  test('<BLUE>BLUE',        esc//'[44mBLUE'//esc//'[0m')
-   allpassed=allpassed  .and.  test('<CYAN>CYAN',        esc//'[46mCYAN'//esc//'[0m')
-   allpassed=allpassed  .and.  test('<MAGENTA>MAGENTA',  esc//'[45mMAGENTA'//esc//'[0m')
-   allpassed=allpassed  .and.  test('<YELLOW>YELLOW',    esc//'[43mYELLOW'//esc//'[0m')
-   allpassed=allpassed  .and.  test('<EBONY>EBONY',      esc//'[40mEBONY'//esc//'[0m')
-   allpassed=allpassed  .and.  test('<WHITE>WHITE',      esc//'[47mWHITE'//esc//'[0m')
+   allpassed= test('<red>red',          esc//'[31mred'//esc//'[0m'      ) .and. allpassed
+   allpassed= test('<green>green',      esc//'[32mgreen'//esc//'[0m'    ) .and. allpassed
+   allpassed= test('<blue>blue',        esc//'[34mblue'//esc//'[0m'     ) .and. allpassed
+   allpassed= test('<cyan>cyan',        esc//'[36mcyan'//esc//'[0m'     ) .and. allpassed
+   allpassed= test('<magenta>magenta',  esc//'[35mmagenta'//esc//'[0m'  ) .and. allpassed
+   allpassed= test('<yellow>yellow',    esc//'[33myellow'//esc//'[0m'   ) .and. allpassed
+   allpassed= test('<ebony>ebony',      esc//'[30mebony'//esc//'[0m'    ) .and. allpassed
+   allpassed= test('<white>white',      esc//'[37mwhite'//esc//'[0m'    ) .and. allpassed
+   allpassed= test('<RED>RED',          esc//'[41mRED'//esc//'[0m'      ) .and. allpassed
+   allpassed= test('<GREEN>GREEN',      esc//'[42mGREEN'//esc//'[0m'    ) .and. allpassed
+   allpassed= test('<BLUE>BLUE',        esc//'[44mBLUE'//esc//'[0m'     ) .and. allpassed
+   allpassed= test('<CYAN>CYAN',        esc//'[46mCYAN'//esc//'[0m'     ) .and. allpassed
+   allpassed= test('<MAGENTA>MAGENTA',  esc//'[45mMAGENTA'//esc//'[0m'  ) .and. allpassed
+   allpassed= test('<YELLOW>YELLOW',    esc//'[43mYELLOW'//esc//'[0m'   ) .and. allpassed
+   allpassed= test('<EBONY>EBONY',      esc//'[40mEBONY'//esc//'[0m'    ) .and. allpassed
+   allpassed= test('<WHITE>WHITE',      esc//'[47mWHITE'//esc//'[0m'    ) .and. allpassed
 
    call attr_mode('plain')
-   allpassed=allpassed  .and.  test('<red>red',          'red')
-   allpassed=allpassed  .and.  test('<green>green',      'green')
-   allpassed=allpassed  .and.  test('<blue>blue',        'blue')
-   allpassed=allpassed  .and.  test('<cyan>cyan',        'cyan')
-   allpassed=allpassed  .and.  test('<magenta>magenta',  'magenta')
-   allpassed=allpassed  .and.  test('<yellow>yellow',    'yellow')
-   allpassed=allpassed  .and.  test('<ebony>ebony',      'ebony')
-   allpassed=allpassed  .and.  test('<white>white',      'white')
-   allpassed=allpassed  .and.  test('<RED>RED',          'RED')
-   allpassed=allpassed  .and.  test('<GREEN>GREEN',      'GREEN')
-   allpassed=allpassed  .and.  test('<BLUE>BLUE',        'BLUE')
-   allpassed=allpassed  .and.  test('<CYAN>CYAN',        'CYAN')
-   allpassed=allpassed  .and.  test('<MAGENTA>MAGENTA',  'MAGENTA')
-   allpassed=allpassed  .and.  test('<YELLOW>YELLOW',    'YELLOW')
-   allpassed=allpassed  .and.  test('<EBONY>EBONY',      'EBONY')
-   allpassed=allpassed  .and.  test('<WHITE>WHITE',      'WHITE')
+   allpassed=  test('<red>red',          'red'      ) .and. allpassed
+   allpassed=  test('<green>green',      'green'    ) .and. allpassed
+   allpassed=  test('<blue>blue',        'blue'     ) .and. allpassed
+   allpassed=  test('<cyan>cyan',        'cyan'     ) .and. allpassed
+   allpassed=  test('<magenta>magenta',  'magenta'  ) .and. allpassed
+   allpassed=  test('<yellow>yellow',    'yellow'   ) .and. allpassed
+   allpassed=  test('<ebony>ebony',      'ebony'    ) .and. allpassed
+   allpassed=  test('<white>white',      'white'    ) .and. allpassed
+   allpassed=  test('<RED>RED',          'RED'      ) .and. allpassed
+   allpassed=  test('<GREEN>GREEN',      'GREEN'    ) .and. allpassed
+   allpassed=  test('<BLUE>BLUE',        'BLUE'     ) .and. allpassed
+   allpassed=  test('<CYAN>CYAN',        'CYAN'     ) .and. allpassed
+   allpassed=  test('<MAGENTA>MAGENTA',  'MAGENTA'  ) .and. allpassed
+   allpassed=  test('<YELLOW>YELLOW',    'YELLOW'   ) .and. allpassed
+   allpassed=  test('<EBONY>EBONY',      'EBONY'    ) .and. allpassed
+   allpassed=  test('<WHITE>WHITE',      'WHITE'    ) .and. allpassed
 
    call attr_mode('raw')
-   allpassed=allpassed  .and.  test('<red>red',          '<red>red')
-   allpassed=allpassed  .and.  test('<green>green',      '<green>green')
-   allpassed=allpassed  .and.  test('<blue>blue',        '<blue>blue')
-   allpassed=allpassed  .and.  test('<cyan>cyan',        '<cyan>cyan')
-   allpassed=allpassed  .and.  test('<magenta>magenta',  '<magenta>magenta')
-   allpassed=allpassed  .and.  test('<yellow>yellow',    '<yellow>yellow')
-   allpassed=allpassed  .and.  test('<ebony>ebony',      '<ebony>ebony')
-   allpassed=allpassed  .and.  test('<white>white',      '<white>white')
-   allpassed=allpassed  .and.  test('<RED>RED',          '<RED>RED')
-   allpassed=allpassed  .and.  test('<GREEN>GREEN',      '<GREEN>GREEN')
-   allpassed=allpassed  .and.  test('<BLUE>BLUE',        '<BLUE>BLUE')
-   allpassed=allpassed  .and.  test('<CYAN>CYAN',        '<CYAN>CYAN')
-   allpassed=allpassed  .and.  test('<MAGENTA>MAGENTA',  '<MAGENTA>MAGENTA')
-   allpassed=allpassed  .and.  test('<YELLOW>YELLOW',    '<YELLOW>YELLOW')
-   allpassed=allpassed  .and.  test('<EBONY>EBONY',      '<EBONY>EBONY')
-   allpassed=allpassed  .and.  test('<WHITE>WHITE',      '<WHITE>WHITE')
+   allpassed=  test('<red>red',          '<red>red'          ) .and. allpassed
+   allpassed=  test('<green>green',      '<green>green'      ) .and. allpassed
+   allpassed=  test('<blue>blue',        '<blue>blue'        ) .and. allpassed
+   allpassed=  test('<cyan>cyan',        '<cyan>cyan'        ) .and. allpassed
+   allpassed=  test('<magenta>magenta',  '<magenta>magenta'  ) .and. allpassed
+   allpassed=  test('<yellow>yellow',    '<yellow>yellow'    ) .and. allpassed
+   allpassed=  test('<ebony>ebony',      '<ebony>ebony'      ) .and. allpassed
+   allpassed=  test('<white>white',      '<white>white'      ) .and. allpassed
+   allpassed=  test('<RED>RED',          '<RED>RED'          ) .and. allpassed
+   allpassed=  test('<GREEN>GREEN',      '<GREEN>GREEN'      ) .and. allpassed
+   allpassed=  test('<BLUE>BLUE',        '<BLUE>BLUE'        ) .and. allpassed
+   allpassed=  test('<CYAN>CYAN',        '<CYAN>CYAN'        ) .and. allpassed
+   allpassed=  test('<MAGENTA>MAGENTA',  '<MAGENTA>MAGENTA'  ) .and. allpassed
+   allpassed=  test('<YELLOW>YELLOW',    '<YELLOW>YELLOW'    ) .and. allpassed
+   allpassed=  test('<EBONY>EBONY',      '<EBONY>EBONY'      ) .and. allpassed
+   allpassed=  test('<WHITE>WHITE',      '<WHITE>WHITE'      ) .and. allpassed
 
    call unit_check('attr',allpassed,msg='basic colors passed foreground and background')
    call unit_check_done('attr')

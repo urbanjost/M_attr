@@ -38,24 +38,23 @@ All documents are contained in the docs/ directory including
 archive files of man(1) pages that can be installed on ULS
 (Unix-Like Systems).
 
-### Individual man-pages as HTML
+If your browser supports Javascript you can view all the procedure
+descriptions in an almalgamated book form that can easily be printed
+or viewed as a single document:
+   - [_book_](https://urbanjost.github.io/M_attr/BOOK_M_attr.html)
 
- - An [index](https://urbanjost.github.io/M_attr/man3.html) to HTML versions
-   of the man-pages describes all the routines. Alternatively, they may be accessed individually:
+Which is also available as indexed HTML documents
+   - [index](https://urbanjost.github.io/M_attr/man3.html) 
+or simply as HTML
    - [M_attr](https://urbanjost.github.io/M_attr/M_attr.3m_attr.html)  -- An overview of the M_attr module
    - [attr](https://urbanjost.github.io/M_attr/attr.3m_attr.html)  -- the main function
    - [attr_mode](https://urbanjost.github.io/M_attr/attr_mode.3m_attr.html)  -- setting processed or plain output mode
    - [attr_update](https://urbanjost.github.io/M_attr/attr_update.3m_attr.html)  -- customizing
    - [alert](https://urbanjost.github.io/M_attr/alert.3m_attr.html)  -- standard INFO, WARNING, ERROR format ![alert](docs/images/alert.gif)
 
-### All man-pages amalgamated as HTML
-
- - Another view of these documents (that uses javascript to combine all
-   the HTML descriptions of the man-pages) is in a
-   [_book_](https://urbanjost.github.io/M_attr/BOOK_M_attr.html) form that can easily be printed
-   as a single document.
-
 ## real man-pages ![gmake](docs/images/manpages.gif)
+
+Documents may be installed as man-pages on Unix-like systems with a man(1) command:
 
    + [manpages.zip](https://urbanjost.github.io/M_attr/manpages.zip)
    + [manpages.tgz](https://urbanjost.github.io/M_attr/manpages.tgz)
@@ -116,7 +115,6 @@ The included demo programs provide templates for the most common usage:
 ```text
         light "<clear><WHITE><blue><bold> WARNING: <reset> that would not be prudent"
 ```
-
 ### A BASIC INTRODUCTORY PROGRAM
 
 This short program will display colored text on an ANSI-compatible color terminal
@@ -146,7 +144,6 @@ or terminal emulator:
 ### NOTE:
    where supported the isatty(3f) function can be used to turn off the sequences when the file is
    not a tty.  isatty(3f) is an extension, but supported by GNU, Intel, PGI, ...
-
 
 ## [HISTORY](HISTORY.md)
 

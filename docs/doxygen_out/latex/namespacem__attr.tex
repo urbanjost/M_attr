@@ -43,8 +43,6 @@ subroutine, public \mbox{\hyperlink{namespacem__attr_a4b74e43b642bf4ce433be16e7e
 character(len=\+:) function, allocatable \mbox{\hyperlink{namespacem__attr_a9f58b2fe5028acae1575ae5b85883bb0}{msg\+\_\+scalar}} (generic0, generic1, generic2, generic3, generic4, generic5, generic6, generic7, generic8, generic9, generica, genericb, genericc, genericd, generice, genericf, genericg, generich, generici, genericj, sep)
 \item 
 character(len=\+:) function, allocatable \mbox{\hyperlink{namespacem__attr_a55260fba28b9c959aa904181106e3a42}{msg\+\_\+one}} (generic0, generic1, generic2, generic3, generic4, generic5, generic6, generic7, generic8, generic9, generica, genericb, genericc, genericd, generice, genericf, genericg, generich, generici, genericj, sep)
-\item 
-recursive character(len=\+:) function, allocatable, public \mbox{\hyperlink{namespacem__attr_a2c887b164e51339823c9cc6be8e5c61e}{fmt}} (generic, format)
 \end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
@@ -214,22 +212,33 @@ logical, save \mbox{\hyperlink{namespacem__attr_a122958cefd3fa4b3301cf4720d33e41
 \doxysubsection{Detailed Description}
 \hypertarget{namespacem__attr_autotoc_md0}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__attr_autotoc_md0}
 M\+\_\+attr(3f) -\/ \mbox{[}M\+\_\+attr\+::\+I\+N\+T\+RO\mbox{]} control text attributes on terminals (L\+I\+C\+E\+N\+SE\+:M\+IT)\hypertarget{namespacem__attr_autotoc_md1}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__attr_autotoc_md1}
-core functions
+\begin{DoxyVerb}  use M_attr, only : attr, attr_mode, attr_update
 
-! Add text attributes like color with an H\+T\+M\+L-\/like syntax use M\+\_\+attr, only \+: attr ! suppress the escape sequence output use M\+\_\+attr, only \+: attr\+\_\+mode ! customize what output strings are produced use M\+\_\+attr, only \+: attr\+\_\+update
+  use M_attr, only : alert ! generate standard messages
+\end{DoxyVerb}
+\hypertarget{namespacem__attr_autotoc_md2}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__attr_autotoc_md2}
+M\+\_\+attr(3f) is a Fortran module that uses common A\+N\+SI escape sequences to control terminal text attributes. \begin{DoxyVerb} use M_attr
+ write(*,*)attr('<red>Red Text!</red> <green>Green Text!</green>')
+ end
+\end{DoxyVerb}
 
-for generating standard messages
 
-use M\+\_\+attr, only \+: alert\hypertarget{namespacem__attr_autotoc_md2}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__attr_autotoc_md2}
-M\+\_\+attr(3f) is a Fortran module that writes common A\+N\+SI escape sequences which control terminal text attributes. It is designed to allow the sequences to be suppressed when desired and for the user program to completely customize the keywords -- the user can add, delete and replace the sequences associated with a keyword without changing the code.
+It is designed to use three simple procedures to
 
-Attributes are specified by writing lines with H\+T\+M\+L-\/like structure.
 
-The advantage of the approach of replacing in-\/band escape sequences with formatting directives contained on each line is that it is easy to turn off when running batch, but more importantly your program can be run in \char`\"{}raw\char`\"{} mode and write a clean text file with the directives in it that can then be read back in by a simple filter program that strips it back to plain text( see app/plain.\+f90), or displays it to a screen in color(see app/light.\+f90) or perhaps converts it to another format.
+\begin{DoxyItemize}
+\item Specify attributes using simple H\+T\+M\+L-\/like syntax
+\item allow the sequences to be suppressed when desired
+\item permit the user program to completely customize the keywords. The user can add, delete and replace the sequences associated with a keyword without changing the code.
+\end{DoxyItemize}
 
-By making each line self-\/contained (by default) this can still be done with any arbitrarily selected group of lines from the file.
+One advantage of the approach of using formatting directives which are replaced with in-\/band escape sequences is that it is easy to turn off when running batch.
 
-So this module makes it trivial to read specially-\/formatted data from a file like a message catalog (perhaps with various versions in different languages) and colorize it or display it as plain text using the attr(3f) procedure. \hypertarget{namespacem__attr_autotoc_md3}{}\doxysubsubsection{A\+C\+C\+E\+SS}\label{namespacem__attr_autotoc_md3}
+Another important capability is that programs can be run in \char`\"{}raw\char`\"{} mode and create a simple text file with the formatting directives in it that can then be read back in by a simple filter program that strips it back to plain text( see app/plain.\+f90), or displays it to a screen in color(see app/light.\+f90) or perhaps converts it to another format.
+
+So this approach makes it trivial to read specially-\/formatted data from a file like a message catalog (perhaps with various versions in different languages) and colorize it or display it as plain text
+
+By making each line self-\/contained (by default) lines can be filtered by external utilities and still display correctly.\hypertarget{namespacem__attr_autotoc_md3}{}\doxysubsubsection{A\+C\+C\+E\+SS}\label{namespacem__attr_autotoc_md3}
 Via git(1)\+: \begin{DoxyVerb}git clone https://github.com/urbanjost/M_attr.git
 cd M_attr/src
 # change Makefile if not using one of the listed compilers
@@ -241,7 +250,7 @@ make clean; make nvfortran   # for nvfortran
 
 This will compile the M\+\_\+attr module and example programs.
 
-Via fpm ( described at \href{https://github.com/fortran-lang/fpm}{\texttt{ https\+://github.\+com/fortran-\/lang/fpm}})\+: \begin{DoxyVerb} git clone https://github.com/urbanjost/M_attr.git
+Alternatively, via fpm ( described at \href{https://github.com/fortran-lang/fpm}{\texttt{ https\+://github.\+com/fortran-\/lang/fpm}})\+: \begin{DoxyVerb} git clone https://github.com/urbanjost/M_attr.git
 \end{DoxyVerb}
 
 
@@ -522,7 +531,7 @@ The \char`\"{}default\char`\"{} keyword is typically used explicitly when reset=
 o colors are not nestable, keywords are case-\/sensitive, o not all terminals obey the sequences. On Windows, it is best if you use Windows 10+ and/or the Linux mode; although it has worked with all Cyg\+Win and Min\+GW and Putty windows and mintty. o you should use \char`\"{}$<$gt$>$\char`\"{} and \char`\"{}$<$lt$>$\char`\"{} instead of \char`\"{}$>$\char`\"{} and \char`\"{}$<$\char`\"{} in a string processed by attr(3f) instead of in any plain text output so that the raw mode will create correct input for the attr(3f) function if read back in.\hypertarget{namespacem__attr_autotoc_md15}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__attr_autotoc_md15}
 \begin{DoxyVerb}Sample program
 
- program demo_esc
+ program demo_attr
  use M_attr, only : attr, attr_mode, attr_update
     call printstuff('defaults')
 
@@ -579,7 +588,7 @@ o colors are not nestable, keywords are case-\/sensitive, o not all terminals ob
    write(*,'(a)') attr(&
     &'<in><bo><ul><it><w>WHITE</w> and <e>EBONY</e></ul></bo></in>')
  end subroutine printstuff
- end program demo_esc
+ end program demo_attr
 \end{DoxyVerb}
 \hypertarget{namespacem__attr_autotoc_md16}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__attr_autotoc_md16}
 John S. Urban, 2021\hypertarget{namespacem__attr_autotoc_md17}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__attr_autotoc_md17}
@@ -699,41 +708,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{namespacem__attr_aba8630a36c29aaeba84ec458812f59ec_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{namespacem__attr_a2c887b164e51339823c9cc6be8e5c61e}\label{namespacem__attr_a2c887b164e51339823c9cc6be8e5c61e}} 
-\index{m\_attr@{m\_attr}!fmt@{fmt}}
-\index{fmt@{fmt}!m\_attr@{m\_attr}}
-\doxysubsubsection{\texorpdfstring{fmt()}{fmt()}}
-{\footnotesize\ttfamily recursive character(len=\+:) function, allocatable, public m\+\_\+attr\+::fmt (\begin{DoxyParamCaption}\item[{class($\ast$), intent(in)}]{generic,  }\item[{character(len=$\ast$), intent(in), optional}]{format }\end{DoxyParamCaption})}
-
-\hypertarget{namespacem__attr_autotoc_md49}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__attr_autotoc_md49}
-fmt(3f) -\/ \mbox{[}M\+\_\+attr\mbox{]} convert any intrinsic to a string using specified format (L\+I\+C\+E\+N\+SE\+:PD) \hypertarget{namespacem__attr_autotoc_md50}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__attr_autotoc_md50}
-\begin{DoxyVerb}function fmt(value,format) result(string)
-
- class(*),intent(in),optional :: value
- character(len=*),intent(in),optional  :: format
- character(len=:),allocatable :: string
-\end{DoxyVerb}
- \hypertarget{namespacem__attr_autotoc_md51}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__attr_autotoc_md51}
-F\+M\+T(3f) converts any standard intrinsic value to a string using the specified format. \hypertarget{namespacem__attr_autotoc_md52}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__attr_autotoc_md52}
-value value to print the value of. May be of type I\+N\+T\+E\+G\+ER, L\+O\+G\+I\+C\+AL, R\+E\+AL, D\+O\+U\+B\+L\+E\+P\+R\+E\+C\+I\+S\+I\+ON, C\+O\+M\+P\+L\+EX, or C\+H\+A\+R\+A\+C\+T\+ER. format format to use to print value. It is up to the user to use an appropriate format. The format does not require being surrounded by parenthesis. If not present a default is selected similar to what would be produced with free format. \hypertarget{namespacem__attr_autotoc_md53}{}\doxysubsubsection{R\+E\+T\+U\+R\+NS}\label{namespacem__attr_autotoc_md53}
-string A string value \hypertarget{namespacem__attr_autotoc_md54}{}\doxysubsubsection{E\+X\+A\+M\+P\+L\+ES}\label{namespacem__attr_autotoc_md54}
-Sample program\+:
-
-program demo\+\_\+fmt use \+:: M\+\_\+attr, only \+: fmt implicit none character(len=\+:),allocatable \+:: output
-
-output=fmt(10,\char`\"{}\textquotesingle{}\mbox{[}\textquotesingle{},i0,\textquotesingle{}\mbox{]}\textquotesingle{}\char`\"{}) write($\ast$,$\ast$)\textquotesingle{}result is \textquotesingle{},output
-
-output=fmt(10.\+0/3.0,\char`\"{}\textquotesingle{}\mbox{[}\textquotesingle{},g0.\+5,\textquotesingle{}\mbox{]}\textquotesingle{}\char`\"{}) write($\ast$,$\ast$)\textquotesingle{}result is \textquotesingle{},output
-
-output=fmt(.true.,\char`\"{}\textquotesingle{}\+The final answer is \mbox{[}\textquotesingle{},g0,\textquotesingle{}\mbox{]}\textquotesingle{}\char`\"{}) write($\ast$,$\ast$)\textquotesingle{}result is \textquotesingle{},output
-
-end program demo\+\_\+fmt
-
-Results\+:
-
-result is \mbox{[}10\mbox{]} result is \mbox{[}3.\+3333\mbox{]} result is The final answer is \mbox{[}T\mbox{]}\hypertarget{namespacem__attr_autotoc_md55}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__attr_autotoc_md55}
-John S. Urban\hypertarget{namespacem__attr_autotoc_md56}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__attr_autotoc_md56}
-Public Domain \mbox{\Hypertarget{namespacem__attr_af46849cecb00919c8ce49afe84b6c1ee}\label{namespacem__attr_af46849cecb00919c8ce49afe84b6c1ee}} 
+\mbox{\Hypertarget{namespacem__attr_af46849cecb00919c8ce49afe84b6c1ee}\label{namespacem__attr_af46849cecb00919c8ce49afe84b6c1ee}} 
 \index{m\_attr@{m\_attr}!get@{get}}
 \index{get@{get}!m\_attr@{m\_attr}}
 \doxysubsubsection{\texorpdfstring{get()}{get()}}

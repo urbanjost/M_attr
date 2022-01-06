@@ -126,7 +126,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title="86.6% of total for modules and submodules.">835 statements</a>
+    title="85.5% of total for modules and submodules.">758 statements</a>
      </li> 
      
      
@@ -258,18 +258,6 @@
 
 
 
-<div class="panel panel-primary">
-  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#funcs-0">Functions</a></h3></div>
-  <div id="funcs-0" class="panel-collapse collapse">
-    <div class="list-group">
-      
-      <a class="list-group-item" href="../module/m_attr.html#proc-fmt">fmt</a>
-      
-    </div>
-  </div>
-</div>
-
-
 
 <div class="panel panel-primary">
   <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#subs-0">Subroutines</a></h3></div>
@@ -301,49 +289,48 @@
     
     <div class="col-md-9" id='text'>
     <h2 id="name">NAME</h2>
-<div class="codehilite"><pre><span></span><code><span class="n">M_attr</span><span class="p">(</span><span class="mi">3</span><span class="n">f</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="o">[</span><span class="n">M_attr</span><span class="o">]</span><span class="w"> </span><span class="n">control</span><span class="w"> </span><span class="nc">text</span><span class="w"> </span><span class="n">attributes</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">terminals</span><span class="w"></span>
-<span class="p">(</span><span class="nl">LICENSE</span><span class="p">:</span><span class="n">MIT</span><span class="p">)</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code>M_attr(3f) - [M_attr::INTRO] control text attributes on terminals
+(LICENSE:MIT)
 </code></pre></div>
 
 <h2 id="synopsis">SYNOPSIS</h2>
-<p>core functions</p>
-<div class="codehilite"><pre><span></span><code>  ! Add text attributes like color with an HTML-like syntax
-  use M_attr, only : attr
-  ! suppress the escape sequence output
-  use M_attr, only : attr_mode
-  ! customize what output strings are produced
-  use M_attr, only : attr_update
-</code></pre></div>
+<div class="codehilite"><pre><span></span><code>  use M_attr, only : attr, attr_mode, attr_update
 
-<p>for generating standard messages</p>
-<div class="codehilite"><pre><span></span><code>  use M_attr, only : alert
+  use M_attr, only : alert ! generate standard messages
 </code></pre></div>
 
 <h2 id="description">DESCRIPTION</h2>
-<div class="codehilite"><pre><span></span><code><span class="n">M_attr</span><span class="p">(</span><span class="mi">3</span><span class="n">f</span><span class="p">)</span> <span class="k">is</span> <span class="n">a</span> <span class="n">Fortran</span> <span class="n">module</span> <span class="n">that</span> <span class="n">writes</span> <span class="n">common</span> <span class="n">ANSI</span> <span class="n">escape</span> <span class="n">sequences</span>
-<span class="n">which</span> <span class="n">control</span> <span class="n">terminal</span> <span class="n">text</span> <span class="n">attributes</span><span class="o">.</span> <span class="n">It</span> <span class="k">is</span> <span class="n">designed</span> <span class="n">to</span> <span class="n">allow</span> <span class="n">the</span>
-<span class="n">sequences</span> <span class="n">to</span> <span class="n">be</span> <span class="n">suppressed</span> <span class="n">when</span> <span class="n">desired</span> <span class="ow">and</span> <span class="k">for</span> <span class="n">the</span> <span class="n">user</span> <span class="n">program</span> <span class="n">to</span>
-<span class="n">completely</span> <span class="n">customize</span> <span class="n">the</span> <span class="n">keywords</span> <span class="o">--</span> <span class="n">the</span> <span class="n">user</span> <span class="n">can</span> <span class="n">add</span><span class="p">,</span> <span class="n">delete</span> <span class="ow">and</span>
-<span class="n">replace</span> <span class="n">the</span> <span class="n">sequences</span> <span class="n">associated</span> <span class="n">with</span> <span class="n">a</span> <span class="n">keyword</span> <span class="n">without</span> <span class="n">changing</span>
-<span class="n">the</span> <span class="n">code</span><span class="o">.</span>
+<div class="codehilite"><pre><span></span><code>M_attr(3f) is a Fortran module that uses common ANSI escape sequences
+to control terminal text attributes.
 
-<span class="n">Attributes</span> <span class="n">are</span> <span class="n">specified</span> <span class="n">by</span> <span class="n">writing</span> <span class="n">lines</span> <span class="n">with</span> <span class="n">HTML</span><span class="o">-</span><span class="n">like</span> <span class="n">structure</span><span class="o">.</span>
+     use M_attr
+     write(*,*)attr(&#39;<span class="nt">&lt;red&gt;</span>Red Text!<span class="nt">&lt;/red&gt;</span> <span class="nt">&lt;green&gt;</span>Green Text!<span class="nt">&lt;/green&gt;</span>&#39;)
+     end
 
-<span class="n">The</span> <span class="n">advantage</span> <span class="n">of</span> <span class="n">the</span> <span class="n">approach</span> <span class="n">of</span> <span class="n">replacing</span> <span class="ow">in</span><span class="o">-</span><span class="n">band</span> <span class="n">escape</span> <span class="n">sequences</span>
-<span class="n">with</span> <span class="n">formatting</span> <span class="n">directives</span> <span class="n">contained</span> <span class="n">on</span> <span class="n">each</span> <span class="n">line</span> <span class="k">is</span> <span class="n">that</span> <span class="n">it</span> <span class="k">is</span> <span class="n">easy</span>
-<span class="n">to</span> <span class="n">turn</span> <span class="n">off</span> <span class="n">when</span> <span class="n">running</span> <span class="n">batch</span><span class="p">,</span> <span class="n">but</span> <span class="n">more</span> <span class="n">importantly</span> <span class="n">your</span> <span class="n">program</span> <span class="n">can</span>
-<span class="n">be</span> <span class="n">run</span> <span class="ow">in</span> <span class="s2">&quot;raw&quot;</span> <span class="n">mode</span> <span class="ow">and</span> <span class="n">write</span> <span class="n">a</span> <span class="n">clean</span> <span class="n">text</span> <span class="n">file</span> <span class="n">with</span> <span class="n">the</span> <span class="n">directives</span> <span class="ow">in</span>
-<span class="n">it</span> <span class="n">that</span> <span class="n">can</span> <span class="n">then</span> <span class="n">be</span> <span class="n">read</span> <span class="n">back</span> <span class="ow">in</span> <span class="n">by</span> <span class="n">a</span> <span class="n">simple</span> <span class="n">filter</span> <span class="n">program</span> <span class="n">that</span> <span class="n">strips</span>
-<span class="n">it</span> <span class="n">back</span> <span class="n">to</span> <span class="n">plain</span> <span class="n">text</span><span class="p">(</span> <span class="n">see</span> <span class="n">app</span><span class="o">/</span><span class="n">plain</span><span class="o">.</span><span class="n">f90</span><span class="p">),</span> <span class="ow">or</span> <span class="n">displays</span> <span class="n">it</span> <span class="n">to</span> <span class="n">a</span> <span class="n">screen</span>
-<span class="ow">in</span> <span class="n">color</span><span class="p">(</span><span class="n">see</span> <span class="n">app</span><span class="o">/</span><span class="n">light</span><span class="o">.</span><span class="n">f90</span><span class="p">)</span> <span class="ow">or</span> <span class="n">perhaps</span> <span class="n">converts</span> <span class="n">it</span> <span class="n">to</span> <span class="n">another</span> <span class="n">format</span><span class="o">.</span>
+It is designed to use three simple procedures to
 
-<span class="n">By</span> <span class="n">making</span> <span class="n">each</span> <span class="n">line</span> <span class="bp">self</span><span class="o">-</span><span class="n">contained</span> <span class="p">(</span><span class="n">by</span> <span class="n">default</span><span class="p">)</span> <span class="n">this</span> <span class="n">can</span> <span class="n">still</span> <span class="n">be</span> <span class="n">done</span>
-<span class="n">with</span> <span class="n">any</span> <span class="n">arbitrarily</span> <span class="n">selected</span> <span class="n">group</span> <span class="n">of</span> <span class="n">lines</span> <span class="n">from</span> <span class="n">the</span> <span class="n">file</span><span class="o">.</span>
+ + Specify attributes using simple HTML-like syntax
+ + allow the sequences to be suppressed when desired
+ + permit the  user program to completely customize the keywords.
+   The user can add, delete and replace the sequences associated with
+   a keyword without changing the code.
 
-<span class="n">So</span> <span class="n">this</span> <span class="n">module</span> <span class="n">makes</span> <span class="n">it</span> <span class="n">trivial</span> <span class="n">to</span> <span class="n">read</span> <span class="n">specially</span><span class="o">-</span><span class="n">formatted</span> <span class="n">data</span>
-<span class="n">from</span> <span class="n">a</span> <span class="n">file</span> <span class="n">like</span> <span class="n">a</span> <span class="n">message</span> <span class="n">catalog</span> <span class="p">(</span><span class="n">perhaps</span> <span class="n">with</span> <span class="n">various</span> <span class="n">versions</span>
-<span class="ow">in</span> <span class="n">different</span> <span class="n">languages</span><span class="p">)</span> <span class="ow">and</span> <span class="n">colorize</span> <span class="n">it</span> <span class="ow">or</span> <span class="n">display</span> <span class="n">it</span> <span class="k">as</span> <span class="n">plain</span> <span class="n">text</span>
-<span class="n">using</span> <span class="n">the</span> <span class="n">attr</span><span class="p">(</span><span class="mi">3</span><span class="n">f</span><span class="p">)</span> <span class="n">procedure</span><span class="o">.</span>
+One advantage of the approach of using formatting directives which
+are replaced with in-band escape sequences is that it is easy to turn
+off when running batch.
+
+Another important capability is that programs can be run in &quot;raw&quot; mode
+and create a simple text file with the formatting directives in it
+that can then be read back in by a simple filter program that strips
+it back to plain text( see app/plain.f90), or displays it to a screen
+in color(see app/light.f90) or perhaps converts it to another format.
+
+So this approach makes it trivial to read specially-formatted data
+from a file like a message catalog (perhaps with various versions
+in different languages) and colorize it or display it as plain text
+
+By making each line self-contained (by default) lines can be filtered
+by external utilities and still display correctly.
 </code></pre></div>
 
 <h2 id="access">ACCESS</h2>
@@ -358,7 +345,7 @@
 
 <span class="n">This</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">compile</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">M_attr</span><span class="w"> </span><span class="k">module</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">example</span><span class="w"> </span><span class="n">programs</span><span class="p">.</span><span class="w"></span>
 
-<span class="n">Via</span><span class="w"> </span><span class="n">fpm</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">described</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="nl">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="k">fortran</span><span class="o">-</span><span class="n">lang</span><span class="o">/</span><span class="n">fpm</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="n">Alternatively</span><span class="p">,</span><span class="w"> </span><span class="n">via</span><span class="w"> </span><span class="n">fpm</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">described</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="nl">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="k">fortran</span><span class="o">-</span><span class="n">lang</span><span class="o">/</span><span class="n">fpm</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">     </span><span class="n">git</span><span class="w"> </span><span class="n">clone</span><span class="w"> </span><span class="nl">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">urbanjost</span><span class="o">/</span><span class="n">M_attr</span><span class="p">.</span><span class="n">git</span><span class="w"></span>
 
@@ -573,18 +560,6 @@ Related information:
 
 
 
-
-
-<div class="panel panel-primary">
-  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#funcs-1">Functions</a></h3></div>
-  <div id="funcs-1" class="panel-collapse collapse">
-    <div class="list-group">
-      
-      <a class="list-group-item" href="../module/m_attr.html#proc-fmt">fmt</a>
-      
-    </div>
-  </div>
-</div>
 
 
 
@@ -1722,95 +1697,6 @@ private function attr_scalar_width(string, reset, chars) result(expanded)
     
     
     
-     
-    <section>
-    <h2>Functions</h2>
-    
-    
-  <div class="panel panel-default">
-  <div class="panel-heading codesum"><span class="anchor" id="proc-fmt"></span><h3>
-public recursive function <a href='../proc/fmt.html'>fmt</a>(generic, format) result(line)
-    
-    
-   
-</h3></div>
-  <div class="panel-body">
-       
-    
-
-
-
-
-
-
-
-<p>Sample program:</p><a href="../proc/fmt.html" class="pull-right"><emph>Read more&hellip;</emph></a>
-    
-    <h4>Arguments</h4>
-    
-      
-      
-<table class="table table-striped varlist">
-<thead><tr><th>Type</th>
-<th>Intent</th><th>Optional</th>
-<th>Attributes</th><th></th><th>Name</th><th></th></thead>
-
-
-
-<tbody>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><span class="anchor" ></span>class(*),</td>
-  <td>intent(in)</td>
-  <td></td>
-  
-  <td></td><td>::</td>
-  <td><strong>generic</strong></td><td></td>
-  
-</tr>
-
-  
-  
-  
-  
-<tr>
-  
-  <td><span class="anchor" ></span>character(len=*),</td>
-  <td>intent(in),</td>
-  <td>optional</td>
-  
-  <td></td><td>::</td>
-  <td><strong>format</strong></td><td></td>
-  
-</tr>
-
-</tbody>
-</table>
-
-      
-    
-    
-
-  
-  
-  
-  
-     <h4>Return Value <small>character(len=:),
-  allocatable</small></h4>
-  
-    
-
-  </div>
-  </div>
-
-    
-    </section>
-    <br>
     
 
     
@@ -2353,13 +2239,13 @@ public subroutine <a href='../proc/attr_update.html'>attr_update</a>(key, valin,
     <footer>
       <div class="container">
       <div class="row">
-        <div class="col-xs-6 col-md-4"><p>&copy; 2021 
+        <div class="col-xs-6 col-md-4"><p>&copy; 2022 
                                           </p></div>
         <div class="col-xs-6 col-md-4 col-md-push-4">
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/cmacmackin/ford">FORD</a>
-             on 2021-10-05 01:01  
+             on 2022-01-05 23:09  
           </p>
         </div>
         <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> M_attr was developed by John S. Urban</p></div>

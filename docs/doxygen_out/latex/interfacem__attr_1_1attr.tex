@@ -72,7 +72,7 @@ The \char`\"{}default\char`\"{} keyword is typically used explicitly when reset=
 o colors are not nestable, keywords are case-\/sensitive, o not all terminals obey the sequences. On Windows, it is best if you use Windows 10+ and/or the Linux mode; although it has worked with all Cyg\+Win and Min\+GW and Putty windows and mintty. o you should use \char`\"{}$<$gt$>$\char`\"{} and \char`\"{}$<$lt$>$\char`\"{} instead of \char`\"{}$>$\char`\"{} and \char`\"{}$<$\char`\"{} in a string processed by attr(3f) instead of in any plain text output so that the raw mode will create correct input for the attr(3f) function if read back in.\hypertarget{namespacem__attr_autotoc_md15}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__attr_autotoc_md15}
 \begin{DoxyVerb}Sample program
 
- program demo_esc
+ program demo_attr
  use M_attr, only : attr, attr_mode, attr_update
     call printstuff('defaults')
 
@@ -129,7 +129,7 @@ o colors are not nestable, keywords are case-\/sensitive, o not all terminals ob
    write(*,'(a)') attr(&
     &'<in><bo><ul><it><w>WHITE</w> and <e>EBONY</e></ul></bo></in>')
  end subroutine printstuff
- end program demo_esc
+ end program demo_attr
 \end{DoxyVerb}
 \hypertarget{namespacem__attr_autotoc_md16}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__attr_autotoc_md16}
 John S. Urban, 2021\hypertarget{namespacem__attr_autotoc_md17}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__attr_autotoc_md17}
