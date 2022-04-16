@@ -14,7 +14,7 @@ homepage = "https://github.com/urbanjost/M_attr.git"
 external-modules = ["ifport", "dfport"]
 
 [install]
-library="true"
+library=true
 
 [[executable]]
 name="tat"

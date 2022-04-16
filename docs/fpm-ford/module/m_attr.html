@@ -126,7 +126,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title="85.5% of total for modules and submodules.">758 statements</a>
+    title="86.0% of total for modules and submodules.">793 statements</a>
      </li> 
      
      
@@ -288,149 +288,7 @@
     </div>
     
     <div class="col-md-9" id='text'>
-    <h2 id="name">NAME</h2>
-<div class="codehilite"><pre><span></span><code>M_attr(3f) - [M_attr::INTRO] control text attributes on terminals
-(LICENSE:MIT)
-</code></pre></div>
-
-<h2 id="synopsis">SYNOPSIS</h2>
-<div class="codehilite"><pre><span></span><code>  use M_attr, only : attr, attr_mode, attr_update
-
-  use M_attr, only : alert ! generate standard messages
-</code></pre></div>
-
-<h2 id="description">DESCRIPTION</h2>
-<div class="codehilite"><pre><span></span><code>M_attr(3f) is a Fortran module that uses common ANSI escape sequences
-to control terminal text attributes.
-
-     use M_attr
-     write(*,*)attr(&#39;<span class="nt">&lt;red&gt;</span>Red Text!<span class="nt">&lt;/red&gt;</span> <span class="nt">&lt;green&gt;</span>Green Text!<span class="nt">&lt;/green&gt;</span>&#39;)
-     end
-
-It is designed to use three simple procedures to
-
- + Specify attributes using simple HTML-like syntax
- + allow the sequences to be suppressed when desired
- + permit the  user program to completely customize the keywords.
-   The user can add, delete and replace the sequences associated with
-   a keyword without changing the code.
-
-One advantage of the approach of using formatting directives which
-are replaced with in-band escape sequences is that it is easy to turn
-off when running batch.
-
-Another important capability is that programs can be run in &quot;raw&quot; mode
-and create a simple text file with the formatting directives in it
-that can then be read back in by a simple filter program that strips
-it back to plain text( see app/plain.f90), or displays it to a screen
-in color(see app/light.f90) or perhaps converts it to another format.
-
-So this approach makes it trivial to read specially-formatted data
-from a file like a message catalog (perhaps with various versions
-in different languages) and colorize it or display it as plain text
-
-By making each line self-contained (by default) lines can be filtered
-by external utilities and still display correctly.
-</code></pre></div>
-
-<h2 id="access">ACCESS</h2>
-<div class="codehilite"><pre><span></span><code><span class="n">Via</span><span class="w"> </span><span class="n">git</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">git</span><span class="w"> </span><span class="n">clone</span><span class="w"> </span><span class="nl">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">urbanjost</span><span class="o">/</span><span class="n">M_attr</span><span class="p">.</span><span class="n">git</span><span class="w"></span>
-<span class="w">    </span><span class="n">cd</span><span class="w"> </span><span class="n">M_attr</span><span class="o">/</span><span class="n">src</span><span class="w"></span>
-<span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="n">change</span><span class="w"> </span><span class="n">Makefile</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">one</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">listed</span><span class="w"> </span><span class="n">compilers</span><span class="w"></span>
-<span class="w">    </span><span class="n">make</span><span class="w"> </span><span class="n">clean</span><span class="p">;</span><span class="w"> </span><span class="n">make</span><span class="w"> </span><span class="n">gfortran</span><span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">gfortran</span><span class="w"></span>
-<span class="w">    </span><span class="n">make</span><span class="w"> </span><span class="n">clean</span><span class="p">;</span><span class="w"> </span><span class="n">make</span><span class="w"> </span><span class="n">ifort</span><span class="w">       </span><span class="err">#</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">ifort</span><span class="w"></span>
-<span class="w">    </span><span class="n">make</span><span class="w"> </span><span class="n">clean</span><span class="p">;</span><span class="w"> </span><span class="n">make</span><span class="w"> </span><span class="n">nvfortran</span><span class="w">   </span><span class="err">#</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">nvfortran</span><span class="w"></span>
-
-<span class="n">This</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">compile</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">M_attr</span><span class="w"> </span><span class="k">module</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">example</span><span class="w"> </span><span class="n">programs</span><span class="p">.</span><span class="w"></span>
-
-<span class="n">Alternatively</span><span class="p">,</span><span class="w"> </span><span class="n">via</span><span class="w"> </span><span class="n">fpm</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">described</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="nl">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="k">fortran</span><span class="o">-</span><span class="n">lang</span><span class="o">/</span><span class="n">fpm</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">     </span><span class="n">git</span><span class="w"> </span><span class="n">clone</span><span class="w"> </span><span class="nl">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">urbanjost</span><span class="o">/</span><span class="n">M_attr</span><span class="p">.</span><span class="n">git</span><span class="w"></span>
-
-<span class="ow">or</span><span class="w"> </span><span class="n">just</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">dependency</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">fpm</span><span class="p">.</span><span class="n">toml</span><span class="w"> </span><span class="n">project</span><span class="w"> </span><span class="k">file</span><span class="p">.</span><span class="w"></span>
-
-<span class="w">     </span><span class="o">[</span><span class="n">dependencies</span><span class="o">]</span><span class="w"></span>
-<span class="w">     </span><span class="n">M_attr</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;https://github.com/urbanjost/M_attr.git&quot;</span><span class="w"> </span><span class="err">}</span><span class="w"></span>
-</code></pre></div>
-
-<h2 id="limitations">LIMITATIONS</h2>
-<p>o colors are not nestable.
-   o keywords are case-sensitive,
-   o ANSI escape sequences are not universally supported by
-     all terminal emulators; and normally should be suppressed
-     when not going to a tty device. Therefore, you should use
-     M_system::system_istty(3f) or the common Fortran extension
-     ISATTY() to set the default to &ldquo;plain&rdquo; instead of &ldquo;color&rdquo;
-     when the output file is not a conforming terminal. On basic
-     MSWindows console windows, it is best to use Windows 10+ and/or
-     the Linux mode; you may have to enable ANSI escape sequence
-     mode on MSWindows. It does work as-is with CygWin and MinGW and
-     Putty windows and mintty(1) as tested.</p>
-<h2 id="example">EXAMPLE</h2>
-<div class="codehilite"><pre><span></span><code>Sample program
-
- program demo_M_attr
- use M_attr, only : attr, attr_mode, attr_update, alert
- implicit none
- character(len=256) :: line
- character(len=*),parameter :: f=&#39;( <span class="err">&amp;</span>
-  <span class="err">&amp;</span>&quot;   <span class="nt">&lt;bo&gt;&lt;w&gt;&lt;G&gt;</span> GREAT: <span class="nt">&lt;/G&gt;&lt;/w&gt;</span><span class="err">&amp;</span>
-  <span class="err">&amp;</span>The new value <span class="nt">&lt;Y&gt;&lt;b&gt;</span>&quot;,f8.4,1x,&quot;<span class="nt">&lt;/b&gt;&lt;/Y&gt;</span> is in range&quot;<span class="err">&amp;</span>
-  <span class="err">&amp;</span>)&#39;
- real :: value
-
-    write(*,&#39;(a)&#39;)<span class="err">&amp;</span>
-    <span class="err">&amp;</span>attr(&#39;   <span class="nt">&lt;r&gt;&lt;W&gt;&lt;bo&gt;</span> ERROR: <span class="nt">&lt;/W&gt;</span>red text on a white background<span class="nt">&lt;/y&gt;</span>&#39;)
-
-    value=3.4567
-    write(line,fmt=f) value
-    write(*,&#39;(a)&#39;)attr(trim(line))
-
-    ! write same string as plain text
-    write(*,*)
-    call attr_mode(manner=&#39;plain&#39;)
-    write(*,&#39;(a)&#39;)attr(trim(line))
-
-    call attr_mode(manner=&#39;color&#39;)
-    ! use pre-defined or user defined strings
-    write(*,*)
-    write(*,&#39;(a)&#39;)attr(&#39;<span class="nt">&lt;ERROR&gt;</span> Woe is nigh.&#39;)
-    write(*,&#39;(a)&#39;)attr(&#39;<span class="nt">&lt;WARNING&gt;</span> The night is young.&#39;)
-    write(*,&#39;(a)&#39;)attr(&#39;<span class="nt">&lt;INFO&gt;</span> It is Monday&#39;)
-
-    call alert(&#39;<span class="nt">&lt;ERROR&gt;</span>&#39;, &#39;Woe is nigh.&#39;)
-    call alert(&#39;<span class="nt">&lt;WARNING&gt;</span>&#39;, &#39;The night is young.&#39;)
-    call alert(&#39;<span class="nt">&lt;INFO&gt;</span>&#39;, &#39;It is Monday&#39;)
-
-    ! create a custom mnemonic
-    call attr_update(&#39;MYERROR&#39;,attr(<span class="err">&amp;</span>
-    &#39; <span class="nt">&lt;R&gt;&lt;e&gt;</span> E<span class="nt">&lt;w&gt;</span>-<span class="nt">&lt;e&gt;</span>R<span class="nt">&lt;w&gt;</span>-<span class="nt">&lt;e&gt;</span>R<span class="nt">&lt;w&gt;</span>-<span class="nt">&lt;e&gt;</span>O<span class="nt">&lt;w&gt;</span>-<span class="nt">&lt;e&gt;</span>R: <span class="nt">&lt;/e&gt;&lt;/R&gt;&lt;/bo&gt;</span>&#39;<span class="err">&amp;</span>
-    ))
-    write(*,*)
-    write(*,&#39;(a)&#39;)attr(&#39;<span class="nt">&lt;MYERROR&gt;</span> my custom message style&#39;)
-
- end program demo_M_attr
-</code></pre></div>
-
-<h2 id="author">AUTHOR</h2>
-<div class="codehilite"><pre><span></span><code>John S. Urban, 2021
-</code></pre></div>
-
-<h2 id="license">LICENSE</h2>
-<div class="codehilite"><pre><span></span><code>MIT
-</code></pre></div>
-
-<h2 id="see-also">SEE ALSO</h2>
-<div class="codehilite"><pre><span></span><code>attr(3f), attr_mode(3f), attr_update(3f)
-
-Related information:
-
- terminfo(3c), termlib(3c), tput(1), reset(1), clear(1),
- console_codes(4), ECMA-48,
- https://en.wikipedia.org/wiki/ANSI_escape_code
-</code></pre></div>
+    
       <br>
     
   
@@ -1058,14 +916,6 @@ public subroutine <a href='../proc/alert.html'>alert</a>(type, message, g0, g1, 
    
 </h3>
     
-
-
-
-
-
-
-
-<p>!&gt;</p><a href="../proc/alert.html" class="pull-right"><emph>Read more&hellip;</emph></a>
     
     <h4>Arguments</h4>
     
@@ -1444,10 +1294,6 @@ private function attr_scalar(string, reset) result(expanded)
    
 </h3>
     
-
-
-
-<a href="../proc/attr_scalar.html" class="pull-right"><emph>Read more&hellip;</emph></a>
     
     <h4>Arguments</h4>
     
@@ -1714,14 +1560,6 @@ public subroutine <a href='../proc/alert.html'>alert</a>(type, message, g0, g1, 
   <div class="panel-body">
        
     
-
-
-
-
-
-
-
-<p>!&gt;</p><a href="../proc/alert.html" class="pull-right"><emph>Read more&hellip;</emph></a>
     
     <h4>Arguments</h4>
     
@@ -2088,14 +1926,6 @@ public subroutine <a href='../proc/attr_mode.html'>attr_mode</a>(manner)
   <div class="panel-body">
        
     
-
-
-
-
-
-
-
-<p>!&gt;</p><a href="../proc/attr_mode.html" class="pull-right"><emph>Read more&hellip;</emph></a>
     
     <h4>Arguments</h4>
     
@@ -2147,14 +1977,6 @@ public subroutine <a href='../proc/attr_update.html'>attr_update</a>(key, valin,
   <div class="panel-body">
        
     
-
-
-
-
-
-
-
-<p>!&gt;</p><a href="../proc/attr_update.html" class="pull-right"><emph>Read more&hellip;</emph></a>
     
     <h4>Arguments</h4>
     
@@ -2245,7 +2067,7 @@ public subroutine <a href='../proc/attr_update.html'>attr_update</a>(key, valin,
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/cmacmackin/ford">FORD</a>
-             on 2022-01-05 23:09  
+             on 2022-04-16 18:40  
           </p>
         </div>
         <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> M_attr was developed by John S. Urban</p></div>

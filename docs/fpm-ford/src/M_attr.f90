@@ -1,143 +1,140 @@
-!>
-!!##NAME
-!!    M_attr(3f) - [M_attr::INTRO] control text attributes on terminals
-!!    (LICENSE:MIT)
-!!
-!!##SYNOPSIS
-!!
-!!
-!!      use M_attr, only : attr, attr_mode, attr_update
-!!
-!!      use M_attr, only : alert ! generate standard messages
-!!
-!!##DESCRIPTION
-!!    M_attr(3f) is a Fortran module that uses common ANSI escape sequences
-!!    to control terminal text attributes.
-!!
-!!         use M_attr
-!!         write(*,*)attr('<red>Red Text!</red> <green>Green Text!</green>')
-!!         end
-!!
-!!    It is designed to use three simple procedures to
-!!
-!!     + Specify attributes using simple HTML-like syntax
-!!     + allow the sequences to be suppressed when desired
-!!     + permit the  user program to completely customize the keywords.
-!!       The user can add, delete and replace the sequences associated with
-!!       a keyword without changing the code.
-!!
-!!    One advantage of the approach of using formatting directives which
-!!    are replaced with in-band escape sequences is that it is easy to turn
-!!    off when running batch.
-!!
-!!    Another important capability is that programs can be run in "raw" mode
-!!    and create a simple text file with the formatting directives in it
-!!    that can then be read back in by a simple filter program that strips
-!!    it back to plain text( see app/plain.f90), or displays it to a screen
-!!    in color(see app/light.f90) or perhaps converts it to another format.
-!!
-!!    So this approach makes it trivial to read specially-formatted data
-!!    from a file like a message catalog (perhaps with various versions
-!!    in different languages) and colorize it or display it as plain text
-!!
-!!    By making each line self-contained (by default) lines can be filtered
-!!    by external utilities and still display correctly.
-!!
-!!##ACCESS
-!!    Via git(1):
-!!
-!!        git clone https://github.com/urbanjost/M_attr.git
-!!        cd M_attr/src
-!!        # change Makefile if not using one of the listed compilers
-!!        make clean; make gfortran    # for gfortran
-!!        make clean; make ifort       # for ifort
-!!        make clean; make nvfortran   # for nvfortran
-!!
-!!    This will compile the M_attr module and example programs.
-!!
-!!    Alternatively, via fpm ( described at https://github.com/fortran-lang/fpm):
-!!
-!!         git clone https://github.com/urbanjost/M_attr.git
-!!
-!!    or just list it as a dependency in your fpm.toml project file.
-!!
-!!         [dependencies]
-!!         M_attr        = { git = "https://github.com/urbanjost/M_attr.git" }
-!!
-!!##LIMITATIONS
-!!   o colors are not nestable.
-!!   o keywords are case-sensitive,
-!!   o ANSI escape sequences are not universally supported by
-!!     all terminal emulators; and normally should be suppressed
-!!     when not going to a tty device. Therefore, you should use
-!!     M_system::system_istty(3f) or the common Fortran extension
-!!     ISATTY() to set the default to "plain" instead of "color"
-!!     when the output file is not a conforming terminal. On basic
-!!     MSWindows console windows, it is best to use Windows 10+ and/or
-!!     the Linux mode; you may have to enable ANSI escape sequence
-!!     mode on MSWindows. It does work as-is with CygWin and MinGW and
-!!     Putty windows and mintty(1) as tested.
-!!
-!!##EXAMPLE
-!!
-!!    Sample program
-!!
-!!     program demo_M_attr
-!!     use M_attr, only : attr, attr_mode, attr_update, alert
-!!     implicit none
-!!     character(len=256) :: line
-!!     character(len=*),parameter :: f='( &
-!!      &"   <bo><w><G> GREAT: </G></w>&
-!!      &The new value <Y><b>",f8.4,1x,"</b></Y> is in range"&
-!!      &)'
-!!     real :: value
-!!
-!!        write(*,'(a)')&
-!!        &attr('   <r><W><bo> ERROR: </W>red text on a white background</y>')
-!!
-!!        value=3.4567
-!!        write(line,fmt=f) value
-!!        write(*,'(a)')attr(trim(line))
-!!
-!!        ! write same string as plain text
-!!        write(*,*)
-!!        call attr_mode(manner='plain')
-!!        write(*,'(a)')attr(trim(line))
-!!
-!!        call attr_mode(manner='color')
-!!        ! use pre-defined or user defined strings
-!!        write(*,*)
-!!        write(*,'(a)')attr('<ERROR> Woe is nigh.')
-!!        write(*,'(a)')attr('<WARNING> The night is young.')
-!!        write(*,'(a)')attr('<INFO> It is Monday')
-!!
-!!        call alert('<ERROR>', 'Woe is nigh.')
-!!        call alert('<WARNING>', 'The night is young.')
-!!        call alert('<INFO>', 'It is Monday')
-!!
-!!        ! create a custom mnemonic
-!!        call attr_update('MYERROR',attr(&
-!!        ' <R><e> E<w>-<e>R<w>-<e>R<w>-<e>O<w>-<e>R: </e></R></bo>'&
-!!        ))
-!!        write(*,*)
-!!        write(*,'(a)')attr('<MYERROR> my custom message style')
-!!
-!!     end program demo_M_attr
-!!
-!!##AUTHOR
-!!    John S. Urban, 2021
-!!
-!!##LICENSE
-!!    MIT
-!!
-!!##SEE ALSO
-!!    attr(3f), attr_mode(3f), attr_update(3f)
-!!
-!!    Related information:
-!!
-!!     terminfo(3c), termlib(3c), tput(1), reset(1), clear(1),
-!!     console_codes(4), ECMA-48,
-!!     https://en.wikipedia.org/wiki/ANSI_escape_code
+! NAME
+!    M_attr(3f) - [M_attr::INTRO] control text attributes on terminals
+!    (LICENSE:MIT)
+! 
+! SYNOPSIS
+! 
+!      use M_attr, only : attr, attr_mode, attr_update
+! 
+!      use M_attr, only : alert ! generate standard messages
+! 
+! DESCRIPTION
+!    M_attr(3f) is a Fortran module that uses common ANSI escape sequences
+!    to control terminal text attributes.
+! 
+!         use M_attr
+!         write(*,*)attr('<red>Red Text!</red> <green>Green Text!</green>')
+!         end
+! 
+!    It is designed to use three simple procedures to
+! 
+!     + Specify attributes using simple HTML-like syntax
+!     + allow the sequences to be suppressed when desired
+!     + permit the  user program to completely customize the keywords.
+!       The user can add, delete and replace the sequences associated with
+!       a keyword without changing the code.
+! 
+!    One advantage of the approach of using formatting directives which
+!    are replaced with in-band escape sequences is that it is easy to turn
+!    off when running batch.
+! 
+!    Another important capability is that programs can be run in "raw" mode
+!    and create a simple text file with the formatting directives in it
+!    that can then be read back in by a simple filter program that strips
+!    it back to plain text( see app/plain.f90), or displays it to a screen
+!    in color(see app/light.f90) or perhaps converts it to another format.
+! 
+!    So this approach makes it trivial to read specially-formatted data
+!    from a file like a message catalog (perhaps with various versions
+!    in different languages) and colorize it or display it as plain text
+! 
+!    By making each line self-contained (by default) lines can be filtered
+!    by external utilities and still display correctly.
+! 
+! ACCESS
+!    Via git(1):
+! 
+!        git clone https://github.com/urbanjost/M_attr.git
+!        cd M_attr/src
+!        # change Makefile if not using one of the listed compilers
+!        make clean; make gfortran    # for gfortran
+!        make clean; make ifort       # for ifort
+!        make clean; make nvfortran   # for nvfortran
+! 
+!    This will compile the M_attr module and example programs.
+! 
+!    Alternatively, via fpm ( described at https://github.com/fortran-lang/fpm):
+! 
+!         git clone https://github.com/urbanjost/M_attr.git
+! 
+!    or just list it as a dependency in your fpm.toml project file.
+! 
+!         [dependencies]
+!         M_attr        = { git = "https://github.com/urbanjost/M_attr.git" }
+! 
+! LIMITATIONS
+!   o colors are not nestable.
+!   o keywords are case-sensitive,
+!   o ANSI escape sequences are not universally supported by
+!     all terminal emulators; and normally should be suppressed
+!     when not going to a tty device. Therefore, you should use
+!     M_system::system_istty(3f) or the common Fortran extension
+!     ISATTY() to set the default to "plain" instead of "color"
+!     when the output file is not a conforming terminal. On basic
+!     MSWindows console windows, it is best to use Windows 10+ and/or
+!     the Linux mode; you may have to enable ANSI escape sequence
+!     mode on MSWindows. It does work as-is with CygWin and MinGW and
+!     Putty windows and mintty(1) as tested.
+! 
+! EXAMPLE
+!    Sample program
+! 
+!     program demo_M_attr
+!     use M_attr, only : attr, attr_mode, attr_update, alert
+!     implicit none
+!     character(len=256) :: line
+!     character(len=*),parameter :: f='( &
+!      &"   <bo><w><G> GREAT: </G></w>&
+!      &The new value <Y><b>",f8.4,1x,"</b></Y> is in range"&
+!      &)'
+!     real :: value
+! 
+!        write(*,'(a)')&
+!        &attr('   <r><W><bo> ERROR: </W>red text on a white background</y>')
+! 
+!        value=3.4567
+!        write(line,fmt=f) value
+!        write(*,'(a)')attr(trim(line))
+! 
+!        ! write same string as plain text
+!        write(*,*)
+!        call attr_mode(manner='plain')
+!        write(*,'(a)')attr(trim(line))
+! 
+!        call attr_mode(manner='color')
+!        ! use pre-defined or user defined strings
+!        write(*,*)
+!        write(*,'(a)')attr('<ERROR> Woe is nigh.')
+!        write(*,'(a)')attr('<WARNING> The night is young.')
+!        write(*,'(a)')attr('<INFO> It is Monday')
+! 
+!        call alert('<ERROR>', 'Woe is nigh.')
+!        call alert('<WARNING>', 'The night is young.')
+!        call alert('<INFO>', 'It is Monday')
+! 
+!        ! create a custom mnemonic
+!        call attr_update('MYERROR',attr(&
+!        ' <R><e> E<w>-<e>R<w>-<e>R<w>-<e>O<w>-<e>R: </e></R></bo>'&
+!        ))
+!        write(*,*)
+!        write(*,'(a)')attr('<MYERROR> my custom message style')
+! 
+!     end program demo_M_attr
+! 
+! AUTHOR
+!    John S. Urban, 2021
+! 
+! LICENSE
+!    MIT
+! 
+! SEE ALSO
+!    attr(3f), attr_mode(3f), attr_update(3f)
+! 
+!    Related information:
+! 
+!     terminfo(3c), termlib(3c), tput(1), reset(1), clear(1),
+!     console_codes(4), ECMA-48,
+!     https://en.wikipedia.org/wiki/ANSI_escape_code
 module M_attr
 use, intrinsic :: iso_fortran_env, only : stderr=>ERROR_UNIT,stdin=>INPUT_UNIT,stdout=>OUTPUT_UNIT
 use, intrinsic :: iso_c_binding, only: c_int
@@ -284,195 +281,192 @@ interface str
 end interface str
 
 contains
-!>
-!!##NAME
-!!    attr(3f) - [M_attr] substitute escape sequences for HTML-like syntax
-!!               in strings
-!!    (LICENSE:MIT)
-!!
-!!##SYNOPSIS
-!!
-!!      function attr(string,reset) result (expanded)
-!!
-!!        ! scalar
-!!        character(len=*),intent(in)  :: string
-!!        logical,intent(in),optional  :: reset
-!!        character(len=:),allocatable :: expanded
-!!        ! or array
-!!        character(len=*),intent(in)  :: string(:)
-!!        logical,intent(in),optional  :: reset
-!!        character(len=:),allocatable :: expanded(:)
-!!        integer,intent(in),optional  :: chars
-!!
-!!##DESCRIPTION
-!!    Use HTML-like syntax to add attributes to terminal output such as color
-!!    on devices that recognize ANSI escape sequences.
-!!
-!!##OPTIONS
-!!    string        input string  of form
-!!
-!!                    "<attribute_name>string</attribute_name> ...".
-!!
-!!                   where the current attributes are color names,
-!!                   bold, italic, underline, ...
-!!
-!!    reset          By default, a sequence to clear all text attributes
-!!                   is sent at the end of each returned line if an escape
-!!                   character appears in the output string. This can be
-!!                   turned off by setting RESET to .false. .
-!!
-!!                   Note if turning off the reset attributes may be
-!!                   continued across lines, but if each line is not
-!!                   self-contained attributes may not display properly
-!!                   when filtered with commands such as grep(1).
-!!
-!!    chars          For arrays, a reset will be placed after the Nth
-!!                   displayable column count in order to make it easier
-!!                   to generate consistent right borders for non-default
-!!                   background colors for a text block.
-!!##KEYWORDS
-!!    primary default keywords
-!!
-!!      colors:
-!!        r,         red,       R,  RED
-!!        g,         green,     G,  GREEN
-!!        b,         blue,      B,  BLUE
-!!        m,         magenta,   M,  MAGENTA
-!!        c,         cyan,      C,  CYAN
-!!        y,         yellow,    Y,  YELLOW
-!!        e,         ebony,     E,  EBONY
-!!        w,         white,     W,  WHITE
-!!
-!!      attributes:
-!!        it,        italic
-!!        bo,        bold
-!!        un,        underline
-!!
-!!      basic control characters:
-!!       nul
-!!       bel  (0x07, ^G) beeps;
-!!       bs   (0x08, ^H) backspaces one column (but not past the beginning of
-!!                       the line);
-!!       ht   (0x09, ^I) goes to the next tab stop or to the end of the line if
-!!                       there is no earlier tab stop;
-!!       lf   (0x0A, ^J),
-!!       vt   (0x0B, ^K)
-!!       ff   (0x0C, ^L) all give a linefeed, and if LF/NL (new-line mode) is
-!!                       set also a carriage return
-!!       cr   (0x0D, ^M) gives a carriage return;
-!!       so   (0x0E, ^N) activates the G1 character set;
-!!       si   (0x0F, ^O) activates the G0 character set;
-!!       can  (0x18, ^X) and SUB (0x1A, ^Z) interrupt escape sequences;
-!!       sub
-!!       esc  (0x1B, ^[) starts an escape sequence;
-!!       del  (0x7F) is ignored;
-!!
-!!      other:
-!!        clear
-!!        default
-!!        reset
-!!        gt
-!!        lt
-!!        save,DECSC     Save  current state (cursor coordinates, attributes,
-!!                       character sets pointed at by G0, G1).
-!!        restore,DECRC  Restore state most recently saved by ESC 7.
-!!        CSI            "Control Sequence Introducer"(0x9B) is equivalent to
-!!                       "ESC [".
-!!
-!!      dual-value (one for color, one for mono):
-!!
-!!        write(*,*)attr('<ERROR>an error message')
-!!        write(*,*)attr('<WARNING>a warning message')
-!!        write(*,*)attr('<INFO>an informational message')
-!!
-!!    By default, if the color mnemonics (ie. the keywords) are uppercase
-!!    they change the background color. If lowercase, the foreground color.
-!!    When preceded by a "/" character the attribute is returned to the default.
-!!
-!!    The "default" keyword is typically used explicitly when
-!!    reset=.false, and sets all text attributes to their initial defaults.
-!!
-!!##LIMITATIONS
-!!    o colors are not nestable, keywords are case-sensitive,
-!!    o not all terminals obey the sequences. On Windows, it is best if
-!!      you use Windows 10+ and/or the Linux mode; although it has worked
-!!      with all CygWin and MinGW and Putty windows and mintty.
-!!    o you should use "<gt>" and "<lt>" instead of ">" and "<" in a string
-!!      processed by attr(3f) instead of in any plain text output so that
-!!      the raw mode will create correct input for the attr(3f) function
-!!      if read back in.
-!!
-!!##EXAMPLE
-!!
-!!    Sample program
-!!
-!!     program demo_attr
-!!     use M_attr, only : attr, attr_mode, attr_update
-!!        call printstuff('defaults')
-!!
-!!        call attr_mode(manner='plain')
-!!        call printstuff('plain:')
-!!
-!!        call printstuff('raw')
-!!
-!!        call attr_mode(manner='color')
-!!        call printstuff('')
-!!
-!!        write(*,'(a)') attr('TEST ADDING A CUSTOM SEQUENCE:')
-!!        call attr_update('blink',char(27)//'[5m')
-!!        call attr_update('/blink',char(27)//'[25m')
-!!        write(*,'(a)') attr('<blink>Items for Friday</blink>')
-!!
-!!     contains
-!!     subroutine printstuff(label)
-!!     character(len=*),intent(in)  :: label
-!!     character(len=:),allocatable :: array(:)
-!!       call attr_mode(manner=label)
-!!
-!!       array=[character(len=60) ::    &
-!!        'TEST MANNER='//label,                      &
-!!        '<r>RED</r>,<g>GREEN</g>,<b>BLUE</b>',      &
-!!        '<c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</y>', &
-!!        '<w>WHITE</w> and <e>EBONY</e>']
-!!       write(*,'(a)') attr(array)
-!!
-!!       write(*,'(a)') attr('Adding <bo>bold</bo>')
-!!       write(*,'(a)') attr('<bo><r>RED</r>,<g>GREEN</g>,<b>BLUE</b></bo>')
-!!       write(*,'(a)') attr('<bo><c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</y></bo>')
-!!       write(*,'(a)') attr('<bo><w>WHITE</w> and <e>EBONY</e></bo>')
-!!
-!!       write(*,'(a)') attr('Adding <ul>underline</ul>')
-!!       write(*,'(a)') attr(&
-!!        &'<bo><ul><r>RED</r>,<g>GREEN</g>,<b>BLUE</b></ul></bo>')
-!!       write(*,'(a)') attr(&
-!!        &'<bo><ul><c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</y></ul></bo>')
-!!       write(*,'(a)') attr('<bo><ul><w>WHITE</w> and <e>EBONY</e></ul></bo>')
-!!
-!!       write(*,'(a)') attr('Adding <ul>italic</ul>')
-!!       write(*,'(a)') attr(&
-!!        &'<bo><ul><it><r>RED</r>,<g>GREEN</g>,<b>BLUE</b></it></ul></bo>')
-!!       write(*,'(a)') attr(&
-!!        &'<bo><ul><it><c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</it></y></ul></bo>')
-!!       write(*,'(a)') attr('<bo><ul><it><w>WHITE</w> and <e>EBONY</e></ul></bo>')
-!!
-!!       write(*,'(a)') attr('Adding <in>inverse</in>')
-!!       write(*,'(a)') attr('<in><bo><ul><it><r>RED</r>,<g>GREEN</g>,&
-!!        &<b>BLUE</b></it></ul></bo></in>')
-!!       write(*,'(a)') attr('<in><bo><ul><it><c>CYAN</c>,<m>MAGENTA</g>,&
-!!        &<y>YELLOW</it></y></ul></bo></in>')
-!!       write(*,'(a)') attr(&
-!!        &'<in><bo><ul><it><w>WHITE</w> and <e>EBONY</e></ul></bo></in>')
-!!     end subroutine printstuff
-!!     end program demo_attr
-!!
-!!##AUTHOR
-!!    John S. Urban, 2021
-!!
-!!##LICENSE
-!!    MIT
-!!
-!!##SEE ALSO
-!!    attr_mode(3f), attr_update(3f)
+! NAME
+!    attr(3f) - [M_attr] substitute escape sequences for HTML-like syntax
+!               in strings
+!    (LICENSE:MIT)
+! 
+! SYNOPSIS
+!      function attr(string,reset) result (expanded)
+! 
+!        ! scalar
+!        character(len=*),intent(in)  :: string
+!        logical,intent(in),optional  :: reset
+!        character(len=:),allocatable :: expanded
+!        ! or array
+!        character(len=*),intent(in)  :: string(:)
+!        logical,intent(in),optional  :: reset
+!        character(len=:),allocatable :: expanded(:)
+!        integer,intent(in),optional  :: chars
+! 
+! DESCRIPTION
+!    Use HTML-like syntax to add attributes to terminal output such as color
+!    on devices that recognize ANSI escape sequences.
+! 
+! OPTIONS
+!    string        input string  of form
+! 
+!                    "<attribute_name>string</attribute_name> ...".
+! 
+!                   where the current attributes are color names,
+!                   bold, italic, underline, ...
+! 
+!    reset          By default, a sequence to clear all text attributes
+!                   is sent at the end of each returned line if an escape
+!                   character appears in the output string. This can be
+!                   turned off by setting RESET to .false. .
+! 
+!                   Note if turning off the reset attributes may be
+!                   continued across lines, but if each line is not
+!                   self-contained attributes may not display properly
+!                   when filtered with commands such as grep(1).
+! 
+!    chars          For arrays, a reset will be placed after the Nth
+!                   displayable column count in order to make it easier
+!                   to generate consistent right borders for non-default
+!                   background colors for a text block.
+! KEYWORDS
+!    primary default keywords
+! 
+!      colors:
+!        r,         red,       R,  RED
+!        g,         green,     G,  GREEN
+!        b,         blue,      B,  BLUE
+!        m,         magenta,   M,  MAGENTA
+!        c,         cyan,      C,  CYAN
+!        y,         yellow,    Y,  YELLOW
+!        e,         ebony,     E,  EBONY
+!        w,         white,     W,  WHITE
+! 
+!      attributes:
+!        it,        italic
+!        bo,        bold
+!        un,        underline
+! 
+!      basic control characters:
+!       nul
+!       bel  (0x07, ^G) beeps;
+!       bs   (0x08, ^H) backspaces one column (but not past the beginning of
+!                       the line);
+!       ht   (0x09, ^I) goes to the next tab stop or to the end of the line if
+!                       there is no earlier tab stop;
+!       lf   (0x0A, ^J),
+!       vt   (0x0B, ^K)
+!       ff   (0x0C, ^L) all give a linefeed, and if LF/NL (new-line mode) is
+!                       set also a carriage return
+!       cr   (0x0D, ^M) gives a carriage return;
+!       so   (0x0E, ^N) activates the G1 character set;
+!       si   (0x0F, ^O) activates the G0 character set;
+!       can  (0x18, ^X) and SUB (0x1A, ^Z) interrupt escape sequences;
+!       sub
+!       esc  (0x1B, ^[) starts an escape sequence;
+!       del  (0x7F) is ignored;
+! 
+!      other:
+!        clear
+!        default
+!        reset
+!        gt
+!        lt
+!        save,DECSC     Save  current state (cursor coordinates, attributes,
+!                       character sets pointed at by G0, G1).
+!        restore,DECRC  Restore state most recently saved by ESC 7.
+!        CSI            "Control Sequence Introducer"(0x9B) is equivalent to
+!                       "ESC [".
+! 
+!      dual-value (one for color, one for mono):
+! 
+!        write(*,*)attr('<ERROR>an error message')
+!        write(*,*)attr('<WARNING>a warning message')
+!        write(*,*)attr('<INFO>an informational message')
+! 
+!    By default, if the color mnemonics (ie. the keywords) are uppercase
+!    they change the background color. If lowercase, the foreground color.
+!    When preceded by a "/" character the attribute is returned to the default.
+! 
+!    The "default" keyword is typically used explicitly when
+!    reset=.false, and sets all text attributes to their initial defaults.
+! 
+! LIMITATIONS
+!    o colors are not nestable, keywords are case-sensitive,
+!    o not all terminals obey the sequences. On Windows, it is best if
+!      you use Windows 10+ and/or the Linux mode; although it has worked
+!      with all CygWin and MinGW and Putty windows and mintty.
+!    o you should use "<gt>" and "<lt>" instead of ">" and "<" in a string
+!      processed by attr(3f) instead of in any plain text output so that
+!      the raw mode will create correct input for the attr(3f) function
+!      if read back in.
+! 
+! EXAMPLE
+!    Sample program
+! 
+!     program demo_attr
+!     use M_attr, only : attr, attr_mode, attr_update
+!        call printstuff('defaults')
+! 
+!        call attr_mode(manner='plain')
+!        call printstuff('plain:')
+! 
+!        call printstuff('raw')
+! 
+!        call attr_mode(manner='color')
+!        call printstuff('')
+! 
+!        write(*,'(a)') attr('TEST ADDING A CUSTOM SEQUENCE:')
+!        call attr_update('blink',char(27)//'[5m')
+!        call attr_update('/blink',char(27)//'[25m')
+!        write(*,'(a)') attr('<blink>Items for Friday</blink>')
+! 
+!     contains
+!     subroutine printstuff(label)
+!     character(len=*),intent(in)  :: label
+!     character(len=:),allocatable :: array(:)
+!       call attr_mode(manner=label)
+! 
+!       array=[character(len=60) ::    &
+!        'TEST MANNER='//label,                      &
+!        '<r>RED</r>,<g>GREEN</g>,<b>BLUE</b>',      &
+!        '<c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</y>', &
+!        '<w>WHITE</w> and <e>EBONY</e>']
+!       write(*,'(a)') attr(array)
+! 
+!       write(*,'(a)') attr('Adding <bo>bold</bo>')
+!       write(*,'(a)') attr('<bo><r>RED</r>,<g>GREEN</g>,<b>BLUE</b></bo>')
+!       write(*,'(a)') attr('<bo><c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</y></bo>')
+!       write(*,'(a)') attr('<bo><w>WHITE</w> and <e>EBONY</e></bo>')
+! 
+!       write(*,'(a)') attr('Adding <ul>underline</ul>')
+!       write(*,'(a)') attr(&
+!        &'<bo><ul><r>RED</r>,<g>GREEN</g>,<b>BLUE</b></ul></bo>')
+!       write(*,'(a)') attr(&
+!        &'<bo><ul><c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</y></ul></bo>')
+!       write(*,'(a)') attr('<bo><ul><w>WHITE</w> and <e>EBONY</e></ul></bo>')
+! 
+!       write(*,'(a)') attr('Adding <ul>italic</ul>')
+!       write(*,'(a)') attr(&
+!        &'<bo><ul><it><r>RED</r>,<g>GREEN</g>,<b>BLUE</b></it></ul></bo>')
+!       write(*,'(a)') attr(&
+!        &'<bo><ul><it><c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</it></y></ul></bo>')
+!       write(*,'(a)') attr('<bo><ul><it><w>WHITE</w> and <e>EBONY</e></ul></bo>')
+! 
+!       write(*,'(a)') attr('Adding <in>inverse</in>')
+!       write(*,'(a)') attr('<in><bo><ul><it><r>RED</r>,<g>GREEN</g>,&
+!        &<b>BLUE</b></it></ul></bo></in>')
+!       write(*,'(a)') attr('<in><bo><ul><it><c>CYAN</c>,<m>MAGENTA</g>,&
+!        &<y>YELLOW</it></y></ul></bo></in>')
+!       write(*,'(a)') attr(&
+!        &'<in><bo><ul><it><w>WHITE</w> and <e>EBONY</e></ul></bo></in>')
+!     end subroutine printstuff
+!     end program demo_attr
+! 
+! AUTHOR
+!    John S. Urban, 2021
+! 
+! LICENSE
+!    MIT
+! 
+! SEE ALSO
+!    attr_mode(3f), attr_update(3f)
 function attr_scalar(string,reset) result (expanded)
 character(len=*),intent(in)  :: string
 logical,intent(in),optional  :: reset
@@ -661,76 +655,111 @@ subroutine vt102()
        call attr_update('/r',fg_default)
        call attr_update('red',fg_red)
        call attr_update('/red',fg_default)
+       call attr_update('fg_red',fg_red)
+       call attr_update('/fg_red',fg_default)
    call attr_update('c',fg_cyan)
        call attr_update('/c',fg_default)
        call attr_update('cyan',fg_cyan)
        call attr_update('/cyan',fg_default)
+       call attr_update('fg_cyan',fg_cyan)
+       call attr_update('/fg_cyan',fg_default)
    call attr_update('m',fg_magenta)
        call attr_update('/m',fg_default)
        call attr_update('magenta',fg_magenta)
        call attr_update('/magenta',fg_default)
+       call attr_update('fg_magenta',fg_magenta)
+       call attr_update('/fg_magenta',fg_default)
    call attr_update('b',fg_blue)
        call attr_update('/b',fg_default)
        call attr_update('blue',fg_blue)
-       call attr_update('/blue',fg_default)
+       call attr_update('fg_blue',fg_blue)
+       call attr_update('/fg_blue',fg_default)
    call attr_update('g',fg_green)
        call attr_update('/g',fg_default)
        call attr_update('green',fg_green)
        call attr_update('/green',fg_default)
+       call attr_update('fg_green',fg_green)
+       call attr_update('/fg_green',fg_default)
    call attr_update('y',fg_yellow)
        call attr_update('/y',fg_default)
        call attr_update('yellow',fg_yellow)
        call attr_update('/yellow',fg_default)
+       call attr_update('fg_yellow',fg_yellow)
+       call attr_update('/fg_yellow',fg_default)
    call attr_update('w',fg_white)
        call attr_update('/w',fg_default)
        call attr_update('white',fg_white)
        call attr_update('/white',fg_default)
+       call attr_update('fg_white',fg_white)
+       call attr_update('/fg_white',fg_default)
    call attr_update('e',fg_ebony)
        call attr_update('/e',fg_default)
        call attr_update('ebony',fg_ebony)
        call attr_update('/ebony',fg_default)
+       call attr_update('fg_ebony',fg_ebony)
+       call attr_update('/fg_ebony',fg_default)
    call attr_update('x',fg_ebony)
        call attr_update('/x',fg_default)
        call attr_update('black',fg_ebony)
        call attr_update('/black',fg_default)
+       call attr_update('fg_black',fg_ebony)
+       call attr_update('/fg_black',fg_default)
 
    ! background colors
    call attr_update('R',bg_red)
        call attr_update('/R',bg_default)
        call attr_update('RED',bg_red)
        call attr_update('/RED',bg_default)
+       call attr_update('bg_red',bg_red)
+       call attr_update('/bg_red',bg_default)
    call attr_update('C',bg_cyan)
        call attr_update('/C',bg_default)
        call attr_update('CYAN',bg_cyan)
        call attr_update('/CYAN',bg_default)
+       call attr_update('bg_cyan',bg_cyan)
+       call attr_update('/bg_cyan',bg_default)
    call attr_update('M',bg_magenta)
        call attr_update('/M',bg_default)
        call attr_update('MAGENTA',bg_magenta)
        call attr_update('/MAGENTA',bg_default)
+       call attr_update('bg_magenta',bg_magenta)
+       call attr_update('/bg_magenta',bg_default)
    call attr_update('B',bg_blue)
        call attr_update('/B',bg_default)
        call attr_update('BLUE',bg_blue)
        call attr_update('/BLUE',bg_default)
+       call attr_update('bg_blue',bg_blue)
+       call attr_update('/bg_blue',bg_default)
    call attr_update('G',bg_green)
        call attr_update('/G',bg_default)
        call attr_update('GREEN',bg_green)
        call attr_update('/GREEN',bg_default)
+       call attr_update('bg_green',bg_green)
+       call attr_update('/bg_green',bg_default)
    call attr_update('Y',bg_yellow)
        call attr_update('/Y',bg_default)
        call attr_update('YELLOW',bg_yellow)
        call attr_update('/YELLOW',bg_default)
+       call attr_update('bg_yellow',bg_yellow)
+       call attr_update('/bg_yellow',bg_default)
    call attr_update('W',bg_white)
        call attr_update('/W',bg_default)
        call attr_update('WHITE',bg_white)
        call attr_update('/WHITE',bg_default)
+       call attr_update('bg_white',bg_white)
+       call attr_update('/bg_white',bg_default)
    call attr_update('E',bg_ebony)
        call attr_update('/E',bg_default)
        call attr_update('EBONY',bg_ebony)
        call attr_update('/EBONY',bg_default)
+       call attr_update('bg_ebony',bg_ebony)
+       call attr_update('/bg_ebony',bg_default)
    call attr_update('X',bg_ebony)
        call attr_update('/X',bg_default)
        call attr_update('BLACK',bg_ebony)
        call attr_update('/BLACK',bg_default)
+       call attr_update('bg_black',bg_ebony)
+       call attr_update('/bg_black',bg_default)
 
    ! compound
    call attr_update('ERROR',fg_red//bold//bg_ebony     //':error:  '//bg_default//fg_default,':error:')
@@ -738,70 +767,67 @@ subroutine vt102()
    call attr_update('INFO',fg_green//bold//bg_ebony    //':info:   '//bg_default//fg_default,':info:')
 
 end subroutine vt102
-!>
-!! !>
-!!##NAME
-!!    attr_mode(3f) - [M_attr] select processing mode for output from attr(3f)
-!!    (LICENSE:MIT)
-!!
-!!##SYNOPSIS
-!!
-!!     subroutine attr_mode(manner)
-!!
-!!        character(len=*),intent(in) :: manner
-!!
-!!##DESCRIPTION
-!!    Turn off the generation of strings associated with the HTML keywords
-!!    in the string generated by the attr(3f) function, or display the
-!!    text in raw mode as it was passed to attr(3f) or return to ANSI
-!!    escape control sequence generation.
-!!
-!!##OPTIONS
-!!    MANNER  The current manners or modes supported via the attr_mode(3f)
-!!             procedure are
-!!
-!!         plain          suppress the output associated with keywords
-!!         color(default) commonly supported escape sequences
-!!         raw            echo the input to attr(3f) as its output
-!!         reload         restore original keyword meanings deleted or
-!!                        replaced by calls to attr_update(3f).
-!!
-!!##EXAMPLE
-!!
-!!    Sample program
-!!
-!!     program demo_attr_mode
-!!     use M_attr, only : attr, attr_mode
-!!     implicit none
-!!     character(len=:),allocatable :: lines(:)
-!!     character(len=:),allocatable :: outlines(:)
-!!     integer :: i
-!!        lines=[character(len=110):: &
-!!        &'<M><y>',&
-!!        &'<M><y>  Suffice it to say that black and white are also colors',&
-!!        &'<M><y>  for their simultaneous contrast is as striking as that ',&
-!!        &'<M><y>  of green and red, for instance. &
-!!        & --- <y><bo>Vincent van Gogh</bo></y>',&
-!!        &' ']
-!!
-!!        outlines=attr(lines,chars=57)
-!!        write(*,'(a)')(trim(outlines(i)),i=1,size(outlines))
-!!
-!!        call attr_mode(manner='plain') ! write as plain text
-!!        write(*,'(a)')attr(lines)
-!!
-!!        call attr_mode(manner='raw')   ! write as-is
-!!        write(*,'(a)')attr(lines)
-!!
-!!        call attr_mode(manner='ansi')  ! return to default mode
-!!
-!!     end program demo_attr_mode
-!!
-!!##AUTHOR
-!!    John S. Urban, 2021
-!!
-!!##LICENSE
-!!    MIT
+! !>
+! NAME
+!    attr_mode(3f) - [M_attr] select processing mode for output from attr(3f)
+!    (LICENSE:MIT)
+! 
+! SYNOPSIS
+!     subroutine attr_mode(manner)
+! 
+!        character(len=*),intent(in) :: manner
+! 
+! DESCRIPTION
+!    Turn off the generation of strings associated with the HTML keywords
+!    in the string generated by the attr(3f) function, or display the
+!    text in raw mode as it was passed to attr(3f) or return to ANSI
+!    escape control sequence generation.
+! 
+! OPTIONS
+!    MANNER  The current manners or modes supported via the attr_mode(3f)
+!             procedure are
+! 
+!         plain          suppress the output associated with keywords
+!         color(default) commonly supported escape sequences
+!         raw            echo the input to attr(3f) as its output
+!         reload         restore original keyword meanings deleted or
+!                        replaced by calls to attr_update(3f).
+! 
+! EXAMPLE
+!    Sample program
+! 
+!     program demo_attr_mode
+!     use M_attr, only : attr, attr_mode
+!     implicit none
+!     character(len=:),allocatable :: lines(:)
+!     character(len=:),allocatable :: outlines(:)
+!     integer :: i
+!        lines=[character(len=110):: &
+!        &'<M><y>',&
+!        &'<M><y>  Suffice it to say that black and white are also colors',&
+!        &'<M><y>  for their simultaneous contrast is as striking as that ',&
+!        &'<M><y>  of green and red, for instance. &
+!        & --- <y><bo>Vincent van Gogh</bo></y>',&
+!        &' ']
+! 
+!        outlines=attr(lines,chars=57)
+!        write(*,'(a)')(trim(outlines(i)),i=1,size(outlines))
+! 
+!        call attr_mode(manner='plain') ! write as plain text
+!        write(*,'(a)')attr(lines)
+! 
+!        call attr_mode(manner='raw')   ! write as-is
+!        write(*,'(a)')attr(lines)
+! 
+!        call attr_mode(manner='ansi')  ! return to default mode
+! 
+!     end program demo_attr_mode
+! 
+! AUTHOR
+!    John S. Urban, 2021
+! 
+! LICENSE
+!    MIT
 subroutine attr_mode(manner)
 character(len=*),intent(in) :: manner
 integer                     :: i
@@ -841,83 +867,80 @@ subroutine wipe_dictionary()
    allocate(character(len=0) :: mono_values(0))
 end subroutine wipe_dictionary
 
-!>
-!! !>
-!!##NAME
-!!    attr_update(3f) - [M_attr] update internal dictionary given keyword and value
-!!    (LICENSE:MIT)
-!!
-!!##SYNOPSIS
-!!
-!!    subroutine attr_update(key,val)
-!!
-!!     character(len=*),intent(in)           :: key
-!!     character(len=*),intent(in),optional  :: val
-!!     character(len=*),intent(in),optional  :: mono_val
-!!
-!!##DESCRIPTION
-!!    Update internal dictionary in M_attr(3fm) module.
-!!
-!!##OPTIONS
-!!    key       name of keyword to add, replace, or delete from dictionary
-!!    val       if present add or replace value associated with keyword. If
-!!              not present remove keyword entry from dictionary.
-!!    mono_val  if present add or replace second value associated with
-!!              keyword used for plain text mode.
-!!              Must only be specified if VAL is also specified.
-!!
-!!##KEYWORDS
-!!    The following keywords are defined by default
-!!
-!!    colors:
-!!
-!!      r,red     c,cyan     w,white
-!!      g,green   m,magenta  e,ebony
-!!      b,blue    y,yellow
-!!
-!!    If the color keywords are capitalized they control the text background
-!!    instead of the text color.
-!!
-!!    attributes:
-!!
-!!      ul,underline
-!!      it,italics (often produces inverse colors on many devices
-!!
-!!##EXAMPLE
-!!
-!!    Sample program
-!!
-!!      program demo_update
-!!      use M_attr, only : attr, attr_update
-!!         write(*,'(a)') attr('<clear>TEST CUSTOMIZATIONS:')
-!!         ! add custom keywords
-!!         call attr_update('blink',char(27)//'[5m')
-!!         call attr_update('/blink',char(27)//'[25m')
-!!         write(*,*)
-!!         write(*,'(a)') attr('<blink>Items for Friday</blink>')
-!!         call attr_update('ouch',attr( &
-!!         ' <R><bo><w>BIG mistake!</R></w> '))
-!!         write(*,*)
-!!         write(*,'(a)') attr('<ouch> Did not see that coming.')
-!!         write(*,*)
-!!         write(*,'(a)') attr( &
-!!         'ORIGINALLY: <r>Apple</r>, <b>Sky</b>, <g>Grass</g>')
-!!         ! delete
-!!         call attr_update('r')
-!!         call attr_update('/r')
-!!         ! replace (or create)
-!!         call attr_update('b','<<<<')
-!!         call attr_update('/b','>>>>')
-!!         write(*,*)
-!!         write(*,'(a)') attr( &
-!!         'CUSTOMIZED: <r>Apple</r>, <b>Sky</b>, <g>Grass</g>')
-!!      end program demo_update
-!!
-!!##AUTHOR
-!!    John S. Urban, 2021
-!!
-!!##LICENSE
-!!    MIT
+! !>
+! NAME
+!    attr_update(3f) - [M_attr] update internal dictionary given keyword and value
+!    (LICENSE:MIT)
+! 
+! SYNOPSIS
+!    subroutine attr_update(key,val)
+! 
+!     character(len=*),intent(in)           :: key
+!     character(len=*),intent(in),optional  :: val
+!     character(len=*),intent(in),optional  :: mono_val
+! 
+! DESCRIPTION
+!    Update internal dictionary in M_attr(3fm) module.
+! 
+! OPTIONS
+!    key       name of keyword to add, replace, or delete from dictionary
+!    val       if present add or replace value associated with keyword. If
+!              not present remove keyword entry from dictionary.
+!    mono_val  if present add or replace second value associated with
+!              keyword used for plain text mode.
+!              Must only be specified if VAL is also specified.
+! 
+! KEYWORDS
+!    The following keywords are defined by default
+! 
+!    colors:
+! 
+!      r,red     c,cyan     w,white
+!      g,green   m,magenta  e,ebony
+!      b,blue    y,yellow
+! 
+!    If the color keywords are capitalized they control the text background
+!    instead of the text color.
+! 
+!    attributes:
+! 
+!      ul,underline
+!      it,italics (often produces inverse colors on many devices
+! 
+! EXAMPLE
+!    Sample program
+! 
+!      program demo_update
+!      use M_attr, only : attr, attr_update
+!         write(*,'(a)') attr('<clear>TEST CUSTOMIZATIONS:')
+!         ! add custom keywords
+!         call attr_update('blink',char(27)//'[5m')
+!         call attr_update('/blink',char(27)//'[25m')
+!         write(*,*)
+!         write(*,'(a)') attr('<blink>Items for Friday</blink>')
+!         call attr_update('ouch',attr( &
+!         ' <R><bo><w>BIG mistake!</R></w> '))
+!         write(*,*)
+!         write(*,'(a)') attr('<ouch> Did not see that coming.')
+!         write(*,*)
+!         write(*,'(a)') attr( &
+!         'ORIGINALLY: <r>Apple</r>, <b>Sky</b>, <g>Grass</g>')
+!         ! delete
+!         call attr_update('r')
+!         call attr_update('/r')
+!         ! replace (or create)
+!         call attr_update('b','<<<<')
+!         call attr_update('/b','>>>>')
+!         write(*,*)
+!         write(*,'(a)') attr( &
+!         'CUSTOMIZED: <r>Apple</r>, <b>Sky</b>, <g>Grass</g>')
+!      end program demo_update
+! 
+! AUTHOR
+!    John S. Urban, 2021
+! 
+! LICENSE
+!    MIT
 subroutine attr_update(key,valin,mono_valin)
 character(len=*),intent(in)           :: key
 character(len=*),intent(in),optional  :: valin
@@ -1111,90 +1134,87 @@ integer                      :: end
       write(stderr,*)'*insert* error: index out of range. end=',end,' index=',place,' value=',value
    endif
 end subroutine insert
-!>
-!! !>
-!!##NAME
-!!    alert(3f) - [M_attr] print messages using a standard format including time and program name
-!!    (LICENSE:MIT)
-!!
-!!##SYNOPSIS
-!!
-!!     subroutine alert(message,g0,g1,g2,g3,g4,g5,g6,g7,g8,g9,ga,gb,gc,gd,ge,gf,gg,gh,gi,gj)
-!!
-!!        character(len=*),intent(in),optional :: type
-!!        character(len=*),intent(in),optional :: message
-!!        class(*),intent(in),optional :: g0,g1,g2,g3,g4,g5,g6,g7,g8,g9, &
-!!                                      & ga,gb,gc,gd,ge,gf,gg,gh,gi,gj
-!!
-!!##DESCRIPTION
-!!    Display a message prefixed with a timestamp and the name
-!!    of the calling program when the TYPE is specified as any
-!!    of 'error','warn', or 'info'.
-!!
-!!    It also allows the keywords
-!!    <ARG0>,<TZ>,<YE>,<MO>,<DA>,<HR>,<MI>,<SE>,<MS> to be used in the
-!!    message (which is passed to ATTR(3f)).
-!!
-!!    Note that time stamp keywords will only be updated when using ALERT(3f)
-!!    and will only be displayed in color mode!
-!!
-!!##OPTIONS
-!!    TYPE     if present and one of 'warn','message','info', or 'debug'  a predefined
-!!             message is written to stderr of the form
-!!
-!!              : <HR>:<MI>:<SE>.<MS> : (<ARG0>) : TYPE -> message
-!!
-!!    MESSAGE  the user-supplied message to display via a call to ATTR(3f)
-!!
-!!    g[0-9a-j]   optional values to print after the message. May
-!!                be of type INTEGER, LOGICAL, REAL, DOUBLEPRECISION,
-!!                COMPLEX, or CHARACTER.
-!!
-!!    if no parameters are supplied the macros are updated but no output is generated.
-!!
-!!##EXAMPLE
-!!
-!!    Sample program
-!!
-!!       program demo_alert
-!!       use M_attr, only : alert, attr, attr_mode
-!!       implicit none
-!!       real X
-!!          call attr_mode(manner='plain')
-!!          call attr_mode(manner='color')
-!!          call alert("error", "Say you didn't!")
-!!          call alert("warn",  "I wouldn't if I were you, Will Robinson.")
-!!          call alert("info",  "I fixed that for you, but it was a bad idea.")
-!!          call alert("debug", "Who knows what is happening now?.")
-!!          call alert("???    ",  "not today you don't")
-!!          ! call to just update the macros
-!!          call alert()
-!!          ! conventional call to ATTR(3f) using the ALERT(3f)-defined macros
-!!          write(*,*)attr('<bo>The year was <g><YE></g>, the month was <g><MO></g>')
-!!          ! optional arguments
-!!          X=211.3
-!!          call alert('error','allowed range of X is 0 <lt> X <lt> 100, X=<r>',X)
-!!          ! up to twenty values are allowed of intrinsic type
-!!          call alert('info','values are<g>',10,234.567,cmplx(11.0,22.0),123.456d0,'</g>today')
-!!       end program demo_alert
-!!
-!!   Results:
-!!
-!!     00:38:30.566 : (demo_alert) : error    -> Say you didn't!
-!!     00:38:30.567 : (demo_alert) : warning  -> I wouldn't if I were you, Will Robinson.
-!!     00:38:30.567 : (demo_alert) : info     -> I fixed that for you, but it was a bad idea.
-!!     00:38:30.567 : (demo_alert) : debug    -> Who knows what is happening now?.
-!!     00:38:30.567 : (demo_alert) : ???      -> not today you don't
-!!     00:38:30.567 : (demo_alert) : error    -> allowed range of X is 0  X  100, X= 211.300003
-!!     00:38:30.567 : (demo_alert) : info     -> values are 10 234.567001 (11.0000000,22.0000000) 123.45600000000000 today
-!!
-!!
-!!
-!!##AUTHOR
-!!    John S. Urban, 2021
-!!
-!!##LICENSE
-!!    MIT
+! !>
+! NAME
+!    alert(3f) - [M_attr] print messages using a standard format including time and program name
+!    (LICENSE:MIT)
+! 
+! SYNOPSIS
+!     subroutine alert(message,g0,g1,g2,g3,g4,g5,g6,g7,g8,g9,ga,gb,gc,gd,ge,gf,gg,gh,gi,gj)
+! 
+!        character(len=*),intent(in),optional :: type
+!        character(len=*),intent(in),optional :: message
+!        class(*),intent(in),optional :: g0,g1,g2,g3,g4,g5,g6,g7,g8,g9, &
+!                                      & ga,gb,gc,gd,ge,gf,gg,gh,gi,gj
+! 
+! DESCRIPTION
+!    Display a message prefixed with a timestamp and the name
+!    of the calling program when the TYPE is specified as any
+!    of 'error','warn', or 'info'.
+! 
+!    It also allows the keywords
+!    <ARG0>,<TZ>,<YE>,<MO>,<DA>,<HR>,<MI>,<SE>,<MS> to be used in the
+!    message (which is passed to ATTR(3f)).
+! 
+!    Note that time stamp keywords will only be updated when using ALERT(3f)
+!    and will only be displayed in color mode!
+! 
+! OPTIONS
+!    TYPE     if present and one of 'warn','message','info', or 'debug'  a predefined
+!             message is written to stderr of the form
+! 
+!              : <HR>:<MI>:<SE>.<MS> : (<ARG0>) : TYPE -> message
+! 
+!    MESSAGE  the user-supplied message to display via a call to ATTR(3f)
+! 
+!    g[0-9a-j]   optional values to print after the message. May
+!                be of type INTEGER, LOGICAL, REAL, DOUBLEPRECISION,
+!                COMPLEX, or CHARACTER.
+! 
+!    if no parameters are supplied the macros are updated but no output is generated.
+! 
+! EXAMPLE
+!    Sample program
+! 
+!       program demo_alert
+!       use M_attr, only : alert, attr, attr_mode
+!       implicit none
+!       real X
+!          call attr_mode(manner='plain')
+!          call attr_mode(manner='color')
+!          call alert("error", "Say you didn't!")
+!          call alert("warn",  "I wouldn't if I were you, Will Robinson.")
+!          call alert("info",  "I fixed that for you, but it was a bad idea.")
+!          call alert("debug", "Who knows what is happening now?.")
+!          call alert("???    ",  "not today you don't")
+!          ! call to just update the macros
+!          call alert()
+!          ! conventional call to ATTR(3f) using the ALERT(3f)-defined macros
+!          write(*,*)attr('<bo>The year was <g><YE></g>, the month was <g><MO></g>')
+!          ! optional arguments
+!          X=211.3
+!          call alert('error','allowed range of X is 0 <lt> X <lt> 100, X=<r>',X)
+!          ! up to twenty values are allowed of intrinsic type
+!          call alert('info','values are<g>',10,234.567,cmplx(11.0,22.0),123.456d0,'</g>today')
+!       end program demo_alert
+! 
+!   Results:
+! 
+!     00:38:30.566 : (demo_alert) : error    -> Say you didn't!
+!     00:38:30.567 : (demo_alert) : warning  -> I wouldn't if I were you, Will Robinson.
+!     00:38:30.567 : (demo_alert) : info     -> I fixed that for you, but it was a bad idea.
+!     00:38:30.567 : (demo_alert) : debug    -> Who knows what is happening now?.
+!     00:38:30.567 : (demo_alert) : ???      -> not today you don't
+!     00:38:30.567 : (demo_alert) : error    -> allowed range of X is 0  X  100, X= 211.300003
+!     00:38:30.567 : (demo_alert) : info     -> values are 10 234.567001 (11.0000000,22.0000000) 123.45600000000000 today
+! 
+! 
+! 
+! AUTHOR
+!    John S. Urban, 2021
+! 
+! LICENSE
+!    MIT
 subroutine alert(type,message,g0,g1,g2,g3,g4,g5,g6,g7,g8,g9,ga,gb,gc,gd,ge,gf,gg,gh,gi,gj)
 ! TODO: could add a warning level to ignore info, or info|warning, or all
 implicit none
@@ -1258,55 +1278,53 @@ logical :: printme
     write(alert_unit,'(a)')attr(trim(other))
    endif
 end subroutine alert
-!>
-!!##NAME
-!!    str(3f) - [M_attr] converts any standard scalar type to a string
-!!    (LICENSE:PD)
-!!
-!!##SYNOPSIS
-!!
-!!    Syntax:
-!!
-!!      function str(g0,g1,g2,g3,g4,g5,g6,g7,g8,g9,&
-!!      & ga,gb,gc,gd,ge,gf,gg,gh,gi,gj,sep)
-!!      class(*),intent(in),optional  :: g0,g1,g2,g3,g4,g5,g6,g7,g8,g9
-!!      class(*),intent(in),optional  :: ga,gb,gc,gd,ge,gf,gg,gh,gi,gj
-!!      character(len=*),intent(in),optional :: sep
-!!      character,len=(:),allocatable :: str
-!!
-!!##DESCRIPTION
-!!    str(3f) builds a space-separated string from up to twenty scalar values.
-!!
-!!##OPTIONS
-!!    g[0-9a-j]   optional value to print the value of after the message. May
-!!                be of type INTEGER, LOGICAL, REAL, DOUBLEPRECISION,
-!!                COMPLEX, or CHARACTER.
-!!
-!!                Optionally, all the generic values can be
-!!                single-dimensioned arrays. Currently, mixing scalar
-!!                arguments and array arguments is not supported.
-!!
-!!    sep         separator string used between values. Defaults to a space.
-!!
-!!##RETURNS
-!!    str     description to print
-!!
-!!##EXAMPLES
-!!
-!!   Sample program:
-!!
-!!    program demo_msg
-!!    use M_attr, only : alert
-!!    end program demo_msg
-!!
-!!   Output
-!!
-!!
-!!##AUTHOR
-!!    John S. Urban
-!!
-!!##LICENSE
-!!    Public Domain
+! NAME
+!    str(3f) - [M_attr] converts any standard scalar type to a string
+!    (LICENSE:PD)
+! 
+! SYNOPSIS
+!    Syntax:
+! 
+!      function str(g0,g1,g2,g3,g4,g5,g6,g7,g8,g9,&
+!      & ga,gb,gc,gd,ge,gf,gg,gh,gi,gj,sep)
+!      class(*),intent(in),optional  :: g0,g1,g2,g3,g4,g5,g6,g7,g8,g9
+!      class(*),intent(in),optional  :: ga,gb,gc,gd,ge,gf,gg,gh,gi,gj
+!      character(len=*),intent(in),optional :: sep
+!      character,len=(:),allocatable :: str
+! 
+! DESCRIPTION
+!    str(3f) builds a space-separated string from up to twenty scalar values.
+! 
+! OPTIONS
+!    g[0-9a-j]   optional value to print the value of after the message. May
+!                be of type INTEGER, LOGICAL, REAL, DOUBLEPRECISION,
+!                COMPLEX, or CHARACTER.
+! 
+!                Optionally, all the generic values can be
+!                single-dimensioned arrays. Currently, mixing scalar
+!                arguments and array arguments is not supported.
+! 
+!    sep         separator string used between values. Defaults to a space.
+! 
+! RETURNS
+!    str     description to print
+! 
+! EXAMPLES
+!   Sample program:
+! 
+!    program demo_msg
+!    use M_attr, only : alert
+!    end program demo_msg
+! 
+!   Output
+! 
+! 
+! AUTHOR
+!    John S. Urban
+! 
+! LICENSE
+!    Public Domain
+!
 function msg_scalar(generic0, generic1, generic2, generic3, generic4, generic5, generic6, generic7, generic8, generic9, &
                   & generica, genericb, genericc, genericd, generice, genericf, genericg, generich, generici, genericj, &
                   & sep)

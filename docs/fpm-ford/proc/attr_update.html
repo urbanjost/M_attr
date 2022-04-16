@@ -126,7 +126,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title=" 9.3% of total for procedures.">36 statements</a>
+    title=" 8.9% of total for procedures.">36 statements</a>
      </li> 
      
      
@@ -224,89 +224,6 @@ public subroutine attr_update(key, valin, mono_valin)
   
 
 
-    
-    <p>!&gt;</p>
-<h2 id="name">NAME</h2>
-<div class="codehilite"><pre><span></span><code><span class="n">attr_update</span><span class="p">(</span><span class="mi">3</span><span class="n">f</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="o">[</span><span class="n">M_attr</span><span class="o">]</span><span class="w"> </span><span class="k">update</span><span class="w"> </span><span class="n">internal</span><span class="w"> </span><span class="k">dictionary</span><span class="w"> </span><span class="n">given</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="k">value</span><span class="w"></span>
-<span class="p">(</span><span class="nl">LICENSE</span><span class="p">:</span><span class="n">MIT</span><span class="p">)</span><span class="w"></span>
-</code></pre></div>
-
-<h2 id="synopsis">SYNOPSIS</h2>
-<div class="codehilite"><pre><span></span><code>subroutine attr_update(key,val)
-
- character(len=*),intent(in)           :: key
- character(len=*),intent(in),optional  :: val
- character(len=*),intent(in),optional  :: mono_val
-</code></pre></div>
-
-<h2 id="description">DESCRIPTION</h2>
-<div class="codehilite"><pre><span></span><code>Update internal dictionary in M_attr(3fm) module.
-</code></pre></div>
-
-<h2 id="options">OPTIONS</h2>
-<div class="codehilite"><pre><span></span><code><span class="nv">key</span>       <span class="nv">name</span> <span class="nv">of</span> <span class="nv">keyword</span> <span class="nv">to</span> <span class="nv">add</span>, <span class="nv">replace</span>, <span class="nv">or</span> <span class="nv">delete</span> <span class="nv">from</span> <span class="nv">dictionary</span>
-<span class="nv">val</span>       <span class="k">if</span> <span class="nv">present</span> <span class="nv">add</span> <span class="nv">or</span> <span class="nv">replace</span> <span class="nv">value</span> <span class="nv">associated</span> <span class="nv">with</span> <span class="nv">keyword</span>. <span class="k">If</span>
-          <span class="nv">not</span> <span class="nv">present</span> <span class="nv">remove</span> <span class="nv">keyword</span> <span class="nv">entry</span> <span class="nv">from</span> <span class="nv">dictionary</span>.
-<span class="nv">mono_val</span>  <span class="k">if</span> <span class="nv">present</span> <span class="nv">add</span> <span class="nv">or</span> <span class="nv">replace</span> <span class="nv">second</span> <span class="nv">value</span> <span class="nv">associated</span> <span class="nv">with</span>
-          <span class="nv">keyword</span> <span class="nv">used</span> <span class="k">for</span> <span class="nv">plain</span> <span class="nv">text</span> <span class="nv">mode</span>.
-          <span class="nv">Must</span> <span class="nv">only</span> <span class="nv">be</span> <span class="nv">specified</span> <span class="k">if</span> <span class="nv">VAL</span> <span class="nv">is</span> <span class="nv">also</span> <span class="nv">specified</span>.
-</code></pre></div>
-
-<h2 id="keywords">KEYWORDS</h2>
-<div class="codehilite"><pre><span></span><code><span class="nv">The</span> <span class="nv">following</span> <span class="nv">keywords</span> <span class="nv">are</span> <span class="nv">defined</span> <span class="nv">by</span> <span class="nv">default</span>
-
-<span class="nv">colors</span>:
-
-  <span class="nv">r</span>,<span class="nv">red</span>     <span class="nv">c</span>,<span class="nv">cyan</span>     <span class="nv">w</span>,<span class="nv">white</span>
-  <span class="nv">g</span>,<span class="nv">green</span>   <span class="nv">m</span>,<span class="nv">magenta</span>  <span class="nv">e</span>,<span class="nv">ebony</span>
-  <span class="nv">b</span>,<span class="nv">blue</span>    <span class="nv">y</span>,<span class="nv">yellow</span>
-
-<span class="k">If</span> <span class="nv">the</span> <span class="nv">color</span> <span class="nv">keywords</span> <span class="nv">are</span> <span class="nv">capitalized</span> <span class="nv">they</span> <span class="nv">control</span> <span class="nv">the</span> <span class="nv">text</span> <span class="nv">background</span>
-<span class="nv">instead</span> <span class="nv">of</span> <span class="nv">the</span> <span class="nv">text</span> <span class="nv">color</span>.
-
-<span class="nv">attributes</span>:
-
-  <span class="nv">ul</span>,<span class="nv">underline</span>
-  <span class="nv">it</span>,<span class="nv">italics</span> <span class="ss">(</span><span class="nv">often</span> <span class="nv">produces</span> <span class="nv">inverse</span> <span class="nv">colors</span> <span class="nv">on</span> <span class="nv">many</span> <span class="nv">devices</span>
-</code></pre></div>
-
-<h2 id="example">EXAMPLE</h2>
-<div class="codehilite"><pre><span></span><code>Sample program
-
-  program demo_update
-  use M_attr, only : attr, attr_update
-     write(*,&#39;(a)&#39;) attr(&#39;<span class="nt">&lt;clear&gt;</span>TEST CUSTOMIZATIONS:&#39;)
-     ! add custom keywords
-     call attr_update(&#39;blink&#39;,char(27)//&#39;[5m&#39;)
-     call attr_update(&#39;/blink&#39;,char(27)//&#39;[25m&#39;)
-     write(*,*)
-     write(*,&#39;(a)&#39;) attr(&#39;<span class="nt">&lt;blink&gt;</span>Items for Friday<span class="nt">&lt;/blink&gt;</span>&#39;)
-     call attr_update(&#39;ouch&#39;,attr( <span class="err">&amp;</span>
-     &#39; <span class="nt">&lt;R&gt;&lt;bo&gt;&lt;w&gt;</span>BIG mistake!<span class="nt">&lt;/R&gt;&lt;/w&gt;</span> &#39;))
-     write(*,*)
-     write(*,&#39;(a)&#39;) attr(&#39;<span class="nt">&lt;ouch&gt;</span> Did not see that coming.&#39;)
-     write(*,*)
-     write(*,&#39;(a)&#39;) attr( <span class="err">&amp;</span>
-     &#39;ORIGINALLY: <span class="nt">&lt;r&gt;</span>Apple<span class="nt">&lt;/r&gt;</span>, <span class="nt">&lt;b&gt;</span>Sky<span class="nt">&lt;/b&gt;</span>, <span class="nt">&lt;g&gt;</span>Grass<span class="nt">&lt;/g&gt;</span>&#39;)
-     ! delete
-     call attr_update(&#39;r&#39;)
-     call attr_update(&#39;/r&#39;)
-     ! replace (or create)
-     call attr_update(&#39;b&#39;,&#39;<span class="err">&lt;&lt;&lt;&lt;</span>&#39;)
-     call attr_update(&#39;/b&#39;,&#39;&gt;&gt;&gt;&gt;&#39;)
-     write(*,*)
-     write(*,&#39;(a)&#39;) attr( <span class="err">&amp;</span>
-     &#39;CUSTOMIZED: <span class="nt">&lt;r&gt;</span>Apple<span class="nt">&lt;/r&gt;</span>, <span class="nt">&lt;b&gt;</span>Sky<span class="nt">&lt;/b&gt;</span>, <span class="nt">&lt;g&gt;</span>Grass<span class="nt">&lt;/g&gt;</span>&#39;)
-  end program demo_update
-</code></pre></div>
-
-<h2 id="author">AUTHOR</h2>
-<div class="codehilite"><pre><span></span><code>John S. Urban, 2021
-</code></pre></div>
-
-<h2 id="license">LICENSE</h2>
-<div class="codehilite"><pre><span></span><code>MIT
-</code></pre></div>
     
 
     <h3>Arguments</h3>
@@ -571,7 +488,7 @@ public subroutine attr_update(key, valin, mono_valin)
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/cmacmackin/ford">FORD</a>
-             on 2022-01-05 23:09  
+             on 2022-04-16 18:40  
           </p>
         </div>
         <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> M_attr was developed by John S. Urban</p></div>

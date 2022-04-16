@@ -126,7 +126,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title=" 7.5% of total for procedures.">29 statements</a>
+    title=" 7.1% of total for procedures.">29 statements</a>
      </li> 
      
      
@@ -220,75 +220,6 @@ public subroutine attr_mode(manner)
   
 
 
-    
-    <p>!&gt;</p>
-<h2 id="name">NAME</h2>
-<div class="codehilite"><pre><span></span><code><span class="n">attr_mode</span><span class="p">(</span><span class="mi">3</span><span class="n">f</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="o">[</span><span class="n">M_attr</span><span class="o">]</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">processing</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">output</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="mi">3</span><span class="n">f</span><span class="p">)</span><span class="w"></span>
-<span class="p">(</span><span class="nl">LICENSE</span><span class="p">:</span><span class="n">MIT</span><span class="p">)</span><span class="w"></span>
-</code></pre></div>
-
-<h2 id="synopsis">SYNOPSIS</h2>
-<div class="codehilite"><pre><span></span><code> subroutine attr_mode(manner)
-
-    character(len=*),intent(in) :: manner
-</code></pre></div>
-
-<h2 id="description">DESCRIPTION</h2>
-<div class="codehilite"><pre><span></span><code><span class="nv">Turn</span> <span class="nv">off</span> <span class="nv">the</span> <span class="nv">generation</span> <span class="nv">of</span> <span class="nv">strings</span> <span class="nv">associated</span> <span class="nv">with</span> <span class="nv">the</span> <span class="nv">HTML</span> <span class="nv">keywords</span>
-<span class="nv">in</span> <span class="nv">the</span> <span class="nv">string</span> <span class="nv">generated</span> <span class="nv">by</span> <span class="nv">the</span> <span class="nv">attr</span><span class="ss">(</span><span class="mi">3</span><span class="nv">f</span><span class="ss">)</span> <span class="nv">function</span>, <span class="nv">or</span> <span class="nv">display</span> <span class="nv">the</span>
-<span class="nv">text</span> <span class="nv">in</span> <span class="nv">raw</span> <span class="nv">mode</span> <span class="nv">as</span> <span class="nv">it</span> <span class="nv">was</span> <span class="nv">passed</span> <span class="nv">to</span> <span class="nv">attr</span><span class="ss">(</span><span class="mi">3</span><span class="nv">f</span><span class="ss">)</span> <span class="nv">or</span> <span class="k">return</span> <span class="nv">to</span> <span class="nv">ANSI</span>
-<span class="nv">escape</span> <span class="nv">control</span> <span class="nv">sequence</span> <span class="nv">generation</span>.
-</code></pre></div>
-
-<h2 id="options">OPTIONS</h2>
-<div class="codehilite"><pre><span></span><code><span class="n">MANNER</span>  <span class="n">The</span> <span class="n">current</span> <span class="n">manners</span> <span class="ow">or</span> <span class="n">modes</span> <span class="n">supported</span> <span class="n">via</span> <span class="n">the</span> <span class="n">attr_mode</span><span class="p">(</span><span class="mi">3</span><span class="n">f</span><span class="p">)</span>
-         <span class="n">procedure</span> <span class="n">are</span>
-
-     <span class="n">plain</span>          <span class="n">suppress</span> <span class="n">the</span> <span class="n">output</span> <span class="n">associated</span> <span class="n">with</span> <span class="n">keywords</span>
-     <span class="n">color</span><span class="p">(</span><span class="n">default</span><span class="p">)</span> <span class="n">commonly</span> <span class="n">supported</span> <span class="n">escape</span> <span class="n">sequences</span>
-     <span class="n">raw</span>            <span class="n">echo</span> <span class="n">the</span> <span class="n">input</span> <span class="n">to</span> <span class="n">attr</span><span class="p">(</span><span class="mi">3</span><span class="n">f</span><span class="p">)</span> <span class="k">as</span> <span class="n">its</span> <span class="n">output</span>
-     <span class="n">reload</span>         <span class="n">restore</span> <span class="n">original</span> <span class="n">keyword</span> <span class="n">meanings</span> <span class="n">deleted</span> <span class="ow">or</span>
-                    <span class="n">replaced</span> <span class="n">by</span> <span class="n">calls</span> <span class="n">to</span> <span class="n">attr_update</span><span class="p">(</span><span class="mi">3</span><span class="n">f</span><span class="p">)</span><span class="o">.</span>
-</code></pre></div>
-
-<h2 id="example">EXAMPLE</h2>
-<div class="codehilite"><pre><span></span><code>Sample program
-
- program demo_attr_mode
- use M_attr, only : attr, attr_mode
- implicit none
- character(len=:),allocatable :: lines(:)
- character(len=:),allocatable :: outlines(:)
- integer :: i
-    lines=[character(len=110):: <span class="err">&amp;</span>
-    <span class="err">&amp;</span>&#39;<span class="nt">&lt;M&gt;&lt;y&gt;</span>&#39;,<span class="err">&amp;</span>
-    <span class="err">&amp;</span>&#39;<span class="nt">&lt;M&gt;&lt;y&gt;</span>  Suffice it to say that black and white are also colors&#39;,<span class="err">&amp;</span>
-    <span class="err">&amp;</span>&#39;<span class="nt">&lt;M&gt;&lt;y&gt;</span>  for their simultaneous contrast is as striking as that &#39;,<span class="err">&amp;</span>
-    <span class="err">&amp;</span>&#39;<span class="nt">&lt;M&gt;&lt;y&gt;</span>  of green and red, for instance. <span class="err">&amp;</span>
-    <span class="err">&amp;</span> --- <span class="nt">&lt;y&gt;&lt;bo&gt;</span>Vincent van Gogh<span class="nt">&lt;/bo&gt;&lt;/y&gt;</span>&#39;,<span class="err">&amp;</span>
-    <span class="err">&amp;</span>&#39; &#39;]
-
-    outlines=attr(lines,chars=57)
-    write(*,&#39;(a)&#39;)(trim(outlines(i)),i=1,size(outlines))
-
-    call attr_mode(manner=&#39;plain&#39;) ! write as plain text
-    write(*,&#39;(a)&#39;)attr(lines)
-
-    call attr_mode(manner=&#39;raw&#39;)   ! write as-is
-    write(*,&#39;(a)&#39;)attr(lines)
-
-    call attr_mode(manner=&#39;ansi&#39;)  ! return to default mode
-
- end program demo_attr_mode
-</code></pre></div>
-
-<h2 id="author">AUTHOR</h2>
-<div class="codehilite"><pre><span></span><code>John S. Urban, 2021
-</code></pre></div>
-
-<h2 id="license">LICENSE</h2>
-<div class="codehilite"><pre><span></span><code>MIT
-</code></pre></div>
     
 
     <h3>Arguments</h3>
@@ -479,7 +410,7 @@ public subroutine attr_mode(manner)
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/cmacmackin/ford">FORD</a>
-             on 2022-01-05 23:09  
+             on 2022-04-16 18:40  
           </p>
         </div>
         <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> M_attr was developed by John S. Urban</p></div>

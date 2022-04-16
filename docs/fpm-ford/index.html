@@ -133,6 +133,177 @@ author_pic:
 twitter:
 website:
 -->
+<p><img alt="sample" src="docs/images/snap3.gif"></p>
+<h2 id="name">NAME</h2>
+<h3 id="m_attr-use-in-band-signaling-to-control-the-text-attributes-formatting-color-and-other-output-options-on-ansi-video-text-terminals">M_attr - use in-band signaling to control the text attributes, formatting, color, and other output options on ANSI video text terminals</h3>
+<h2 id="description">DESCRIPTION</h2>
+<p>M_attr(3f) is a Fortran module that writes common ANSI escape
+   sequences which control terminal attributes like text color. It is
+   designed to allow the sequences to be suppressed and for the user
+   program to completely customize it &ndash; the user can add, delete and
+   replace the sequences associated with a keyword without changing
+   the code.</p>
+<h2 id="functional-specification">FUNCTIONAL SPECIFICATION</h2>
+<p>Attributes are specified by writing lines with HTML-like structure.</p>
+<p><strong>This is how the interface works &ndash;</strong></p>
+<p>Call the attr(3f) function with strings that include syntax like
+   &ldquo;\&lt;attribute> My regular text \&lt;/attribute>&rdquo; and the &ldquo;attribute&rdquo;
+   and &ldquo;/attribute&rdquo; names will be replaced with ANSI escape sequences or
+   user-defined strings associated with those keywords.</p>
+<div class="codehilite"><pre><span></span><code>   <span class="k">program </span><span class="n">demo_M_attr</span>
+   <span class="k">use </span><span class="n">M_attr</span><span class="p">,</span> <span class="k">only</span> <span class="p">:</span> <span class="n">attr</span>
+      <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;GREEN&gt;&lt;bold&gt;&lt;white&gt; Hello World!&lt;/white&gt;&lt;/bold&gt;&lt;/GREEN&gt;&lt;reset&gt;&#39;</span><span class="p">)</span>
+      <span class="c">! or</span>
+      <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;G&gt;&lt;bo&gt;&lt;w&gt; Hello World!&#39;</span><span class="p">)</span>
+   <span class="k">end program </span><span class="n">demo_M_attr</span>
+</code></pre></div>
+
+<h2 id="documentation">DOCUMENTATION   <img alt="docs" src="docs/images/docs.gif"></h2>
+<h3 id="user">USER</h3>
+<p>All documents are contained in the docs/ directory including
+archive files of man(1) pages that can be installed on ULS
+(Unix-Like Systems).</p>
+<p>If your browser supports Javascript you can view all the procedure
+descriptions in an almalgamated book form that can easily be printed
+or viewed as a single document:
+   - <a href="https://urbanjost.github.io/M_attr/BOOK_M_attr.html"><em>book</em></a></p>
+<p>Which is also available as indexed HTML documents
+   - <a href="https://urbanjost.github.io/M_attr/man3.html">index</a> 
+or simply as HTML
+   - <a href="https://urbanjost.github.io/M_attr/M_attr.3m_attr.html">M_attr</a>  &ndash; An overview of the M_attr module
+   - <a href="https://urbanjost.github.io/M_attr/attr.3m_attr.html">attr</a>  &ndash; the main function
+   - <a href="https://urbanjost.github.io/M_attr/attr_mode.3m_attr.html">attr_mode</a>  &ndash; setting processed or plain output mode
+   - <a href="https://urbanjost.github.io/M_attr/attr_update.3m_attr.html">attr_update</a>  &ndash; customizing
+   - <a href="https://urbanjost.github.io/M_attr/alert.3m_attr.html">alert</a>  &ndash; standard INFO, WARNING, ERROR format <img alt="alert" src="docs/images/alert.gif"></p>
+<h2 id="real-man-pages">real man-pages <img alt="gmake" src="docs/images/manpages.gif"></h2>
+<p>Documents may be installed as man-pages on Unix-like systems with a man(1) command:</p>
+<ul>
+<li><a href="https://urbanjost.github.io/M_attr/manpages.zip">manpages.zip</a></li>
+<li><a href="https://urbanjost.github.io/M_attr/manpages.tgz">manpages.tgz</a></li>
+</ul>
+<h3 id="developer">DEVELOPER</h3>
+<h4 id="doxygen">doxygen</h4>
+<ul>
+<li><a href="https://urbanjost.github.io/M_attr/doxygen_out/html/index.html">doxygen(1) output</a>.</li>
+</ul>
+<h4 id="ford">ford</h4>
+<ul>
+<li><a href="https://urbanjost.github.io/M_attr/fpm-ford/index.html">ford(1) output</a>.</li>
+</ul>
+<h2 id="download-and-build">DOWNLOAD AND BUILD</h2>
+<h3 id="gmake">gmake <img alt="gmake" src="docs/images/gnu.gif"></h3>
+<p><code>bash
+       git clone https://github.com/urbanjost/M_attr.git
+       cd M_attr/src
+       # change Makefile if not using one of the listed compilers
+       make clean; make gfortran    # for gfortran
+       make clean; make ifort       # for ifort
+       make clean; make nvfortran   # for nvfortran</code>
+   This will compile the M_attr module and example programs.</p>
+<h3 id="fpm">fpm <img alt="fpm" src="docs/images/fpm_logo.gif"></h3>
+<p>Alternatively, download the github repository and build it with
+   fpm ( as described at <a href="https://github.com/fortran-lang/fpm">Fortran Package Manager</a> )</p>
+<p><code>bash
+        git clone https://github.com/urbanjost/M_attr.git
+        cd M_attr
+        fpm test</code></p>
+<p>or just list it as a dependency in your fpm.toml project file.</p>
+<div class="codehilite"><pre><span></span><code>        <span class="k">[dependencies]</span>
+        <span class="n">M_attr</span>        <span class="o">=</span> <span class="p">{</span> <span class="n">git</span> <span class="o">=</span> <span class="s">&quot;https://github.com/urbanjost/M_attr.git&quot;</span> <span class="p">}</span>
+</code></pre></div>
+
+<h2 id="demo-programs">DEMO PROGRAMS<img alt="demos" src="docs/images/demo.gif"></h2>
+<p>The included demo programs provide templates for the most common usage:</p>
+<ul>
+<li><a href="test/default.f90">default</a> - simple demo setting color</li>
+<li><a href="test/custom.f90">custom</a> - how to add, delete, and replace attribute strings</li>
+<li>
+<p><a href="test/mixed.f90">mixed</a> - multiple modes and mixed attributes</p>
+</li>
+<li>
+<p><a href="test/dump.f90">dump</a> - dump the dictionary. Intended for debugging but might be generally useful.</p>
+</li>
+<li>
+<p><a href="test/message.f90">message</a> - using pre-defined message prefixes of various types</p>
+</li>
+<li>
+<p><a href="app/redirect.f90">redirect</a> - a complete little application showing how to call ISATTY(3f) in
+                                 gfortran(3f) and ifort(3f) to automatically turn color off when output
+                                 is not to a tty device.</p>
+</li>
+<li>
+<p><a href="app/plain.f90">plain</a> - a simple filter program that strips &ldquo;raw mode&rdquo; output back to plain text</p>
+</li>
+<li>
+<p><a href="app/light.f90">color</a> - a filter program that displays a &ldquo;raw mode&rdquo; input file in color
+                            (or displays command line arguments). So you
+                            can read in a file generated in &ldquo;raw&rdquo; mode
+                            and display it in color, or use it for testing
+                            commands or for adding color from scripts:</p>
+</li>
+</ul>
+<div class="codehilite"><pre><span></span><code>        light &quot;&lt;clear&gt;&lt;WHITE&gt;&lt;blue&gt;&lt;bold&gt; WARNING: &lt;reset&gt; that would not be prudent&quot;
+</code></pre></div>
+
+<h3 id="a-basic-introductory-program">A BASIC INTRODUCTORY PROGRAM</h3>
+<p>This short program will display colored text on an ANSI-compatible color terminal
+or terminal emulator:</p>
+<div class="codehilite"><pre><span></span><code>   <span class="k">program </span><span class="n">demo_M_attr</span>
+   <span class="k">use </span><span class="n">M_attr</span><span class="p">,</span> <span class="k">only</span> <span class="p">:</span> <span class="n">attr</span><span class="p">,</span> <span class="n">attr_mode</span>
+
+      <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(/,a,/)&#39;</span><span class="p">)</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;GREEN&gt;&lt;bold&gt;&lt;white&gt; COLOR &lt;reset&gt;&#39;</span><span class="p">)</span>
+      <span class="k">call </span><span class="n">printme</span><span class="p">()</span>
+
+      <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(/,a,/)&#39;</span><span class="p">)</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;G&gt;&lt;bo&gt;&lt;w&gt; DO THE SAME THING IN &quot;PLAIN&quot; MODE&#39;</span><span class="p">)</span>
+      <span class="k">call </span><span class="n">attr_mode</span><span class="p">(</span><span class="n">manner</span><span class="o">=</span><span class="s1">&#39;plain&#39;</span><span class="p">)</span>
+      <span class="k">call </span><span class="n">printme</span><span class="p">()</span>
+
+   <span class="k">contains</span>
+<span class="k">   subroutine </span><span class="n">printme</span><span class="p">()</span>
+      <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(3x,a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;W&gt;&lt;bo&gt;&lt;r&gt; ERROR   &lt;/W&gt;  This should appear as red text&lt;/y&gt;&#39;</span><span class="p">)</span>
+      <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(3x,a)&#39;</span><span class="p">)</span> <span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;B&gt;&lt;bo&gt;&lt;y&gt; WARNING &lt;/B&gt;&lt;/y&gt;  This should appear as default text&#39;</span><span class="p">)</span>
+   <span class="k">end subroutine </span><span class="n">printme</span>
+
+   <span class="k">end program </span><span class="n">demo_M_attr</span>
+</code></pre></div>
+
+<p><img alt="sample" src="docs/images/snap1.gif"></p>
+<h3 id="note">NOTE:</h3>
+<p>where supported the isatty(3f) function can be used to turn off the sequences when the file is
+   not a tty.  isatty(3f) is an extension, but supported by GNU, Intel, PGI, &hellip;</p>
+<h2 id="history"><a href="HISTORY.md">HISTORY</a></h2>
+<hr>
+<h3 id="references">REFERENCES</h3>
+<ul>
+<li><a href="http://fortranwiki.org/fortran/show/ansi_colors"><strong>Fortran Wiki example</strong></a> for an example that covers the basics</li>
+<li><a href="https://rosettacode.org/wiki/Terminal_control/Coloured_text"><strong>Rosetta Code examples</strong></a> for how other languages do color.
+  I find the Ncurses, Fortran, bash and C++ examples particularly interesting.</li>
+<li><a href="https://en.wikipedia.org/wiki/ANSI_escape_code"><strong>Wikipedia</strong></a> a description of the basic ANSI escape sequences.</li>
+<li><a href="https://github.com/fortran-lang/stdlib/issues/229"><strong>Fortran Standard Library project</strong></a> discussion about
+  adding ANSI control sequences to the Fortran Standard Library project.</li>
+<li><a href="http://www.pixelbeat.org/docs/terminal_colours/">terminal colors</a></li>
+</ul>
+<h3 id="of-interest">OF INTEREST</h3>
+<ul>
+<li><a href="https://github.com/ralphbean/ansi2html">ansi2html</a> ANSI escape codes to HTML from programs and as a bash shell</li>
+</ul>
+<h3 id="alternatives">ALTERNATIVES</h3>
+<ul>
+<li><a href="https://github.com/urbanjost/M_ncurses"><strong>M_ncurses</strong></a> A Fortran interface to Ncurses(3c)</li>
+<li><a href="https://github.com/urbanjost/M_escape"><strong>M_escape</strong></a> A multi-mode exploratory version from which M_attr(3f) evolved</li>
+<li><a href="https://github.com/szaghi/FACE"><strong>FACE</strong></a> A Fortran library for generating ANSI escape sequences</li>
+<li><a href="http://foul.sourceforge.net/"><strong>foul</strong></a> A library for controlling the attributes of output text using Fortran</li>
+</ul>
+<h3 id="other-languages">OTHER LANGUAGES</h3>
+<ul>
+<li><a href="https://python-prompt-toolkit.readthedocs.io/en/master/pages/printing_text.html#html">python</a> prompt-toolkit</li>
+</ul>
+<hr>
+<h5 id="wiki">+ <a href="https://github.com/urbanjost/M_attr/wiki">WIKI</a></h5>
+<h5 id="issues">+ <a href="https://github.com/urbanjost/M_attr/issues">ISSUES</a></h5>
+<h5 id="changelog">+ <a href="docs/CHANGELOG.md">CHANGELOG</a></h5>
+<h5 id="build-status">+ <a href="docs/STATUS.md">BUILD STATUS</a></h5>
+<h2 id="_1"><img alt="sample" src="docs/images/snap2b.gif"></h2>
         </div>
 		  
         <div class="col-md-4">
@@ -198,15 +369,15 @@ website:
                   
                 
                   
-                    <li><a href='./sourcefile/demo_fmt.f90.html'>demo_fmt.f90</a></li>
-                  
-                
-                  
                     <li><a href='./sourcefile/demo_m_attr.f90.html'>demo_M_attr.f90</a></li>
                   
                 
                   
                     <li><a href='./sourcefile/dots.f90.html'>dots.f90</a></li>
+                  
+                
+                  
+                    <li><a href='./sourcefile/dump.f90.html'>dump.f90</a></li>
                   
                 
                   
@@ -322,6 +493,8 @@ website:
                 
                   
                 
+                  
+                
               </ul>
           </div>
           
@@ -339,7 +512,7 @@ website:
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/cmacmackin/ford">FORD</a>
-             on 2022-01-05 23:09  
+             on 2022-04-16 18:40  
           </p>
         </div>
         <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> M_attr was developed by John S. Urban</p></div>

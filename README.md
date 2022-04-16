@@ -32,14 +32,15 @@
    end program demo_M_attr
 ```
 
-## USER DOCUMENTATION
+## DOCUMENTATION   ![docs](docs/images/docs.gif)
+### USER 
 
 All documents are contained in the docs/ directory including
 archive files of man(1) pages that can be installed on ULS
 (Unix-Like Systems).
 
 If your browser supports Javascript you can view all the procedure
-descriptions in an almalgamated book form that can easily be printed
+descriptions in an amalgamated book form that can easily be printed
 or viewed as a single document:
    - [_book_](https://urbanjost.github.io/M_attr/BOOK_M_attr.html)
 
@@ -58,6 +59,14 @@ Documents may be installed as man-pages on Unix-like systems with a man(1) comma
 
    + [manpages.zip](https://urbanjost.github.io/M_attr/manpages.zip)
    + [manpages.tgz](https://urbanjost.github.io/M_attr/manpages.tgz)
+### DEVELOPER
+#### doxygen
+
+- [doxygen(1) output](https://urbanjost.github.io/M_attr/doxygen_out/html/index.html).
+
+#### ford
+
+- [ford(1) output](https://urbanjost.github.io/M_attr/fpm-ford/index.html).
 
 ## DOWNLOAD AND BUILD
 
@@ -147,14 +156,6 @@ or terminal emulator:
 
 ## [HISTORY](HISTORY.md)
 
-## DEVELOPER DOCUMENTATION
-### doxygen
-
-- [doxygen(1) output](https://urbanjost.github.io/M_attr/doxygen_out/html/index.html).
-
-### ford
-
-- [ford(1) output](https://urbanjost.github.io/M_attr/fpm-ford/index.html).
 ---
 ### REFERENCES
 * [**Fortran Wiki example**](http://fortranwiki.org/fortran/show/ansi_colors) for an example that covers the basics
