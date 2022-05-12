@@ -235,6 +235,93 @@ public subroutine alert(type, message, g0, g1, g2, g3, g4, g5, g6, g7, g8, g9, g
 
 
     
+    <p>!&gt;</p>
+<h2 id="name">NAME</h2>
+<div class="codehilite"><pre><span></span><code><span class="n">alert</span><span class="p">(</span><span class="mi">3</span><span class="n">f</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="o">[</span><span class="n">M_attr</span><span class="o">]</span><span class="w"> </span><span class="k">print</span><span class="w"> </span><span class="n">messages</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">standard</span><span class="w"> </span><span class="nf">format</span><span class="w"> </span><span class="n">including</span><span class="w"> </span><span class="nc">time</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">program</span><span class="w"> </span><span class="n">name</span><span class="w"></span>
+<span class="p">(</span><span class="nl">LICENSE</span><span class="p">:</span><span class="n">MIT</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+
+<h2 id="synopsis">SYNOPSIS</h2>
+<div class="codehilite"><pre><span></span><code> subroutine alert(message,g0,g1,g2,g3,g4,g5,g6,g7,g8,g9,ga,gb,gc,gd,ge,gf,gg,gh,gi,gj)
+
+    character(len=*),intent(in),optional :: type
+    character(len=*),intent(in),optional :: message
+    class(*),intent(in),optional :: g0,g1,g2,g3,g4,g5,g6,g7,g8,g9, &amp;
+                                  &amp; ga,gb,gc,gd,ge,gf,gg,gh,gi,gj
+</code></pre></div>
+
+<h2 id="description">DESCRIPTION</h2>
+<div class="codehilite"><pre><span></span><code>Display a message prefixed with a timestamp and the name
+of the calling program when the TYPE is specified as any
+of &#39;error&#39;,&#39;warn&#39;, or &#39;info&#39;.
+
+It also allows the keywords
+&lt;ARG0&gt;,&lt;TZ&gt;,&lt;YE&gt;,&lt;MO&gt;,&lt;DA&gt;,&lt;HR&gt;,&lt;MI&gt;,&lt;SE&gt;,&lt;MS&gt; to be used in the
+message (which is passed to ATTR(3f)).
+
+Note that time stamp keywords will only be updated when using ALERT(3f)
+and will only be displayed in color mode!
+</code></pre></div>
+
+<h2 id="options">OPTIONS</h2>
+<div class="codehilite"><pre><span></span><code><span class="kr">TYPE</span>     <span class="nf">if</span> <span class="n">present</span> <span class="kr">and</span> <span class="n">one</span> <span class="kr">of</span> <span class="s">&#39;warn&#39;</span><span class="p">,</span><span class="s">&#39;message&#39;</span><span class="p">,</span><span class="s">&#39;info&#39;</span><span class="p">,</span> <span class="kr">or</span> <span class="s">&#39;debug&#39;</span>  <span class="n">a</span> <span class="n">predefined</span>
+         <span class="n">message</span> <span class="n">is</span> <span class="n">written</span> <span class="n">to</span> <span class="n">stderr</span> <span class="kr">of</span> <span class="n">the</span> <span class="n">form</span>
+
+          <span class="o">:</span> <span class="o">&lt;</span><span class="n">HR</span><span class="o">&gt;:&lt;</span><span class="n">MI</span><span class="o">&gt;:&lt;</span><span class="n">SE</span><span class="o">&gt;</span><span class="p">.</span><span class="o">&lt;</span><span class="n">MS</span><span class="o">&gt;</span> <span class="o">:</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">ARG0</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">:</span> <span class="kr">TYPE</span> <span class="o">-&gt;</span> <span class="n">message</span>
+
+<span class="n">MESSAGE</span>  <span class="n">the</span> <span class="n">user</span><span class="o">-</span><span class="n">supplied</span> <span class="n">message</span> <span class="n">to</span> <span class="n">display</span> <span class="n">via</span> <span class="n">a</span> <span class="n">call</span> <span class="n">to</span> <span class="n">ATTR</span><span class="p">(</span><span class="mf">3f</span><span class="p">)</span>
+
+<span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="o">-</span><span class="mi">9</span><span class="n">a</span><span class="o">-</span><span class="n">j</span><span class="p">]</span>   <span class="n">optional</span> <span class="n">values</span> <span class="n">to</span> <span class="n">print</span> <span class="n">after</span> <span class="n">the</span> <span class="n">message</span><span class="p">.</span> <span class="n">May</span>
+            <span class="n">be</span> <span class="kr">of</span> <span class="kr">type</span> <span class="n">INTEGER</span><span class="p">,</span> <span class="n">LOGICAL</span><span class="p">,</span> <span class="n">REAL</span><span class="p">,</span> <span class="n">DOUBLEPRECISION</span><span class="p">,</span>
+            <span class="n">COMPLEX</span><span class="p">,</span> <span class="kr">or</span> <span class="n">CHARACTER</span><span class="p">.</span>
+
+<span class="nf">if</span> <span class="n">no</span> <span class="n">parameters</span> <span class="n">are</span> <span class="n">supplied</span> <span class="n">the</span> <span class="n">macros</span> <span class="n">are</span> <span class="n">updated</span> <span class="n">but</span> <span class="n">no</span> <span class="kr">output</span> <span class="n">is</span> <span class="n">generated</span><span class="p">.</span>
+</code></pre></div>
+
+<h2 id="example">EXAMPLE</h2>
+<div class="codehilite"><pre><span></span><code>Sample program
+
+   program demo_alert
+   use M_attr, only : alert, attr, attr_mode
+   implicit none
+   real X
+      call attr_mode(manner=&#39;plain&#39;)
+      call attr_mode(manner=&#39;color&#39;)
+      call alert(&quot;error&quot;, &quot;Say you didn&#39;t!&quot;)
+      call alert(&quot;warn&quot;,  &quot;I wouldn&#39;t if I were you, Will Robinson.&quot;)
+      call alert(&quot;info&quot;,  &quot;I fixed that for you, but it was a bad idea.&quot;)
+      call alert(&quot;debug&quot;, &quot;Who knows what is happening now?.&quot;)
+      call alert(&quot;???    &quot;,  &quot;not today you don&#39;t&quot;)
+      ! call to just update the macros
+      call alert()
+      ! conventional call to ATTR(3f) using the ALERT(3f)-defined macros
+      write(*,*)attr(&#39;<span class="nt">&lt;bo&gt;</span>The year was <span class="nt">&lt;g&gt;&lt;YE&gt;&lt;/g&gt;</span>, the month was <span class="nt">&lt;g&gt;&lt;MO&gt;&lt;/g&gt;</span>&#39;)
+      ! optional arguments
+      X=211.3
+      call alert(&#39;error&#39;,&#39;allowed range of X is 0 <span class="nt">&lt;lt&gt;</span> X <span class="nt">&lt;lt&gt;</span> 100, X=<span class="nt">&lt;r&gt;</span>&#39;,X)
+      ! up to twenty values are allowed of intrinsic type
+      call alert(&#39;info&#39;,&#39;values are<span class="nt">&lt;g&gt;</span>&#39;,10,234.567,cmplx(11.0,22.0),123.456d0,&#39;<span class="nt">&lt;/g&gt;</span>today&#39;)
+   end program demo_alert
+</code></pre></div>
+
+<p>Results:</p>
+<div class="codehilite"><pre><span></span><code> <span class="mo">00</span><span class="o">:</span><span class="mi">38</span><span class="o">:</span><span class="mf">30.566</span> <span class="o">:</span> <span class="p">(</span><span class="n">demo_alert</span><span class="p">)</span> <span class="o">:</span> <span class="nf">error</span>    <span class="o">-&gt;</span> <span class="n">Say</span> <span class="n">you</span> <span class="n">didn</span><span class="s">&#39;t!</span>
+<span class="s"> 00:38:30.567 : (demo_alert) : warning  -&gt; I wouldn&#39;</span><span class="n">t</span> <span class="nf">if</span> <span class="n">I</span> <span class="n">were</span> <span class="n">you</span><span class="p">,</span> <span class="n">Will</span> <span class="n">Robinson</span><span class="p">.</span>
+ <span class="mo">00</span><span class="o">:</span><span class="mi">38</span><span class="o">:</span><span class="mf">30.567</span> <span class="o">:</span> <span class="p">(</span><span class="n">demo_alert</span><span class="p">)</span> <span class="o">:</span> <span class="n">info</span>     <span class="o">-&gt;</span> <span class="n">I</span> <span class="n">fixed</span> <span class="n">that</span> <span class="n">for</span> <span class="n">you</span><span class="p">,</span> <span class="n">but</span> <span class="n">it</span> <span class="n">was</span> <span class="n">a</span> <span class="n">bad</span> <span class="n">idea</span><span class="p">.</span>
+ <span class="mo">00</span><span class="o">:</span><span class="mi">38</span><span class="o">:</span><span class="mf">30.567</span> <span class="o">:</span> <span class="p">(</span><span class="n">demo_alert</span><span class="p">)</span> <span class="o">:</span> <span class="n">debug</span>    <span class="o">-&gt;</span> <span class="n">Who</span> <span class="n">knows</span> <span class="n">what</span> <span class="n">is</span> <span class="n">happening</span> <span class="n">now</span><span class="o">?</span><span class="p">.</span>
+ <span class="mo">00</span><span class="o">:</span><span class="mi">38</span><span class="o">:</span><span class="mf">30.567</span> <span class="o">:</span> <span class="p">(</span><span class="n">demo_alert</span><span class="p">)</span> <span class="o">:</span> <span class="o">???</span>      <span class="o">-&gt;</span> <span class="kr">not</span> <span class="n">today</span> <span class="n">you</span> <span class="n">don</span><span class="s">&#39;t</span>
+<span class="s"> 00:38:30.567 : (demo_alert) : error    -&gt; allowed range of X is 0  X  100, X= 211.300003</span>
+<span class="s"> 00:38:30.567 : (demo_alert) : info     -&gt; values are 10 234.567001 (11.0000000,22.0000000) 123.45600000000000 today</span>
+</code></pre></div>
+
+<h2 id="author">AUTHOR</h2>
+<div class="codehilite"><pre><span></span><code>John S. Urban, 2021
+</code></pre></div>
+
+<h2 id="license">LICENSE</h2>
+<div class="codehilite"><pre><span></span><code>MIT
+</code></pre></div>
+    
 
     <h3>Arguments</h3>
     
@@ -885,7 +972,7 @@ public subroutine alert(type, message, g0, g1, g2, g3, g4, g5, g6, g7, g8, g9, g
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/cmacmackin/ford">FORD</a>
-             on 2022-04-16 18:40  
+             on 2022-05-12 08:26  
           </p>
         </div>
         <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> M_attr was developed by John S. Urban</p></div>
