@@ -250,12 +250,12 @@ make clean; make nvfortran   # for nvfortran
 
 This will compile the M\+\_\+attr module and example programs.
 
-Alternatively, via fpm ( described at \href{https://github.com/fortran-lang/fpm}{\texttt{ https\+://github.\+com/fortran-\/lang/fpm}})\+: \begin{DoxyVerb} git clone https://github.com/urbanjost/M_attr.git
+Alternatively, via fpm (see \href{https://github.com/fortran-lang/fpm}{\texttt{ https\+://github.\+com/fortran-\/lang/fpm}})\+: \begin{DoxyVerb} git clone https://github.com/urbanjost/M_attr.git
 \end{DoxyVerb}
 
 
 or just list it as a dependency in your fpm.\+toml project file. \begin{DoxyVerb} [dependencies]
- M_attr        = { git = "https://github.com/urbanjost/M_attr.git" }
+ M_attr = { git = "https://github.com/urbanjost/M_attr.git" }
 \end{DoxyVerb}
 \hypertarget{namespacem__attr_autotoc_md4}{}\doxysubsubsection{L\+I\+M\+I\+T\+A\+T\+I\+O\+NS}\label{namespacem__attr_autotoc_md4}
 o colors are not nestable. o keywords are case-\/sensitive, o A\+N\+SI escape sequences are not universally supported by all terminal emulators; and normally should be suppressed when not going to a tty device. Therefore, you should use M\+\_\+system\+::system\+\_\+istty(3f) or the common Fortran extension I\+S\+A\+T\+T\+Y() to set the default to \char`\"{}plain\char`\"{} instead of \char`\"{}color\char`\"{} when the output file is not a conforming terminal. On basic M\+S\+Windows console windows, it is best to use Windows 10+ and/or the Linux mode; you may have to enable A\+N\+SI escape sequence mode on M\+S\+Windows. It does work as-\/is with Cyg\+Win and Min\+GW and Putty windows and mintty(1) as tested.\hypertarget{namespacem__attr_autotoc_md5}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__attr_autotoc_md5}
@@ -325,7 +325,8 @@ terminfo(3c), termlib(3c), tput(1), reset(1), clear(1), console\+\_\+codes(4), E
 
 \hypertarget{namespacem__attr_autotoc_md34}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__attr_autotoc_md34}
 alert(3f) -\/ \mbox{[}M\+\_\+attr\mbox{]} print messages using a standard format including time and program name (L\+I\+C\+E\+N\+SE\+:M\+IT)\hypertarget{namespacem__attr_autotoc_md35}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__attr_autotoc_md35}
-\begin{DoxyVerb} subroutine alert(message,g0,g1,g2,g3,g4,g5,g6,g7,g8,g9,ga,gb,gc,gd,ge,gf,gg,gh,gi,gj)
+\begin{DoxyVerb} subroutine alert(message,&
+ g0,g1,g2,g3,g4,g5,g6,g7,g8,g9,ga,gb,gc,gd,ge,gf,gg,gh,gi,gj)
 
     character(len=*),intent(in),optional :: type
     character(len=*),intent(in),optional :: message
@@ -351,33 +352,40 @@ g\mbox{[}0-\/9a-\/j\mbox{]} optional values to print after the message. May be o
 if no parameters are supplied the macros are updated but no output is generated.\hypertarget{namespacem__attr_autotoc_md38}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__attr_autotoc_md38}
 \begin{DoxyVerb}Sample program
 
-   program demo_alert
-   use M_attr, only : alert, attr, attr_mode
-   implicit none
-   real X
-      call attr_mode(manner='plain')
-      call attr_mode(manner='color')
-      call alert("error", "Say you didn't!")
-      call alert("warn",  "I wouldn't if I were you, Will Robinson.")
-      call alert("info",  "I fixed that for you, but it was a bad idea.")
-      call alert("debug", "Who knows what is happening now?.")
-      call alert("???    ",  "not today you don't")
-      ! call to just update the macros
-      call alert()
-      ! conventional call to ATTR(3f) using the ALERT(3f)-defined macros
-      write(*,*)attr('<bo>The year was <g><YE></g>, the month was <g><MO></g>')
-      ! optional arguments
-      X=211.3
-      call alert('error','allowed range of X is 0 <lt> X <lt> 100, X=<r>',X)
-      ! up to twenty values are allowed of intrinsic type
-      call alert('info','values are<g>',10,234.567,cmplx(11.0,22.0),123.456d0,'</g>today')
-   end program demo_alert
+ program demo_alert
+ use M_attr, only : alert, attr, attr_mode
+ implicit none
+ real X
+  call attr_mode(manner='plain')
+  call attr_mode(manner='color')
+  call alert("error",&
+            "Say you didn't!")
+  call alert("warn", &
+            "I wouldn't if I were you, Will Robinson.")
+  call alert("info", &
+            "I fixed that for you, but it was a bad idea.")
+  call alert("debug", &
+            "Who knows what is happening now?.")
+  call alert("???    ",  "not today you don't")
+  ! call to just update the macros
+  call alert()
+  ! conventional call to ATTR(3f) using the ALERT(3f)-defined macros
+  write(*,*)attr(&
+          '<bo>The year was <g><YE></g>, the month was <g><MO></g>')
+  ! optional arguments
+  X=211.3
+  call alert('error',&
+          'allowed range of X is 0 <lt> X <lt> 100, X=<r>',X)
+  ! up to twenty values are allowed of intrinsic type
+  call alert('info','values are<g>',10,234.567,&
+          cmplx(11.0,22.0),123.456d0,'</g>today')
+ end program demo_alert
 \end{DoxyVerb}
 
 
 Results\+:
 
-00\+:38\+:30.\+566 \+: (demo\+\_\+alert) \+: error -\/$>$ Say you didn\textquotesingle{}t! 00\+:38\+:30.\+567 \+: (demo\+\_\+alert) \+: warning -\/$>$ I wouldn\textquotesingle{}t if I were you, Will Robinson. 00\+:38\+:30.\+567 \+: (demo\+\_\+alert) \+: info -\/$>$ I fixed that for you, but it was a bad idea. 00\+:38\+:30.\+567 \+: (demo\+\_\+alert) \+: debug -\/$>$ Who knows what is happening now?. 00\+:38\+:30.\+567 \+: (demo\+\_\+alert) \+: ??? -\/$>$ not today you don\textquotesingle{}t 00\+:38\+:30.\+567 \+: (demo\+\_\+alert) \+: error -\/$>$ allowed range of X is 0 X 100, X= 211.\+300003 00\+:38\+:30.\+567 \+: (demo\+\_\+alert) \+: info -\/$>$ values are 10 234.\+567001 (11.\+0000000,22.\+0000000) 123.\+45600000000000 today\hypertarget{namespacem__attr_autotoc_md39}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__attr_autotoc_md39}
+00\+:38\+:30\+: (prg) \+: error -\/$>$ Say you didn\textquotesingle{}t! 00\+:38\+:30\+: (prg) \+: warning -\/$>$ I wouldn\textquotesingle{}t if I were you, ... Will Robinson. 00\+:38\+:30\+: (prg) \+: info -\/$>$ I fixed that for you, ... but it was a bad idea. 00\+:38\+:30\+: (prg) \+: debug -\/$>$ Who knows what is happening now?. ... 00\+:38\+:30\+: (prg) \+: ??? -\/$>$ not today you don\textquotesingle{}t 00\+:38\+:30\+: (prg) \+: error -\/$>$ allowed range of X is 0 X 100, ... X= 211.\+300003 00\+:38\+:30\+: (prg) \+: info -\/$>$ values are 10 234.\+567001 ... (11.\+0000000,22.\+0000000) ... 123.\+45600000000000 today\hypertarget{namespacem__attr_autotoc_md39}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__attr_autotoc_md39}
 John S. Urban, 2021\hypertarget{namespacem__attr_autotoc_md40}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__attr_autotoc_md40}
 M\+IT 
 

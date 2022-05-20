@@ -314,9 +314,9 @@ make clean; make gfortran    # for gfortran
 make clean; make ifort       # for ifort
 make clean; make nvfortran   # for nvfortran
 </pre><p>This will compile the M_attr module and example programs.</p>
-<p>Alternatively, via fpm ( described at <a href="https://github.com/fortran-lang/fpm">https://github.com/fortran-lang/fpm</a>): </p><pre class="fragment"> git clone https://github.com/urbanjost/M_attr.git
+<p>Alternatively, via fpm (see <a href="https://github.com/fortran-lang/fpm">https://github.com/fortran-lang/fpm</a>): </p><pre class="fragment"> git clone https://github.com/urbanjost/M_attr.git
 </pre><p>or just list it as a dependency in your fpm.toml project file. </p><pre class="fragment"> [dependencies]
- M_attr        = { git = "https://github.com/urbanjost/M_attr.git" }
+ M_attr = { git = "https://github.com/urbanjost/M_attr.git" }
 </pre><h2><a class="anchor" id="autotoc_md4"></a>
 LIMITATIONS</h2>
 <p>o colors are not nestable. o keywords are case-sensitive, o ANSI escape sequences are not universally supported by all terminal emulators; and normally should be suppressed when not going to a tty device. Therefore, you should use M_system::system_istty(3f) or the common Fortran extension ISATTY() to set the default to "plain" instead of "color" when the output file is not a conforming terminal. On basic MSWindows console windows, it is best to use Windows 10+ and/or the Linux mode; you may have to enable ANSI escape sequence mode on MSWindows. It does work as-is with CygWin and MinGW and Putty windows and mintty(1) as tested.</p>
@@ -529,7 +529,8 @@ NAME</h2>
 <p>alert(3f) - [M_attr] print messages using a standard format including time and program name (LICENSE:MIT)</p>
 <h2><a class="anchor" id="autotoc_md35"></a>
 SYNOPSIS</h2>
-<pre class="fragment"> subroutine alert(message,g0,g1,g2,g3,g4,g5,g6,g7,g8,g9,ga,gb,gc,gd,ge,gf,gg,gh,gi,gj)
+<pre class="fragment"> subroutine alert(message,&amp;
+ g0,g1,g2,g3,g4,g5,g6,g7,g8,g9,ga,gb,gc,gd,ge,gf,gg,gh,gi,gj)
 
     character(len=*),intent(in),optional :: type
     character(len=*),intent(in),optional :: message
@@ -553,29 +554,36 @@ OPTIONS</h2>
 EXAMPLE</h2>
 <pre class="fragment">Sample program
 
-   program demo_alert
-   use M_attr, only : alert, attr, attr_mode
-   implicit none
-   real X
-      call attr_mode(manner='plain')
-      call attr_mode(manner='color')
-      call alert("error", "Say you didn't!")
-      call alert("warn",  "I wouldn't if I were you, Will Robinson.")
-      call alert("info",  "I fixed that for you, but it was a bad idea.")
-      call alert("debug", "Who knows what is happening now?.")
-      call alert("???    ",  "not today you don't")
-      ! call to just update the macros
-      call alert()
-      ! conventional call to ATTR(3f) using the ALERT(3f)-defined macros
-      write(*,*)attr('&lt;bo&gt;The year was &lt;g&gt;&lt;YE&gt;&lt;/g&gt;, the month was &lt;g&gt;&lt;MO&gt;&lt;/g&gt;')
-      ! optional arguments
-      X=211.3
-      call alert('error','allowed range of X is 0 &lt;lt&gt; X &lt;lt&gt; 100, X=&lt;r&gt;',X)
-      ! up to twenty values are allowed of intrinsic type
-      call alert('info','values are&lt;g&gt;',10,234.567,cmplx(11.0,22.0),123.456d0,'&lt;/g&gt;today')
-   end program demo_alert
+ program demo_alert
+ use M_attr, only : alert, attr, attr_mode
+ implicit none
+ real X
+  call attr_mode(manner='plain')
+  call attr_mode(manner='color')
+  call alert("error",&amp;
+            "Say you didn't!")
+  call alert("warn", &amp;
+            "I wouldn't if I were you, Will Robinson.")
+  call alert("info", &amp;
+            "I fixed that for you, but it was a bad idea.")
+  call alert("debug", &amp;
+            "Who knows what is happening now?.")
+  call alert("???    ",  "not today you don't")
+  ! call to just update the macros
+  call alert()
+  ! conventional call to ATTR(3f) using the ALERT(3f)-defined macros
+  write(*,*)attr(&amp;
+          '&lt;bo&gt;The year was &lt;g&gt;&lt;YE&gt;&lt;/g&gt;, the month was &lt;g&gt;&lt;MO&gt;&lt;/g&gt;')
+  ! optional arguments
+  X=211.3
+  call alert('error',&amp;
+          'allowed range of X is 0 &lt;lt&gt; X &lt;lt&gt; 100, X=&lt;r&gt;',X)
+  ! up to twenty values are allowed of intrinsic type
+  call alert('info','values are&lt;g&gt;',10,234.567,&amp;
+          cmplx(11.0,22.0),123.456d0,'&lt;/g&gt;today')
+ end program demo_alert
 </pre><p>Results:</p>
-<p>00:38:30.566 : (demo_alert) : error -&gt; Say you didn't! 00:38:30.567 : (demo_alert) : warning -&gt; I wouldn't if I were you, Will Robinson. 00:38:30.567 : (demo_alert) : info -&gt; I fixed that for you, but it was a bad idea. 00:38:30.567 : (demo_alert) : debug -&gt; Who knows what is happening now?. 00:38:30.567 : (demo_alert) : ??? -&gt; not today you don't 00:38:30.567 : (demo_alert) : error -&gt; allowed range of X is 0 X 100, X= 211.300003 00:38:30.567 : (demo_alert) : info -&gt; values are 10 234.567001 (11.0000000,22.0000000) 123.45600000000000 today</p>
+<p>00:38:30: (prg) : error -&gt; Say you didn't! 00:38:30: (prg) : warning -&gt; I wouldn't if I were you, ... Will Robinson. 00:38:30: (prg) : info -&gt; I fixed that for you, ... but it was a bad idea. 00:38:30: (prg) : debug -&gt; Who knows what is happening now?. ... 00:38:30: (prg) : ??? -&gt; not today you don't 00:38:30: (prg) : error -&gt; allowed range of X is 0 X 100, ... X= 211.300003 00:38:30: (prg) : info -&gt; values are 10 234.567001 ... (11.0000000,22.0000000) ... 123.45600000000000 today</p>
 <h2><a class="anchor" id="autotoc_md39"></a>
 AUTHOR</h2>
 <p>John S. Urban, 2021</p>

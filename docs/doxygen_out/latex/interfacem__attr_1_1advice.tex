@@ -20,7 +20,8 @@ subroutine \mbox{\hyperlink{interfacem__attr_1_1advice_afda0977b78b401153a5f090a
 
 \hypertarget{namespacem__attr_autotoc_md34}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__attr_autotoc_md34}
 alert(3f) -\/ \mbox{[}M\+\_\+attr\mbox{]} print messages using a standard format including time and program name (L\+I\+C\+E\+N\+SE\+:M\+IT)\hypertarget{namespacem__attr_autotoc_md35}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__attr_autotoc_md35}
-\begin{DoxyVerb} subroutine alert(message,g0,g1,g2,g3,g4,g5,g6,g7,g8,g9,ga,gb,gc,gd,ge,gf,gg,gh,gi,gj)
+\begin{DoxyVerb} subroutine alert(message,&
+ g0,g1,g2,g3,g4,g5,g6,g7,g8,g9,ga,gb,gc,gd,ge,gf,gg,gh,gi,gj)
 
     character(len=*),intent(in),optional :: type
     character(len=*),intent(in),optional :: message
@@ -46,33 +47,40 @@ g\mbox{[}0-\/9a-\/j\mbox{]} optional values to print after the message. May be o
 if no parameters are supplied the macros are updated but no output is generated.\hypertarget{namespacem__attr_autotoc_md38}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__attr_autotoc_md38}
 \begin{DoxyVerb}Sample program
 
-   program demo_alert
-   use M_attr, only : alert, attr, attr_mode
-   implicit none
-   real X
-      call attr_mode(manner='plain')
-      call attr_mode(manner='color')
-      call alert("error", "Say you didn't!")
-      call alert("warn",  "I wouldn't if I were you, Will Robinson.")
-      call alert("info",  "I fixed that for you, but it was a bad idea.")
-      call alert("debug", "Who knows what is happening now?.")
-      call alert("???    ",  "not today you don't")
-      ! call to just update the macros
-      call alert()
-      ! conventional call to ATTR(3f) using the ALERT(3f)-defined macros
-      write(*,*)attr('<bo>The year was <g><YE></g>, the month was <g><MO></g>')
-      ! optional arguments
-      X=211.3
-      call alert('error','allowed range of X is 0 <lt> X <lt> 100, X=<r>',X)
-      ! up to twenty values are allowed of intrinsic type
-      call alert('info','values are<g>',10,234.567,cmplx(11.0,22.0),123.456d0,'</g>today')
-   end program demo_alert
+ program demo_alert
+ use M_attr, only : alert, attr, attr_mode
+ implicit none
+ real X
+  call attr_mode(manner='plain')
+  call attr_mode(manner='color')
+  call alert("error",&
+            "Say you didn't!")
+  call alert("warn", &
+            "I wouldn't if I were you, Will Robinson.")
+  call alert("info", &
+            "I fixed that for you, but it was a bad idea.")
+  call alert("debug", &
+            "Who knows what is happening now?.")
+  call alert("???    ",  "not today you don't")
+  ! call to just update the macros
+  call alert()
+  ! conventional call to ATTR(3f) using the ALERT(3f)-defined macros
+  write(*,*)attr(&
+          '<bo>The year was <g><YE></g>, the month was <g><MO></g>')
+  ! optional arguments
+  X=211.3
+  call alert('error',&
+          'allowed range of X is 0 <lt> X <lt> 100, X=<r>',X)
+  ! up to twenty values are allowed of intrinsic type
+  call alert('info','values are<g>',10,234.567,&
+          cmplx(11.0,22.0),123.456d0,'</g>today')
+ end program demo_alert
 \end{DoxyVerb}
 
 
 Results\+:
 
-00\+:38\+:30.\+566 \+: (demo\+\_\+alert) \+: error -\/$>$ Say you didn\textquotesingle{}t! 00\+:38\+:30.\+567 \+: (demo\+\_\+alert) \+: warning -\/$>$ I wouldn\textquotesingle{}t if I were you, Will Robinson. 00\+:38\+:30.\+567 \+: (demo\+\_\+alert) \+: info -\/$>$ I fixed that for you, but it was a bad idea. 00\+:38\+:30.\+567 \+: (demo\+\_\+alert) \+: debug -\/$>$ Who knows what is happening now?. 00\+:38\+:30.\+567 \+: (demo\+\_\+alert) \+: ??? -\/$>$ not today you don\textquotesingle{}t 00\+:38\+:30.\+567 \+: (demo\+\_\+alert) \+: error -\/$>$ allowed range of X is 0 X 100, X= 211.\+300003 00\+:38\+:30.\+567 \+: (demo\+\_\+alert) \+: info -\/$>$ values are 10 234.\+567001 (11.\+0000000,22.\+0000000) 123.\+45600000000000 today\hypertarget{namespacem__attr_autotoc_md39}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__attr_autotoc_md39}
+00\+:38\+:30\+: (prg) \+: error -\/$>$ Say you didn\textquotesingle{}t! 00\+:38\+:30\+: (prg) \+: warning -\/$>$ I wouldn\textquotesingle{}t if I were you, ... Will Robinson. 00\+:38\+:30\+: (prg) \+: info -\/$>$ I fixed that for you, ... but it was a bad idea. 00\+:38\+:30\+: (prg) \+: debug -\/$>$ Who knows what is happening now?. ... 00\+:38\+:30\+: (prg) \+: ??? -\/$>$ not today you don\textquotesingle{}t 00\+:38\+:30\+: (prg) \+: error -\/$>$ allowed range of X is 0 X 100, ... X= 211.\+300003 00\+:38\+:30\+: (prg) \+: info -\/$>$ values are 10 234.\+567001 ... (11.\+0000000,22.\+0000000) ... 123.\+45600000000000 today\hypertarget{namespacem__attr_autotoc_md39}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__attr_autotoc_md39}
 John S. Urban, 2021\hypertarget{namespacem__attr_autotoc_md40}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__attr_autotoc_md40}
 M\+IT 
 
