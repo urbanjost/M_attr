@@ -56,7 +56,7 @@ or simply as HTML
    - [attr_update](https://urbanjost.github.io/M_attr/attr_update.3m_attr.html)  -- customizing
    - [alert](https://urbanjost.github.io/M_attr/alert.3m_attr.html)  -- standard INFO, WARNING, ERROR format ![alert](docs/images/alert.gif)
 
-## real man-pages
+#### real man-pages
 ---
 ![gmake](docs/images/manpages.gif)
 ---
