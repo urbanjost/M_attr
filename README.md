@@ -31,8 +31,11 @@
       print *, attr('<G><bo><w> Hello World!')
    end program demo_M_attr
 ```
+---
+![docs](docs/images/docs.gif)
+---
 
-## DOCUMENTATION   ![docs](docs/images/docs.gif)
+## DOCUMENTATION 
 ### USER 
 
 All documents are contained in the docs/ directory including
@@ -53,7 +56,10 @@ or simply as HTML
    - [attr_update](https://urbanjost.github.io/M_attr/attr_update.3m_attr.html)  -- customizing
    - [alert](https://urbanjost.github.io/M_attr/alert.3m_attr.html)  -- standard INFO, WARNING, ERROR format ![alert](docs/images/alert.gif)
 
-## real man-pages ![gmake](docs/images/manpages.gif)
+## real man-pages
+---
+![gmake](docs/images/manpages.gif)
+---
 
 Documents may be installed as man-pages on Unix-like systems with a man(1) command:
 
@@ -70,8 +76,11 @@ Documents may be installed as man-pages on Unix-like systems with a man(1) comma
 
 ## DOWNLOAD AND BUILD
 
-### gmake ![gmake](docs/images/gnu.gif)
+---
+![gmake](docs/images/gnu.gif)
+---
 
+### gmake
    ```bash
        git clone https://github.com/urbanjost/M_attr.git
        cd M_attr/src
@@ -81,8 +90,11 @@ Documents may be installed as man-pages on Unix-like systems with a man(1) comma
        make clean; make nvfortran   # for nvfortran
    ```
    This will compile the M_attr module and example programs.
+---
+![fpm](docs/images/fpm_logo.gif)
+---
 
-### fpm ![fpm](docs/images/fpm_logo.gif)
+### fpm
 
    Alternatively, download the github repository and build it with
    fpm ( as described at [Fortran Package Manager](https://github.com/fortran-lang/fpm) )
@@ -100,7 +112,11 @@ Documents may be installed as man-pages on Unix-like systems with a man(1) comma
         M_attr        = { git = "https://github.com/urbanjost/M_attr.git" }
 ```
 
-## DEMO PROGRAMS![demos](docs/images/demo.gif)
+## DEMO PROGRAMS
+---
+![demos](docs/images/demo.gif)
+---
+
 The included demo programs provide templates for the most common usage:
 
 - [default](test/default.f90) - simple demo setting color
@@ -148,7 +164,9 @@ or terminal emulator:
 
    end program demo_M_attr
 ```
+---
 ![sample](docs/images/snap1.gif)
+---
 
 ### NOTE:
    where supported the isatty(3f) function can be used to turn off the sequences when the file is
