@@ -1,10 +1,10 @@
 ![sample](docs/images/snap3.gif)
 
-## NAME
+## Name
 
 ### M_attr - use in-band signaling to control the text attributes, formatting, color, and other output options on ANSI video text terminals
 
-## DESCRIPTION
+## Description
 
    M_attr(3f) is a Fortran module that writes common ANSI escape
    sequences which control terminal attributes like text color. It is
@@ -13,7 +13,7 @@
    replace the sequences associated with a keyword without changing
    the code.
 
-## FUNCTIONAL SPECIFICATION
+## Functional Specification
 
    Attributes are specified by writing lines with HTML-like structure.
 
@@ -35,8 +35,8 @@
 ![docs](docs/images/docs.gif)
 ---
 
-## DOCUMENTATION 
-### USER 
+## Documentation 
+### User 
 
 All documents are contained in the docs/ directory including
 archive files of man(1) pages that can be installed on ULS
@@ -65,7 +65,7 @@ Documents may be installed as man-pages on Unix-like systems with a man(1) comma
 
    + [manpages.zip](https://urbanjost.github.io/M_attr/manpages.zip)
    + [manpages.tgz](https://urbanjost.github.io/M_attr/manpages.tgz)
-### DEVELOPER
+### Developer
 #### doxygen
 
 - [doxygen(1) output](https://urbanjost.github.io/M_attr/doxygen_out/html/index.html).
@@ -74,7 +74,7 @@ Documents may be installed as man-pages on Unix-like systems with a man(1) comma
 
 - [ford(1) output](https://urbanjost.github.io/M_attr/fpm-ford/index.html).
 
-## DOWNLOAD AND BUILD
+## Download and Build
 
 ---
 ![gmake](docs/images/gnu.gif)
@@ -112,7 +112,7 @@ Documents may be installed as man-pages on Unix-like systems with a man(1) comma
         M_attr        = { git = "https://github.com/urbanjost/M_attr.git" }
 ```
 
-## DEMO PROGRAMS
+## Demo Programs
 ---
 ![demos](docs/images/demo.gif)
 ---
@@ -140,7 +140,7 @@ The included demo programs provide templates for the most common usage:
 ```text
         light "<clear><WHITE><blue><bold> WARNING: <reset> that would not be prudent"
 ```
-### A BASIC INTRODUCTORY PROGRAM
+### A Basic Introductory Program
 
 This short program will display colored text on an ANSI-compatible color terminal
 or terminal emulator:
@@ -168,14 +168,14 @@ or terminal emulator:
 ![sample](docs/images/snap1.gif)
 ---
 
-### NOTE:
+### Note:
    where supported the isatty(3f) function can be used to turn off the sequences when the file is
    not a tty.  isatty(3f) is an extension, but supported by GNU, Intel, PGI, ...
 
-## [HISTORY](HISTORY.md)
+## [History](HISTORY.md)
 
 ---
-### REFERENCES
+### References
 * [**Fortran Wiki example**](http://fortranwiki.org/fortran/show/ansi_colors) for an example that covers the basics
 * [**Rosetta Code examples**](https://rosettacode.org/wiki/Terminal_control/Coloured_text) for how other languages do color.
   I find the Ncurses, Fortran, bash and C++ examples particularly interesting.
@@ -184,23 +184,23 @@ or terminal emulator:
   adding ANSI control sequences to the Fortran Standard Library project.
 * [terminal colors](http://www.pixelbeat.org/docs/terminal_colours/)
 
-### OF INTEREST
+### Of Interest
 * [ansi2html](https://github.com/ralphbean/ansi2html) ANSI escape codes to HTML from programs and as a bash shell
 
-### ALTERNATIVES
+### Alternatives
 * [**M_ncurses**](https://github.com/urbanjost/M_ncurses) A Fortran interface to Ncurses(3c)
 * [**M_escape**](https://github.com/urbanjost/M_escape) A multi-mode exploratory version from which M_attr(3f) evolved
 * [**FACE**](https://github.com/szaghi/FACE) A Fortran library for generating ANSI escape sequences
 * [**foul**](http://foul.sourceforge.net/) A library for controlling the attributes of output text using Fortran
 
-### OTHER LANGUAGES
+### Other Languages
 
 *  [python](https://python-prompt-toolkit.readthedocs.io/en/master/pages/printing_text.html#html) prompt-toolkit
 
 ---
 
-##### + [WIKI](https://github.com/urbanjost/M_attr/wiki)
-##### + [ISSUES](https://github.com/urbanjost/M_attr/issues)
+##### + [Wiki](https://github.com/urbanjost/M_attr/wiki)
+##### + [Issues](https://github.com/urbanjost/M_attr/issues)
 ##### + [CHANGELOG](docs/CHANGELOG.md)
-##### + [BUILD STATUS](docs/STATUS.md)
+##### + [Build Status](docs/STATUS.md)
 ![sample](docs/images/snap2b.gif)

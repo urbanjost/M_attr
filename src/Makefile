@@ -1,6 +1,6 @@
 #@(#) make(1) rules for maintaining a FORTRAN90/C library. Makefile started by makeout(1) 2020-01-14 01:11:41
 NULL=
-PROGFILES = $(wildcard ../app/*.f90) $(wildcard ../example/*.f90) $(wildcard ../example/*/*.f90)
+PROGFILES = $(wildcard ../app/*.f90) $(wildcard ../example/*.f90) $(wildcard ../example/*/*.F90)
 PROG = ${PROGFILES:.f90=}
 SRCS = $(wildcard ./*.f90) $(wildcard ./*.c ) $(wildcard ./*.h )
 LIBS := -Llib -lM_attr 
@@ -121,9 +121,9 @@ man:
 >: INDEX OF MANPAGES TOPICS
 >@env MANPATH=../man MANWIDTH=256 man -k .|col -b
 >: MANPAGES
->@env MANPATH=../man MANWIDTH=80  man --regex '.*'|col -b
+>@env MANPATH=../man MANWIDTH=80  man -Tutf8 --regex '.*'|col -b
 >: SPELLING
->@env MANPATH=../man MANWIDTH=80  man --regex '.*'|col -b|spell|xargs -n 5|column -t
+>@env MANPATH=../man MANWIDTH=80  man -Tutf8 --regex '.*'|col -b|spell|xargs -n 5|column -t
 #=================================================================================
 M_attr.o:
 #=================================================================================
