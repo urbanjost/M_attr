@@ -1,0 +1,241 @@
+\hypertarget{M__attr_8f90}{}\doxysection{/home/urbanjs/venus/\+V600/github/\+F\+O\+R\+M\+A\+T\+S/\+M\+\_\+attr/src/\+M\+\_\+attr.f90 File Reference}
+\label{M__attr_8f90}\index{/home/urbanjs/venus/V600/github/FORMATS/M\_attr/src/M\_attr.f90@{/home/urbanjs/venus/V600/github/FORMATS/M\_attr/src/M\_attr.f90}}
+\doxysubsection*{Data Types}
+\begin{DoxyCompactItemize}
+\item 
+interface \mbox{\hyperlink{interfacem__attr_1_1attr}{m\+\_\+attr\+::attr}}
+\item 
+interface \mbox{\hyperlink{interfacem__attr_1_1advice}{m\+\_\+attr\+::advice}}
+\item 
+interface \mbox{\hyperlink{interfacem__attr_1_1str}{m\+\_\+attr\+::str}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+module \mbox{\hyperlink{namespacem__attr}{m\+\_\+attr}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+character(len=\+:) function, allocatable, private \mbox{\hyperlink{namespacem__attr_a46eba7c8e021da09c2ba477d23138dca}{m\+\_\+attr\+::attr\+\_\+scalar}} (string, reset)
+\item 
+character(len=\+:) function, dimension(\+:), allocatable, private \mbox{\hyperlink{namespacem__attr_aa1c99b1d2eb001a2768afbc6779f23e1}{m\+\_\+attr\+::attr\+\_\+matrix}} (strings, reset, chars)
+\item 
+subroutine \mbox{\hyperlink{namespacem__attr_a7b32a6654c75d29be63017228406cc16}{m\+\_\+attr\+::kludge\+\_\+bug}} (strings, reset, chars, expanded)
+\item 
+character(len=\+:) function, allocatable, private \mbox{\hyperlink{namespacem__attr_a8bf4df5eb60c36c22c287fa82486e5a5}{m\+\_\+attr\+::attr\+\_\+scalar\+\_\+width}} (string, reset, chars)
+\item 
+subroutine, private \mbox{\hyperlink{namespacem__attr_a9c0a92fda25004390849bef90fefb386}{m\+\_\+attr\+::vt102}} ()
+\item 
+subroutine, public \mbox{\hyperlink{namespacem__attr_a1667b54d5580bcf8e99732896b2017c2}{m\+\_\+attr\+::attr\+\_\+mode}} (manner)
+\begin{DoxyCompactList}\small\item\em !$>$ \end{DoxyCompactList}\item 
+subroutine, private \mbox{\hyperlink{namespacem__attr_a8e927eced32a170b0502ef283119ab57}{m\+\_\+attr\+::wipe\+\_\+dictionary}} ()
+\item 
+subroutine, public \mbox{\hyperlink{namespacem__attr_aba8630a36c29aaeba84ec458812f59ec}{m\+\_\+attr\+::attr\+\_\+update}} (key, valin, mono\+\_\+valin)
+\begin{DoxyCompactList}\small\item\em !$>$ \end{DoxyCompactList}\item 
+character(len=\+:) function, allocatable, private \mbox{\hyperlink{namespacem__attr_af46849cecb00919c8ce49afe84b6c1ee}{m\+\_\+attr\+::get}} (key)
+\item 
+subroutine, private \mbox{\hyperlink{namespacem__attr_a2910d09c004b3ddb45d2271beb5c1420}{m\+\_\+attr\+::locate}} (list, value, place, ier, errmsg)
+\item 
+subroutine, private \mbox{\hyperlink{namespacem__attr_ac91d4e9d24c3b4cb9d46dfc8ce467cfc}{m\+\_\+attr\+::remove}} (list, place)
+\item 
+subroutine, private \mbox{\hyperlink{namespacem__attr_aa70700df053289657efdf1168d8b0381}{m\+\_\+attr\+::replace}} (list, value, place)
+\item 
+subroutine, private \mbox{\hyperlink{namespacem__attr_a6d2cdb036e195b3738da45b1e07ddaea}{m\+\_\+attr\+::insert}} (list, value, place)
+\item 
+subroutine, public \mbox{\hyperlink{namespacem__attr_a4b74e43b642bf4ce433be16e7e471ac8}{m\+\_\+attr\+::alert}} (type, message, g0, g1, g2, g3, g4, g5, g6, g7, g8, g9, ga, gb, gc, gd, ge, gf, gg, gh, gi, gj)
+\begin{DoxyCompactList}\small\item\em !$>$ \end{DoxyCompactList}\item 
+character(len=\+:) function, allocatable \mbox{\hyperlink{namespacem__attr_a9f58b2fe5028acae1575ae5b85883bb0}{m\+\_\+attr\+::msg\+\_\+scalar}} (generic0, generic1, generic2, generic3, generic4, generic5, generic6, generic7, generic8, generic9, generica, genericb, genericc, genericd, generice, genericf, genericg, generich, generici, genericj, sep)
+\item 
+subroutine \mbox{\hyperlink{M__attr_8f90_aaa8ee15f943d8e1543ae35ab732c3cd2}{print\+\_\+generic}} (generic)
+\item 
+character(len=\+:) function, allocatable \mbox{\hyperlink{namespacem__attr_a55260fba28b9c959aa904181106e3a42}{m\+\_\+attr\+::msg\+\_\+one}} (generic0, generic1, generic2, generic3, generic4, generic5, generic6, generic7, generic8, generic9, generica, genericb, genericc, genericd, generice, genericf, genericg, generich, generici, genericj, sep)
+\item 
+subroutine \mbox{\hyperlink{M__attr_8f90_a9d5e1620d474ac03a74eeb9b0f7d6ae1}{print\+\_\+generic}} (generic)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+character(len=\+:), dimension(\+:), allocatable, save \mbox{\hyperlink{namespacem__attr_a5c0930fded00a38206475db70b106592}{m\+\_\+attr\+::keywords}}
+\item 
+character(len=\+:), dimension(\+:), allocatable, save \mbox{\hyperlink{namespacem__attr_a915d66e15dcaa262e255dfbca1b14aa7}{m\+\_\+attr\+::values}}
+\item 
+character(len=\+:), dimension(\+:), allocatable, save \mbox{\hyperlink{namespacem__attr_adf30f417812561394b55c26c6bc1b6dd}{m\+\_\+attr\+::mono\+\_\+values}}
+\item 
+character(len=\+:), allocatable, save \mbox{\hyperlink{namespacem__attr_a963c117320fcad3f459f2206346c8bbc}{m\+\_\+attr\+::mode}}
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_a717fd98962f864afbed58624b573ff2c}{m\+\_\+attr\+::nl}} =new\+\_\+line(\textquotesingle{}a\textquotesingle{})
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_aa79518bd2af2d92431f50305cd2b3d64}{m\+\_\+attr\+::nul}} =achar(0)
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_af10bf566f6db39d4d60816ca444af6fd}{m\+\_\+attr\+::bel}} =achar(7)
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_abc4b570c183978ceba02c9b93142cb87}{m\+\_\+attr\+::bs}} =achar(8)
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_a8ee24c57081367ac30e9cd9bc1a0b862}{m\+\_\+attr\+::ht}} =achar(9)
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_a04e509489f4fe9aa6d25635329271765}{m\+\_\+attr\+::lf}} =achar(10)
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_a934c20770741003b05c1861afa7950c2}{m\+\_\+attr\+::vt}} =achar(11)
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_a8c9f15737c34cf8775e51b403487a6e1}{m\+\_\+attr\+::ff}} =achar(12)
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_a1bd6780a7e3d24ff31db34c668c5c23f}{m\+\_\+attr\+::cr}} =achar(13)
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_ac7a0cf49e617916bb26161f1994f5849}{m\+\_\+attr\+::so}} =achar(14)
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_a0dbb81fe0b5c2a282c28e1bd5fffbb0d}{m\+\_\+attr\+::si}} =achar(15)
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_a0f5eb7eb759c3ae916057d0e2a840975}{m\+\_\+attr\+::can}} =achar(24)
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_a2a2a711f01e7586a3e750edcdec82470}{m\+\_\+attr\+::sub}} =achar(26)
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_a92dcdc7da607be246e292ba2d9ea5bec}{m\+\_\+attr\+::esc}} =achar(27)
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_ade6a752f387596b25a9a740aaf30feff}{m\+\_\+attr\+::del}} =achar(127)
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_aeae9b092000b8188fe7b2891a35aa4a0}{m\+\_\+attr\+::code\+\_\+start}} =esc//\textquotesingle{}\mbox{[}\textquotesingle{}
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_a471e9ae2e334ee2986a75129b6cda952}{m\+\_\+attr\+::code\+\_\+end}} =\textquotesingle{}m\textquotesingle{}
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_a57f5687d0c45d20656b4bd0d7bcadb95}{m\+\_\+attr\+::code\+\_\+reset}} =C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//\textquotesingle{}0\textquotesingle{}//C\+O\+D\+E\+\_\+\+E\+ND
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_afb37c7f4f8b0a8857ece174acc6266d5}{m\+\_\+attr\+::clear\+\_\+display}} =C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//\textquotesingle{}2J\textquotesingle{}
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_a818d1e47b946aafb740ea236ea1df0cf}{m\+\_\+attr\+::home\+\_\+display}} =C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//\textquotesingle{}H\textquotesingle{}
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_adf434c8a40b58595db346b40642b4c26}{m\+\_\+attr\+::bell}} =achar(7)
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_ab801189fd6a6ea2c56d611a40f0954ca}{m\+\_\+attr\+::at\+\_\+bold}} =\textquotesingle{}1\textquotesingle{}
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_aec680886de3d2dcfbbaa8bb6930c0b68}{m\+\_\+attr\+::at\+\_\+italic}} =\textquotesingle{}3\textquotesingle{}
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_ac5b309544e551b4e4ddd7f0154c5ec37}{m\+\_\+attr\+::at\+\_\+underline}} =\textquotesingle{}4\textquotesingle{}
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_ac6383b4a0b17690327d4f9744af6940c}{m\+\_\+attr\+::at\+\_\+inverse}} =\textquotesingle{}7\textquotesingle{}
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_a9d18d3d354e4be6ef5837f9af828c1b8}{m\+\_\+attr\+::black}} =\textquotesingle{}0\textquotesingle{}
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_a8b26d3eac6421f6ea12154a6a54d62f1}{m\+\_\+attr\+::red}} =\textquotesingle{}1\textquotesingle{}
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_a6759aa0da1c120a522dcd392c400cc09}{m\+\_\+attr\+::green}} =\textquotesingle{}2\textquotesingle{}
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_ad7f76e68e669802c1c6e80c941e13f99}{m\+\_\+attr\+::yellow}} =\textquotesingle{}3\textquotesingle{}
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_a5ef0cb627c9ff51e219af0ac738ee54b}{m\+\_\+attr\+::blue}} =\textquotesingle{}4\textquotesingle{}
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_a7d8c7dec830fc2947b07869d07f01ea9}{m\+\_\+attr\+::magenta}} =\textquotesingle{}5\textquotesingle{}
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_a4d456f7cdd618bbd05ea682979abc7e6}{m\+\_\+attr\+::cyan}} =\textquotesingle{}6\textquotesingle{}
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_a17937f8ff528c1f9d16739e9107699b2}{m\+\_\+attr\+::white}} =\textquotesingle{}7\textquotesingle{}
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_a8b0814800f9817140796f54631b256e9}{m\+\_\+attr\+::default}} =\textquotesingle{}9\textquotesingle{}
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_a14f5f141489c969ff2e8f0aa5dfa2efc}{m\+\_\+attr\+::fg}} =\textquotesingle{}3\textquotesingle{}
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_a96068a84edf742e3ae7fd5a1589b3a70}{m\+\_\+attr\+::bg}} =\textquotesingle{}4\textquotesingle{}
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_ae0f8a69732b276d8386e9beff2d51361}{m\+\_\+attr\+::fg\+\_\+intense}} =\textquotesingle{}9\textquotesingle{}
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_a31ea7588547d9dc0b502050bb5776715}{m\+\_\+attr\+::bg\+\_\+intense}} =\textquotesingle{}10\textquotesingle{}
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_aab3b233ea97970503c2cd79bfd151706}{m\+\_\+attr\+::on}} =\textquotesingle{}\textquotesingle{}
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__attr_ac5acd6a84cc0ab5684adcb57e5848596}{m\+\_\+attr\+::off}} =\textquotesingle{}2\textquotesingle{}
+\item 
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_a37fa6e1f86046628786fa8db8ac4f1f9}{m\+\_\+attr\+::fg\+\_\+red}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//FG//R\+ED//C\+O\+D\+E\+\_\+\+E\+ND
+\item 
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_ae292148ae0abb1198646206997be216d}{m\+\_\+attr\+::fg\+\_\+cyan}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//FG//C\+Y\+AN//C\+O\+D\+E\+\_\+\+E\+ND
+\item 
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_ab05ab20734e83b897cbe631b0f5703c5}{m\+\_\+attr\+::fg\+\_\+magenta}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//FG//M\+A\+G\+E\+N\+TA//C\+O\+D\+E\+\_\+\+E\+ND
+\item 
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_a8e6dd9a83212a7cff480485c60d14d84}{m\+\_\+attr\+::fg\+\_\+blue}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//FG//B\+L\+UE//C\+O\+D\+E\+\_\+\+E\+ND
+\item 
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_a63f1a5ad45dd36100a93b7d44170c76e}{m\+\_\+attr\+::fg\+\_\+green}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//FG//G\+R\+E\+EN//C\+O\+D\+E\+\_\+\+E\+ND
+\item 
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_a6c273a2d62ff9c080320928f4f83c67e}{m\+\_\+attr\+::fg\+\_\+yellow}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//FG//Y\+E\+L\+L\+OW//C\+O\+D\+E\+\_\+\+E\+ND
+\item 
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_a09a73463bdb60c4374018c56cc476d5e}{m\+\_\+attr\+::fg\+\_\+white}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//FG//W\+H\+I\+TE//C\+O\+D\+E\+\_\+\+E\+ND
+\item 
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_afe5a12f0d8b949cda9b1e1dc496f0254}{m\+\_\+attr\+::fg\+\_\+ebony}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//FG//B\+L\+A\+CK//C\+O\+D\+E\+\_\+\+E\+ND
+\item 
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_abb6f7a3e18f9f46191c9bca6bdc6ad96}{m\+\_\+attr\+::fg\+\_\+black}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//FG//B\+L\+A\+CK//C\+O\+D\+E\+\_\+\+E\+ND
+\item 
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_ac9164c3d948aaf7f865ad71591a38140}{m\+\_\+attr\+::fg\+\_\+default}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//FG//D\+E\+F\+A\+U\+LT//C\+O\+D\+E\+\_\+\+E\+ND
+\item 
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_a2814088bbca59b6bb97df519cb504df1}{m\+\_\+attr\+::bg\+\_\+red}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//BG//R\+ED//C\+O\+D\+E\+\_\+\+E\+ND
+\item 
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_a4ab28036c4cff532352369df0b5b7b8d}{m\+\_\+attr\+::bg\+\_\+cyan}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//BG//C\+Y\+AN//C\+O\+D\+E\+\_\+\+E\+ND
+\item 
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_a42a15c62106a19db87a23ee99890e28e}{m\+\_\+attr\+::bg\+\_\+magenta}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//BG//M\+A\+G\+E\+N\+TA//C\+O\+D\+E\+\_\+\+E\+ND
+\item 
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_a0c0a563fccb0cd03da8b5a9ca020217a}{m\+\_\+attr\+::bg\+\_\+blue}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//BG//B\+L\+UE//C\+O\+D\+E\+\_\+\+E\+ND
+\item 
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_ac8be7434831b085ca1bad9d19d634b73}{m\+\_\+attr\+::bg\+\_\+green}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//BG//G\+R\+E\+EN//C\+O\+D\+E\+\_\+\+E\+ND
+\item 
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_a0f37c5080eabb4479eb463ac4d0a64bd}{m\+\_\+attr\+::bg\+\_\+yellow}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//BG//Y\+E\+L\+L\+OW//C\+O\+D\+E\+\_\+\+E\+ND
+\item 
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_a9d491f7dec8157cc178a39414e42141f}{m\+\_\+attr\+::bg\+\_\+white}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//BG//W\+H\+I\+TE//C\+O\+D\+E\+\_\+\+E\+ND
+\item 
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_af89a369d64ee740fbd888198c8691ad1}{m\+\_\+attr\+::bg\+\_\+ebony}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//BG//B\+L\+A\+CK//C\+O\+D\+E\+\_\+\+E\+ND
+\item 
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_ad40c5ee4866846896d7625ccfa2a0181}{m\+\_\+attr\+::bg\+\_\+black}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//BG//B\+L\+A\+CK//C\+O\+D\+E\+\_\+\+E\+ND
+\item 
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_add8d1898742227999e5bd967ad21cb05}{m\+\_\+attr\+::bg\+\_\+default}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//BG//D\+E\+F\+A\+U\+LT//C\+O\+D\+E\+\_\+\+E\+ND
+\item 
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_a78904320b58f3b9f9582f3119c2de914}{m\+\_\+attr\+::bold}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//ON//A\+T\+\_\+\+B\+O\+LD//C\+O\+D\+E\+\_\+\+E\+ND
+\item 
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_a98d6e471784979f92ae432a56fce8695}{m\+\_\+attr\+::italic}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//ON//A\+T\+\_\+\+I\+T\+A\+L\+IC//C\+O\+D\+E\+\_\+\+E\+ND
+\item 
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_a5f353f7daf9b33bcc5fdf673bdfa2090}{m\+\_\+attr\+::inverse}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//ON//A\+T\+\_\+\+I\+N\+V\+E\+R\+SE//C\+O\+D\+E\+\_\+\+E\+ND
+\item 
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_ad25d4dcd29f9499606be1e527498f132}{m\+\_\+attr\+::underline}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//ON//A\+T\+\_\+\+U\+N\+D\+E\+R\+L\+I\+NE//C\+O\+D\+E\+\_\+\+E\+ND
+\item 
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_a48baec32513cc6f02bb887b6071bc352}{m\+\_\+attr\+::unbold}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//\textquotesingle{}22\textquotesingle{}//C\+O\+D\+E\+\_\+\+E\+ND
+\item 
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_af4d0788a38acb447da350781524f2b88}{m\+\_\+attr\+::unitalic}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//O\+FF//A\+T\+\_\+\+I\+T\+A\+L\+IC//C\+O\+D\+E\+\_\+\+E\+ND
+\item 
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_a07a266adc2d6b785c998251e3774425e}{m\+\_\+attr\+::uninverse}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//O\+FF//A\+T\+\_\+\+I\+N\+V\+E\+R\+SE//C\+O\+D\+E\+\_\+\+E\+ND
+\item 
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_afad32a2c30eb35b8d3a178360f85879d}{m\+\_\+attr\+::ununderline}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//O\+FF//A\+T\+\_\+\+U\+N\+D\+E\+R\+L\+I\+NE//C\+O\+D\+E\+\_\+\+E\+ND
+\item 
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_a7fbabaa819e5276aa2fff7a9a833aff0}{m\+\_\+attr\+::reset}} = C\+O\+D\+E\+\_\+\+R\+E\+S\+ET
+\item 
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__attr_af3a23c4e05227c51110ae9b3ccac2675}{m\+\_\+attr\+::clear}} = H\+O\+M\+E\+\_\+\+D\+I\+S\+P\+L\+AY//C\+L\+E\+A\+R\+\_\+\+D\+I\+S\+P\+L\+AY
+\item 
+integer, save \mbox{\hyperlink{namespacem__attr_a11187f8daec47b12ae94a03b0a121baf}{m\+\_\+attr\+::alert\+\_\+unit}} =stdout
+\item 
+logical, save \mbox{\hyperlink{namespacem__attr_a24a558beac923f29919b85f646aac5e4}{m\+\_\+attr\+::alert\+\_\+debug}} =.true.
+\item 
+logical, save \mbox{\hyperlink{namespacem__attr_af43ff72f37c575f8306e9ab3d2a28401}{m\+\_\+attr\+::alert\+\_\+warn}} =.true.
+\item 
+logical, save \mbox{\hyperlink{namespacem__attr_a5698aa625be65c1fb4da594bcc25af72}{m\+\_\+attr\+::alert\+\_\+info}} =.true.
+\item 
+logical, save \mbox{\hyperlink{namespacem__attr_ae5e62e97d776cad6e050b7f0349c0026}{m\+\_\+attr\+::alert\+\_\+error}} =.true.
+\item 
+logical, save \mbox{\hyperlink{namespacem__attr_a122958cefd3fa4b3301cf4720d33e415}{m\+\_\+attr\+::alert\+\_\+other}} =.true.
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function/\+Subroutine Documentation}
+\mbox{\Hypertarget{M__attr_8f90_aaa8ee15f943d8e1543ae35ab732c3cd2}\label{M__attr_8f90_aaa8ee15f943d8e1543ae35ab732c3cd2}} 
+\index{M\_attr.f90@{M\_attr.f90}!print\_generic@{print\_generic}}
+\index{print\_generic@{print\_generic}!M\_attr.f90@{M\_attr.f90}}
+\doxysubsubsection{\texorpdfstring{print\_generic()}{print\_generic()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily subroutine msg\+\_\+scalar\+::print\+\_\+generic (\begin{DoxyParamCaption}\item[{class($\ast$), intent(in)}]{generic }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=306pt]{M__attr_8f90_aaa8ee15f943d8e1543ae35ab732c3cd2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{M__attr_8f90_a9d5e1620d474ac03a74eeb9b0f7d6ae1}\label{M__attr_8f90_a9d5e1620d474ac03a74eeb9b0f7d6ae1}} 
+\index{M\_attr.f90@{M\_attr.f90}!print\_generic@{print\_generic}}
+\index{print\_generic@{print\_generic}!M\_attr.f90@{M\_attr.f90}}
+\doxysubsubsection{\texorpdfstring{print\_generic()}{print\_generic()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily subroutine msg\+\_\+one\+::print\+\_\+generic (\begin{DoxyParamCaption}\item[{class($\ast$), dimension(\+:), intent(in), optional}]{generic }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
