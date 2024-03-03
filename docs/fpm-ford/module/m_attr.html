@@ -1,0 +1,2289 @@
+<!-- -*- mode: jinja2 -*- -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="terminal text attributes">
+    <meta name="author" content="John S. Urban" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>M_attr &ndash; M_attr</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/local.css" rel="stylesheet">
+      <link  href="../tipuesearch/tipuesearch.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="../js/svg-pan-zoom.min.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="container-fluid mb-sm-4 mb-xl-2">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="../index.html">M_attr </a>
+          <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon">
+          </button>
+
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" href="../lists/files.html">Source Files</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/modules.html">Modules</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/procedures.html">Procedures</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/programs.html">Programs</a>
+                </li>
+            </ul>
+              <div class="d-flex align-items-end flex-grow-1">
+                <form action="../search.html" role="search" class="ms-auto">
+                  <input type="text" class="form-control" aria-label="Search" placeholder="Search" name="q" id="tipue_search_input" autocomplete="off" required>
+                </form>
+              </div>
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+  <div class="row">
+    <h1>M_attr
+      <small>Module</small>
+      
+    </h1>
+      <div class="container p-2 mb-4 bg-light border rounded-3">
+    <div class="row align-items-center justify-content-between" id="info-bar">
+      <div class="col">
+        <ul class="list-inline" style="margin-bottom:0px;display:inline">
+
+            <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
+              <a data-bs-toggle="tooltip"
+                 data-bs-placement="bottom" data-html="true"
+                 title="86.0% of total for modules and submodules.">793 statements</a>
+            </li>
+
+            <li class="list-inline-item" id="source-file">
+              <i class="fa fa-code"></i>
+              <a href="../src/M_attr.f90"> Source File</a>
+            </li>
+        </ul>
+      </div>
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-end mb-0">
+                <li class="breadcrumb-item"><a href='../sourcefile/m_attr.f90.html'>M_attr.f90</a></li>
+            <li class="breadcrumb-item active" aria-current="page">M_attr</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(function () {
+    $('[data-bs-toggle="tooltip"]').tooltip()
+    })
+  </script>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+        <div id="sidebar">
+      <h3>Contents</h3>
+  
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#vars-0"
+         aria-expanded="false" aria-controls="vars-0">
+         <h4 class="card-header bg-primary text-white">Variables</h4>
+      </a>
+      <div id="vars-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../module/m_attr.html#variable-bg_black">bg_black</a>
+            <a class="list-group-item" href="../module/m_attr.html#variable-bg_blue">bg_blue</a>
+            <a class="list-group-item" href="../module/m_attr.html#variable-bg_cyan">bg_cyan</a>
+            <a class="list-group-item" href="../module/m_attr.html#variable-bg_default">bg_default</a>
+            <a class="list-group-item" href="../module/m_attr.html#variable-bg_ebony">bg_ebony</a>
+            <a class="list-group-item" href="../module/m_attr.html#variable-bg_green">bg_green</a>
+            <a class="list-group-item" href="../module/m_attr.html#variable-bg_magenta">bg_magenta</a>
+            <a class="list-group-item" href="../module/m_attr.html#variable-bg_red">bg_red</a>
+            <a class="list-group-item" href="../module/m_attr.html#variable-bg_white">bg_white</a>
+            <a class="list-group-item" href="../module/m_attr.html#variable-bg_yellow">bg_yellow</a>
+            <a class="list-group-item" href="../module/m_attr.html#variable-bold">bold</a>
+            <a class="list-group-item" href="../module/m_attr.html#variable-clear">clear</a>
+            <a class="list-group-item" href="../module/m_attr.html#variable-fg_black">fg_black</a>
+            <a class="list-group-item" href="../module/m_attr.html#variable-fg_blue">fg_blue</a>
+            <a class="list-group-item" href="../module/m_attr.html#variable-fg_cyan">fg_cyan</a>
+            <a class="list-group-item" href="../module/m_attr.html#variable-fg_default">fg_default</a>
+            <a class="list-group-item" href="../module/m_attr.html#variable-fg_ebony">fg_ebony</a>
+            <a class="list-group-item" href="../module/m_attr.html#variable-fg_green">fg_green</a>
+            <a class="list-group-item" href="../module/m_attr.html#variable-fg_magenta">fg_magenta</a>
+            <a class="list-group-item" href="../module/m_attr.html#variable-fg_red">fg_red</a>
+            <a class="list-group-item" href="../module/m_attr.html#variable-fg_white">fg_white</a>
+            <a class="list-group-item" href="../module/m_attr.html#variable-fg_yellow">fg_yellow</a>
+            <a class="list-group-item" href="../module/m_attr.html#variable-inverse">inverse</a>
+            <a class="list-group-item" href="../module/m_attr.html#variable-italic">italic</a>
+            <a class="list-group-item" href="../module/m_attr.html#variable-reset">reset</a>
+            <a class="list-group-item" href="../module/m_attr.html#variable-unbold">unbold</a>
+            <a class="list-group-item" href="../module/m_attr.html#variable-underline">underline</a>
+            <a class="list-group-item" href="../module/m_attr.html#variable-uninverse">uninverse</a>
+            <a class="list-group-item" href="../module/m_attr.html#variable-unitalic">unitalic</a>
+            <a class="list-group-item" href="../module/m_attr.html#variable-ununderline">ununderline</a>
+        </div>
+      </div>
+    </div>
+
+  
+  
+  
+  
+  
+  
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#inters-0"
+         aria-expanded="false" aria-controls="inters-0">
+         <h4 class="card-header bg-primary text-white">Interfaces</h4>
+      </a>
+      <div id="inters-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../module/m_attr.html#interface-advice">advice</a>
+            <a class="list-group-item" href="../module/m_attr.html#interface-attr">attr</a>
+        </div>
+      </div>
+    </div>
+
+  
+  
+  
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#subs-0"
+         aria-expanded="false" aria-controls="subs-0">
+         <h4 class="card-header bg-primary text-white">Subroutines</h4>
+      </a>
+      <div id="subs-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../module/m_attr.html#proc-alert">alert</a>
+            <a class="list-group-item" href="../module/m_attr.html#proc-attr_mode">attr_mode</a>
+            <a class="list-group-item" href="../module/m_attr.html#proc-attr_update">attr_update</a>
+        </div>
+      </div>
+    </div>
+
+  
+  
+  
+  
+  
+  
+  
+
+
+  </div>
+
+    </div>
+
+    <div class="col-md-9" id='text'>
+      <h2 id="name">NAME</h2>
+<div class="codehilite"><pre><span></span><code>M_attr(3f) - [M_attr::INTRO] control text attributes on terminals
+(LICENSE:MIT)
+</code></pre></div>
+
+<h2 id="synopsis">SYNOPSIS</h2>
+<div class="codehilite"><pre><span></span><code>  use M_attr, only : attr, attr_mode, attr_update
+
+  use M_attr, only : alert ! generate standard messages
+</code></pre></div>
+
+<h2 id="description">DESCRIPTION</h2>
+<div class="codehilite"><pre><span></span><code>M_attr(3f)<span class="w"> </span>is<span class="w"> </span>a<span class="w"> </span>Fortran<span class="w"> </span>module<span class="w"> </span>that<span class="w"> </span>uses<span class="w"> </span>common<span class="w"> </span>ANSI<span class="w"> </span>escape<span class="w"> </span>sequences
+to<span class="w"> </span>control<span class="w"> </span>terminal<span class="w"> </span>text<span class="w"> </span>attributes.
+
+<span class="w">     </span>use<span class="w"> </span>M_attr
+<span class="w">     </span>write(*,*)attr(&#39;<span class="nt">&lt;red&gt;</span>Red<span class="w"> </span>Text!<span class="nt">&lt;/red&gt;</span><span class="w"> </span><span class="nt">&lt;green&gt;</span>Green<span class="w"> </span>Text!<span class="nt">&lt;/green&gt;</span>&#39;)
+<span class="w">     </span>end
+
+It<span class="w"> </span>is<span class="w"> </span>designed<span class="w"> </span>to<span class="w"> </span>use<span class="w"> </span>three<span class="w"> </span>simple<span class="w"> </span>procedures<span class="w"> </span>to
+
+<span class="w"> </span>+<span class="w"> </span>Specify<span class="w"> </span>attributes<span class="w"> </span>using<span class="w"> </span>simple<span class="w"> </span>HTML-like<span class="w"> </span>syntax
+<span class="w"> </span>+<span class="w"> </span>allow<span class="w"> </span>the<span class="w"> </span>sequences<span class="w"> </span>to<span class="w"> </span>be<span class="w"> </span>suppressed<span class="w"> </span>when<span class="w"> </span>desired
+<span class="w"> </span>+<span class="w"> </span>permit<span class="w"> </span>the<span class="w">  </span>user<span class="w"> </span>program<span class="w"> </span>to<span class="w"> </span>completely<span class="w"> </span>customize<span class="w"> </span>the<span class="w"> </span>keywords.
+<span class="w">   </span>The<span class="w"> </span>user<span class="w"> </span>can<span class="w"> </span>add,<span class="w"> </span>delete<span class="w"> </span>and<span class="w"> </span>replace<span class="w"> </span>the<span class="w"> </span>sequences<span class="w"> </span>associated<span class="w"> </span>with
+<span class="w">   </span>a<span class="w"> </span>keyword<span class="w"> </span>without<span class="w"> </span>changing<span class="w"> </span>the<span class="w"> </span>code.
+
+One<span class="w"> </span>advantage<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>approach<span class="w"> </span>of<span class="w"> </span>using<span class="w"> </span>formatting<span class="w"> </span>directives<span class="w"> </span>which
+are<span class="w"> </span>replaced<span class="w"> </span>with<span class="w"> </span>in-band<span class="w"> </span>escape<span class="w"> </span>sequences<span class="w"> </span>is<span class="w"> </span>that<span class="w"> </span>it<span class="w"> </span>is<span class="w"> </span>easy<span class="w"> </span>to<span class="w"> </span>turn
+off<span class="w"> </span>when<span class="w"> </span>running<span class="w"> </span>batch.
+
+Another<span class="w"> </span>important<span class="w"> </span>capability<span class="w"> </span>is<span class="w"> </span>that<span class="w"> </span>programs<span class="w"> </span>can<span class="w"> </span>be<span class="w"> </span>run<span class="w"> </span>in<span class="w"> </span>&quot;raw&quot;<span class="w"> </span>mode
+and<span class="w"> </span>create<span class="w"> </span>a<span class="w"> </span>simple<span class="w"> </span>text<span class="w"> </span>file<span class="w"> </span>with<span class="w"> </span>the<span class="w"> </span>formatting<span class="w"> </span>directives<span class="w"> </span>in<span class="w"> </span>it
+that<span class="w"> </span>can<span class="w"> </span>then<span class="w"> </span>be<span class="w"> </span>read<span class="w"> </span>back<span class="w"> </span>in<span class="w"> </span>by<span class="w"> </span>a<span class="w"> </span>simple<span class="w"> </span>filter<span class="w"> </span>program<span class="w"> </span>that<span class="w"> </span>strips
+it<span class="w"> </span>back<span class="w"> </span>to<span class="w"> </span>plain<span class="w"> </span>text(<span class="w"> </span>see<span class="w"> </span>app/plain.f90),<span class="w"> </span>or<span class="w"> </span>displays<span class="w"> </span>it<span class="w"> </span>to<span class="w"> </span>a<span class="w"> </span>screen
+in<span class="w"> </span>color(see<span class="w"> </span>app/light.f90)<span class="w"> </span>or<span class="w"> </span>perhaps<span class="w"> </span>converts<span class="w"> </span>it<span class="w"> </span>to<span class="w"> </span>another<span class="w"> </span>format.
+
+So<span class="w"> </span>this<span class="w"> </span>approach<span class="w"> </span>makes<span class="w"> </span>it<span class="w"> </span>trivial<span class="w"> </span>to<span class="w"> </span>read<span class="w"> </span>specially-formatted<span class="w"> </span>data
+from<span class="w"> </span>a<span class="w"> </span>file<span class="w"> </span>like<span class="w"> </span>a<span class="w"> </span>message<span class="w"> </span>catalog<span class="w"> </span>(perhaps<span class="w"> </span>with<span class="w"> </span>various<span class="w"> </span>versions<span class="w"> </span>in
+different<span class="w"> </span>languages)<span class="w"> </span>and<span class="w"> </span>colorize<span class="w"> </span>it<span class="w"> </span>or<span class="w"> </span>display<span class="w"> </span>it<span class="w"> </span>as<span class="w"> </span>plain<span class="w"> </span>text
+
+By<span class="w"> </span>making<span class="w"> </span>each<span class="w"> </span>line<span class="w"> </span>self-contained<span class="w"> </span>(by<span class="w"> </span>default)<span class="w"> </span>lines<span class="w"> </span>can<span class="w"> </span>be<span class="w"> </span>filtered
+by<span class="w"> </span>external<span class="w"> </span>utilities<span class="w"> </span>and<span class="w"> </span>still<span class="w"> </span>display<span class="w"> </span>correctly.
+</code></pre></div>
+
+<h2 id="access">ACCESS</h2>
+<div class="codehilite"><pre><span></span><code><span class="n">Via</span><span class="w"> </span><span class="n">git</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="err">:</span>
+
+<span class="w">    </span><span class="n">git</span><span class="w"> </span><span class="n">clone</span><span class="w"> </span><span class="nl">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">urbanjost</span><span class="o">/</span><span class="n">M_attr</span><span class="p">.</span><span class="n">git</span>
+<span class="w">    </span><span class="n">cd</span><span class="w"> </span><span class="n">M_attr</span><span class="o">/</span><span class="n">src</span>
+<span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="n">change</span><span class="w"> </span><span class="n">Makefile</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">one</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">listed</span><span class="w"> </span><span class="n">compilers</span>
+<span class="w">    </span><span class="n">make</span><span class="w"> </span><span class="n">clean</span><span class="p">;</span><span class="w"> </span><span class="n">make</span><span class="w"> </span><span class="n">gfortran</span><span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">gfortran</span>
+<span class="w">    </span><span class="n">make</span><span class="w"> </span><span class="n">clean</span><span class="p">;</span><span class="w"> </span><span class="n">make</span><span class="w"> </span><span class="n">ifort</span><span class="w">       </span><span class="err">#</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">ifort</span>
+<span class="w">    </span><span class="n">make</span><span class="w"> </span><span class="n">clean</span><span class="p">;</span><span class="w"> </span><span class="n">make</span><span class="w"> </span><span class="n">nvfortran</span><span class="w">   </span><span class="err">#</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">nvfortran</span>
+
+<span class="n">This</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">compile</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">M_attr</span><span class="w"> </span><span class="k">module</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">example</span><span class="w"> </span><span class="n">programs</span><span class="p">.</span>
+
+<span class="n">Alternatively</span><span class="p">,</span><span class="w"> </span><span class="n">via</span><span class="w"> </span><span class="n">fpm</span><span class="w"> </span><span class="p">(</span><span class="n">see</span><span class="w"> </span><span class="nl">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="k">fortran</span><span class="o">-</span><span class="n">lang</span><span class="o">/</span><span class="n">fpm</span><span class="p">)</span><span class="err">:</span>
+
+<span class="w">     </span><span class="n">git</span><span class="w"> </span><span class="n">clone</span><span class="w"> </span><span class="nl">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">urbanjost</span><span class="o">/</span><span class="n">M_attr</span><span class="p">.</span><span class="n">git</span>
+
+<span class="ow">or</span><span class="w"> </span><span class="n">just</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">dependency</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">fpm</span><span class="p">.</span><span class="n">toml</span><span class="w"> </span><span class="n">project</span><span class="w"> </span><span class="k">file</span><span class="p">.</span>
+
+<span class="w">     </span><span class="o">[</span><span class="n">dependencies</span><span class="o">]</span>
+<span class="w">     </span><span class="n">M_attr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;https://github.com/urbanjost/M_attr.git&quot;</span><span class="w"> </span><span class="err">}</span>
+</code></pre></div>
+
+<h2 id="limitations">LIMITATIONS</h2>
+<p>o colors are not nestable.
+   o keywords are case-sensitive,
+   o ANSI escape sequences are not universally supported by
+     all terminal emulators; and normally should be suppressed
+     when not going to a tty device. Therefore, you should use
+     M_system::system_istty(3f) or the common Fortran extension
+     ISATTY() to set the default to &ldquo;plain&rdquo; instead of &ldquo;color&rdquo;
+     when the output file is not a conforming terminal. On basic
+     MSWindows console windows, it is best to use Windows 10+ and/or
+     the Linux mode; you may have to enable ANSI escape sequence
+     mode on MSWindows. It does work as-is with CygWin and MinGW and
+     Putty windows and mintty(1) as tested.</p>
+<h2 id="example">EXAMPLE</h2>
+<div class="codehilite"><pre><span></span><code>Sample<span class="w"> </span>program
+
+<span class="w"> </span>program<span class="w"> </span>demo_M_attr
+<span class="w"> </span>use<span class="w"> </span>M_attr,<span class="w"> </span>only<span class="w"> </span>:<span class="w"> </span>attr,<span class="w"> </span>attr_mode,<span class="w"> </span>attr_update,<span class="w"> </span>alert
+<span class="w"> </span>implicit<span class="w"> </span>none
+<span class="w"> </span>character(len=256)<span class="w"> </span>::<span class="w"> </span>line
+<span class="w"> </span>character(len=*),parameter<span class="w"> </span>::<span class="w"> </span>f=&#39;(<span class="w"> </span><span class="err">&amp;</span>
+<span class="w">  </span><span class="err">&amp;</span>&quot;<span class="w">   </span><span class="nt">&lt;bo&gt;&lt;w&gt;&lt;G&gt;</span><span class="w"> </span>GREAT:<span class="w"> </span><span class="nt">&lt;/G&gt;&lt;/w&gt;</span><span class="err">&amp;</span>
+<span class="w">  </span><span class="err">&amp;</span>The<span class="w"> </span>new<span class="w"> </span>value<span class="w"> </span><span class="nt">&lt;Y&gt;&lt;b&gt;</span>&quot;,f8.4,1x,&quot;<span class="nt">&lt;/b&gt;&lt;/Y&gt;</span><span class="w"> </span>is<span class="w"> </span>in<span class="w"> </span>range&quot;<span class="err">&amp;</span>
+<span class="w">  </span><span class="err">&amp;</span>)&#39;
+<span class="w"> </span>real<span class="w"> </span>::<span class="w"> </span>value
+
+<span class="w">    </span>write(*,&#39;(a)&#39;)<span class="err">&amp;</span>
+<span class="w">    </span><span class="err">&amp;</span>attr(&#39;<span class="w">   </span><span class="nt">&lt;r&gt;&lt;W&gt;&lt;bo&gt;</span><span class="w"> </span>ERROR:<span class="w"> </span><span class="nt">&lt;/W&gt;</span>red<span class="w"> </span>text<span class="w"> </span>on<span class="w"> </span>a<span class="w"> </span>white<span class="w"> </span>background<span class="nt">&lt;/y&gt;</span>&#39;)
+
+<span class="w">    </span>value=3.4567
+<span class="w">    </span>write(line,fmt=f)<span class="w"> </span>value
+<span class="w">    </span>write(*,&#39;(a)&#39;)attr(trim(line))
+
+<span class="w">    </span>!<span class="w"> </span>write<span class="w"> </span>same<span class="w"> </span>string<span class="w"> </span>as<span class="w"> </span>plain<span class="w"> </span>text
+<span class="w">    </span>write(*,*)
+<span class="w">    </span>call<span class="w"> </span>attr_mode(manner=&#39;plain&#39;)
+<span class="w">    </span>write(*,&#39;(a)&#39;)attr(trim(line))
+
+<span class="w">    </span>call<span class="w"> </span>attr_mode(manner=&#39;color&#39;)
+<span class="w">    </span>!<span class="w"> </span>use<span class="w"> </span>pre-defined<span class="w"> </span>or<span class="w"> </span>user<span class="w"> </span>defined<span class="w"> </span>strings
+<span class="w">    </span>write(*,*)
+<span class="w">    </span>write(*,&#39;(a)&#39;)attr(&#39;<span class="nt">&lt;ERROR&gt;</span><span class="w"> </span>Woe<span class="w"> </span>is<span class="w"> </span>nigh.&#39;)
+<span class="w">    </span>write(*,&#39;(a)&#39;)attr(&#39;<span class="nt">&lt;WARNING&gt;</span><span class="w"> </span>The<span class="w"> </span>night<span class="w"> </span>is<span class="w"> </span>young.&#39;)
+<span class="w">    </span>write(*,&#39;(a)&#39;)attr(&#39;<span class="nt">&lt;INFO&gt;</span><span class="w"> </span>It<span class="w"> </span>is<span class="w"> </span>Monday&#39;)
+
+<span class="w">    </span>call<span class="w"> </span>alert(&#39;<span class="nt">&lt;ERROR&gt;</span>&#39;,<span class="w"> </span>&#39;Woe<span class="w"> </span>is<span class="w"> </span>nigh.&#39;)
+<span class="w">    </span>call<span class="w"> </span>alert(&#39;<span class="nt">&lt;WARNING&gt;</span>&#39;,<span class="w"> </span>&#39;The<span class="w"> </span>night<span class="w"> </span>is<span class="w"> </span>young.&#39;)
+<span class="w">    </span>call<span class="w"> </span>alert(&#39;<span class="nt">&lt;INFO&gt;</span>&#39;,<span class="w"> </span>&#39;It<span class="w"> </span>is<span class="w"> </span>Monday&#39;)
+
+<span class="w">    </span>!<span class="w"> </span>create<span class="w"> </span>a<span class="w"> </span>custom<span class="w"> </span>mnemonic
+<span class="w">    </span>call<span class="w"> </span>attr_update(&#39;MYERROR&#39;,attr(<span class="err">&amp;</span>
+<span class="w">    </span>&#39;<span class="w"> </span><span class="nt">&lt;R&gt;&lt;e&gt;</span><span class="w"> </span>E<span class="nt">&lt;w&gt;</span>-<span class="nt">&lt;e&gt;</span>R<span class="nt">&lt;w&gt;</span>-<span class="nt">&lt;e&gt;</span>R<span class="nt">&lt;w&gt;</span>-<span class="nt">&lt;e&gt;</span>O<span class="nt">&lt;w&gt;</span>-<span class="nt">&lt;e&gt;</span>R:<span class="w"> </span><span class="nt">&lt;/e&gt;&lt;/R&gt;&lt;/bo&gt;</span>&#39;<span class="err">&amp;</span>
+<span class="w">    </span>))
+<span class="w">    </span>write(*,*)
+<span class="w">    </span>write(*,&#39;(a)&#39;)attr(&#39;<span class="nt">&lt;MYERROR&gt;</span><span class="w"> </span>my<span class="w"> </span>custom<span class="w"> </span>message<span class="w"> </span>style&#39;)
+
+<span class="w"> </span>end<span class="w"> </span>program<span class="w"> </span>demo_M_attr
+</code></pre></div>
+
+<h2 id="author">AUTHOR</h2>
+<div class="codehilite"><pre><span></span><code>John S. Urban, 2021
+</code></pre></div>
+
+<h2 id="license">LICENSE</h2>
+<div class="codehilite"><pre><span></span><code>MIT
+</code></pre></div>
+
+<h2 id="see-also">SEE ALSO</h2>
+<div class="codehilite"><pre><span></span><code>attr(3f), attr_mode(3f), attr_update(3f)
+
+Related information:
+
+ terminfo(3c), termlib(3c), tput(1), reset(1), clear(1),
+ console_codes(4), ECMA-48,
+ https://en.wikipedia.org/wiki/ANSI_escape_code
+</code></pre></div>
+<br>          <div class="card mb-4">
+      <h3 class="card-header card-title bg-light">Uses</h3>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <ul class="list-inline">
+                  <li class="list-inline-item"><a href='http://fortranwiki.org/fortran/show/iso_fortran_env'>iso_fortran_env</a></li>
+                  <li class="list-inline-item"><a href='http://fortranwiki.org/fortran/show/iso_c_binding'>iso_c_binding</a></li>
+              </ul>
+            </li>
+        </ul>
+      </div>
+    </div>
+
+      
+      <br>
+
+
+        <section>
+          <h2>Variables</h2>
+            <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Visibility</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+<th></th><th scope="col">Initial</th>        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bg_black"></span>
+              character(len=*),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>bg_black</strong></td>
+<td> =</td>
+                <td>CODE_START//BG//BLACK//CODE_END</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bg_blue"></span>
+              character(len=*),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>bg_blue</strong></td>
+<td> =</td>
+                <td>CODE_START//BG//BLUE//CODE_END</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bg_cyan"></span>
+              character(len=*),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>bg_cyan</strong></td>
+<td> =</td>
+                <td>CODE_START//BG//CYAN//CODE_END</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bg_default"></span>
+              character(len=*),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>bg_default</strong></td>
+<td> =</td>
+                <td>CODE_START//BG//DEFAULT//CODE_END</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bg_ebony"></span>
+              character(len=*),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>bg_ebony</strong></td>
+<td> =</td>
+                <td>CODE_START//BG//BLACK//CODE_END</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bg_green"></span>
+              character(len=*),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>bg_green</strong></td>
+<td> =</td>
+                <td>CODE_START//BG//GREEN//CODE_END</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bg_magenta"></span>
+              character(len=*),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>bg_magenta</strong></td>
+<td> =</td>
+                <td>CODE_START//BG//MAGENTA//CODE_END</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bg_red"></span>
+              character(len=*),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>bg_red</strong></td>
+<td> =</td>
+                <td>CODE_START//BG//RED//CODE_END</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bg_white"></span>
+              character(len=*),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>bg_white</strong></td>
+<td> =</td>
+                <td>CODE_START//BG//WHITE//CODE_END</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bg_yellow"></span>
+              character(len=*),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>bg_yellow</strong></td>
+<td> =</td>
+                <td>CODE_START//BG//YELLOW//CODE_END</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bold"></span>
+              character(len=*),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>bold</strong></td>
+<td> =</td>
+                <td>CODE_START//ON//AT_BOLD//CODE_END</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-clear"></span>
+              character(len=*),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>clear</strong></td>
+<td> =</td>
+                <td>HOME_DISPLAY//CLEAR_DISPLAY</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-fg_black"></span>
+              character(len=*),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>fg_black</strong></td>
+<td> =</td>
+                <td>CODE_START//FG//BLACK//CODE_END</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-fg_blue"></span>
+              character(len=*),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>fg_blue</strong></td>
+<td> =</td>
+                <td>CODE_START//FG//BLUE//CODE_END</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-fg_cyan"></span>
+              character(len=*),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>fg_cyan</strong></td>
+<td> =</td>
+                <td>CODE_START//FG//CYAN//CODE_END</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-fg_default"></span>
+              character(len=*),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>fg_default</strong></td>
+<td> =</td>
+                <td>CODE_START//FG//DEFAULT//CODE_END</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-fg_ebony"></span>
+              character(len=*),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>fg_ebony</strong></td>
+<td> =</td>
+                <td>CODE_START//FG//BLACK//CODE_END</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-fg_green"></span>
+              character(len=*),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>fg_green</strong></td>
+<td> =</td>
+                <td>CODE_START//FG//GREEN//CODE_END</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-fg_magenta"></span>
+              character(len=*),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>fg_magenta</strong></td>
+<td> =</td>
+                <td>CODE_START//FG//MAGENTA//CODE_END</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-fg_red"></span>
+              character(len=*),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>fg_red</strong></td>
+<td> =</td>
+                <td>CODE_START//FG//RED//CODE_END</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-fg_white"></span>
+              character(len=*),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>fg_white</strong></td>
+<td> =</td>
+                <td>CODE_START//FG//WHITE//CODE_END</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-fg_yellow"></span>
+              character(len=*),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>fg_yellow</strong></td>
+<td> =</td>
+                <td>CODE_START//FG//YELLOW//CODE_END</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-inverse"></span>
+              character(len=*),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>inverse</strong></td>
+<td> =</td>
+                <td>CODE_START//ON//AT_INVERSE//CODE_END</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-italic"></span>
+              character(len=*),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>italic</strong></td>
+<td> =</td>
+                <td>CODE_START//ON//AT_ITALIC//CODE_END</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-reset"></span>
+              character(len=*),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>reset</strong></td>
+<td> =</td>
+                <td>CODE_RESET</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-unbold"></span>
+              character(len=*),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>unbold</strong></td>
+<td> =</td>
+                <td>CODE_START//&#39;22&#39;//CODE_END</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-underline"></span>
+              character(len=*),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>underline</strong></td>
+<td> =</td>
+                <td>CODE_START//ON//AT_UNDERLINE//CODE_END</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-uninverse"></span>
+              character(len=*),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>uninverse</strong></td>
+<td> =</td>
+                <td>CODE_START//OFF//AT_INVERSE//CODE_END</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-unitalic"></span>
+              character(len=*),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>unitalic</strong></td>
+<td> =</td>
+                <td>CODE_START//OFF//AT_ITALIC//CODE_END</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ununderline"></span>
+              character(len=*),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>ununderline</strong></td>
+<td> =</td>
+                <td>CODE_START//OFF//AT_UNDERLINE//CODE_END</td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+        </section>
+        <br>
+
+
+        <section>
+          <h2>Interfaces</h2>
+              <div class="card">
+    <div class="card-header bg-light codesum">
+      <span class="anchor" id="interface-advice"></span>
+      <h3>public        interface <a href='../interface/advice.html'>advice</a> 
+      </h3>
+    </div>
+    <ul class="list-group">
+          <li class="list-group-item">
+                <h3>
+    public  subroutine <a href='../proc/alert.html'>alert</a>(type, message, g0, g1, g2, g3, g4, g5, g6, g7, g8, g9, ga, gb, gc, gd, ge, gf, gg, gh, gi, gj)  
+
+    </h3>
+    
+  <p>!&gt;</p>
+<h2 id="name">NAME</h2>
+<div class="codehilite"><pre><span></span><code><span class="n">alert</span><span class="p">(</span><span class="mi">3</span><span class="n">f</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="o">[</span><span class="n">M_attr</span><span class="o">]</span><span class="w"> </span><span class="k">print</span><span class="w"> </span><span class="n">messages</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">standard</span><span class="w"> </span><span class="nf">format</span><span class="w"> </span><span class="n">including</span>
+<span class="nc">time</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">program</span><span class="w"> </span><span class="n">name</span>
+<span class="p">(</span><span class="nl">LICENSE</span><span class="p">:</span><span class="n">MIT</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="synopsis">SYNOPSIS</h2>
+<div class="codehilite"><pre><span></span><code><span class="w"> </span><span class="nx">subroutine</span><span class="w"> </span><span class="nx">alert</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span><span class="o">&amp;</span>
+<span class="w"> </span><span class="nx">g0</span><span class="p">,</span><span class="nx">g1</span><span class="p">,</span><span class="nx">g2</span><span class="p">,</span><span class="nx">g3</span><span class="p">,</span><span class="nx">g4</span><span class="p">,</span><span class="nx">g5</span><span class="p">,</span><span class="nx">g6</span><span class="p">,</span><span class="nx">g7</span><span class="p">,</span><span class="nx">g8</span><span class="p">,</span><span class="nx">g9</span><span class="p">,</span><span class="nx">ga</span><span class="p">,</span><span class="nx">gb</span><span class="p">,</span><span class="nx">gc</span><span class="p">,</span><span class="nx">gd</span><span class="p">,</span><span class="nx">ge</span><span class="p">,</span><span class="nx">gf</span><span class="p">,</span><span class="nx">gg</span><span class="p">,</span><span class="nx">gh</span><span class="p">,</span><span class="nx">gi</span><span class="p">,</span><span class="nx">gj</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nx">character</span><span class="p">(</span><span class="nx">len</span><span class="p">=</span><span class="o">*</span><span class="p">),</span><span class="nx">intent</span><span class="p">(</span><span class="k">in</span><span class="p">),</span><span class="nx">optional</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="k">type</span>
+<span class="w">    </span><span class="nx">character</span><span class="p">(</span><span class="nx">len</span><span class="p">=</span><span class="o">*</span><span class="p">),</span><span class="nx">intent</span><span class="p">(</span><span class="k">in</span><span class="p">),</span><span class="nx">optional</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="nx">message</span>
+<span class="w">    </span><span class="kd">class</span><span class="p">(</span><span class="o">*</span><span class="p">),</span><span class="nx">intent</span><span class="p">(</span><span class="k">in</span><span class="p">),</span><span class="nx">optional</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="nx">g0</span><span class="p">,</span><span class="nx">g1</span><span class="p">,</span><span class="nx">g2</span><span class="p">,</span><span class="nx">g3</span><span class="p">,</span><span class="nx">g4</span><span class="p">,</span><span class="nx">g5</span><span class="p">,</span><span class="nx">g6</span><span class="p">,</span><span class="nx">g7</span><span class="p">,</span><span class="nx">g8</span><span class="p">,</span><span class="nx">g9</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span>
+<span class="w">                                  </span><span class="o">&amp;</span><span class="w"> </span><span class="nx">ga</span><span class="p">,</span><span class="nx">gb</span><span class="p">,</span><span class="nx">gc</span><span class="p">,</span><span class="nx">gd</span><span class="p">,</span><span class="nx">ge</span><span class="p">,</span><span class="nx">gf</span><span class="p">,</span><span class="nx">gg</span><span class="p">,</span><span class="nx">gh</span><span class="p">,</span><span class="nx">gi</span><span class="p">,</span><span class="nx">gj</span>
+</code></pre></div>
+
+<h2 id="description">DESCRIPTION</h2>
+<div class="codehilite"><pre><span></span><code>Display a message prefixed with a timestamp and the name
+of the calling program when the TYPE is specified as any
+of &#39;error&#39;,&#39;warn&#39;, or &#39;info&#39;.
+
+It also allows the keywords
+&lt;ARG0&gt;,&lt;TZ&gt;,&lt;YE&gt;,&lt;MO&gt;,&lt;DA&gt;,&lt;HR&gt;,&lt;MI&gt;,&lt;SE&gt;,&lt;MS&gt; to be used in the
+message (which is passed to ATTR(3f)).
+
+Note that time stamp keywords will only be updated when using ALERT(3f)
+and will only be displayed in color mode!
+</code></pre></div>
+
+<h2 id="options">OPTIONS</h2>
+<div class="codehilite"><pre><span></span><code><span class="nx">TYPE</span><span class="w">     </span><span class="k">if</span><span class="w"> </span><span class="nx">present</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">one</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">warn</span><span class="sc">&#39;,&#39;</span><span class="nx">message</span><span class="sc">&#39;,&#39;</span><span class="nx">info</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">debug</span><span class="err">&#39;</span>
+<span class="w">         </span><span class="nx">a</span><span class="w"> </span><span class="nx">predefined</span><span class="w"> </span><span class="nx">message</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">written</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">stderr</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">form</span>
+
+<span class="w">          </span><span class="p">:</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">HR</span><span class="p">&gt;:&lt;</span><span class="nx">MI</span><span class="p">&gt;:&lt;</span><span class="nx">SE</span><span class="p">&gt;.&lt;</span><span class="nx">MS</span><span class="p">&gt;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">(&lt;</span><span class="nx">ARG0</span><span class="p">&gt;)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nx">TYPE</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nx">message</span>
+
+<span class="nx">MESSAGE</span><span class="w">  </span><span class="nx">the</span><span class="w"> </span><span class="nx">user</span><span class="o">-</span><span class="nx">supplied</span><span class="w"> </span><span class="nx">message</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">display</span><span class="w"> </span><span class="nx">via</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">call</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">ATTR</span><span class="p">(</span><span class="mi">3</span><span class="nx">f</span><span class="p">)</span>
+
+<span class="nx">g</span><span class="p">[</span><span class="mi">0</span><span class="o">-</span><span class="mi">9</span><span class="nx">a</span><span class="o">-</span><span class="nx">j</span><span class="p">]</span><span class="w">   </span><span class="nx">optional</span><span class="w"> </span><span class="nx">values</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">print</span><span class="w"> </span><span class="nx">after</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">message</span><span class="p">.</span><span class="w"> </span><span class="nx">May</span>
+<span class="w">            </span><span class="nx">be</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="nx">INTEGER</span><span class="p">,</span><span class="w"> </span><span class="nx">LOGICAL</span><span class="p">,</span><span class="w"> </span><span class="nx">REAL</span><span class="p">,</span><span class="w"> </span><span class="nx">DOUBLEPRECISION</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">COMPLEX</span><span class="p">,</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">CHARACTER</span><span class="p">.</span>
+
+<span class="k">if</span><span class="w"> </span><span class="nx">no</span><span class="w"> </span><span class="nx">parameters</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">supplied</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">macros</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">updated</span><span class="w"> </span><span class="nx">but</span><span class="w"> </span><span class="nx">no</span><span class="w"> </span><span class="nx">output</span>
+<span class="k">is</span><span class="w"> </span><span class="nx">generated</span><span class="p">.</span>
+</code></pre></div>
+
+<h2 id="example">EXAMPLE</h2>
+<div class="codehilite"><pre><span></span><code>Sample<span class="w"> </span>program
+
+<span class="w"> </span>program<span class="w"> </span>demo_alert
+<span class="w"> </span>use<span class="w"> </span>M_attr,<span class="w"> </span>only<span class="w"> </span>:<span class="w"> </span>alert,<span class="w"> </span>attr,<span class="w"> </span>attr_mode
+<span class="w"> </span>implicit<span class="w"> </span>none
+<span class="w"> </span>real<span class="w"> </span>X
+<span class="w">  </span>call<span class="w"> </span>attr_mode(manner=&#39;plain&#39;)
+<span class="w">  </span>call<span class="w"> </span>attr_mode(manner=&#39;color&#39;)
+<span class="w">  </span>call<span class="w"> </span>alert(&quot;error&quot;,<span class="err">&amp;</span>
+<span class="w">            </span>&quot;Say<span class="w"> </span>you<span class="w"> </span>didn&#39;t!&quot;)
+<span class="w">  </span>call<span class="w"> </span>alert(&quot;warn&quot;,<span class="w"> </span><span class="err">&amp;</span>
+<span class="w">            </span>&quot;I<span class="w"> </span>wouldn&#39;t<span class="w"> </span>if<span class="w"> </span>I<span class="w"> </span>were<span class="w"> </span>you,<span class="w"> </span>Will<span class="w"> </span>Robinson.&quot;)
+<span class="w">  </span>call<span class="w"> </span>alert(&quot;info&quot;,<span class="w"> </span><span class="err">&amp;</span>
+<span class="w">            </span>&quot;I<span class="w"> </span>fixed<span class="w"> </span>that<span class="w"> </span>for<span class="w"> </span>you,<span class="w"> </span>but<span class="w"> </span>it<span class="w"> </span>was<span class="w"> </span>a<span class="w"> </span>bad<span class="w"> </span>idea.&quot;)
+<span class="w">  </span>call<span class="w"> </span>alert(&quot;debug&quot;,<span class="w"> </span><span class="err">&amp;</span>
+<span class="w">            </span>&quot;Who<span class="w"> </span>knows<span class="w"> </span>what<span class="w"> </span>is<span class="w"> </span>happening<span class="w"> </span>now?.&quot;)
+<span class="w">  </span>call<span class="w"> </span>alert(&quot;???<span class="w">    </span>&quot;,<span class="w">  </span>&quot;not<span class="w"> </span>today<span class="w"> </span>you<span class="w"> </span>don&#39;t&quot;)
+<span class="w">  </span>!<span class="w"> </span>call<span class="w"> </span>to<span class="w"> </span>just<span class="w"> </span>update<span class="w"> </span>the<span class="w"> </span>macros
+<span class="w">  </span>call<span class="w"> </span>alert()
+<span class="w">  </span>!<span class="w"> </span>conventional<span class="w"> </span>call<span class="w"> </span>to<span class="w"> </span>ATTR(3f)<span class="w"> </span>using<span class="w"> </span>the<span class="w"> </span>ALERT(3f)-defined<span class="w"> </span>macros
+<span class="w">  </span>write(*,*)attr(<span class="err">&amp;</span>
+<span class="w">          </span>&#39;<span class="nt">&lt;bo&gt;</span>The<span class="w"> </span>year<span class="w"> </span>was<span class="w"> </span><span class="nt">&lt;g&gt;&lt;YE&gt;&lt;/g&gt;</span>,<span class="w"> </span>the<span class="w"> </span>month<span class="w"> </span>was<span class="w"> </span><span class="nt">&lt;g&gt;&lt;MO&gt;&lt;/g&gt;</span>&#39;)
+<span class="w">  </span>!<span class="w"> </span>optional<span class="w"> </span>arguments
+<span class="w">  </span>X=211.3
+<span class="w">  </span>call<span class="w"> </span>alert(&#39;error&#39;,<span class="err">&amp;</span>
+<span class="w">          </span>&#39;allowed<span class="w"> </span>range<span class="w"> </span>of<span class="w"> </span>X<span class="w"> </span>is<span class="w"> </span>0<span class="w"> </span><span class="nt">&lt;lt&gt;</span><span class="w"> </span>X<span class="w"> </span><span class="nt">&lt;lt&gt;</span><span class="w"> </span>100,<span class="w"> </span>X=<span class="nt">&lt;r&gt;</span>&#39;,X)
+<span class="w">  </span>!<span class="w"> </span>up<span class="w"> </span>to<span class="w"> </span>twenty<span class="w"> </span>values<span class="w"> </span>are<span class="w"> </span>allowed<span class="w"> </span>of<span class="w"> </span>intrinsic<span class="w"> </span>type
+<span class="w">  </span>call<span class="w"> </span>alert(&#39;info&#39;,&#39;values<span class="w"> </span>are<span class="nt">&lt;g&gt;</span>&#39;,10,234.567,<span class="err">&amp;</span>
+<span class="w">          </span>cmplx(11.0,22.0),123.456d0,&#39;<span class="nt">&lt;/g&gt;</span>today&#39;)
+<span class="w"> </span>end<span class="w"> </span>program<span class="w"> </span>demo_alert
+</code></pre></div>
+
+<p>Results:</p>
+<div class="codehilite"><pre><span></span><code><span class="w"> </span><span class="mo">00</span><span class="o">:</span><span class="mi">38</span><span class="o">:</span><span class="mi">30</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="n">prg</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nf">error</span><span class="w">    </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Say</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">didn</span><span class="s">&#39;t!</span>
+<span class="s"> 00:38:30: (prg) : warning  -&gt; I wouldn&#39;</span><span class="n">t</span><span class="w"> </span><span class="nf">if</span><span class="w"> </span><span class="n">I</span><span class="w"> </span><span class="n">were</span><span class="w"> </span><span class="n">you</span><span class="p">,</span><span class="w"> </span><span class="p">...</span>
+<span class="w">                               </span><span class="n">Will</span><span class="w"> </span><span class="n">Robinson</span><span class="p">.</span>
+<span class="w"> </span><span class="mo">00</span><span class="o">:</span><span class="mi">38</span><span class="o">:</span><span class="mi">30</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="n">prg</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">info</span><span class="w">     </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">I</span><span class="w"> </span><span class="n">fixed</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">for</span><span class="w"> </span><span class="n">you</span><span class="p">,</span><span class="w">  </span><span class="p">...</span>
+<span class="w">                               </span><span class="n">but</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">was</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">bad</span><span class="w"> </span><span class="n">idea</span><span class="p">.</span>
+<span class="w"> </span><span class="mo">00</span><span class="o">:</span><span class="mi">38</span><span class="o">:</span><span class="mi">30</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="n">prg</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">debug</span><span class="w">    </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Who</span><span class="w"> </span><span class="n">knows</span><span class="w"> </span><span class="n">what</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">happening</span><span class="w"> </span><span class="n">now</span><span class="o">?</span><span class="p">.</span><span class="w"> </span><span class="p">...</span>
+<span class="w"> </span><span class="mo">00</span><span class="o">:</span><span class="mi">38</span><span class="o">:</span><span class="mi">30</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="n">prg</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">???</span><span class="w">      </span><span class="o">-&gt;</span><span class="w"> </span><span class="kr">not</span><span class="w"> </span><span class="n">today</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">don</span><span class="s">&#39;t</span>
+<span class="s"> 00:38:30: (prg) : error    -&gt; allowed range of X is 0  X  100, ...</span>
+<span class="s">                               X= 211.300003</span>
+<span class="s"> 00:38:30: (prg) : info     -&gt; values are 10 234.567001 ...</span>
+<span class="s">                               (11.0000000,22.0000000) ...</span>
+<span class="s">                               123.45600000000000 today</span>
+</code></pre></div>
+
+<h2 id="author">AUTHOR</h2>
+<div class="codehilite"><pre><span></span><code>John S. Urban, 2021
+</code></pre></div>
+
+<h2 id="license">LICENSE</h2>
+<div class="codehilite"><pre><span></span><code>MIT
+</code></pre></div>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-type"></span>
+              character(len=*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>type</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-message~2"></span>
+              character(len=*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>message</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-g0"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>g0</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-g1"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>g1</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-g2"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>g2</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-g3"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>g3</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-g4"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>g4</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-g5"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>g5</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-g6"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>g6</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-g7"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>g7</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-g8"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>g8</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-g9"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>g9</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ga"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ga</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-gb"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>gb</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-gc"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>gc</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-gd"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>gd</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ge"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ge</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-gf"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>gf</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-gg"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>gg</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-gh"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>gh</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-gi"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>gi</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-gj"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>gj</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+          </li>
+    </ul>
+  </div>
+
+              <div class="card">
+    <div class="card-header bg-light codesum">
+      <span class="anchor" id="interface-attr"></span>
+      <h3>public        interface <a href='../interface/attr.html'>attr</a> 
+      </h3>
+    </div>
+    <ul class="list-group">
+          <li class="list-group-item">
+                <h3>
+    private  function attr_scalar(string, reset) result(expanded)  
+
+    </h3>
+  <h2 id="name">NAME</h2>
+<div class="codehilite"><pre><span></span><code><span class="n">attr</span><span class="p">(</span><span class="mi">3</span><span class="n">f</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="o">[</span><span class="n">M_attr</span><span class="o">]</span><span class="w"> </span><span class="n">substitute</span><span class="w"> </span><span class="k">escape</span><span class="w"> </span><span class="n">sequences</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">HTML</span><span class="o">-</span><span class="ow">like</span><span class="w"> </span><span class="n">syntax</span>
+<span class="w">           </span><span class="ow">in</span><span class="w"> </span><span class="n">strings</span>
+<span class="p">(</span><span class="nl">LICENSE</span><span class="p">:</span><span class="n">MIT</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="synopsis">SYNOPSIS</h2>
+<div class="codehilite"><pre><span></span><code><span class="w">  </span><span class="k">function</span><span class="w"> </span><span class="nf">attr(string,reset) result </span><span class="p">(</span>expanded<span class="p">)</span>
+
+<span class="w">    </span>!<span class="w"> </span><span class="n">scalar</span>
+<span class="w">    </span><span class="n">character</span><span class="p">(</span><span class="n">len</span><span class="p">=</span><span class="o">*</span><span class="p">),</span><span class="n">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w">  </span><span class="p">::</span><span class="w"> </span><span class="nb">string</span>
+<span class="w">    </span><span class="nb">logical</span><span class="p">,</span><span class="n">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="n">optional</span><span class="w">  </span><span class="p">::</span><span class="w"> </span><span class="nb">reset</span>
+<span class="w">    </span><span class="n">character</span><span class="p">(</span><span class="n">len</span><span class="p">=:),</span><span class="n">allocatable</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">expanded</span>
+<span class="w">    </span>!<span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="n">array</span>
+<span class="w">    </span><span class="n">character</span><span class="p">(</span><span class="n">len</span><span class="p">=</span><span class="o">*</span><span class="p">),</span><span class="n">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w">  </span><span class="p">::</span><span class="w"> </span><span class="nb">string</span><span class="p">(:)</span>
+<span class="w">    </span><span class="nb">logical</span><span class="p">,</span><span class="n">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="n">optional</span><span class="w">  </span><span class="p">::</span><span class="w"> </span><span class="nb">reset</span>
+<span class="w">    </span><span class="n">character</span><span class="p">(</span><span class="n">len</span><span class="p">=:),</span><span class="n">allocatable</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">expanded</span><span class="p">(:)</span>
+<span class="w">    </span><span class="n">integer</span><span class="p">,</span><span class="n">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="n">optional</span><span class="w">  </span><span class="p">::</span><span class="w"> </span><span class="n">chars</span>
+</code></pre></div>
+
+<h2 id="description">DESCRIPTION</h2>
+<div class="codehilite"><pre><span></span><code>Use HTML-like syntax to add attributes to terminal output such as
+color on devices that recognize ANSI escape sequences.
+</code></pre></div>
+
+<h2 id="options">OPTIONS</h2>
+<div class="codehilite"><pre><span></span><code>string<span class="w">        </span>input<span class="w"> </span>string<span class="w">  </span>of<span class="w"> </span>form
+
+<span class="w">                </span>&quot;<span class="nt">&lt;attribute_name&gt;</span>string<span class="nt">&lt;/attribute_name&gt;</span><span class="w"> </span>...&quot;.
+
+<span class="w">               </span>where<span class="w"> </span>the<span class="w"> </span>current<span class="w"> </span>attributes<span class="w"> </span>are<span class="w"> </span>color<span class="w"> </span>names,
+<span class="w">               </span>bold,<span class="w"> </span>italic,<span class="w"> </span>underline,<span class="w"> </span>...
+
+reset<span class="w">          </span>By<span class="w"> </span>default,<span class="w"> </span>a<span class="w"> </span>sequence<span class="w"> </span>to<span class="w"> </span>clear<span class="w"> </span>all<span class="w"> </span>text<span class="w"> </span>attributes
+<span class="w">               </span>is<span class="w"> </span>sent<span class="w"> </span>at<span class="w"> </span>the<span class="w"> </span>end<span class="w"> </span>of<span class="w"> </span>each<span class="w"> </span>returned<span class="w"> </span>line<span class="w"> </span>if<span class="w"> </span>an<span class="w"> </span>escape
+<span class="w">               </span>character<span class="w"> </span>appears<span class="w"> </span>in<span class="w"> </span>the<span class="w"> </span>output<span class="w"> </span>string.<span class="w"> </span>This<span class="w"> </span>can<span class="w"> </span>be
+<span class="w">               </span>turned<span class="w"> </span>off<span class="w"> </span>by<span class="w"> </span>setting<span class="w"> </span>RESET<span class="w"> </span>to<span class="w"> </span>.false.<span class="w"> </span>.
+
+<span class="w">               </span>Note<span class="w"> </span>if<span class="w"> </span>turning<span class="w"> </span>off<span class="w"> </span>the<span class="w"> </span>reset<span class="w"> </span>attributes<span class="w"> </span>may<span class="w"> </span>be
+<span class="w">               </span>continued<span class="w"> </span>across<span class="w"> </span>lines,<span class="w"> </span>but<span class="w"> </span>if<span class="w"> </span>each<span class="w"> </span>line<span class="w"> </span>is<span class="w"> </span>not
+<span class="w">               </span>self-contained<span class="w"> </span>attributes<span class="w"> </span>may<span class="w"> </span>not<span class="w"> </span>display<span class="w"> </span>properly
+<span class="w">               </span>when<span class="w"> </span>filtered<span class="w"> </span>with<span class="w"> </span>commands<span class="w"> </span>such<span class="w"> </span>as<span class="w"> </span>grep(1).
+
+chars<span class="w">          </span>For<span class="w"> </span>arrays,<span class="w"> </span>a<span class="w"> </span>reset<span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>placed<span class="w"> </span>after<span class="w"> </span>the<span class="w"> </span>Nth
+<span class="w">               </span>displayable<span class="w"> </span>column<span class="w"> </span>count<span class="w"> </span>in<span class="w"> </span>order<span class="w"> </span>to<span class="w"> </span>make<span class="w"> </span>it<span class="w"> </span>easier
+<span class="w">               </span>to<span class="w"> </span>generate<span class="w"> </span>consistent<span class="w"> </span>right<span class="w"> </span>borders<span class="w"> </span>for<span class="w"> </span>non-default
+<span class="w">               </span>background<span class="w"> </span>colors<span class="w"> </span>for<span class="w"> </span>a<span class="w"> </span>text<span class="w"> </span>block.
+</code></pre></div>
+
+<h2 id="keywords">KEYWORDS</h2>
+<div class="codehilite"><pre><span></span><code><span class="n">primary</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="n">keywords</span>
+
+<span class="w">  </span><span class="nl">colors:</span>
+<span class="w">    </span><span class="n">r</span><span class="p">,</span><span class="w">         </span><span class="n">red</span><span class="p">,</span><span class="w">       </span><span class="n">R</span><span class="p">,</span><span class="w">  </span><span class="n">RED</span>
+<span class="w">    </span><span class="n">g</span><span class="p">,</span><span class="w">         </span><span class="n">green</span><span class="p">,</span><span class="w">     </span><span class="n">G</span><span class="p">,</span><span class="w">  </span><span class="n">GREEN</span>
+<span class="w">    </span><span class="n">b</span><span class="p">,</span><span class="w">         </span><span class="n">blue</span><span class="p">,</span><span class="w">      </span><span class="n">B</span><span class="p">,</span><span class="w">  </span><span class="n">BLUE</span>
+<span class="w">    </span><span class="n">m</span><span class="p">,</span><span class="w">         </span><span class="n">magenta</span><span class="p">,</span><span class="w">   </span><span class="n">M</span><span class="p">,</span><span class="w">  </span><span class="n">MAGENTA</span>
+<span class="w">    </span><span class="n">c</span><span class="p">,</span><span class="w">         </span><span class="n">cyan</span><span class="p">,</span><span class="w">      </span><span class="n">C</span><span class="p">,</span><span class="w">  </span><span class="n">CYAN</span>
+<span class="w">    </span><span class="n">y</span><span class="p">,</span><span class="w">         </span><span class="n">yellow</span><span class="p">,</span><span class="w">    </span><span class="n">Y</span><span class="p">,</span><span class="w">  </span><span class="n">YELLOW</span>
+<span class="w">    </span><span class="n">e</span><span class="p">,</span><span class="w">         </span><span class="n">ebony</span><span class="p">,</span><span class="w">     </span><span class="n">E</span><span class="p">,</span><span class="w">  </span><span class="n">EBONY</span>
+<span class="w">    </span><span class="n">w</span><span class="p">,</span><span class="w">         </span><span class="n">white</span><span class="p">,</span><span class="w">     </span><span class="n">W</span><span class="p">,</span><span class="w">  </span><span class="n">WHITE</span>
+
+<span class="w">  </span><span class="nl">attributes:</span>
+<span class="w">    </span><span class="n">it</span><span class="p">,</span><span class="w">        </span><span class="n">italic</span>
+<span class="w">    </span><span class="n">bo</span><span class="p">,</span><span class="w">        </span><span class="n">bold</span>
+<span class="w">    </span><span class="n">un</span><span class="p">,</span><span class="w">        </span><span class="n">underline</span>
+
+<span class="w">  </span><span class="n">basic</span><span class="w"> </span><span class="n">control</span><span class="w"> </span><span class="nl">characters:</span>
+<span class="w">   </span><span class="n">nul</span>
+<span class="w">   </span><span class="n">bel</span><span class="w">  </span><span class="p">(</span><span class="mh">0</span><span class="n">x07</span><span class="p">,</span><span class="w"> </span><span class="o">^</span><span class="n">G</span><span class="p">)</span><span class="w"> </span><span class="n">beeps</span><span class="p">;</span>
+<span class="w">   </span><span class="n">bs</span><span class="w">   </span><span class="p">(</span><span class="mh">0</span><span class="n">x08</span><span class="p">,</span><span class="w"> </span><span class="o">^</span><span class="n">H</span><span class="p">)</span><span class="w"> </span><span class="n">backspaces</span><span class="w"> </span><span class="n">one</span><span class="w"> </span><span class="n">column</span><span class="w"> </span><span class="p">(</span><span class="n">but</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">past</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">beginning</span><span class="w"> </span><span class="n">of</span>
+<span class="w">                   </span><span class="n">the</span><span class="w"> </span><span class="n">line</span><span class="p">);</span>
+<span class="w">   </span><span class="n">ht</span><span class="w">   </span><span class="p">(</span><span class="mh">0</span><span class="n">x09</span><span class="p">,</span><span class="w"> </span><span class="o">^</span><span class="n">I</span><span class="p">)</span><span class="w"> </span><span class="n">goes</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">next</span><span class="w"> </span><span class="n">tab</span><span class="w"> </span><span class="n">stop</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="k">if</span>
+<span class="w">                   </span><span class="n">there</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="n">earlier</span><span class="w"> </span><span class="n">tab</span><span class="w"> </span><span class="n">stop</span><span class="p">;</span>
+<span class="w">   </span><span class="n">lf</span><span class="w">   </span><span class="p">(</span><span class="mh">0</span><span class="n">x0A</span><span class="p">,</span><span class="w"> </span><span class="o">^</span><span class="n">J</span><span class="p">),</span>
+<span class="w">   </span><span class="n">vt</span><span class="w">   </span><span class="p">(</span><span class="mh">0</span><span class="n">x0B</span><span class="p">,</span><span class="w"> </span><span class="o">^</span><span class="n">K</span><span class="p">)</span>
+<span class="w">   </span><span class="n">ff</span><span class="w">   </span><span class="p">(</span><span class="mh">0</span><span class="n">x0C</span><span class="p">,</span><span class="w"> </span><span class="o">^</span><span class="n">L</span><span class="p">)</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">give</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">linefeed</span><span class="p">,</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">LF</span><span class="o">/</span><span class="n">NL</span><span class="w"> </span><span class="p">(</span><span class="n">new</span><span class="o">-</span><span class="n">line</span><span class="w"> </span><span class="n">mode</span><span class="p">)</span><span class="w"> </span><span class="n">is</span>
+<span class="w">                   </span><span class="n">set</span><span class="w"> </span><span class="n">also</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">carriage</span><span class="w"> </span><span class="k">return</span>
+<span class="w">   </span><span class="n">cr</span><span class="w">   </span><span class="p">(</span><span class="mh">0</span><span class="n">x0D</span><span class="p">,</span><span class="w"> </span><span class="o">^</span><span class="n">M</span><span class="p">)</span><span class="w"> </span><span class="n">gives</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">carriage</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">   </span><span class="n">so</span><span class="w">   </span><span class="p">(</span><span class="mh">0</span><span class="n">x0E</span><span class="p">,</span><span class="w"> </span><span class="o">^</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="n">activates</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">G1</span><span class="w"> </span><span class="n">character</span><span class="w"> </span><span class="n">set</span><span class="p">;</span>
+<span class="w">   </span><span class="n">si</span><span class="w">   </span><span class="p">(</span><span class="mh">0</span><span class="n">x0F</span><span class="p">,</span><span class="w"> </span><span class="o">^</span><span class="n">O</span><span class="p">)</span><span class="w"> </span><span class="n">activates</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">G0</span><span class="w"> </span><span class="n">character</span><span class="w"> </span><span class="n">set</span><span class="p">;</span>
+<span class="w">   </span><span class="n">can</span><span class="w">  </span><span class="p">(</span><span class="mh">0</span><span class="n">x18</span><span class="p">,</span><span class="w"> </span><span class="o">^</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">SUB</span><span class="w"> </span><span class="p">(</span><span class="mh">0</span><span class="n">x1A</span><span class="p">,</span><span class="w"> </span><span class="o">^</span><span class="n">Z</span><span class="p">)</span><span class="w"> </span><span class="n">interrupt</span><span class="w"> </span><span class="n">escape</span><span class="w"> </span><span class="n">sequences</span><span class="p">;</span>
+<span class="w">   </span><span class="n">sub</span>
+<span class="w">   </span><span class="n">esc</span><span class="w">  </span><span class="p">(</span><span class="mh">0</span><span class="n">x1B</span><span class="p">,</span><span class="w"> </span><span class="o">^</span><span class="p">[)</span><span class="w"> </span><span class="n">starts</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">escape</span><span class="w"> </span><span class="n">sequence</span><span class="p">;</span>
+<span class="w">   </span><span class="n">del</span><span class="w">  </span><span class="p">(</span><span class="mh">0</span><span class="n">x7F</span><span class="p">)</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">ignored</span><span class="p">;</span>
+
+<span class="w">  </span><span class="nl">other:</span>
+<span class="w">    </span><span class="n">clear</span>
+<span class="w">    </span><span class="k">default</span>
+<span class="w">    </span><span class="n">reset</span>
+<span class="w">    </span><span class="n">gt</span>
+<span class="w">    </span><span class="n">lt</span>
+<span class="w">    </span><span class="n">save</span><span class="p">,</span><span class="n">DECSC</span><span class="w">     </span><span class="n">Save</span><span class="w">  </span><span class="n">current</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="p">(</span><span class="n">cursor</span><span class="w"> </span><span class="n">coordinates</span><span class="p">,</span><span class="w"> </span><span class="n">attributes</span><span class="p">,</span>
+<span class="w">                   </span><span class="n">character</span><span class="w"> </span><span class="n">sets</span><span class="w"> </span><span class="n">pointed</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">G0</span><span class="p">,</span><span class="w"> </span><span class="n">G1</span><span class="p">).</span>
+<span class="w">    </span><span class="n">restore</span><span class="p">,</span><span class="n">DECRC</span><span class="w">  </span><span class="n">Restore</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="n">most</span><span class="w"> </span><span class="n">recently</span><span class="w"> </span><span class="n">saved</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">ESC</span><span class="w"> </span><span class="mf">7.</span>
+<span class="w">    </span><span class="n">CSI</span><span class="w">            </span><span class="s">&quot;Control Sequence Introducer&quot;</span><span class="p">(</span><span class="mh">0</span><span class="n">x9B</span><span class="p">)</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">equivalent</span><span class="w"> </span><span class="n">to</span>
+<span class="w">                   </span><span class="s">&quot;ESC [&quot;</span><span class="p">.</span>
+
+<span class="w">  </span><span class="n">dual</span><span class="o">-</span><span class="n">value</span><span class="w"> </span><span class="p">(</span><span class="n">one</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">color</span><span class="p">,</span><span class="w"> </span><span class="n">one</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">mono</span><span class="p">)</span><span class="o">:</span>
+
+<span class="w">    </span><span class="n">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="n">attr</span><span class="p">(&#39;</span><span class="o">&lt;</span><span class="n">ERROR</span><span class="o">&gt;</span><span class="n">an</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="n">message</span><span class="p">&#39;)</span>
+<span class="w">    </span><span class="n">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="n">attr</span><span class="p">(&#39;</span><span class="o">&lt;</span><span class="n">WARNING</span><span class="o">&gt;</span><span class="n">a</span><span class="w"> </span><span class="n">warning</span><span class="w"> </span><span class="n">message</span><span class="p">&#39;)</span>
+<span class="w">    </span><span class="n">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="n">attr</span><span class="p">(&#39;</span><span class="o">&lt;</span><span class="n">INFO</span><span class="o">&gt;</span><span class="n">an</span><span class="w"> </span><span class="n">informational</span><span class="w"> </span><span class="n">message</span><span class="p">&#39;)</span>
+
+<span class="n">By</span><span class="w"> </span><span class="k">default</span><span class="p">,</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="n">mnemonics</span><span class="w"> </span><span class="p">(</span><span class="n">ie</span><span class="p">.</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">keywords</span><span class="p">)</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">uppercase</span>
+<span class="n">they</span><span class="w"> </span><span class="n">change</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">background</span><span class="w"> </span><span class="n">color</span><span class="p">.</span><span class="w"> </span><span class="n">If</span><span class="w"> </span><span class="n">lowercase</span><span class="p">,</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">foreground</span><span class="w"> </span><span class="n">color</span><span class="p">.</span>
+<span class="n">When</span><span class="w"> </span><span class="n">preceded</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="s">&quot;/&quot;</span><span class="w"> </span><span class="n">character</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">attribute</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">returned</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">the</span>
+<span class="k">default</span><span class="p">.</span>
+
+<span class="n">The</span><span class="w"> </span><span class="s">&quot;default&quot;</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">typically</span><span class="w"> </span><span class="n">used</span><span class="w"> </span><span class="n">explicitly</span><span class="w"> </span><span class="n">when</span><span class="w"> </span><span class="n">reset</span><span class="o">=</span><span class="p">.</span><span class="n">false</span><span class="p">,</span>
+<span class="k">and</span><span class="w"> </span><span class="n">sets</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="n">attributes</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">their</span><span class="w"> </span><span class="k">initial</span><span class="w"> </span><span class="n">defaults</span><span class="p">.</span>
+</code></pre></div>
+
+<h2 id="limitations">LIMITATIONS</h2>
+<div class="codehilite"><pre><span></span><code><span class="nv">o</span><span class="w"> </span><span class="nv">colors</span><span class="w"> </span><span class="nv">are</span><span class="w"> </span><span class="nv">not</span><span class="w"> </span><span class="nv">nestable</span>,<span class="w"> </span><span class="nv">keywords</span><span class="w"> </span><span class="nv">are</span><span class="w"> </span><span class="nv">case</span><span class="o">-</span><span class="nv">sensitive</span>,
+<span class="nv">o</span><span class="w"> </span><span class="nv">not</span><span class="w"> </span><span class="nv">all</span><span class="w"> </span><span class="nv">terminals</span><span class="w"> </span><span class="nv">obey</span><span class="w"> </span><span class="nv">the</span><span class="w"> </span><span class="nv">sequences</span>.<span class="w"> </span><span class="nv">On</span><span class="w"> </span><span class="nv">Windows</span>,<span class="w"> </span><span class="nv">it</span><span class="w"> </span><span class="nv">is</span><span class="w"> </span><span class="nv">best</span><span class="w"> </span><span class="k">if</span>
+<span class="w">  </span><span class="nv">you</span><span class="w"> </span><span class="nv">use</span><span class="w"> </span><span class="nv">Windows</span><span class="w"> </span><span class="mi">10</span><span class="o">+</span><span class="w"> </span><span class="nv">and</span><span class="o">/</span><span class="nv">or</span><span class="w"> </span><span class="nv">the</span><span class="w"> </span><span class="nv">Linux</span><span class="w"> </span><span class="nv">mode</span><span class="c1">; although it has worked</span>
+<span class="w">  </span><span class="nv">with</span><span class="w"> </span><span class="nv">all</span><span class="w"> </span><span class="nv">CygWin</span><span class="w"> </span><span class="nv">and</span><span class="w"> </span><span class="nv">MinGW</span><span class="w"> </span><span class="nv">and</span><span class="w"> </span><span class="nv">Putty</span><span class="w"> </span><span class="nv">windows</span><span class="w"> </span><span class="nv">and</span><span class="w"> </span><span class="nv">mintty</span>.
+<span class="nv">o</span><span class="w"> </span><span class="nv">you</span><span class="w"> </span><span class="nv">should</span><span class="w"> </span><span class="nv">use</span><span class="w"> </span><span class="s2">&quot;&lt;gt&gt;&quot;</span><span class="w"> </span><span class="nv">and</span><span class="w"> </span><span class="s2">&quot;&lt;lt&gt;&quot;</span><span class="w"> </span><span class="nv">instead</span><span class="w"> </span><span class="nv">of</span><span class="w"> </span><span class="s2">&quot;&gt;&quot;</span><span class="w"> </span><span class="nv">and</span><span class="w"> </span><span class="s2">&quot;&lt;&quot;</span><span class="w"> </span><span class="nv">in</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nv">string</span>
+<span class="w">  </span><span class="nv">processed</span><span class="w"> </span><span class="nv">by</span><span class="w"> </span><span class="nv">attr</span><span class="ss">(</span><span class="mi">3</span><span class="nv">f</span><span class="ss">)</span><span class="w"> </span><span class="nv">instead</span><span class="w"> </span><span class="nv">of</span><span class="w"> </span><span class="nv">in</span><span class="w"> </span><span class="nv">any</span><span class="w"> </span><span class="nv">plain</span><span class="w"> </span><span class="nv">text</span><span class="w"> </span><span class="nv">output</span><span class="w"> </span><span class="nv">so</span><span class="w"> </span><span class="nv">that</span>
+<span class="w">  </span><span class="nv">the</span><span class="w"> </span><span class="nv">raw</span><span class="w"> </span><span class="nv">mode</span><span class="w"> </span><span class="nv">will</span><span class="w"> </span><span class="nv">create</span><span class="w"> </span><span class="nv">correct</span><span class="w"> </span><span class="nv">input</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nv">the</span><span class="w"> </span><span class="nv">attr</span><span class="ss">(</span><span class="mi">3</span><span class="nv">f</span><span class="ss">)</span><span class="w"> </span><span class="nv">function</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="nv">read</span><span class="w"> </span><span class="nv">back</span><span class="w"> </span><span class="nv">in</span>.
+</code></pre></div>
+
+<h2 id="example">EXAMPLE</h2>
+<div class="codehilite"><pre><span></span><code>Sample<span class="w"> </span>program
+
+<span class="w"> </span>program<span class="w"> </span>demo_attr
+<span class="w"> </span>use<span class="w"> </span>M_attr,<span class="w"> </span>only<span class="w"> </span>:<span class="w"> </span>attr,<span class="w"> </span>attr_mode,<span class="w"> </span>attr_update
+<span class="w">    </span>call<span class="w"> </span>printstuff(&#39;defaults&#39;)
+
+<span class="w">    </span>call<span class="w"> </span>attr_mode(manner=&#39;plain&#39;)
+<span class="w">    </span>call<span class="w"> </span>printstuff(&#39;plain:&#39;)
+
+<span class="w">    </span>call<span class="w"> </span>printstuff(&#39;raw&#39;)
+
+<span class="w">    </span>call<span class="w"> </span>attr_mode(manner=&#39;color&#39;)
+<span class="w">    </span>call<span class="w"> </span>printstuff(&#39;&#39;)
+
+<span class="w">    </span>write(*,&#39;(a)&#39;)<span class="w"> </span>attr(&#39;TEST<span class="w"> </span>ADDING<span class="w"> </span>A<span class="w"> </span>CUSTOM<span class="w"> </span>SEQUENCE:&#39;)
+<span class="w">    </span>call<span class="w"> </span>attr_update(&#39;blink&#39;,char(27)//&#39;[5m&#39;)
+<span class="w">    </span>call<span class="w"> </span>attr_update(&#39;/blink&#39;,char(27)//&#39;[25m&#39;)
+<span class="w">    </span>write(*,&#39;(a)&#39;)<span class="w"> </span>attr(&#39;<span class="nt">&lt;blink&gt;</span>Items<span class="w"> </span>for<span class="w"> </span>Friday<span class="nt">&lt;/blink&gt;</span>&#39;)
+
+<span class="w"> </span>contains
+<span class="w"> </span>subroutine<span class="w"> </span>printstuff(label)
+<span class="w"> </span>character(len=*),intent(in)<span class="w">  </span>::<span class="w"> </span>label
+<span class="w"> </span>character(len=:),allocatable<span class="w"> </span>::<span class="w"> </span>array(:)
+<span class="w">   </span>call<span class="w"> </span>attr_mode(manner=label)
+
+<span class="w">   </span>array=[character(len=60)<span class="w"> </span>::<span class="w">    </span><span class="err">&amp;</span>
+<span class="w">    </span>&#39;TEST<span class="w"> </span>MANNER=&#39;//label,<span class="w">                      </span><span class="err">&amp;</span>
+<span class="w">    </span>&#39;<span class="nt">&lt;r&gt;</span>RED<span class="nt">&lt;/r&gt;</span>,<span class="nt">&lt;g&gt;</span>GREEN<span class="nt">&lt;/g&gt;</span>,<span class="nt">&lt;b&gt;</span>BLUE<span class="nt">&lt;/b&gt;</span>&#39;,<span class="w">      </span><span class="err">&amp;</span>
+<span class="w">    </span>&#39;<span class="nt">&lt;c&gt;</span>CYAN<span class="nt">&lt;/c&gt;</span>,<span class="nt">&lt;m&gt;</span>MAGENTA<span class="nt">&lt;/g&gt;</span>,<span class="nt">&lt;y&gt;</span>YELLOW<span class="nt">&lt;/y&gt;</span>&#39;,<span class="w"> </span><span class="err">&amp;</span>
+<span class="w">    </span>&#39;<span class="nt">&lt;w&gt;</span>WHITE<span class="nt">&lt;/w&gt;</span><span class="w"> </span>and<span class="w"> </span><span class="nt">&lt;e&gt;</span>EBONY<span class="nt">&lt;/e&gt;</span>&#39;]
+<span class="w">   </span>write(*,&#39;(a)&#39;)<span class="w"> </span>attr(array)
+
+<span class="w">   </span>write(*,&#39;(a)&#39;)<span class="w"> </span>attr(&#39;Adding<span class="w"> </span><span class="nt">&lt;bo&gt;</span>bold<span class="nt">&lt;/bo&gt;</span>&#39;)
+<span class="w">   </span>write(*,&#39;(a)&#39;)<span class="w"> </span>attr(&#39;<span class="nt">&lt;bo&gt;&lt;r&gt;</span>RED<span class="nt">&lt;/r&gt;</span>,<span class="nt">&lt;g&gt;</span>GREEN<span class="nt">&lt;/g&gt;</span>,<span class="nt">&lt;b&gt;</span>BLUE<span class="nt">&lt;/b&gt;&lt;/bo&gt;</span>&#39;)
+<span class="w">   </span>write(*,&#39;(a)&#39;)<span class="w"> </span>attr(&#39;<span class="nt">&lt;bo&gt;&lt;c&gt;</span>CYAN<span class="nt">&lt;/c&gt;</span>,<span class="nt">&lt;m&gt;</span>MAGENTA<span class="nt">&lt;/g&gt;</span>,<span class="nt">&lt;y&gt;</span>YELLOW<span class="nt">&lt;/y&gt;&lt;/bo&gt;</span>&#39;)
+<span class="w">   </span>write(*,&#39;(a)&#39;)<span class="w"> </span>attr(&#39;<span class="nt">&lt;bo&gt;&lt;w&gt;</span>WHITE<span class="nt">&lt;/w&gt;</span><span class="w"> </span>and<span class="w"> </span><span class="nt">&lt;e&gt;</span>EBONY<span class="nt">&lt;/e&gt;&lt;/bo&gt;</span>&#39;)
+
+<span class="w">   </span>write(*,&#39;(a)&#39;)<span class="w"> </span>attr(&#39;Adding<span class="w"> </span><span class="nt">&lt;ul&gt;</span>underline<span class="nt">&lt;/ul&gt;</span>&#39;)
+<span class="w">   </span>write(*,&#39;(a)&#39;)<span class="w"> </span>attr(<span class="err">&amp;</span>
+<span class="w">    </span><span class="err">&amp;</span>&#39;<span class="nt">&lt;bo&gt;&lt;ul&gt;&lt;r&gt;</span>RED<span class="nt">&lt;/r&gt;</span>,<span class="nt">&lt;g&gt;</span>GREEN<span class="nt">&lt;/g&gt;</span>,<span class="nt">&lt;b&gt;</span>BLUE<span class="nt">&lt;/b&gt;&lt;/ul&gt;&lt;/bo&gt;</span>&#39;)
+<span class="w">   </span>write(*,&#39;(a)&#39;)<span class="w"> </span>attr(<span class="err">&amp;</span>
+<span class="w">    </span><span class="err">&amp;</span>&#39;<span class="nt">&lt;bo&gt;&lt;ul&gt;&lt;c&gt;</span>CYAN<span class="nt">&lt;/c&gt;</span>,<span class="nt">&lt;m&gt;</span>MAGENTA<span class="nt">&lt;/g&gt;</span>,<span class="nt">&lt;y&gt;</span>YELLOW<span class="nt">&lt;/y&gt;&lt;/ul&gt;&lt;/bo&gt;</span>&#39;)
+<span class="w">   </span>write(*,&#39;(a)&#39;)<span class="w"> </span>attr(&#39;<span class="nt">&lt;bo&gt;&lt;ul&gt;&lt;w&gt;</span>WHITE<span class="nt">&lt;/w&gt;</span><span class="w"> </span>and<span class="w"> </span><span class="nt">&lt;e&gt;</span>EBONY<span class="nt">&lt;/e&gt;&lt;/ul&gt;&lt;/bo&gt;</span>&#39;)
+
+<span class="w">   </span>write(*,&#39;(a)&#39;)<span class="w"> </span>attr(&#39;Adding<span class="w"> </span><span class="nt">&lt;ul&gt;</span>italic<span class="nt">&lt;/ul&gt;</span>&#39;)
+<span class="w">   </span>write(*,&#39;(a)&#39;)<span class="w"> </span>attr(<span class="err">&amp;</span>
+<span class="w">    </span><span class="err">&amp;</span>&#39;<span class="nt">&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;r&gt;</span>RED<span class="nt">&lt;/r&gt;</span>,<span class="nt">&lt;g&gt;</span>GREEN<span class="nt">&lt;/g&gt;</span>,<span class="nt">&lt;b&gt;</span>BLUE<span class="nt">&lt;/b&gt;&lt;/it&gt;&lt;/ul&gt;&lt;/bo&gt;</span>&#39;)
+<span class="w">   </span>write(*,&#39;(a)&#39;)<span class="w"> </span>attr(<span class="err">&amp;</span>
+<span class="w">    </span><span class="err">&amp;</span>&#39;<span class="nt">&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;c&gt;</span>CYAN<span class="nt">&lt;/c&gt;</span>,<span class="nt">&lt;m&gt;</span>MAGENTA<span class="nt">&lt;/g&gt;</span>,<span class="nt">&lt;y&gt;</span>YELLOW<span class="nt">&lt;/it&gt;&lt;/y&gt;&lt;/ul&gt;&lt;/bo&gt;</span>&#39;)
+<span class="w">   </span>write(*,&#39;(a)&#39;)<span class="w"> </span>attr(&#39;<span class="nt">&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;w&gt;</span>WHITE<span class="nt">&lt;/w&gt;</span><span class="w"> </span>and<span class="w"> </span><span class="nt">&lt;e&gt;</span>EBONY<span class="nt">&lt;/e&gt;&lt;/ul&gt;&lt;/bo&gt;</span>&#39;)
+
+<span class="w">   </span>write(*,&#39;(a)&#39;)<span class="w"> </span>attr(&#39;Adding<span class="w"> </span><span class="nt">&lt;in&gt;</span>inverse<span class="nt">&lt;/in&gt;</span>&#39;)
+<span class="w">   </span>write(*,&#39;(a)&#39;)<span class="w"> </span>attr(&#39;<span class="nt">&lt;in&gt;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;r&gt;</span>RED<span class="nt">&lt;/r&gt;</span>,<span class="nt">&lt;g&gt;</span>GREEN<span class="nt">&lt;/g&gt;</span>,<span class="err">&amp;</span>
+<span class="w">    </span><span class="err">&amp;</span><span class="nt">&lt;b&gt;</span>BLUE<span class="nt">&lt;/b&gt;&lt;/it&gt;&lt;/ul&gt;&lt;/bo&gt;&lt;/in&gt;</span>&#39;)
+<span class="w">   </span>write(*,&#39;(a)&#39;)<span class="w"> </span>attr(&#39;<span class="nt">&lt;in&gt;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;c&gt;</span>CYAN<span class="nt">&lt;/c&gt;</span>,<span class="nt">&lt;m&gt;</span>MAGENTA<span class="nt">&lt;/g&gt;</span>,<span class="err">&amp;</span>
+<span class="w">    </span><span class="err">&amp;</span><span class="nt">&lt;y&gt;</span>YELLOW<span class="nt">&lt;/it&gt;&lt;/y&gt;&lt;/ul&gt;&lt;/bo&gt;&lt;/in&gt;</span>&#39;)
+<span class="w">   </span>write(*,&#39;(a)&#39;)<span class="w"> </span>attr(<span class="err">&amp;</span>
+<span class="w">    </span><span class="err">&amp;</span>&#39;<span class="nt">&lt;in&gt;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;w&gt;</span>WHITE<span class="nt">&lt;/w&gt;</span><span class="w"> </span>and<span class="w"> </span><span class="nt">&lt;e&gt;</span>EBONY<span class="nt">&lt;/e&gt;&lt;/ul&gt;&lt;/bo&gt;&lt;/in&gt;</span>&#39;)
+<span class="w"> </span>end<span class="w"> </span>subroutine<span class="w"> </span>printstuff
+<span class="w"> </span>end<span class="w"> </span>program<span class="w"> </span>demo_attr
+</code></pre></div>
+
+<h2 id="author">AUTHOR</h2>
+<div class="codehilite"><pre><span></span><code>John S. Urban, 2021
+</code></pre></div>
+
+<h2 id="license">LICENSE</h2>
+<div class="codehilite"><pre><span></span><code>MIT
+</code></pre></div>
+
+<h2 id="see-also">SEE ALSO</h2>
+<div class="codehilite"><pre><span></span><code>attr_mode(3f), attr_update(3f)
+</code></pre></div>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-string"></span>
+              character(len=*),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>string</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-reset~2"></span>
+              logical,
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>reset</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>character(len=:), allocatable</small>
+    </h4>
+    
+
+          </li>
+          <li class="list-group-item">
+                <h3>
+    private  function attr_matrix(strings, reset, chars) result(expanded)  
+
+    </h3>
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-strings"></span>
+              character(len=*),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>strings</strong>(:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-reset~3"></span>
+              logical,
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>reset</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-chars"></span>
+              integer,
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>chars</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>character(len=:), allocatable, (:)</small>
+    </h4>
+    
+
+          </li>
+          <li class="list-group-item">
+                <h3>
+    private  function attr_scalar_width(string, reset, chars) result(expanded)  
+
+    </h3>
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-string~2"></span>
+              character(len=*),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>string</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-reset~5"></span>
+              logical,
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>reset</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-chars~3"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>chars</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>character(len=:), allocatable</small>
+    </h4>
+    
+
+          </li>
+    </ul>
+  </div>
+
+        </section>
+        <br>
+
+
+
+
+        <section>
+          <h2>Subroutines</h2>
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-alert"></span> <h3>public  subroutine <a href='../proc/alert.html'>alert</a>(type, message, g0, g1, g2, g3, g4, g5, g6, g7, g8, g9, ga, gb, gc, gd, ge, gf, gg, gh, gi, gj)  
+</h3></div>
+    <div class="card-body">
+          
+  <p>!&gt;</p><a href="../proc/alert.html" class="pull-right"><emph>Read more&hellip;</emph></a>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-type"></span>
+              character(len=*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>type</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-message~2"></span>
+              character(len=*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>message</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-g0"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>g0</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-g1"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>g1</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-g2"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>g2</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-g3"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>g3</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-g4"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>g4</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-g5"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>g5</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-g6"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>g6</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-g7"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>g7</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-g8"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>g8</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-g9"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>g9</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ga"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ga</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-gb"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>gb</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-gc"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>gc</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-gd"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>gd</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ge"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ge</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-gf"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>gf</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-gg"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>gg</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-gh"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>gh</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-gi"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>gi</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-gj"></span>
+              class(*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>gj</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-attr_mode"></span> <h3>public  subroutine <a href='../proc/attr_mode.html'>attr_mode</a>(manner)  
+</h3></div>
+    <div class="card-body">
+          
+  <p>!&gt;</p><a href="../proc/attr_mode.html" class="pull-right"><emph>Read more&hellip;</emph></a>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-manner"></span>
+              character(len=*),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>manner</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-attr_update"></span> <h3>public  subroutine <a href='../proc/attr_update.html'>attr_update</a>(key, valin, mono_valin)  
+</h3></div>
+    <div class="card-body">
+          
+  <p>!&gt;</p><a href="../proc/attr_update.html" class="pull-right"><emph>Read more&hellip;</emph></a>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-key"></span>
+              character(len=*),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>key</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-valin"></span>
+              character(len=*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>valin</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-mono_valin"></span>
+              character(len=*),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>mono_valin</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+        </section>
+        <br>
+
+
+
+    </div>
+  </div>
+
+      <hr>
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col"><p>M_attr was developed by John S. Urban<br>&copy; 2024 
+</p>
+          </div>
+          <div class="col">
+            <p class="text-end">
+              Documentation generated by
+              <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+ on 2024-03-03 00:54              </p>
+          </div>
+        </div>
+        <br>
+      </div> <!-- /container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>    
+
+    <!-- MathJax JavaScript
+             ================================================== -->
+             <!-- Placed at the end of the document so the pages load faster -->
+        <script type="text/x-mathjax-config">
+          MathJax.Hub.Config({
+          TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
+          jax: ['input/TeX','input/MathML','output/HTML-CSS'],
+          extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']
+          });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+          <script src="../tipuesearch/tipuesearch_content.js"></script>
+          <script src="../tipuesearch/tipuesearch_set.js"></script>
+          <script src="../tipuesearch/tipuesearch.js"></script>
+
+  </body>
+</html>
