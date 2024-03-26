@@ -12,6 +12,7 @@ homepage = "https://github.com/urbanjost/M_attr.git"
 
 [build]
 external-modules = ["ifport", "dfport"]
+module-naming = true
 
 [install]
 library=true
@@ -21,7 +22,7 @@ name="tat"
 source-dir="app"
 main="tat.f90"
 [executable.dependencies]
-M_CLI2 = { git = "https://github.com/urbanjost/M_CLI2.git" }
+M_CLI2 = { namespace = "GPF" }
 
 [[executable]]
 name="redirect"
@@ -43,4 +44,4 @@ name="test_suite"
 source-dir="test"
 main="test_suite_M_attr.f90"
 [test.dependencies]
-M_framework          = { git = "https://github.com/urbanjost/M_framework.git" }
+M_framework = {namespace = "GPF"}
