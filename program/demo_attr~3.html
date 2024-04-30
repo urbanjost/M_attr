@@ -73,19 +73,19 @@
             <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
               <a data-bs-toggle="tooltip"
                  data-bs-placement="bottom" data-html="true"
-                 title=" 6.4% of total for programs.">37 statements</a>
+                 title=" 2.4% of total for programs.">14 statements</a>
             </li>
 
             <li class="list-inline-item" id="source-file">
               <i class="fa fa-code"></i>
-              <a href="../src/demo_attr.f90"> Source File</a>
+              <a href="../src/plain.f90"> Source File</a>
             </li>
         </ul>
       </div>
       <div class="col">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb justify-content-end mb-0">
-                <li class="breadcrumb-item"><a href='../sourcefile/demo_attr.f90.html'>demo_attr.f90</a></li>
+                <li class="breadcrumb-item"><a href='../sourcefile/plain.f90.html'>plain.f90</a></li>
             <li class="breadcrumb-item active" aria-current="page">demo_attr</li>
           </ol>
         </nav>
@@ -105,29 +105,30 @@
       <div id="sidebar">
       <h3>Contents</h3>
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
       <div class="card mb-4">
-      <a data-bs-toggle="collapse" href="#subs-0"
-         aria-expanded="false" aria-controls="subs-0">
-         <h4 class="card-header bg-primary text-white">Subroutines</h4>
+      <a data-bs-toggle="collapse" href="#vars-0"
+         aria-expanded="false" aria-controls="vars-0">
+         <h4 class="card-header bg-primary text-white">Variables</h4>
       </a>
-      <div id="subs-0" class="collapse">
+      <div id="vars-0" class="collapse">
         <div class="list-group list-group-flush">
-            <a class="list-group-item" href="../program/demo_attr~3.html#proc-printstuff">printstuff</a>
+            <a class="list-group-item" href="../program/demo_attr~3.html#variable-ios~3">ios</a>
+            <a class="list-group-item" href="../program/demo_attr~3.html#variable-line~5">line</a>
         </div>
       </div>
     </div>
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -164,118 +165,81 @@
     
 
 
-    
-    
-    
-
-    
-
-
     <section>
-    <h2>Subroutines</h2>
-      <div class="card">
-    <div class="card-header codesum"><span class="anchor" id="proc-printstuff"></span> <h3> subroutine <a href='../proc/printstuff.html'>printstuff</a>(label)  
-</h3></div>
-    <div class="card-body">
-          
-  
-
-  <h4>Arguments</h4>
+    <h2>Variables</h2>
       <table class="table table-striped varlist">
     <thead>
       <tr>
         <th scope="col">Type</th>
-<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col">Attributes</th>
         <th scope="col"></th>
         <th scope="col">Name</th>
-        <th scope="col"></th>
+<th></th><th scope="col">Initial</th>        <th scope="col"></th>
     </thead>
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-label"></span>
-              character(len=*),
+              <span class="anchor" id="variable-ios~3"></span>
+              integer
             </td>
-<td>intent(in)</td>
-              <td></td>            <td>
+            <td>
               
             </td>
             <td>::</td>
-            <td><strong>label</strong></td>
+            <td><strong>ios</strong></td>
+                <td></td>
+                <td></td>
             <td>
-
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-line~5"></span>
+              character(len=1024)
+            </td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>line</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
             </td>
         </tr>
     </tbody>
   </table>
 
+    </section>
+    <br>
+    
+    
+    
 
-    </div>
-  </div>
+    
 
-    </section>    
+
     
 
     <section>
     <h2 id="src">Source Code</h2>
-    <div class="hl codehilite"><pre><span></span><span class="w">      </span><span class="k">program </span><span class="n">demo_attr</span>
-<span class="w">      </span><span class="k">use </span><span class="n">M_attr</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">attr</span><span class="p">,</span><span class="w"> </span><span class="n">attr_mode</span><span class="p">,</span><span class="w"> </span><span class="n">attr_update</span>
-<span class="w">         </span><span class="k">call </span><span class="n">printstuff</span><span class="p">(</span><span class="s1">&#39;defaults&#39;</span><span class="p">)</span>
-
-<span class="w">         </span><span class="k">call </span><span class="n">attr_mode</span><span class="p">(</span><span class="n">manner</span><span class="o">=</span><span class="s1">&#39;plain&#39;</span><span class="p">)</span>
-<span class="w">         </span><span class="k">call </span><span class="n">printstuff</span><span class="p">(</span><span class="s1">&#39;plain:&#39;</span><span class="p">)</span>
-
-<span class="w">         </span><span class="k">call </span><span class="n">printstuff</span><span class="p">(</span><span class="s1">&#39;raw&#39;</span><span class="p">)</span>
-
-<span class="w">         </span><span class="k">call </span><span class="n">attr_mode</span><span class="p">(</span><span class="n">manner</span><span class="o">=</span><span class="s1">&#39;color&#39;</span><span class="p">)</span>
-<span class="w">         </span><span class="k">call </span><span class="n">printstuff</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-
-<span class="w">         </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;TEST ADDING A CUSTOM SEQUENCE:&#39;</span><span class="p">)</span>
-<span class="w">         </span><span class="k">call </span><span class="n">attr_update</span><span class="p">(</span><span class="s1">&#39;blink&#39;</span><span class="p">,</span><span class="nb">char</span><span class="p">(</span><span class="mi">27</span><span class="p">)</span><span class="o">//</span><span class="s1">&#39;[5m&#39;</span><span class="p">)</span>
-<span class="w">         </span><span class="k">call </span><span class="n">attr_update</span><span class="p">(</span><span class="s1">&#39;/blink&#39;</span><span class="p">,</span><span class="nb">char</span><span class="p">(</span><span class="mi">27</span><span class="p">)</span><span class="o">//</span><span class="s1">&#39;[25m&#39;</span><span class="p">)</span>
-<span class="w">         </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;blink&gt;Items for Friday&lt;/blink&gt;&#39;</span><span class="p">)</span>
-
-<span class="w">      </span><span class="k">contains</span>
-<span class="k">      subroutine </span><span class="n">printstuff</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
-<span class="w">      </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=*</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w">  </span><span class="kd">::</span><span class="w"> </span><span class="n">label</span>
-<span class="w">      </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="p">:),</span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="k">array</span><span class="p">(:)</span>
-<span class="w">        </span><span class="k">call </span><span class="n">attr_mode</span><span class="p">(</span><span class="n">manner</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
-
-<span class="w">        </span><span class="k">array</span><span class="o">=</span><span class="p">[</span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w">    </span><span class="p">&amp;</span>
-<span class="w">         </span><span class="s1">&#39;TEST MANNER=&#39;</span><span class="o">//</span><span class="n">label</span><span class="p">,</span><span class="w">                      </span><span class="p">&amp;</span>
-<span class="w">         </span><span class="s1">&#39;&lt;r&gt;RED&lt;/r&gt;,&lt;g&gt;GREEN&lt;/g&gt;,&lt;b&gt;BLUE&lt;/b&gt;&#39;</span><span class="p">,</span><span class="w">      </span><span class="p">&amp;</span>
-<span class="w">         </span><span class="s1">&#39;&lt;c&gt;CYAN&lt;/c&gt;,&lt;m&gt;MAGENTA&lt;/g&gt;,&lt;y&gt;YELLOW&lt;/y&gt;&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
-<span class="w">         </span><span class="s1">&#39;&lt;w&gt;WHITE&lt;/w&gt; and &lt;e&gt;EBONY&lt;/e&gt;&#39;</span><span class="p">]</span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="k">array</span><span class="p">)</span>
-
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;Adding &lt;bo&gt;bold&lt;/bo&gt;&#39;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;bo&gt;&lt;r&gt;RED&lt;/r&gt;,&lt;g&gt;GREEN&lt;/g&gt;,&lt;b&gt;BLUE&lt;/b&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;bo&gt;&lt;c&gt;CYAN&lt;/c&gt;,&lt;m&gt;MAGENTA&lt;/g&gt;,&lt;y&gt;YELLOW&lt;/y&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;bo&gt;&lt;w&gt;WHITE&lt;/w&gt; and &lt;e&gt;EBONY&lt;/e&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
-
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;Adding &lt;ul&gt;underline&lt;/ul&gt;&#39;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(&amp;</span>
-<span class="w">         </span><span class="p">&amp;</span><span class="s1">&#39;&lt;bo&gt;&lt;ul&gt;&lt;r&gt;RED&lt;/r&gt;,&lt;g&gt;GREEN&lt;/g&gt;,&lt;b&gt;BLUE&lt;/b&gt;&lt;/ul&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(&amp;</span>
-<span class="w">         </span><span class="p">&amp;</span><span class="s1">&#39;&lt;bo&gt;&lt;ul&gt;&lt;c&gt;CYAN&lt;/c&gt;,&lt;m&gt;MAGENTA&lt;/g&gt;,&lt;y&gt;YELLOW&lt;/y&gt;&lt;/ul&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;bo&gt;&lt;ul&gt;&lt;w&gt;WHITE&lt;/w&gt; and &lt;e&gt;EBONY&lt;/e&gt;&lt;/ul&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
-
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;Adding &lt;ul&gt;italic&lt;/ul&gt;&#39;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(&amp;</span>
-<span class="w">         </span><span class="p">&amp;</span><span class="s1">&#39;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;r&gt;RED&lt;/r&gt;,&lt;g&gt;GREEN&lt;/g&gt;,&lt;b&gt;BLUE&lt;/b&gt;&lt;/it&gt;&lt;/ul&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(&amp;</span>
-<span class="w">         </span><span class="p">&amp;</span><span class="s1">&#39;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;c&gt;CYAN&lt;/c&gt;,&lt;m&gt;MAGENTA&lt;/g&gt;,&lt;y&gt;YELLOW&lt;/it&gt;&lt;/y&gt;&lt;/ul&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;w&gt;WHITE&lt;/w&gt; and &lt;e&gt;EBONY&lt;/e&gt;&lt;/ul&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
-
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;Adding &lt;in&gt;inverse&lt;/in&gt;&#39;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;in&gt;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;r&gt;RED&lt;/r&gt;,&lt;g&gt;GREEN&lt;/g&gt;,&amp;</span>
-<span class="s1">         &amp;&lt;b&gt;BLUE&lt;/b&gt;&lt;/it&gt;&lt;/ul&gt;&lt;/bo&gt;&lt;/in&gt;&#39;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;in&gt;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;c&gt;CYAN&lt;/c&gt;,&lt;m&gt;MAGENTA&lt;/g&gt;,&amp;</span>
-<span class="s1">         &amp;&lt;y&gt;YELLOW&lt;/it&gt;&lt;/y&gt;&lt;/ul&gt;&lt;/bo&gt;&lt;/in&gt;&#39;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(&amp;</span>
-<span class="w">         </span><span class="p">&amp;</span><span class="s1">&#39;&lt;in&gt;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;w&gt;WHITE&lt;/w&gt; and &lt;e&gt;EBONY&lt;/e&gt;&lt;/ul&gt;&lt;/bo&gt;&lt;/in&gt;&#39;</span><span class="p">)</span>
-<span class="w">      </span><span class="k">end subroutine </span><span class="n">printstuff</span>
-<span class="w">      </span><span class="k">end program </span><span class="n">demo_attr</span>
+    <div class="hl codehilite"><pre><span></span><span class="k">program </span><span class="n">demo_attr</span>
+<span class="c">! read stdin and run it through M_attr::attr to display without color</span>
+<span class="k">use </span><span class="n">M_attr</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">attr</span><span class="p">,</span><span class="w"> </span><span class="n">attr_mode</span>
+<span class="k">implicit none</span>
+<span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">line</span>
+<span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ios</span>
+<span class="w">   </span><span class="n">line</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+<span class="w">   </span><span class="k">call </span><span class="n">attr_mode</span><span class="p">(</span><span class="n">manner</span><span class="o">=</span><span class="s1">&#39;plain&#39;</span><span class="p">)</span>
+<span class="w">   </span><span class="k">do </span>
+<span class="k">      read</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">ios</span><span class="p">)</span><span class="n">line</span>
+<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="n">ios</span><span class="p">.</span><span class="n">ne</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span><span class="k">exit</span>
+<span class="k">      write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="nb">trim</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
+<span class="w">   </span><span class="k">enddo</span>
+<span class="k">   write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">,</span><span class="n">advance</span><span class="o">=</span><span class="s1">&#39;no&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;reset&gt;&#39;</span><span class="p">)</span>
+<span class="k">end program </span><span class="n">demo_attr</span>
 </pre></div>
 
     </section>
@@ -295,7 +259,7 @@
             <p class="text-end">
               Documentation generated by
               <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
- on 2024-03-29 03:43              </p>
+ on 2024-03-29 03:51              </p>
           </div>
         </div>
         <br>

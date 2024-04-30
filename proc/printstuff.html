@@ -74,20 +74,20 @@
             <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
               <a data-bs-toggle="tooltip"
                  data-bs-placement="bottom" data-html="true"
-                 title=" 5.9% of total for procedures.">23 statements</a>
+                 title=" 5.4% of total for procedures.">21 statements</a>
             </li>
 
             <li class="list-inline-item" id="source-file">
               <i class="fa fa-code"></i>
-              <a href="../src/demo_attr.f90"> Source File</a>
+              <a href="../src/mixed.f90"> Source File</a>
             </li>
         </ul>
       </div>
       <div class="col">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb justify-content-end mb-0">
-                <li class="breadcrumb-item"><a href='../sourcefile/demo_attr.f90.html'>demo_attr.f90</a></li>
-                <li class="breadcrumb-item"><a href='../program/demo_attr~3.html'>demo_attr</a></li>
+                <li class="breadcrumb-item"><a href='../sourcefile/mixed.f90.html'>mixed.f90</a></li>
+                <li class="breadcrumb-item"><a href='../program/demo_m_attrape.html'>demo_M_attrape</a></li>
             <li class="breadcrumb-item active" aria-current="page">printstuff</li>
           </ol>
         </nav>
@@ -107,18 +107,7 @@
       <div id="sidebar">
       <h3>Contents</h3>
   
-      <div class="card mb-4">
-      <a data-bs-toggle="collapse" href="#vars-0"
-         aria-expanded="false" aria-controls="vars-0">
-         <h4 class="card-header bg-primary text-white">Variables</h4>
-      </a>
-      <div id="vars-0" class="collapse">
-        <div class="list-group list-group-flush">
-            <a class="list-group-item" href="../proc/printstuff.html#variable-array">array</a>
-        </div>
-      </div>
-    </div>
-
+  
   
   
   
@@ -150,78 +139,18 @@
     </div>
     
     <div class="col-md-9" id='text'>
-    <h2> subroutine printstuff(label)  
+    <h2> subroutine printstuff()  
 </h2>
     
 
 
 
     <h3>Arguments</h3>
-        <table class="table table-striped varlist">
-    <thead>
-      <tr>
-        <th scope="col">Type</th>
-<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
-        <th scope="col"></th>
-        <th scope="col">Name</th>
-        <th scope="col"></th>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-              <span class="anchor" id="variable-label"></span>
-              character(len=*),
-            </td>
-<td>intent(in)</td>
-              <td></td>            <td>
-              
-            </td>
-            <td>::</td>
-            <td><strong>label</strong></td>
-            <td>
-                
-            </td>
-        </tr>
-    </tbody>
-  </table>
-
+    <em>None</em>
+    <br>
     <br>
 
 
-    <section>    
-      <h2>Variables</h2>
-      <table class="table table-striped varlist">
-    <thead>
-      <tr>
-        <th scope="col">Type</th>
-<th scope="col">Visibility</th>        <th scope="col">Attributes</th>
-        <th scope="col"></th>
-        <th scope="col">Name</th>
-<th></th><th scope="col">Initial</th>        <th scope="col"></th>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-              <span class="anchor" id="variable-array"></span>
-              character(len=:),
-            </td>
-              <td>public,</td>
-            <td>
-              allocatable
-            </td>
-            <td>::</td>
-            <td><strong>array</strong>(:)</td>
-                <td></td>
-                <td></td>
-            <td>
-                
-            </td>
-        </tr>
-    </tbody>
-  </table>
-
-    </section>
-    <br>
     
     
 
@@ -233,45 +162,32 @@
     
     <section>
     <h2><span class="anchor" id="src"></span>Source Code</h2>
-    <div class="hl codehilite"><pre><span></span><span class="w">      </span><span class="k">subroutine </span><span class="n">printstuff</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
-<span class="w">      </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=*</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w">  </span><span class="kd">::</span><span class="w"> </span><span class="n">label</span>
-<span class="w">      </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="p">:),</span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="k">array</span><span class="p">(:)</span>
-<span class="w">        </span><span class="k">call </span><span class="n">attr_mode</span><span class="p">(</span><span class="n">manner</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+    <div class="hl codehilite"><pre><span></span><span class="w">          </span><span class="k">subroutine </span><span class="n">printstuff</span><span class="p">()</span>
 
-<span class="w">        </span><span class="k">array</span><span class="o">=</span><span class="p">[</span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w">    </span><span class="p">&amp;</span>
-<span class="w">         </span><span class="s1">&#39;TEST MANNER=&#39;</span><span class="o">//</span><span class="n">label</span><span class="p">,</span><span class="w">                      </span><span class="p">&amp;</span>
-<span class="w">         </span><span class="s1">&#39;&lt;r&gt;RED&lt;/r&gt;,&lt;g&gt;GREEN&lt;/g&gt;,&lt;b&gt;BLUE&lt;/b&gt;&#39;</span><span class="p">,</span><span class="w">      </span><span class="p">&amp;</span>
-<span class="w">         </span><span class="s1">&#39;&lt;c&gt;CYAN&lt;/c&gt;,&lt;m&gt;MAGENTA&lt;/g&gt;,&lt;y&gt;YELLOW&lt;/y&gt;&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
-<span class="w">         </span><span class="s1">&#39;&lt;w&gt;WHITE&lt;/w&gt; and &lt;e&gt;EBONY&lt;/e&gt;&#39;</span><span class="p">]</span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="k">array</span><span class="p">)</span>
+<span class="w">             </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;r&gt;RED&lt;/r&gt;,&lt;g&gt;GREEN&lt;/g&gt;,&lt;b&gt;BLUE&lt;/b&gt;&#39;</span><span class="p">)</span>
+<span class="w">             </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;c&gt;CYAN&lt;/c&gt;,&lt;m&gt;MAGENTA&lt;/g&gt;,&lt;y&gt;YELLOW&lt;/y&gt;&#39;</span><span class="p">)</span>
+<span class="w">             </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;w&gt;WHITE&lt;/w&gt; and &lt;e&gt;EBONY&lt;/e&gt;&#39;</span><span class="p">)</span>
 
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;Adding &lt;bo&gt;bold&lt;/bo&gt;&#39;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;bo&gt;&lt;r&gt;RED&lt;/r&gt;,&lt;g&gt;GREEN&lt;/g&gt;,&lt;b&gt;BLUE&lt;/b&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;bo&gt;&lt;c&gt;CYAN&lt;/c&gt;,&lt;m&gt;MAGENTA&lt;/g&gt;,&lt;y&gt;YELLOW&lt;/y&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;bo&gt;&lt;w&gt;WHITE&lt;/w&gt; and &lt;e&gt;EBONY&lt;/e&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
+<span class="w">             </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;Adding &lt;bo&gt;bold&lt;/bo&gt;&#39;</span><span class="p">)</span>
+<span class="w">             </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;bo&gt;&lt;r&gt;RED&lt;/r&gt;,&lt;g&gt;GREEN&lt;/g&gt;,&lt;b&gt;BLUE&lt;/b&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
+<span class="w">             </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;bo&gt;&lt;c&gt;CYAN&lt;/c&gt;,&lt;m&gt;MAGENTA&lt;/g&gt;,&lt;y&gt;YELLOW&lt;/y&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
+<span class="w">             </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;bo&gt;&lt;w&gt;WHITE&lt;/w&gt; and &lt;e&gt;EBONY&lt;/e&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
 
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;Adding &lt;ul&gt;underline&lt;/ul&gt;&#39;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(&amp;</span>
-<span class="w">         </span><span class="p">&amp;</span><span class="s1">&#39;&lt;bo&gt;&lt;ul&gt;&lt;r&gt;RED&lt;/r&gt;,&lt;g&gt;GREEN&lt;/g&gt;,&lt;b&gt;BLUE&lt;/b&gt;&lt;/ul&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(&amp;</span>
-<span class="w">         </span><span class="p">&amp;</span><span class="s1">&#39;&lt;bo&gt;&lt;ul&gt;&lt;c&gt;CYAN&lt;/c&gt;,&lt;m&gt;MAGENTA&lt;/g&gt;,&lt;y&gt;YELLOW&lt;/y&gt;&lt;/ul&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;bo&gt;&lt;ul&gt;&lt;w&gt;WHITE&lt;/w&gt; and &lt;e&gt;EBONY&lt;/e&gt;&lt;/ul&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
+<span class="w">             </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;Adding &lt;ul&gt;underline&lt;/ul&gt;&#39;</span><span class="p">)</span>
+<span class="w">             </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;bo&gt;&lt;ul&gt;&lt;r&gt;RED&lt;/r&gt;,&lt;g&gt;GREEN&lt;/g&gt;,&lt;b&gt;BLUE&lt;/b&gt;&lt;/ul&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
+<span class="w">             </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;bo&gt;&lt;ul&gt;&lt;c&gt;CYAN&lt;/c&gt;,&lt;m&gt;MAGENTA&lt;/g&gt;,&lt;y&gt;YELLOW&lt;/y&gt;&lt;/ul&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
+<span class="w">             </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;bo&gt;&lt;ul&gt;&lt;w&gt;WHITE&lt;/w&gt; and &lt;e&gt;EBONY&lt;/e&gt;&lt;/ul&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
 
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;Adding &lt;ul&gt;italic&lt;/ul&gt;&#39;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(&amp;</span>
-<span class="w">         </span><span class="p">&amp;</span><span class="s1">&#39;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;r&gt;RED&lt;/r&gt;,&lt;g&gt;GREEN&lt;/g&gt;,&lt;b&gt;BLUE&lt;/b&gt;&lt;/it&gt;&lt;/ul&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(&amp;</span>
-<span class="w">         </span><span class="p">&amp;</span><span class="s1">&#39;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;c&gt;CYAN&lt;/c&gt;,&lt;m&gt;MAGENTA&lt;/g&gt;,&lt;y&gt;YELLOW&lt;/it&gt;&lt;/y&gt;&lt;/ul&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;w&gt;WHITE&lt;/w&gt; and &lt;e&gt;EBONY&lt;/e&gt;&lt;/ul&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
+<span class="w">             </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;Adding &lt;ul&gt;italic&lt;/ul&gt;&#39;</span><span class="p">)</span>
+<span class="w">             </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;r&gt;RED&lt;/r&gt;,&lt;g&gt;GREEN&lt;/g&gt;,&lt;b&gt;BLUE&lt;/b&gt;&lt;/it&gt;&lt;/ul&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
+<span class="w">             </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;c&gt;CYAN&lt;/c&gt;,&lt;m&gt;MAGENTA&lt;/g&gt;,&lt;y&gt;YELLOW&lt;/it&gt;&lt;/y&gt;&lt;/ul&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
+<span class="w">             </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;w&gt;WHITE&lt;/w&gt; and &lt;e&gt;EBONY&lt;/e&gt;&lt;/ul&gt;&lt;/bo&gt;&#39;</span><span class="p">)</span>
 
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;Adding &lt;in&gt;inverse&lt;/in&gt;&#39;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;in&gt;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;r&gt;RED&lt;/r&gt;,&lt;g&gt;GREEN&lt;/g&gt;,&amp;</span>
-<span class="s1">         &amp;&lt;b&gt;BLUE&lt;/b&gt;&lt;/it&gt;&lt;/ul&gt;&lt;/bo&gt;&lt;/in&gt;&#39;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;in&gt;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;c&gt;CYAN&lt;/c&gt;,&lt;m&gt;MAGENTA&lt;/g&gt;,&amp;</span>
-<span class="s1">         &amp;&lt;y&gt;YELLOW&lt;/it&gt;&lt;/y&gt;&lt;/ul&gt;&lt;/bo&gt;&lt;/in&gt;&#39;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(&amp;</span>
-<span class="w">         </span><span class="p">&amp;</span><span class="s1">&#39;&lt;in&gt;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;w&gt;WHITE&lt;/w&gt; and &lt;e&gt;EBONY&lt;/e&gt;&lt;/ul&gt;&lt;/bo&gt;&lt;/in&gt;&#39;</span><span class="p">)</span>
-<span class="w">      </span><span class="k">end subroutine </span><span class="n">printstuff</span>
+<span class="w">             </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;Adding &lt;in&gt;inverse&lt;/in&gt;&#39;</span><span class="p">)</span>
+<span class="w">             </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;in&gt;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;r&gt;RED&lt;/r&gt;,&lt;g&gt;GREEN&lt;/g&gt;,&lt;b&gt;BLUE&lt;/b&gt;&lt;/it&gt;&lt;/ul&gt;&lt;/bo&gt;&lt;/in&gt;&#39;</span><span class="p">)</span>
+<span class="w">             </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;in&gt;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;c&gt;CYAN&lt;/c&gt;,&lt;m&gt;MAGENTA&lt;/g&gt;,&lt;y&gt;YELLOW&lt;/it&gt;&lt;/y&gt;&lt;/ul&gt;&lt;/bo&gt;&lt;/in&gt;&#39;</span><span class="p">)</span>
+<span class="w">             </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;in&gt;&lt;bo&gt;&lt;ul&gt;&lt;it&gt;&lt;w&gt;WHITE&lt;/w&gt; and &lt;e&gt;EBONY&lt;/e&gt;&lt;/ul&gt;&lt;/bo&gt;&lt;/in&gt;&#39;</span><span class="p">)</span>
+<span class="w">       </span><span class="k">end subroutine </span><span class="n">printstuff</span><span class="w"> </span>
 </pre></div>
 
     </section>
@@ -292,7 +208,7 @@
             <p class="text-end">
               Documentation generated by
               <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
- on 2024-03-29 03:43              </p>
+ on 2024-03-29 03:51              </p>
           </div>
         </div>
         <br>
