@@ -56,12 +56,9 @@ or simply as HTML
    - [attr_update](https://urbanjost.github.io/M_attr/attr_update.3m_attr.html)  -- customizing
    - [alert](https://urbanjost.github.io/M_attr/alert.3m_attr.html)  -- standard INFO, WARNING, ERROR format ![alert](docs/images/alert.gif)
 
-#### real man-pages
----
-![gmake](docs/images/manpages.gif)
 ---
 
-Documents may be installed as man-pages on Unix-like systems with a man(1) command:
+![gmake](docs/images/manpages.gif) Documents may be installed as man-pages on Unix-like systems with a man(1) command:
 
    + [manpages.zip](https://urbanjost.github.io/M_attr/manpages.zip)
    + [manpages.tgz](https://urbanjost.github.io/M_attr/manpages.tgz)
@@ -79,8 +76,7 @@ Documents may be installed as man-pages on Unix-like systems with a man(1) comma
 ---
 ![gmake](docs/images/gnu.gif)
 ---
-
-### gmake
+   compile the M_attr module and example programs using make(1):
    ```bash
        git clone https://github.com/urbanjost/M_attr.git
        cd M_attr/src
@@ -89,27 +85,27 @@ Documents may be installed as man-pages on Unix-like systems with a man(1) comma
        make clean; make ifort       # for ifort
        make clean; make nvfortran   # for nvfortran
    ```
-   This will compile the M_attr module and example programs.
+
 ---
 ![fpm](docs/images/fpm_logo.gif)
 ---
 
 ### fpm
 
-   Alternatively, download the github repository and build it with
-   fpm ( as described at [Fortran Package Manager](https://github.com/fortran-lang/fpm) )
+   download the github repository and build it with
+   [Fortran Package Manager](https://github.com/fortran-lang/fpm)
 
-   ```bash
-        git clone https://github.com/urbanjost/M_attr.git
-        cd M_attr
-        fpm test
-   ```
+```bash
+   git clone https://github.com/urbanjost/M_attr.git
+   cd M_attr
+   fpm test
+```
 
    or just list it as a dependency in your fpm.toml project file.
 
 ```toml
-        [dependencies]
-        M_attr        = { git = "https://github.com/urbanjost/M_attr.git" }
+   [dependencies]
+   M_attr        = { git = "https://github.com/urbanjost/M_attr.git" }
 ```
 
 ## Demo Programs
