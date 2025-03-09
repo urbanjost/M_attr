@@ -29,6 +29,7 @@ jobs:
     - name: Install fpm
       run: |
            echo PATH %PATH%
+	   echo
            pwd
            curl https://raw.githubusercontent.com/lockstockandbarrel/mars/main/bootstrap/fpm_debug.F90 --output fpm.F90
            mkdir tmp
@@ -39,6 +40,7 @@ jobs:
     - name: Display environment
       run: |
         echo PATH %PATH%
+	echo
         pwd
         uname -a
         echo "end" > foo.f90
