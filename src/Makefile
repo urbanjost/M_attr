@@ -1,4 +1,4 @@
-#@(#) make(1) rules for maintaining a FORTRAN90/C library. Makefile started by makeout(1) 2020-01-14 01:11:41
+#@(#) make(1) rules for maintaining a FORTRAN90/C library. Makefile started by makeout(1) 2025-01-14 01:11:41
 NULL=
 PROGFILES = $(wildcard ../app/*.f90) $(wildcard ../example/*.f90) $(wildcard ../example/*/*.F90)
 PROG = ${PROGFILES:.f90=}

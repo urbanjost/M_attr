@@ -35,8 +35,8 @@
 ![docs](docs/images/docs.gif)
 ---
 
-## Documentation 
-### User 
+## Documentation
+### User
 
 All documents are contained in the docs/ directory including
 archive files of man(1) pages that can be installed on ULS
@@ -48,7 +48,7 @@ or viewed as a single document:
    - [_book_](https://urbanjost.github.io/M_attr/BOOK_M_attr.html)
 
 Which is also available as indexed HTML documents
-   - [index](https://urbanjost.github.io/M_attr/man3.html) 
+   - [index](https://urbanjost.github.io/M_attr/man3.html)
 or simply as HTML
    - [M_attr](https://urbanjost.github.io/M_attr/M_attr.3m_attr.html)  -- An overview of the M_attr module
    - [attr](https://urbanjost.github.io/M_attr/attr.3m_attr.html)  -- the main function
@@ -108,10 +108,9 @@ or simply as HTML
    M_attr        = { git = "https://github.com/urbanjost/M_attr.git" }
 ```
 
+---
 ## Demo Programs
----
 ![demos](docs/images/demo.gif)
----
 
 The included demo programs provide templates for the most common usage:
 
@@ -195,8 +194,6 @@ or terminal emulator:
 
 ---
 
-##### + [Wiki](https://github.com/urbanjost/M_attr/wiki)
-##### + [Issues](https://github.com/urbanjost/M_attr/issues)
-##### + [CHANGELOG](docs/CHANGELOG.md)
-##### + [Build Status](docs/STATUS.md)
++ [CHANGELOG](docs/CHANGELOG.md)
++ [Build Status](docs/STATUS.md)
 ![sample](docs/images/snap2b.gif)

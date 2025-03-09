@@ -40,7 +40,8 @@ jobs:
            echo $PATH
            pwd
            uname -a
-           wget https://raw.githubusercontent.com/urbanjost/index/main/bootstrap/fpm.F90
+           #wget https://raw.githubusercontent.com/urbanjost/index/main/bootstrap/fpm.F90
+           wget https://raw.githubusercontent.com/lockstockandbarrel/mars/main/bootstrap/fpm.F90
            mkdir -p tmp
            gfortran fpm.F90 -Jtmp -Itmp -static -o fpm
            rm -f tmp/*.mod
@@ -70,5 +71,5 @@ jobs:
         FC: gfortran
         TZ: UTC+04:00
 
-    - name: cleanup 
+    - name: cleanup
       run: ls -ltras
