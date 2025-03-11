@@ -53,6 +53,8 @@ jobs:
            source /opt/intel/oneapi/setvars.sh --force
            which ifort || echo no ifort
            which ifx || echo no ifx
+           which icc || echo no icc
+	   find /opt/intel .|grep ifx
            echo $PATH
            pwd
            uname -a
