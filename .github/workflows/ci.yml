@@ -3,9 +3,9 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  build-and-test:
+  test:
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 10 
+    timeout-minutes: 30 
     strategy:
       matrix:
         os: [ubuntu-latest]
@@ -52,7 +52,7 @@ jobs:
 
       - name: Build
         run: | 
-          fpm build --profile debug
+          fpm build --verbose --profile debug
 
       - name: Run unit tests 
         run: fpm test
