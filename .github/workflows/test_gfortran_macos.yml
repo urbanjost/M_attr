@@ -53,7 +53,7 @@ jobs:
           exec 2>&1
           set -x
           ulimit -S -t 1800
-          timeout 0.5h fpm test --profile debug --verbose
+          fpm test --profile debug --verbose
 
     - name: tests MacOS (debug)
       run: |

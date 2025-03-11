@@ -26,16 +26,18 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v1
 
-    - name: Install fpm
-      run: |
-           echo PATH %PATH%
-           echo
-           pwd
-           curl https://raw.githubusercontent.com/lockstockandbarrel/mars/main/bootstrap/fpm_debug.F90 --output fpm.F90
-           mkdir tmp
-           gfortran -static fpm.F90 -Itmp -Jtmp -o fpm -D_WIN32 2>&1
-           dir
       shell: cmd
+    - name: fpm-setup
+      uses: ./ # Uses action in the root directory
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        fpm-version: ${{ matrix.fpm-version }}
+
+    - name: Checkout the fpm repo
+      if: matrix.fpm-version == 'latest'
+      uses: actions/checkout@v4
+      with:
+        repository: fortran-lang/fpm
 
     - name: Display environment
       run: |
