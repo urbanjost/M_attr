@@ -64,9 +64,19 @@ jobs:
            ls -l
            rm -fv *.mod tmp/*.mod
 
-    - name: Run Intel unit tests on Linux
+    - name: Run Intel unit tests on Linux (debug)
       run: |
-        source /opt/intel/oneapi/setvars.sh
+        printenv TZ
+        printenv FPM_COMPILER
+        printenv OMP_NUM_THREADS
+        ulimit -c unlimited -d unlimited -f unlimited -m unlimited -s unlimited -t unlimited -v unlimited -x unlimited
+        fpm test --profile debug --verbose --compiler ifx
+        ls -l
+      env:
+        OMP_NUM_THREADS: 2,1
+
+    - name: Run Intel unit tests on Linux (release)
+      run: |
         printenv TZ
         printenv FPM_COMPILER
         printenv OMP_NUM_THREADS
