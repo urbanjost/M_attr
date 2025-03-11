@@ -54,7 +54,7 @@ jobs:
            which ifort || echo no ifort
            which ifx || echo no ifx
            which icc || echo no icc
-	   find /opt/intel .|grep ifx
+           find /opt/intel .|grep ifx
            echo $PATH
            pwd
            uname -a
