@@ -11,7 +11,7 @@ jobs:
         os: [ macos-13 ]
         include:
         - os: macos-13
-          gcc_v: 13
+          gcc_v: 14
     env:
       FC: gfortran
       GCC_V: ${{ matrix.gcc_v }}
@@ -23,7 +23,8 @@ jobs:
 
     - name: Install fpm
       run: |
-           ls /usr/local/bin/gfortran* /usr/bin/gfortran*
+           ls /usr/local/bin/gfortran*
+           ln -f -s /usr/local/bin/gfortran-${GCC_V} /usr/local/bin/gfortran
            echo $PATH
            pwd
            uname -a
