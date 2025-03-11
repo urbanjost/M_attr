@@ -23,6 +23,7 @@ jobs:
 
     - name: Install GFortran macOS
       run: |
+          ls /usr/local/bin/gfortran* /usr/bin/gfortran*
           ##############################
           #ls /usr/local/bin/gfortran-*
           #ln -f -s /usr/local/bin/gfortran-${GCC_V} /usr/local/bin/gfortran
@@ -35,6 +36,7 @@ jobs:
           #brew install gcc@${GCC_V}
           ##############################
           which gfortran
+
       - name: Setup the Fortran compiler
         if: matrix.fpm-version == 'latest'
         uses: fortran-lang/setup-fortran@v1.6.3
