@@ -48,7 +48,9 @@ jobs:
 
     - name: Install fpm
       run: |
-           source /opt/intel/oneapi/setvars.sh
+           set -v -x
+           #source /opt/intel/oneapi/setvars.sh
+           which ifx
            echo $PATH
            pwd
            uname -a
