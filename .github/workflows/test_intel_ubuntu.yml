@@ -50,7 +50,7 @@ jobs:
       run: |
            set -v -x
            source /opt/intel/oneapi/setvars.sh
-	   which ifort || echo no ifort
+           which ifort || echo no ifort
            which ifx || echo no ifx
            echo $PATH
            pwd
