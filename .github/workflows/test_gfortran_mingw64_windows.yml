@@ -35,17 +35,28 @@ jobs:
           mingw-w64-${{ matrix.arch }}-gcc
           mingw-w64-${{ matrix.arch }}-gcc-fortran
 
-    - name: Install fpm
-      run: |
-           echo $PATH
-           pwd
-           uname -a
-           #wget https://raw.githubusercontent.com/urbanjost/index/main/bootstrap/fpm.F90
-           wget https://raw.githubusercontent.com/lockstockandbarrel/mars/main/bootstrap/fpm.F90
-           mkdir -p tmp
-           gfortran fpm.F90 -Jtmp -Itmp -static -o fpm
-           rm -f tmp/*.mod
-           ls -l
+#    - name: Install fpm
+#      run: |
+#           echo $PATH
+#           pwd
+#           uname -a
+#           #wget https://raw.githubusercontent.com/urbanjost/index/main/bootstrap/fpm.F90
+#           wget https://raw.githubusercontent.com/lockstockandbarrel/mars/main/bootstrap/fpm.F90
+#           mkdir -p tmp
+#           gfortran fpm.F90 -Jtmp -Itmp -static -o fpm
+#           rm -f tmp/*.mod
+#           ls -l
+      - name: fpm-setup
+        uses: ./ # Uses action in the root directory
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          fpm-version: ${{ matrix.fpm-version }}
+
+      - name: Checkout the fpm repo
+        if: matrix.fpm-version == 'latest'
+        uses: actions/checkout@v4
+        with:
+          repository: fortran-lang/fpm
 
     - name: tests (release)
       run: |
