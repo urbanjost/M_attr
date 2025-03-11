@@ -48,6 +48,7 @@ jobs:
 
     - name: Install fpm
       run: |
+           source /opt/intel/oneapi/setvars.sh
            echo $PATH
            pwd
            uname -a
@@ -61,6 +62,7 @@ jobs:
 
     - name: Run Intel unit tests on Linux
       run: |
+        source /opt/intel/oneapi/setvars.sh
         printenv TZ
         printenv FPM_COMPILER
         printenv OMP_NUM_THREADS
