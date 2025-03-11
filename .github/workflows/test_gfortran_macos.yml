@@ -23,17 +23,17 @@ jobs:
 
     - name: Install GFortran macOS
       run: |
-	  ##############################
+          ##############################
           #ls /usr/local/bin/gfortran-*
           #ln -f -s /usr/local/bin/gfortran-${GCC_V} /usr/local/bin/gfortran
           #which gfortran-${GCC_V}
-	  ##############################
+          ##############################
           ## Alternative:
           #conda create -n gf gfortran
           #conda activate gf
-	  ##############################
+          ##############################
           brew install gcc@10
-	  ##############################
+          ##############################
           which gfortran
 
     - name: Install fpm
