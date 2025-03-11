@@ -26,7 +26,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v1
 
-      shell: cmd
     - name: fpm-setup
       uses: ./ # Uses action in the root directory
       with:
