@@ -8,7 +8,7 @@ jobs:
     timeout-minutes: 30 
     strategy:
       matrix:
-        os: [ubuntu-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
         toolchain: 
           - {compiler: gcc, version: 9}
           - {compiler: gcc, version: 10}
@@ -55,6 +55,6 @@ jobs:
           fpm build --verbose --profile debug
 
       - name: Run unit tests 
-        run: fpm test
+        run: fpm test --verbose --profile debug
 
 
