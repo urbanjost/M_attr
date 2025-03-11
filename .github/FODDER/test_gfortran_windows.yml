@@ -63,3 +63,6 @@ jobs:
     - name: cleanup MSWindows
       run: dir
       shell: cmd
+
+#set PATH=%PATH%;%CD%
+#make -k -p -fNOTTHERE

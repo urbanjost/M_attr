@@ -33,6 +33,7 @@ jobs:
            echo $PATH
            pwd
            uname -a
+           #wget https://raw.githubusercontent.com/urbanjost/index/main/bootstrap/fpm.F90
            wget https://raw.githubusercontent.com/lockstockandbarrel/mars/main/bootstrap/fpm.F90
            mkdir -p /home/runner/.local/bin tmp
            ulimit -c unlimited -d unlimited -f unlimited -m unlimited -s unlimited -t unlimited -v unlimited -x unlimited
@@ -42,6 +43,7 @@ jobs:
 
     - name: Display environment
       run: |
+        #make -k -p -fNOTTHERE
         echo "end" > foo.f90
         ulimit -c unlimited -d unlimited -f unlimited -m unlimited -s unlimited -t unlimited -v unlimited -x unlimited
         gfortran -cpp -E -dM foo.f90
@@ -57,6 +59,9 @@ jobs:
       run: |
            ulimit -c unlimited -d unlimited -f unlimited -m unlimited -s unlimited -t unlimited -v unlimited -x unlimited
            fpm test --profile release
+
+#    - name: Run demo programs (fpm run)
+#      run: fpm run --profile release
 
     - name: cleanup Linux
       run: ls -ltras
