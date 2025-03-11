@@ -49,7 +49,7 @@ jobs:
     - name: Install fpm
       run: |
            # source /opt/intel/oneapi/setvars.sh --force
-	   # why not already set by script
+           # why not already set by script
            export PATH=/opt/intel/oneapi/compiler/2025.0/bin/:$PATH
            which ifx || echo no ifx
            which gfortran || echo no gfortran
