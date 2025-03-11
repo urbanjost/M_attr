@@ -21,31 +21,9 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v1
 
-    - name: Install GFortran macOS
-      run: |
-          ls /usr/local/bin/gfortran* /usr/bin/gfortran*
-          ##############################
-          #ls /usr/local/bin/gfortran-*
-          #ln -f -s /usr/local/bin/gfortran-${GCC_V} /usr/local/bin/gfortran
-          #which gfortran-${GCC_V}
-          ##############################
-          ## Alternative:
-          #conda create -n gf gfortran
-          #conda activate gf
-          ##############################
-          #brew install gcc@${GCC_V}
-          ##############################
-          which gfortran
-
-      - name: Setup the Fortran compiler
-        if: matrix.fpm-version == 'latest'
-        uses: fortran-lang/setup-fortran@v1.6.3
-        with:
-          compiler: gcc
-          version: 13
-
     - name: Install fpm
       run: |
+           ls /usr/local/bin/gfortran* /usr/bin/gfortran*
            echo $PATH
            pwd
            uname -a
@@ -93,6 +71,30 @@ jobs:
 
     - name: cleanup MacOS
       run: ls -ltras
+##########################################################
+#    - name: Install GFortran macOS
+#      run: |
+#          ls /usr/local/bin/gfortran* /usr/bin/gfortran*
+#          ##############################
+#          #ls /usr/local/bin/gfortran-*
+#          #ln -f -s /usr/local/bin/gfortran-${GCC_V} /usr/local/bin/gfortran
+#          #which gfortran-${GCC_V}
+#          ##############################
+#          ## Alternative:
+#          #conda create -n gf gfortran
+#          #conda activate gf
+#          ##############################
+#          #brew install gcc@${GCC_V}
+#          ##############################
+#          which gfortran
+#
+#      - name: Setup the Fortran compiler
+#        if: matrix.fpm-version == 'latest'
+#        uses: fortran-lang/setup-fortran@v1.6.3
+#        with:
+#          compiler: gcc
+#          version: 13
+##########################################################
 #       -fno-automatic
 #     Treat each program unit (except those marked as RECURSIVE) as if
 #     the "SAVE" statement were specified for every local variable and
