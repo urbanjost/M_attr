@@ -114,6 +114,7 @@ character(len=*),intent(in),optional :: string
       write(stdout,'(*(g0))') attr('<B><g><bo>',chars=80)
    endif
 end subroutine text
+
 !>  call compiler-specific ISATTY() function or return .FALSE.
 #undef ISATTY
 

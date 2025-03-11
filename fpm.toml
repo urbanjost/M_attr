@@ -11,39 +11,39 @@ keywords = ["fortran", "terminal control sequences", "escape sequences", "in-ban
 homepage = "https://github.com/urbanjost/M_attr.git"
 
 [build]
-external-modules = ["ifport", "dfport"]
-module-naming = true
+   external-modules = ["ifport", "dfport"]
+   module-naming = true
 
 [install]
-library=true
+   library=true
 
 [[executable]]
-name="tat"
-source-dir="app"
-main="tat.f90"
-[executable.dependencies]
-M_CLI2 = { git = "https://github.com/urbanjost/M_CLI2.git" }
-#M_CLI2 = { namespace = "GPF" }
+   name="tat"
+   source-dir="app"
+   main="tat.f90"
+   [executable.dependencies]
+      M_CLI2 = { git = "https://github.com/urbanjost/M_CLI2.git" }
+      #M_CLI2 = { namespace = "GPF" }
 
-[[executable]]
-name="redirect"
-source-dir="app"
+   [[executable]]
+   name="redirect"
+   source-dir="app"
 main="redirect.F90"
 
-[[executable]]
-name="plain"
-source-dir="app"
+   [[executable]]
+   name="plain"
+   source-dir="app"
 main="plain.f90"
 
 [[executable]]
-name="light"
-source-dir="app"
-main="light.f90"
+   name="light"
+   source-dir="app"
+   main="light.f90"
 
 [[test]]
-name="test_suite"
-source-dir="test"
-main="test_suite_M_attr.f90"
-[test.dependencies]
-M_framework          = { git = "https://github.com/urbanjost/M_framework.git" }
-#M_framework = {namespace = "GPF"}
+   name="test_suite"
+   source-dir="test"
+   main="test_suite_M_attr.f90"
+   [test.dependencies]
+      M_framework          = { git = "https://github.com/urbanjost/M_framework.git" }
+      #M_framework = {namespace = "GPF"}
