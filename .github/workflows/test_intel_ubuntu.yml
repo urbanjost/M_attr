@@ -70,7 +70,11 @@ jobs:
         printenv FPM_COMPILER
         printenv OMP_NUM_THREADS
         ulimit -c unlimited -d unlimited -f unlimited -m unlimited -s unlimited -t unlimited -v unlimited -x unlimited
-        which ifx
+        which ifx || echo no ifx
+        #source /opt/intel/oneapi/setvars.sh --force
+        # why not already set by script
+        export PATH=/opt/intel/oneapi/compiler/2025.0/bin/:$PATH
+        which ifx || echo no ifx
         ifx --version
         fpm test --profile debug --verbose --compiler ifx
         ls -l
@@ -83,6 +87,11 @@ jobs:
         printenv FPM_COMPILER
         printenv OMP_NUM_THREADS
         ulimit -c unlimited -d unlimited -f unlimited -m unlimited -s unlimited -t unlimited -v unlimited -x unlimited
+        which ifx || echo no ifx
+        #source /opt/intel/oneapi/setvars.sh --force
+        # why not already set by script
+        export PATH=/opt/intel/oneapi/compiler/2025.0/bin/:$PATH
+        which ifx || echo no ifx
         fpm test --profile release --compiler ifx
         ls -l
       env:
