@@ -56,6 +56,9 @@ jobs:
            which icc || echo no icc
            find /opt/intel .|grep ifx
            find /opt/intel .|grep setvars
+           export PATH=/opt/intel/oneapi/compiler/2025.0/bin/:$PATH
+           which ifx || echo no ifx
+           which gfortran || echo no gfortran
            echo $PATH
            pwd
            uname -a
