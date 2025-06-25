@@ -1,0 +1,75 @@
+!>
+NAME
+   attr_update(3f) - [M_attr] update internal dictionary given keyword
+                     and value
+   (LICENSE:MIT)
+
+SYNOPSIS
+   subroutine attr_update(key,val)
+
+    character(len=*),intent(in)           :: key
+    character(len=*),intent(in),optional  :: val
+    character(len=*),intent(in),optional  :: mono_val
+
+DESCRIPTION
+   Update internal dictionary in M_attr(3fm) module.
+
+OPTIONS
+   key       name of keyword to add, replace, or delete from dictionary
+   val       if present add or replace value associated with keyword. If
+             not present remove keyword entry from dictionary.
+   mono_val  if present add or replace second value associated with
+             keyword used for plain text mode.
+             Must only be specified if VAL is also specified.
+
+KEYWORDS
+   The following keywords are defined by default
+
+   colors:
+
+     r,red     c,cyan     w,white
+     g,green   m,magenta  e,ebony
+     b,blue    y,yellow
+
+   If the color keywords are capitalized they control the text background
+   instead of the text color.
+
+   attributes:
+
+     ul,underline
+     it,italics (often produces inverse colors on many devices
+
+EXAMPLE
+   Sample program
+
+     program demo_update
+     use M_attr, only : attr, attr_update
+        write(*,'(a)') attr('<clear>TEST CUSTOMIZATIONS:')
+        ! add custom keywords
+        call attr_update('blink',char(27)//'[5m')
+        call attr_update('/blink',char(27)//'[25m')
+        write(*,*)
+        write(*,'(a)') attr('<blink>Items for Friday</blink>')
+        call attr_update('ouch',attr( &
+        ' <R><bo><w>BIG mistake!</R></w> '))
+        write(*,*)
+        write(*,'(a)') attr('<ouch> Did not see that coming.')
+        write(*,*)
+        write(*,'(a)') attr( &
+        'ORIGINALLY: <r>Apple</r>, <b>Sky</b>, <g>Grass</g>')
+        ! delete
+        call attr_update('r')
+        call attr_update('/r')
+        ! replace (or create)
+        call attr_update('b','<<<<')
+        call attr_update('/b','>>>>')
+        write(*,*)
+        write(*,'(a)') attr( &
+        'CUSTOMIZED: <r>Apple</r>, <b>Sky</b>, <g>Grass</g>')
+     end program demo_update
+
+AUTHOR
+   John S. Urban, 2021
+
+LICENSE
+   MIT

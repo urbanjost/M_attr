@@ -1,0 +1,48 @@
+NAME
+   str(3f) - [M_attr] converts any standard scalar type to a string
+   (LICENSE:PD)
+
+SYNOPSIS
+   Syntax:
+
+     function str(g0,g1,g2,g3,g4,g5,g6,g7,g8,g9,&
+     & ga,gb,gc,gd,ge,gf,gg,gh,gi,gj,sep)
+     class(*),intent(in),optional  :: g0,g1,g2,g3,g4,g5,g6,g7,g8,g9
+     class(*),intent(in),optional  :: ga,gb,gc,gd,ge,gf,gg,gh,gi,gj
+     character(len=*),intent(in),optional :: sep
+     character,len=(:),allocatable :: str
+
+DESCRIPTION
+   str(3f) builds a space-separated string from up to twenty scalar
+   values.
+
+OPTIONS
+   g[0-9a-j]   optional value to print the value of after the message. May
+               be of type INTEGER, LOGICAL, REAL, DOUBLEPRECISION,
+               COMPLEX, or CHARACTER.
+
+               Optionally, all the generic values can be
+               single-dimensioned arrays. Currently, mixing scalar
+               arguments and array arguments is not supported.
+
+   sep         separator string used between values. Defaults to a space.
+
+RETURNS
+   str     description to print
+
+EXAMPLES
+  Sample program:
+
+   program demo_msg
+   use M_attr, only : alert
+   end program demo_msg
+
+  Output
+
+
+AUTHOR
+   John S. Urban
+
+LICENSE
+   Public Domain
+

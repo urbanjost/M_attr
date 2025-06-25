@@ -1,0 +1,2 @@
+Allow method in an input file to define new colors and do an update
+use M_colors to allow an optional truecolor mode and load in all standard colornames
