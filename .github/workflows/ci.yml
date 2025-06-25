@@ -5,11 +5,11 @@ on: [push, pull_request]
 jobs:
   test:
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 30 
+    timeout-minutes: 30
     strategy:
       matrix:
         os: [ubuntu-latest]
-        toolchain: 
+        toolchain:
           - {compiler: gcc, version: 9}
           - {compiler: gcc, version: 10}
           - {compiler: gcc, version: 11}
@@ -18,7 +18,7 @@ jobs:
           - {compiler: gcc, version: 14}
           - {compiler: intel, version: '2023.2'}
           - {compiler: intel, version: '2024.0'}
-          - {compiler: intel, version: '2025.0'}          
+          - {compiler: intel, version: '2025.0'}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -32,7 +32,7 @@ jobs:
       - name: Setup fpm
         uses: fortran-lang/setup-fpm@v6.1.0
         with:
-          fpm-version: 'v0.10.1'      
+          fpm-version: 'v0.10.1'
 #        run: |
 #          # Download fpm source file
 #          curl -LO https://github.com/fortran-lang/fpm/releases/download/v0.10.1/fpm-0.10.1.F90
@@ -51,10 +51,10 @@ jobs:
           echo "DYLD_FALLBACK_LIBRARY_PATH=$(brew --prefix gcc)/lib/gcc/current" >> $GITHUB_ENV
 
       - name: Build
-        run: | 
+        run: |
           fpm build --verbose --profile debug
 
-      - name: Run unit tests 
+      - name: Run unit tests
         run: fpm test --verbose --profile debug
 
 
