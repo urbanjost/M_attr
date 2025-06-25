@@ -12,14 +12,29 @@
 
     <title>demo_attr &ndash; M_attr</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link href="../css/pygments.css" rel="stylesheet">
-    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Font Awesome -->
+    <link href="../css/fontawesome.min.css" rel="stylesheet">
+    <link href="../css/brands.min.css" rel="stylesheet">
+    <link href="../css/regular.min.css" rel="stylesheet">
+    <link href="../css/solid.min.css" rel="stylesheet">
+    <link href="../css/v4-font-face.min.css" rel="stylesheet">
+    <link href="../css/v4-shims.min.css" rel="stylesheet">
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async
+            integrity="sha256-DViIOMYdwlM/axqoGDPeUyf0urLoHMN4QACBKyB58Uw=" crossorigin="anonymous"></script>
+    <!-- Other scripts and stylesheets -->
     <link href="../css/local.css" rel="stylesheet">
-      <link  href="../tipuesearch/tipuesearch.css" rel="stylesheet">
-
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link href="../css/pygments.css" rel="stylesheet">
     <script src="../js/svg-pan-zoom.min.js"></script>
   </head>
 
@@ -71,21 +86,20 @@
         <ul class="list-inline" style="margin-bottom:0px;display:inline">
 
             <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
-              <a data-bs-toggle="tooltip"
-                 data-bs-placement="bottom" data-html="true"
-                 title=" 6.6% of total for programs.">38 statements</a>
+              <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
+                 title=" 2.3% of total for programs.">14 statements</a>
             </li>
 
             <li class="list-inline-item" id="source-file">
               <i class="fa fa-code"></i>
-              <a href="../src/light.f90"> Source File</a>
+              <a href="../src/plain.f90"> Source File</a>
             </li>
         </ul>
       </div>
       <div class="col">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb justify-content-end mb-0">
-                <li class="breadcrumb-item"><a href='../sourcefile/light.f90.html'>light.f90</a></li>
+                <li class="breadcrumb-item"><a href='../sourcefile/plain.f90.html'>plain.f90</a></li>
             <li class="breadcrumb-item active" aria-current="page">demo_attr</li>
           </ol>
         </nav>
@@ -93,9 +107,11 @@
     </div>
   </div>
   <script>
-    $(function () {
-    $('[data-bs-toggle="tooltip"]').tooltip()
-    })
+    // Enable Bootstrap tooltips
+    (function () {
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    })();
   </script>
 
   </div>
@@ -112,10 +128,8 @@
       </a>
       <div id="vars-0" class="collapse">
         <div class="list-group list-group-flush">
-            <a class="list-group-item" href="../program/demo_attr~2.html#variable-expanded~5">expanded</a>
-            <a class="list-group-item" href="../program/demo_attr~2.html#variable-icount~2">icount</a>
-            <a class="list-group-item" href="../program/demo_attr~2.html#variable-ios">ios</a>
-            <a class="list-group-item" href="../program/demo_attr~2.html#variable-line~3">line</a>
+            <a class="list-group-item" href="../program/demo_attr~2.html#variable-ios~3">ios</a>
+            <a class="list-group-item" href="../program/demo_attr~2.html#variable-line~4">line</a>
         </div>
       </div>
     </div>
@@ -130,18 +144,7 @@
   
   
   
-      <div class="card mb-4">
-      <a data-bs-toggle="collapse" href="#subs-0"
-         aria-expanded="false" aria-controls="subs-0">
-         <h4 class="card-header bg-primary text-white">Subroutines</h4>
-      </a>
-      <div id="subs-0" class="collapse">
-        <div class="list-group list-group-flush">
-            <a class="list-group-item" href="../program/demo_attr~2.html#proc-args">args</a>
-        </div>
-      </div>
-    </div>
-
+  
   
   
   
@@ -192,39 +195,7 @@
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-expanded~5"></span>
-              character(len=:),
-            </td>
-            <td>
-              allocatable
-            </td>
-            <td>::</td>
-            <td><strong>expanded</strong></td>
-                <td></td>
-                <td></td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <span class="anchor" id="variable-icount~2"></span>
-              integer
-            </td>
-            <td>
-              
-            </td>
-            <td>::</td>
-            <td><strong>icount</strong></td>
-                <td></td>
-                <td></td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <span class="anchor" id="variable-ios"></span>
+              <span class="anchor" id="variable-ios~3"></span>
               integer
             </td>
             <td>
@@ -240,7 +211,7 @@
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-line~3"></span>
+              <span class="anchor" id="variable-line~4"></span>
               character(len=1024)
             </td>
             <td>
@@ -266,68 +237,24 @@
     
 
 
-    <section>
-    <h2>Subroutines</h2>
-      <div class="card">
-    <div class="card-header codesum"><span class="anchor" id="proc-args"></span> <h3> subroutine <a href='../proc/args.html'>args</a>()  
-</h3></div>
-    <div class="card-body">
-          
-  
-
-  <h4>Arguments</h4>
-    <em>None</em>
-
-    </div>
-  </div>
-
-    </section>    
     
 
     <section>
     <h2 id="src">Source Code</h2>
     <div class="hl codehilite"><pre><span></span><span class="k">program </span><span class="n">demo_attr</span>
-<span class="c">! read stdin and run it through M_attr::attr to display color</span>
-<span class="k">use </span><span class="n">M_attr</span><span class="p">,</span><span class="w">  </span><span class="k">only</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">attr</span><span class="p">,</span><span class="w"> </span><span class="n">attr_update</span>
+<span class="c">! read stdin and run it through M_attr::attr to display without color</span>
+<span class="k">use </span><span class="n">M_attr</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">attr</span><span class="p">,</span><span class="w"> </span><span class="n">attr_mode</span>
 <span class="k">implicit none</span>
-<span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span><span class="w">          </span><span class="kd">::</span><span class="w"> </span><span class="n">line</span>
-<span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="p">:),</span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">expanded</span>
-<span class="kt">integer</span><span class="w">                      </span><span class="kd">::</span><span class="w"> </span><span class="n">icount</span>
-<span class="kt">integer</span><span class="w">                      </span><span class="kd">::</span><span class="w"> </span><span class="n">ios</span>
+<span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">line</span>
+<span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ios</span>
 <span class="w">   </span><span class="n">line</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
-<span class="w">   </span><span class="k">call </span><span class="n">attr_update</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span><span class="nb">char</span><span class="p">(</span><span class="mi">27</span><span class="p">)</span><span class="o">//</span><span class="s1">&#39;[1m&#39;</span><span class="p">)</span>
-<span class="w">   </span><span class="n">icount</span><span class="o">=</span><span class="nb">command_argument_count</span><span class="p">()</span><span class="w"> </span><span class="c">! get number of arguments</span>
-<span class="w">   </span><span class="c">! if command arguments use those instead of reading stdin</span>
-<span class="w">   </span><span class="c">! example: light &#39;&lt;clear&gt;&lt;B&gt;&lt;w&gt;&lt;bo&gt;&lt;CSI&gt;12;36f Good Morning! &#39;</span>
-<span class="w">   </span><span class="k">if</span><span class="p">(</span><span class="n">icount</span><span class="p">.</span><span class="n">gt</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span><span class="k">then</span>
-<span class="k">      call </span><span class="n">args</span><span class="p">()</span>
-<span class="w">   </span><span class="k">else</span>
-<span class="k">      do </span>
-<span class="k">         read</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">ios</span><span class="p">)</span><span class="n">line</span>
-<span class="w">         </span><span class="k">if</span><span class="p">(</span><span class="n">ios</span><span class="p">.</span><span class="n">ne</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span><span class="k">exit</span>
-<span class="k">         </span><span class="n">expanded</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="nb">trim</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
-<span class="w">         </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">expanded</span>
-<span class="w">      </span><span class="k">enddo</span>
-<span class="k">      write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">,</span><span class="n">advance</span><span class="o">=</span><span class="s1">&#39;no&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;reset&gt;&#39;</span><span class="p">)</span>
-<span class="w">   </span><span class="k">endif</span>
-<span class="k">contains</span>
-<span class="k">subroutine </span><span class="n">args</span><span class="p">()</span>
-<span class="k">implicit none</span>
-<span class="kt">integer</span><span class="w">                      </span><span class="kd">::</span><span class="w"> </span><span class="n">i</span>
-<span class="kt">integer</span><span class="w">                      </span><span class="kd">::</span><span class="w"> </span><span class="n">istat</span>
-<span class="kt">integer</span><span class="w">                      </span><span class="kd">::</span><span class="w"> </span><span class="n">argument_length</span>
-<span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="p">:),</span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">argument</span>
-<span class="w">   </span><span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">icount</span>
-<span class="w">       </span><span class="k">call </span><span class="nb">get_command_argument</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="n">i</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="n">argument_length</span><span class="p">)</span>
-<span class="w">       </span><span class="c">! allocate string array big enough to hold command line argument</span>
-<span class="w">       </span><span class="k">if</span><span class="p">(</span><span class="nb">allocated</span><span class="p">(</span><span class="n">argument</span><span class="p">))</span><span class="k">deallocate</span><span class="p">(</span><span class="n">argument</span><span class="p">)</span>
-<span class="w">       </span><span class="k">allocate</span><span class="p">(</span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="n">argument_length</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">argument</span><span class="p">)</span>
-<span class="w">       </span><span class="c">! read the argument </span>
-<span class="w">       </span><span class="k">call </span><span class="nb">get_command_argument</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">argument</span><span class="p">,</span><span class="n">status</span><span class="o">=</span><span class="n">istat</span><span class="p">)</span>
-<span class="w">       </span><span class="n">expanded</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="nb">trim</span><span class="p">(</span><span class="n">argument</span><span class="p">))</span>
-<span class="w">       </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">expanded</span>
+<span class="w">   </span><span class="k">call </span><span class="n">attr_mode</span><span class="p">(</span><span class="n">manner</span><span class="o">=</span><span class="s1">&#39;plain&#39;</span><span class="p">)</span>
+<span class="w">   </span><span class="k">do </span>
+<span class="k">      read</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">ios</span><span class="p">)</span><span class="n">line</span>
+<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="n">ios</span><span class="p">.</span><span class="n">ne</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span><span class="k">exit</span>
+<span class="k">      write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="nb">trim</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
 <span class="w">   </span><span class="k">enddo</span>
-<span class="k">   end subroutine </span><span class="n">args</span>
+<span class="k">   write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">,</span><span class="n">advance</span><span class="o">=</span><span class="s1">&#39;no&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;&lt;reset&gt;&#39;</span><span class="p">)</span>
 <span class="k">end program </span><span class="n">demo_attr</span>
 </pre></div>
 
@@ -341,40 +268,21 @@
     <footer>
       <div class="container">
         <div class="row justify-content-between">
-          <div class="col"><p>M_attr was developed by John S. Urban<br>&copy; 2024 
+          <div class="col">
+            <p>
+              M_attr
+ was developed by John S. Urban<br>              &copy; 2025 
 </p>
           </div>
           <div class="col">
             <p class="text-end">
               Documentation generated by
               <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
- on 2024-03-29 03:51              </p>
+ on 2025-06-25 08:50 +0000             </p>
           </div>
         </div>
         <br>
       </div> <!-- /container -->
     </footer>
-
-    <!-- Bootstrap core JavaScript -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>    
-
-    <!-- MathJax JavaScript
-             ================================================== -->
-             <!-- Placed at the end of the document so the pages load faster -->
-        <script type="text/x-mathjax-config">
-          MathJax.Hub.Config({
-          TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
-          jax: ['input/TeX','input/MathML','output/HTML-CSS'],
-          extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']
-          });
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-          <script src="../tipuesearch/tipuesearch_content.js"></script>
-          <script src="../tipuesearch/tipuesearch_set.js"></script>
-          <script src="../tipuesearch/tipuesearch.js"></script>
-
   </body>
 </html>
