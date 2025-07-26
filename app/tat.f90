@@ -11,7 +11,7 @@ integer                      :: i
 character(len=:),allocatable :: help_text(:), version_text(:)
    line=''
    call setup()
-   call set_args(' --manner "color" --debug F --chars 0 -prefix " "', help_text,version_text)
+   call set_args(' --manner:m "color" --debug F --width:w 0 --prefix:p " "', help_text,version_text)
    ! if command arguments use those instead of reading stdin
    ! example: tat '<clear><B><w><bo><CSI>12;36f Good Morning! '
    iwidth=iget('chars')
@@ -51,32 +51,34 @@ help_text=[character(len=80) :: &
 '    tat(1f) - [M_attr] filter terminal attribute strings                       ',&
 '    (LICENSE:MIT)                                                              ',&
 'SYNOPSIS                                                                       ',&
-'    tat [[string(s)][ --chars N] [ --prefix STR] [ --manner MODE] ]|           ',&
-'    [ --help| --version]                                                       ',&
+'    tat [[string(s)][ --width N] [ --prefix STR] [ --manner MODE] ]|           ',&
+'    [ --help| --version| --usage]                                              ',&
 'DESCRIPTION                                                                    ',&
 '   tat(1) ("Terminal Attributes") is like cat(1), except it processes          ',&
 '   special strings in the input specifying terminal attributes such as color   ',&
 '   and underlining using an HTML-like syntax via the M_attr(3f) module.        ',&
 '                                                                               ',&
 'OPTIONS                                                                        ',&
-'   STRINGS    if present process and print these strings instead of reading    ',&
-'              and processing stdin.                                            ',&
-'   --manner   Set output mode ("color"|"plain"|"raw"). Default is "color".     ',&
-'   --chars    column to fill background color out to. Default is 0 (zero);     ',&
-'              meaning to not padd the lines. Note multi-byte character sets    ',&
-'              and non-printable characters will not work properly with this    ',&
-'              option, but typical plain ASCII will.                            ',&
-'   --prefix   string to place in from of input lines from stdin. Typically     ',&
-'              used to set background and text color, as with "<B><w><bo>".     ',&
-'   --help     display this help and exit                                       ',&
-'   --version  output version information and exit                              ',&
+'   STRINGS      if present process and print these strings instead of reading  ',&
+'                and processing stdin.                                          ',&
+'   --manner,-m  Set output mode ("color"|"plain"|"raw"). Default is "color".   ',&
+'   --width,-w   column to fill background color out to. Default is 0 (zero);   ',&
+'                meaning to not pad the lines. Note multi-byte character sets   ',&
+'                and non-printable characters will not work properly with this  ',&
+'                option, but typical plain ASCII will.                          ',&
+'   --prefix,-p  string to place in front of input lines from stdin. Typically  ',&
+'                used to set background and text color, as with "<B><w><bo>".   ',&
+'                                                                               ',&
+'   --help,-h     display this help and exit                                    ',&
+'   --version,-v  output version information and exit                           ',&
+'   --usage,-u    display list of parameters and exit                           ',&
 '                                                                               ',&
 'EXAMPLES                                                                       ',&
 '  Sample commands                                                              ',&
 '                                                                               ',&
-'     cmd|tat -chars 132 -prefix "<B><w>"                                       ',&
+'     cmd|tat -width 132 -prefix "<B><w>"                                       ',&
 '     tat "<clear><B><w><bo><CSI>12;36f Good Morning!"                          ',&
-'     tat --chars 80 --prefix "<B><w>"                                          ',&
+'     tat --width 80 --prefix "<B><w>"                                          ',&
 'LIMITATIONS                                                                    ',&
 'AUTHOR                                                                         ',&
 '   John S. Urban                                                               ',&
