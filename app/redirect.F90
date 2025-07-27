@@ -3,17 +3,18 @@ use, intrinsic :: iso_fortran_env, only : stdin=>input_unit, stdout=>output_unit
 use M_attr, only : attr, attr_mode, attr_update
 ! Calculate and print the roots of a quadratic formula even if they are complex
 implicit none
-integer,parameter               :: dp=kind(0.0d0)
-real(kind=dp)                   :: a, b, c, discriminant
-real(kind=dp)                   :: x1, x2, x ! Real roots of the equation
-real(kind=dp)                   :: x_real    ! Real part of complex root of the equation
-REAL(kind=dp)                   :: x_complex ! Imaginary part of complex root of the equation
-character(len=256)              :: message
-integer                         :: ios
-character(len=1)                :: paws
-character(len=1024)             :: buffer
-character(len=*),parameter      :: numbers='("<B><w><bo>   ",*("(",g0.8,",",g0.8,")":,1x))'
-character(len=:),allocatable    :: TERM
+integer,parameter            :: dp=kind(0.0d0)
+real(kind=dp)                :: a, b, c, discriminant
+real(kind=dp)                :: x1, x2, x ! Real roots of the equation
+real(kind=dp)                :: x_real    ! Real part of complex root of the equation
+REAL(kind=dp)                :: x_complex ! Imaginary part of complex root of the equation
+character(len=256)           :: message
+integer                      :: ios
+character(len=1)             :: paws
+character(len=1024)          :: buffer
+character(len=*),parameter   :: numbers='("<B><w><bo>   ",*("(",g0.8,",",g0.8,")":,1x))'
+character(len=*),parameter   :: g='(*(g0))'
+character(len=:),allocatable :: TERM
 
    if(system_isatty(stdout))then ! ISATTY() is an extension, but found in Intel, GNU, PGI, ... compiler
       call attr_mode('color')
@@ -41,7 +42,7 @@ character(len=:),allocatable    :: TERM
       write(stdout,'(a)',advance='no')attr('<reset>')
       if(ios.ne.0)then
          write(stdout,*)
-         write(stdout,'(*(g0))')ios,' ',trim(message)
+         write(stdout,g)ios,' ',trim(message)
          rewind(unit=stdin,iostat=ios)
          backspace(unit=stdin,iostat=ios)
       else
@@ -101,7 +102,7 @@ character(len=:),allocatable    :: TERM
          call text(buffer)
          call text()
       endif
-      write(stdout,'(*(g0))',advance='no')attr('<B><e>press <g>return</g><e> to continue, "<g>q</g><e>" to quit:',chars=79)
+      write(stdout,g,advance='no')attr('<B><e>press <g>return</g><e> to continue, "<g>q</g><e>" to quit:',chars=79)
       read(stdin,advance='yes',iostat=ios,fmt='(a)',iomsg=message)paws
       if(paws.ne.'')exit INFINITE
    enddo INFINITE
@@ -109,9 +110,9 @@ contains
 subroutine text(string)
 character(len=*),intent(in),optional :: string
    if(present(string))then
-      write(stdout,'(*(g0))') attr('<B><g><bo>'//trim(string),chars=80)
+      write(stdout,g) attr('<B><g><bo>'//trim(string),chars=80)
    else
-      write(stdout,'(*(g0))') attr('<B><g><bo>',chars=80)
+      write(stdout,g) attr('<B><g><bo>',chars=80)
    endif
 end subroutine text
 
@@ -166,7 +167,7 @@ integer                              :: stat
 character(len=:),allocatable         :: value
 
    if(NAME.ne.'')then
-      call get_environment_variable(name, length=howbig, status=stat, trim_name=.true.)  ! get length required to hold value
+      call get_environment_variable(name,length=howbig,status=stat,trim_name=.true.) ! get length required to hold value
       if(howbig.ne.0)then
          select case (stat)
          case (1)     ! print *, NAME, " is not defined in the environment. Strange..."
